@@ -6,7 +6,7 @@ def get_stochastic_oscillator(api_key, forex_symbol, k_period=24, d_period=3, sm
     params = {
         "function": "STOCH",
         "symbol": forex_symbol,
-        "interval": "daily",
+        "interval": "1min",
         "apikey": api_key,
         "fastkperiod": k_period,
         "slowkperiod": d_period,
@@ -18,21 +18,19 @@ def get_stochastic_oscillator(api_key, forex_symbol, k_period=24, d_period=3, sm
     data = response.json()
     
     # Extract %K and %D values
-    percentk_values = data["Technical Analysis: STOCH"]
-    last_date = list(percentk_values.keys())[0]
-    last_percentk = percentk_values[last_date]["SlowK"]
-    last_percentd = percentk_values[last_date]["SlowD"]
-    
+    try:
+        percentk_values = data["Technical Analysis: STOCH"]
+        last_date = list(percentk_values.keys())[0]
+        # print(last_percentk)
+        print(percentk_values[last_date])
+        last_percentk = percentk_values[last_date]["SlowK"]
+        last_percentd = percentk_values[last_date]["SlowD"]
+        return float(last_percentk), float(last_percentd)
+    except:
+        print(data)
+        
     return float(last_percentk), float(last_percentd)
 
-# Replace with your Alpha Vantage API key
-# api_key = (r'api_key.txt')[0]
-api_key = 'd3234f9b98msh636f82f9af5f491p15d26ejsn2b89beb2bdc3'
-
-# Replace with the forex symbol and the desired periods
-forex_symbol = "AUDUSD"
-
-percentk, percentd = get_stochastic_oscillator(api_key, forex_symbol)
 def compareGetStoch(kValue, dValue, pointOfError):
     specialPointOfError = 10
     def findBuy(kValue, dValue):

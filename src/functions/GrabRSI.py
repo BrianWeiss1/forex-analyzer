@@ -25,6 +25,7 @@ def RSI(symbol, api_key, rsi_period=14):
         return rsi_values
 
     return None
+
 def findRSIslope(rsi_values, time_frame):
     total = 0
     for each in rsi_values[0:time_frame]:
