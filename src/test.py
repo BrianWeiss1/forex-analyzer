@@ -108,20 +108,3 @@
 # # dataPoints = grabData(symbol)['Close']
 # # print(getArrayOfKs(dataPoints, 4))\
 
-
-
-import quandl
-
-# Set your Quandl API key
-quandl.ApiConfig.api_key = "AGvv7E67_4d4cntuufrt"
-
-# Specify the forex pair you're interested in and the date range
-forex_pair = "CURRFX/USDEUR"  # Replace with your desired forex pair
-start_date = "2023-01-01"
-end_date = "2023-08-01"
-
-# Retrieve the historical forex data
-forex_data = quandl.get(forex_pair, start_date=start_date, end_date=end_date)
-
-# Print the retrieved data
-print(forex_data)
