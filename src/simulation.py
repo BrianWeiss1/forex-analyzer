@@ -5,7 +5,7 @@ from functions.GrabData import GrabCloseData
 from functions.StochasticOscillator import compareGetStoch
 from functions.StochasticOscillator import get_list_solastic
 
-def calculate_supreme_average(lstKandDValues, lstValues, time):
+def calculate_supreme_average(lstKandDValues, lstValues, time, specialNum):
     arraylst = []
     previousBuy = False
     previousSell = False
@@ -35,7 +35,7 @@ def calculate_supreme_average(lstKandDValues, lstValues, time):
             else:
                 neg += 1
                 previousSell = False
-        result = compareGetStoch(float(lstKandDValues[time[i]]['SlowK']), float(lstKandDValues[time[i]]['SlowD']), 10) # I can run this with each different %
+        result = compareGetStoch(float(lstKandDValues[time[i]]['SlowK']), float(lstKandDValues[time[i]]['SlowD']), 1, specialNum) # I can run this with each different %
 
         if result['buy']:
             arraylst.append(['buy', datetime.datetime.now])
@@ -45,25 +45,27 @@ def calculate_supreme_average(lstKandDValues, lstValues, time):
             previousSell = True
     return pos, neg
 symbol = 'AUDCHF'
-sucess = 0.6612529002320185 # 1 3 3
-for i in range(22, 50):
+sucess = 0.6739288307915758 # 1 3 3 (1) (0)
+# for i in range(10, 12): # will try negitive later but might have to change some stuff
     # time.sleep(20)
-    closeData, time2 = GrabCloseData(symbol)
-    temp = True
-    while(temp == True):
-        try:
-            pos, neg = calculate_supreme_average(get_list_solastic(symbol, 1, 3, 3), closeData, time2)
-            sucessRate = pos/(pos+neg)
-            print("Trades = " + str(pos+neg))
-            print("Sucess = " + str(sucessRate))
-            if sucessRate > sucess:
-                sucess = sucessRate
-            temp = False
-        except:
-            print("error")
-            time.sleep(60)
-            # closeData, time2, data = GrabCloseData(symbol)
-            temp = True
+closeData, time2 = GrabCloseData(symbol)
+temp = True
+while(temp == True):
+    try:
+        pos, neg = calculate_supreme_average(get_list_solastic(symbol, 1, 3, 3), closeData, time2, -40)
+        sucessRate = pos/(pos+neg)
+        print(pos)
+        print(neg)
+        print("Trades = " + str(pos+neg))
+        print("Sucess = " + str(sucessRate))
+        if sucessRate > sucess:
+            sucess = sucessRate
+        temp = False
+    except:
+        print("error")
+        time.sleep(20)
+        # closeData, time2, data = GrabCloseData(symbol)
+        temp = True
 
 # print("Amount of candles: " + str(1383))
 # print("Trades = " + str(pos+neg))

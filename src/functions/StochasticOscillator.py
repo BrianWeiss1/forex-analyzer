@@ -31,8 +31,7 @@ def get_stochastic_oscillator(api_key, forex_symbol, k_period=24, d_period=3, sm
         
     return float(last_percentk), float(last_percentd)
 
-def compareGetStoch(kValue, dValue, pointOfError):
-    specialPointOfError = 5
+def compareGetStoch(kValue, dValue, pointOfError, specialPointOfError):
     def findBuy(kValue, dValue):
         if kValue < dValue and kValue+pointOfError < dValue and kValue < 20 and dValue < 20:
             return True
