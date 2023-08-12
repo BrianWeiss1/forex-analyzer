@@ -60,7 +60,7 @@ def get_list_solastic(forex_symbol, k_period=5, d_period=3, smoothing_period=3, 
     
     # Request parameters
     params = {
-        'month': '2009-02',
+        'month': '2009-03',
         "function": "STOCH",
         "symbol": forex_symbol,
         "interval": "1min",

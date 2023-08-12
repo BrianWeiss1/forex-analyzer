@@ -12,19 +12,27 @@ def RSI(symbol, api_key="YOUR_API_KEY", rsi_period=3):
         "time_period": rsi_period,
         "series_type": "close",
         "apikey": api_key,
-        'month': '2009-02',
+        'month': '2009-03',
         "outputsize": 'full',
     }
 
     response = requests.get(base_url, params=params)
     data = response.json()
+    rsi_data = data["Technical Analysis: RSI"]
+    return rsi_data
+
 
     if "Technical Analysis: RSI" in data:
-        rsi_values = []
+        rsi_data = []
+        
         for timestamp, rsi_info in data["Technical Analysis: RSI"].items():
-            rsi_values.append(float(rsi_info["RSI"]))
+            rsi_entry = {
+                "timestamp": timestamp,
+                "rsi_value": float(rsi_info["RSI"])
+            }
+            rsi_data.append(rsi_entry)
 
-        return rsi_values
+        return rsi_data
 
     return None
 
@@ -92,7 +100,7 @@ def checkPusdo(current, RSI):
     return current
 
 
-def findCandleNumber(current, number):
+def findCandleNumber(current, number=5):
     if current[">67"] >= number:
         checkNextCandle = 1
     elif current["<67"] >= number:
@@ -106,19 +114,23 @@ def findCandleNumber(current, number):
     return checkNextCandle
 
 
-def obtainResult(checkNextCandle, RSIvalue):
+def obtainResult(checkNextCandle, RSIvalue, current):
     if checkNextCandle > 0:
         if checkNextCandle == 1:
             if RSIvalue < 67:
+                current[">67"] = 0
                 return "SELL"
-        if checkNextCandle == 2:
+        if int(checkNextCandle) == 2:
             if RSIvalue > 67:
+                current["<67"] = 0
                 return "BUY"
-        if checkNextCandle == 3:
+        if int(checkNextCandle) == 3:
             if RSIvalue < 37:
+                current[">37"] = 0
                 return "SELL"
         if checkNextCandle == 4:
             if RSIvalue > 37:
+                current["<37"] = 0
                 return "BUY"
     return None
 

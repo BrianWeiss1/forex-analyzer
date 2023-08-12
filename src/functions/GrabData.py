@@ -5,7 +5,7 @@ import yfinance as yf
 def GrabCloseData(symbol, api_key='YOUR_API_KEY2'):
     end_time = datetime.utcnow() - timedelta(minutes=1)
     start_time = end_time - timedelta(minutes=55) # grabs data from 55 minutes ago till now
-    endpoint = f'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol={symbol}&interval=1min&apikey={api_key}&month=2009-02&outputsize=full'
+    endpoint = f'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol={symbol}&interval=1min&apikey={api_key}&month=2009-03&outputsize=full'
 
     # Send a GET request to the API
     response = requests.get(endpoint)
