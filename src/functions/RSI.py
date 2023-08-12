@@ -4,7 +4,6 @@ from src.functions.specialFunctions import automaticBuy, automaticSell
 
 def RSI(symbol, api_key="YOUR_API_KEY", rsi_period=3):
     base_url = "https://www.alphavantage.co/query"
-    outputsize = "compact"
 
     params = {
         "function": "RSI",
@@ -13,7 +12,8 @@ def RSI(symbol, api_key="YOUR_API_KEY", rsi_period=3):
         "time_period": rsi_period,
         "series_type": "close",
         "apikey": api_key,
-        "outputsize": outputsize,
+        'month': '2009-02',
+        "outputsize": 'full',
     }
 
     response = requests.get(base_url, params=params)

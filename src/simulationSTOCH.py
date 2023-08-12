@@ -17,7 +17,7 @@ def calculate_supreme_average(lstKandDValues, lstValues, time, specialNum):
     # print(lstKandDValues)
     # print(len(time))
     print(len(lstValues))
-    # print(len(lstKandDValues))
+    print((lstKandDValues))
     print(len(time))
     # KDvalue = list(lstKandDValues.values())
     for i in range(len(list(lstKandDValues.keys()))-1, 0, -1):
