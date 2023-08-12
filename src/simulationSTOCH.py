@@ -52,7 +52,7 @@ closeData, time2 = GrabCloseData(symbol)
 temp = True
 while(temp == True):
     try:
-        pos, neg = calculate_supreme_average(get_list_solastic(symbol, 1, 3, 3), closeData, time2, -40)
+        pos, neg = calculate_supreme_average(get_list_solastic(symbol, 1, 3, 3), closeData, time2, 0)
         sucessRate = pos/(pos+neg)
         print(pos)
         print(neg)
@@ -85,3 +85,4 @@ while(temp == True):
 
 
 # 0.5724 = 
+

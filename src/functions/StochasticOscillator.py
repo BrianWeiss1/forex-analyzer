@@ -18,16 +18,15 @@ def get_stochastic_oscillator(api_key, forex_symbol, k_period=24, d_period=3, sm
     data = response.json()
     
     # Extract %K and %D values
-    try:
-        percentk_values = data["Technical Analysis: STOCH"]
-        last_date = list(percentk_values.keys())[0]
-        # print(last_percentk)
-        last_percentk = percentk_values[last_date]["SlowK"]
-        last_percentd = percentk_values[last_date]["SlowD"]
-        print(last_date)
-        return float(last_percentk), float(last_percentd)
-    except:
-        print(data)
+    percentk_values = data["Technical Analysis: STOCH"]
+    last_date = list(percentk_values.keys())[0]
+    # print(last_percentk)
+    print(percentk_values)
+    last_percentk = percentk_values[last_date]["SlowK"]
+    last_percentd = percentk_values[last_date]["SlowD"]
+    print(last_date)
+    return float(last_percentk), float(last_percentd)
+    print(data)
         
     return float(last_percentk), float(last_percentd)
 
@@ -61,7 +60,7 @@ def get_list_solastic(forex_symbol, k_period=5, d_period=3, smoothing_period=3, 
     
     # Request parameters
     params = {
-        'month': '2009-01',
+        'month': '2009-02',
         "function": "STOCH",
         "symbol": forex_symbol,
         "interval": "1min",
@@ -84,5 +83,8 @@ def get_list_solastic(forex_symbol, k_period=5, d_period=3, smoothing_period=3, 
 
         
     # return float(last_percentk), float(last_percentd)
-# symbol = 'AUDCHF'
+symbol = 'AUDCHF'
 # get_list_solastic('d3234f9b98msh636f82f9af5f491p15d26ejsn2b89beb2bdc9', symbol)
+
+
+# print(get_stochastic_oscillator('d3234f9b98msh636f82f9af5f491p15d26ejsn2b89beb2bdc9', symbol, 1, 3, 3))
