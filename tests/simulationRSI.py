@@ -7,6 +7,7 @@ from src.functions.RSI import RSI, checkPusdo, findCandleNumber, obtainResult
 symbol = "AUDCAD"
 symbol = "EURUSD"
 symbol = "EURUSD"
+month = '2023-02'
 def calculate_supremeRSIaverage(RSIvalues, dataPoints, time, number):
 
     checkNextCandle = 0
@@ -65,11 +66,13 @@ prevouisBestPercent = 100
 symbols = ['EURJPY', 'USDCNH', 'GBPJPY', 'AUDCAD', 'AUDCHF', 'AUDJPY', 'AUDUSD', 'CADCHF', 'CHFJPY', 'EURAUD', 'EURCAD', 'EURGBP', 'EURUSD', 'GBPAUD', 'GDPCAD', 'GDPCHF', 'GDPUSD', 'USDCHF', 'USDJPY', 'EURCHF', 'CADJPY', 'USDCAD']
 symbolsBest = ['EURJPY', 'GBPJPY', 'AUDJPY', 'CHFJPY', 'USDJPY', 'CADJPY']
 symbolsSorted = ['USDJPY', 'CADJPY', 'GBPJPY', 'CHFJPY', 'EURJPY', 'AUDJPY']
-for symbol in symbolsBest:
-    closeData, time2 = GrabCloseData(symbol)
+symbolsSorted2 = ['USDJPY', 'CADJPY', 'GBPJPY', 'CHFJPY', 'EURJPY', 'AUDJPY']
+symbolsSorted3 = ['USDJPY', 'CADJPY', 'GBPJPY', 'CHFJPY', 'EURJPY', 'AUDJPY']
+for symbol in symbolsSorted:
+    closeData, time2 = GrabCloseData(symbol, month)
     current = {}
     checkNextCandle = 0
-    RSIvalues = RSI(symbol)
+    RSIvalues = RSI(symbol, month)
     pos, neu, neg = calculate_supremeRSIaverage(RSIvalues, closeData, time2, 5)
     print(symbol)
     print("Candles: " + str(len(RSIvalues)))

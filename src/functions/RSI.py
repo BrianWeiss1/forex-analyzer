@@ -2,7 +2,7 @@ import requests
 
 from src.functions.specialFunctions import automaticBuy, automaticSell
 
-def RSI(symbol, api_key="AH1AA678VJ1UI7LD", rsi_period=3):
+def RSI(symbol, month='2021-03', rsi_period=3, api_key="AH1AA678VJ1UI7LD"):
     base_url = "https://www.alphavantage.co/query"
 
     params = {
@@ -12,7 +12,7 @@ def RSI(symbol, api_key="AH1AA678VJ1UI7LD", rsi_period=3):
         "time_period": rsi_period,
         "series_type": "close",
         "apikey": api_key,
-        'month': '2022-03',
+        'month': month,
         "outputsize": 'full',
     }
     

@@ -2,14 +2,27 @@ import requests
 from datetime import datetime, timedelta
 import yfinance as yf
 #AlphaVantage
-def GrabCloseData(symbol, api_key='FR0QI17GT3B0YBDU'):
-    endpoint = f'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol={symbol}&interval=1min&month=2022-03&outputsize=full&apikey={api_key}'
+def GrabCloseData(symbol, month='2021-03', api_key='FR0QI17GT3B0YBDU'):
+    # endpoint = f'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol={symbol}&interval=1min&month={month}&outputsize=full&apikey={api_key}'
+    
+    base_url = "https://www.alphavantage.co/query"
+
+    params = {
+        "function": "TIME_SERIES_INTRADAY",
+        "symbol": symbol,
+        "interval": "1min",
+        'month': month,
+        "outputsize": 'full',
+        "apikey": api_key,
+    }
+    
+
+    response = requests.get(base_url, params=params)
+    # data = response.json()
 
 
-
-
-    # Send a GET request to the API
-    response = requests.get(endpoint)
+    # # Send a GET request to the API
+    # response = requests.get(endpoint)
 
     if response.status_code == 200:
         data = response.json()
