@@ -1,5 +1,35 @@
 
 
+from functions.RSI import RSI, checkPusdo, findCandleNumber, obtainResult
+from functions.specialFunctions import automaticBuy, automaticSell, checkTime
+
+
+if __name__ == "__main__":
+    symbol = input("Symbol: ")
+    number = input("Number: ")
+
+def main(symbol, number):
+    timer = -1
+    current = {}
+    checkNextCandle = 0
+    while (True):
+        bol, timer = checkTime(timer)
+        if bol == True:
+            RSIvalue = RSI(symbol)[-1]
+            checkPusdo(current, RSIvalue)
+            signal = obtainResult(checkNextCandle, RSIvalue)
+            if signal == "BUY":
+                automaticBuy()
+            if signal == "SELL":
+                automaticSell()
+            checkNextCandle = findCandleNumber(current, number)
+
+
+
+
+'''
+
+
 from decimal import Decimal
 from functions.GrabData import GrabCloseData
 from functions.RSI import RSI, checkPusdo, findCandleNumber, obtainResult
@@ -16,7 +46,9 @@ def calculate_supremeRSIaverage(RSIvalues, dataPoints, time, number):
         # Go through, 
         if NextCandle == True or NextCandle == False:
             if NextCandle == True:
-                if dataPoints[i+1] > dataPoints[i+2]:
+                now = dataPoints[i+1]
+                previous = dataPoints[i+2]
+                if Decimal(dataPoints[i+1]) > Decimal(dataPoints[i+2]):
                     pos += 1
                 elif dataPoints[i+1] == dataPoints[i+2]:
                     neu += 1
@@ -24,6 +56,8 @@ def calculate_supremeRSIaverage(RSIvalues, dataPoints, time, number):
                     neg += 1
                 NextCandle = None
             else:
+                now = dataPoints[i+1]
+                previous = dataPoints[i+2]
                 if dataPoints[i+1] < dataPoints[i+2]:
                     pos += 1
                 elif dataPoints[i+1] == dataPoints[i+2]:
@@ -67,3 +101,5 @@ print("Neutrol Trades: " + str(neu))
 print("Negitive Trades: " + str(neg))
 if not pos == 0:
     print("Win %: " + str((pos/(neg+pos))*100) + "%")
+
+'''

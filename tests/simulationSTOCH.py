@@ -1,9 +1,9 @@
 import datetime
 import time
-from functions.GrabData import GrabCloseData
+from src.functions.GrabData import GrabCloseData
 
-from functions.StochasticOscillator import compareGetStoch
-from functions.StochasticOscillator import get_list_solastic
+from src.functions.StochasticOscillator import compareGetStoch
+from src.functions.StochasticOscillator import get_list_solastic
 
 def calculate_supreme_average(lstKandDValues, lstValues, time, specialNum):
     arraylst = []
@@ -11,19 +11,15 @@ def calculate_supreme_average(lstKandDValues, lstValues, time, specialNum):
     previousSell = False
     pos = 0
     neg = 0
-    # print(lstValues[1])
-    # print(time[1])
-    # print(data)
-    # print(lstKandDValues)
-    # print(len(time))
-    print(len(lstValues))
-    print((lstKandDValues))
-    print(len(time))
-    # KDvalue = list(lstKandDValues.values())
+    nuet = 0
+
     for i in range(len(list(lstKandDValues.keys()))-1, 0, -1):
         if previousBuy:
             if not lstValues[i] > lstValues[i+1]: # need to change to prices
                 pos += 1
+                previousBuy = False
+            elif lstValues[i] == lstValues[i+1]:
+                nuet += 1
                 previousBuy = False
             else:
                 neg += 1
@@ -31,6 +27,9 @@ def calculate_supreme_average(lstKandDValues, lstValues, time, specialNum):
         elif previousSell:
             if not lstValues[i] < lstValues[i+1]: # need to change to prices
                 pos += 1
+                previousSell = False
+            elif lstValues[i] == lstValues[i+1]:
+                nuet += 1
                 previousSell = False
             else:
                 neg += 1
@@ -43,46 +42,24 @@ def calculate_supreme_average(lstKandDValues, lstValues, time, specialNum):
         elif result['sell']:
             arraylst.append(['sell', datetime.datetime.now])
             previousSell = True
-    return pos, neg
+    return pos, nuet, neg
 symbol = 'AUDCHF'
 sucess = 0.6739288307915758 # 1 3 3 (1) (0)
-# for i in range(10, 12): # will try negitive later but might have to change some stuff
-    # time.sleep(20)
 closeData, time2 = GrabCloseData(symbol)
 temp = True
 while(temp == True):
     try:
-        pos, neg = calculate_supreme_average(get_list_solastic(symbol, 1, 3, 3), closeData, time2, 0)
+        pos, nuet, neg = calculate_supreme_average(get_list_solastic(symbol, 1, 3, 3), closeData, time2, 0)
         sucessRate = pos/(pos+neg)
-        print(pos)
-        print(neg)
-        print("Trades = " + str(pos+neg))
-        print("Sucess = " + str(sucessRate))
+        print("Candles: " + str(len(closeData)))
+        print("Total Trades: " + str(pos+neg+nuet))
+        print("Positive Trades: " + str(pos))
+        print("Neutrol Trades: " + str(nuet))
+        print("Negitive Trades: " + str(neg))
         if sucessRate > sucess:
             sucess = sucessRate
         temp = False
     except:
         print("error")
         time.sleep(20)
-        # closeData, time2, data = GrabCloseData(symbol)
         temp = True
-
-# print("Amount of candles: " + str(1383))
-# print("Trades = " + str(pos+neg))
-# print("Sucessful Trades: " + str(pos))
-# print("Negitive Traades: " + str(neg))
-# print("Sucess = " + str(pos/(pos+neg)))
-
-# CURRENT TIME: 2023-08-10 17:07'
-# This is in the list: 2023-08-10 17:07:00
-# Times printed out
-
-#17:21
-#17:48
-# 27
-# 0.5706 = 2023-08-10 17:25
-
-
-
-# 0.5724 = 
-

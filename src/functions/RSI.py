@@ -12,13 +12,14 @@ def RSI(symbol, api_key="YOUR_API_KEY", rsi_period=3):
         "time_period": rsi_period,
         "series_type": "close",
         "apikey": api_key,
-        'month': '2009-03',
+        'month': '2020-03',
         "outputsize": 'full',
     }
 
     response = requests.get(base_url, params=params)
     data = response.json()
     rsi_data = data["Technical Analysis: RSI"]
+    # print(rsi_data)
     return rsi_data
 
 
