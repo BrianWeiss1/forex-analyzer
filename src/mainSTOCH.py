@@ -1,5 +1,5 @@
 from datetime import datetime
-from functions.StochasticOscillator import compareGetStoch, get_stochastic_oscillator
+from functions.STOCH import compareGetStoch, get_stochastic_oscillator
 from functions.specialFunctions import automaticBuy, automaticSell, checkTime
 lst = []
 try:

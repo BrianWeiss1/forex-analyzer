@@ -1,14 +1,15 @@
 
 
 from decimal import Decimal
+from functions.AMX import GrabCurrentADX, ADX
 from src.functions.GrabData import GrabCloseData
 from src.functions.RSI import RSI, checkPusdo, findCandleNumber, obtainResult
 
-symbol = "USDJPY"
-symbol = "CADJPY"
-symbol = "GBPJPY"
+symbol = "AUDCAD"
+symbol = "EURUSD"
+symbol = "EURUSD"
 month = '2023-02'
-def calculate_supremeRSIaverage(RSIvalues, dataPoints, time, number):
+def calculate_supremeRSIaverage(RSIvalues, AMXlist, dataPoints, time, amountOfCandles, ADXlow, ADXhigh):
 
     checkNextCandle = 0
     NextCandle = None
@@ -42,11 +43,14 @@ def calculate_supremeRSIaverage(RSIvalues, dataPoints, time, number):
         RSIvalue = float(RSIvalues[time[i]]['RSI'])
         signal = obtainResult(checkNextCandle, RSIvalue, current) # check 1 data BUY
         checkPusdo(current, RSIvalue) # check 1 data
-        checkNextCandle = findCandleNumber(current, number) # solves for candle
+        checkNextCandle = findCandleNumber(current, amountOfCandles) # solves for candle
+        AMXvalue = GrabCurrentADX(AMXlist)
         if signal == "BUY":
-            NextCandle = True
+            if AMXvalue > ADXlow and AMXvalue < ADXhigh:
+                NextCandle = True
         if signal == "SELL":
-            NextCandle = False
+            if AMXvalue > ADXlow and AMXvalue < ADXhigh:
+                NextCandle = False
     return pos, neu, neg
 
 
@@ -73,7 +77,8 @@ for symbol in symbolsSorted:
     current = {}
     checkNextCandle = 0
     RSIvalues = RSI(symbol, month)
-    pos, neu, neg = calculate_supremeRSIaverage(RSIvalues, closeData, time2, 5)
+    AMXlist = ADX(symbol, month)
+    pos, neu, neg = calculate_supremeRSIaverage(RSIvalues, AMXlist, closeData, time2, 5)
     print(symbol)
     print("Candles: " + str(len(RSIvalues)))
     print("Total Trades: " + str(pos+neg+neu))
@@ -92,6 +97,3 @@ for symbol in symbolsSorted:
         print("Neut %: " + str(nuetPercent) + "%")
         print("Win %: " + str((pos/(neg+pos))*100) + "%")
     print("\n\n\n\n")
-
-# print(prevouisBestPercent)
-# print(prevouisBestSymbol)

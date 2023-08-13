@@ -2,8 +2,8 @@ import datetime
 import time
 from src.functions.GrabData import GrabCloseData
 
-from src.functions.StochasticOscillator import compareGetStoch
-from src.functions.StochasticOscillator import get_list_solastic
+from functions.STOCH import compareGetStoch
+from functions.STOCH import get_list_solastic
 
 def calculate_supreme_average(lstKandDValues, lstValues, time, specialNum):
     arraylst = []

@@ -26,21 +26,7 @@ def RSI(symbol, month='2021-03', rsi_period=3, api_key="AH1AA678VJ1UI7LD"):
     except:
         print(data)
         print(data.keys())
-
-
-    if "Technical Analysis: RSI" in data:
-        rsi_data = []
-        
-        for timestamp, rsi_info in data["Technical Analysis: RSI"].items():
-            rsi_entry = {
-                "timestamp": timestamp,
-                "rsi_value": float(rsi_info["RSI"])
-            }
-            rsi_data.append(rsi_entry)
-
-        return rsi_data
-
-    return None
+    #removed some data here IF RSI doesnt work add it back
 
 
 def findRSIslope(rsi_values, time_frame):
