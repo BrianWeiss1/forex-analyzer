@@ -2,9 +2,9 @@ import requests
 from datetime import datetime, timedelta
 import yfinance as yf
 #AlphaVantage
-def GrabCloseData(symbol, api_key='d3234f9b98msh636f82f9af5f491p15d26ejsn2b89beb2bdc9'):
-    endpoint = f'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol={symbol}&interval=1min&apikey={api_key}&month=2009-03&outputsize=full'
-    endpoint = f'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol={symbol}&interval=1min&month=2020-03&outputsize=full&apikey={api_key}'
+def GrabCloseData(symbol, api_key='FR0QI17GT3B0YBDU'):
+    endpoint = f'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol={symbol}&interval=1min&month=2022-03&outputsize=full&apikey={api_key}'
+
 
 
 

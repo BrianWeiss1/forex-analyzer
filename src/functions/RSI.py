@@ -2,7 +2,7 @@ import requests
 
 from src.functions.specialFunctions import automaticBuy, automaticSell
 
-def RSI(symbol, api_key="YOUR_API_KEY", rsi_period=3):
+def RSI(symbol, api_key="AH1AA678VJ1UI7LD", rsi_period=3):
     base_url = "https://www.alphavantage.co/query"
 
     params = {
@@ -12,15 +12,20 @@ def RSI(symbol, api_key="YOUR_API_KEY", rsi_period=3):
         "time_period": rsi_period,
         "series_type": "close",
         "apikey": api_key,
-        'month': '2020-03',
+        'month': '2022-03',
         "outputsize": 'full',
     }
+    
 
     response = requests.get(base_url, params=params)
     data = response.json()
-    rsi_data = data["Technical Analysis: RSI"]
-    # print(rsi_data)
-    return rsi_data
+    try:
+        rsi_data = data["Technical Analysis: RSI"]
+        # print(rsi_data)
+        return rsi_data
+    except:
+        print(data)
+        print(data.keys())
 
 
     if "Technical Analysis: RSI" in data:

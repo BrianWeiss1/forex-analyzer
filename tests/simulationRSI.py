@@ -8,9 +8,7 @@ symbol = "AUDCAD"
 symbol = "EURUSD"
 symbol = "EURUSD"
 def calculate_supremeRSIaverage(RSIvalues, dataPoints, time, number):
-    print(len(time))
-    print(len(RSIvalues))
-    print(len(dataPoints))
+
     checkNextCandle = 0
     NextCandle = None
     current = {}
@@ -44,20 +42,13 @@ def calculate_supremeRSIaverage(RSIvalues, dataPoints, time, number):
         signal = obtainResult(checkNextCandle, RSIvalue, current) # check 1 data BUY
         checkPusdo(current, RSIvalue) # check 1 data
         checkNextCandle = findCandleNumber(current, number) # solves for candle
-        # print(type(checkNextCandle))
-        if signal != None:
-            print(signal)
         if signal == "BUY":
-            # print("a")
             NextCandle = True
         if signal == "SELL":
             NextCandle = False
     return pos, neu, neg
 
-closeData, time2 = GrabCloseData(symbol)
-current = {}
-checkNextCandle = 0
-RSIvalues = RSI(symbol)
+
 # while True:
 #     current = checkPusdo(current, RSIvalue) # check 1 data
 #     signal = obtainResult(checkNextCandle, RSIvalue) # check 1 data
@@ -67,13 +58,37 @@ RSIvalues = RSI(symbol)
 #         automaticSell()
 #     checkNextCandle = findCandleNumber(current, number)
 #     break
+# EURJPY 0% GBPJPY 0%
+#USDCNH 1.17%
+# 'USDCNH', 'EURJPY', 
+prevouisBestPercent = 100
+symbols = ['EURJPY', 'USDCNH', 'GBPJPY', 'AUDCAD', 'AUDCHF', 'AUDJPY', 'AUDUSD', 'CADCHF', 'CHFJPY', 'EURAUD', 'EURCAD', 'EURGBP', 'EURUSD', 'GBPAUD', 'GDPCAD', 'GDPCHF', 'GDPUSD', 'USDCHF', 'USDJPY', 'EURCHF', 'CADJPY', 'USDCAD']
+symbolsBest = ['EURJPY', 'GBPJPY', 'AUDJPY', 'CHFJPY', 'USDJPY', 'CADJPY']
+symbolsSorted = ['USDJPY', 'CADJPY', 'GBPJPY', 'CHFJPY', 'EURJPY', 'AUDJPY']
+for symbol in symbolsBest:
+    closeData, time2 = GrabCloseData(symbol)
+    current = {}
+    checkNextCandle = 0
+    RSIvalues = RSI(symbol)
+    pos, neu, neg = calculate_supremeRSIaverage(RSIvalues, closeData, time2, 5)
+    print(symbol)
+    print("Candles: " + str(len(RSIvalues)))
+    print("Total Trades: " + str(pos+neg+neu))
+    print("Positive Trades: " + str(pos))
+    print("Neutrol Trades: " + str(neu))
+    print("Negitive Trades: " + str(neg))
+    if not pos == 0:
+        nuetPercent = round((neu/(pos+neg+neu))*100, 2)
+        if nuetPercent < prevouisBestPercent:
+            prevouisBestPercent = nuetPercent
+            prevouisBestSymbol = symbol
+        print("Trade %: " + str(round((Decimal(pos+neg+neu)/Decimal(len(RSIvalues))*100), 2)) + "%")
+        print("Trade %: " + str(round((Decimal(pos+neg+neu)/Decimal(len(RSIvalues))*100), 2)) + "%")
+        print("Trade %: " + str(round((Decimal(pos+neg+neu)/Decimal(len(RSIvalues))*100), 2)) + "%")
 
-pos, neu, neg = calculate_supremeRSIaverage(RSIvalues, closeData, time2, 5)
-print("Candles: " + str(len(RSIvalues)))
-print("Total Trades: " + str(pos+neg+neu))
-print("Positive Trades: " + str(pos))
-print("Neutrol Trades: " + str(neu))
-print("Negitive Trades: " + str(neg))
-if not pos == 0:
-    print("Neut %: " + str(round((neu/(pos+neg+neu))*100, 2)) + "%")
-    print("Win %: " + str((pos/(neg+pos))*100) + "%")
+        print("Neut %: " + str(nuetPercent) + "%")
+        print("Win %: " + str((pos/(neg+pos))*100) + "%")
+    print("\n\n\n\n")
+
+# print(prevouisBestPercent)
+# print(prevouisBestSymbol)
