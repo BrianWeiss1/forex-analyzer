@@ -1,6 +1,9 @@
 import pyautogui
 from datetime import datetime
-
+import time
+def findLocation(wait):
+    time.sleep(wait)
+    print(pyautogui.position())
 def automaticBuy(buy=(1118, 387)):
     pyautogui.click(buy)
 def automaticSell(sell=(1123, 462)):
@@ -13,3 +16,4 @@ def checkTime(lastMin = -1):
         return True, lastMin
     else:
         return False, lastMin
+# def openVPN(VPNopen=()):

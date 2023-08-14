@@ -1,7 +1,7 @@
 
 
 from decimal import Decimal
-from functions.AMX import GrabCurrentADX, ADX
+from src.functions.AMX import ADX
 from src.functions.GrabData import GrabCloseData
 from src.functions.RSI import RSI, checkPusdo, findCandleNumber, obtainResult
 
@@ -17,7 +17,7 @@ def calculate_supremeRSIaverage(RSIvalues, AMXlist, dataPoints, time, amountOfCa
     pos = 0
     neg = 0
     neu = 0
-    for i in range(len(list(RSIvalues))-1, 0, -1):
+    for i in range(len(list(AMXlist))-1, 0, -1):
         # Go through, 
         if NextCandle == True or NextCandle == False:
             if NextCandle == True:
@@ -44,7 +44,7 @@ def calculate_supremeRSIaverage(RSIvalues, AMXlist, dataPoints, time, amountOfCa
         signal = obtainResult(checkNextCandle, RSIvalue, current) # check 1 data BUY
         checkPusdo(current, RSIvalue) # check 1 data
         checkNextCandle = findCandleNumber(current, amountOfCandles) # solves for candle
-        AMXvalue = GrabCurrentADX(AMXlist)
+        AMXvalue = AMXlist[time[i]]['ADX']
         if signal == "BUY":
             if AMXvalue > ADXlow and AMXvalue < ADXhigh:
                 NextCandle = True
@@ -72,7 +72,8 @@ symbolsBest = ['EURJPY', 'GBPJPY', 'AUDJPY', 'CHFJPY', 'USDJPY', 'CADJPY']
 symbolsSorted = ['USDJPY', 'CADJPY', 'GBPJPY', 'CHFJPY', 'EURJPY', 'AUDJPY']
 symbolsSorted2 = ['USDJPY', 'CADJPY', 'GBPJPY', 'CHFJPY', 'EURJPY', 'AUDJPY']
 symbolsSorted3 = ['USDJPY', 'CADJPY', 'GBPJPY', 'CHFJPY', 'EURJPY', 'AUDJPY']
-for symbol in symbolsSorted:
+stocks = ['APPL']
+for symbol in stocks:
     closeData, time2 = GrabCloseData(symbol, month)
     current = {}
     checkNextCandle = 0

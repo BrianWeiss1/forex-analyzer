@@ -1,9 +1,8 @@
 import datetime
-import time
 from src.functions.GrabData import GrabCloseData
 
-from functions.STOCH import compareGetStoch
-from functions.STOCH import get_list_solastic
+from src.functions.STOCH import compareGetStoch
+from src.functions.STOCH import get_list_solastic
 
 def calculate_supreme_average(lstKandDValues, lstValues, time, specialNum):
     arraylst = []
@@ -43,7 +42,7 @@ def calculate_supreme_average(lstKandDValues, lstValues, time, specialNum):
             arraylst.append(['sell', datetime.datetime.now])
             previousSell = True
     return pos, nuet, neg
-symbol = 'AUDCHF'
+symbol = 'AAPL'
 sucess = 0.6739288307915758 # 1 3 3 (1) (0)
 closeData, time2 = GrabCloseData(symbol)
 temp = True
@@ -61,5 +60,5 @@ while(temp == True):
         temp = False
     except:
         print("error")
-        time.sleep(20)
+        # time.sleep(20)
         temp = True

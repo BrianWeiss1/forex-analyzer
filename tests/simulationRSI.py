@@ -6,7 +6,7 @@ from src.functions.RSI import RSI, checkPusdo, findCandleNumber, obtainResult
 
 symbol = "USDJPY"
 symbol = "CADJPY"
-symbol = "GBPJPY"
+symbol = "AAPL"
 month = '2023-02'
 def calculate_supremeRSIaverage(RSIvalues, dataPoints, time, number):
 
@@ -68,7 +68,8 @@ symbolsBest = ['EURJPY', 'GBPJPY', 'AUDJPY', 'CHFJPY', 'USDJPY', 'CADJPY']
 symbolsSorted = ['USDJPY', 'CADJPY', 'GBPJPY', 'CHFJPY', 'EURJPY', 'AUDJPY']
 symbolsSorted2 = ['USDJPY', 'CADJPY', 'GBPJPY', 'CHFJPY', 'EURJPY', 'AUDJPY']
 symbolsSorted3 = ['USDJPY', 'CADJPY', 'GBPJPY', 'CHFJPY', 'EURJPY', 'AUDJPY']
-for symbol in symbolsSorted:
+stocks = ['AAPL']
+for symbol in stocks:
     closeData, time2 = GrabCloseData(symbol, month)
     current = {}
     checkNextCandle = 0
