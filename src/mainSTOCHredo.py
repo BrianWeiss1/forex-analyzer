@@ -3,6 +3,7 @@ from src.functions.STOCHredo import STOCH, checkPusdo, findCandleNumber, obtainR
 from datetime import datetime
 import time
 # 1 is at 80.06674757281553%
+#EURUSD
 def main(symbol):
 
     current = {}
@@ -15,7 +16,7 @@ def main(symbol):
         if (datetime.now().second >= 1 and datetime.now().second <= 2 and not datetime.now().minute == timer):
             bol = True
         if bol == True:
-            listOfKD = STOCH(symbol, 2, 1, 50)
+            listOfKD = STOCH(symbol, 2, 1, 2)
             percentK = float(listOfKD[obtainCurrentTime()]['SlowK'])
             percentD = float(listOfKD[obtainCurrentTime()]['SlowD'])
             checkNextCandle = findCandleNumber(current) # check next candle 
@@ -36,4 +37,4 @@ def main(symbol):
             time.sleep(50)
 
 if __name__ == "__main__":
-    main("CHFJPY")
+    main("GBPAUD")
