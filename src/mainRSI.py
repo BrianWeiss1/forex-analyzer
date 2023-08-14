@@ -1,28 +1,58 @@
 
 
 from functions.RSI import RSI, checkPusdo, findCandleNumber, obtainResult
-from functions.specialFunctions import automaticBuy, automaticSell, checkTime
-
-
-if __name__ == "__main__":
-    symbol = input("Symbol: ")
-    number = input("Number: ")
+from functions.specialFunctions import automaticBuy, automaticSell, checkTime, obtainCurrentTime
+from datetime import datetime
+import time
 
 def main(symbol, number):
     timer = -1
     current = {}
+    current[">67"] = 0
+    current["<67"] = 0
+    current["<37"] = 0
+    current[">37"] = 0
     checkNextCandle = 0
+    bol = False
     while (True):
-        bol, timer = checkTime(timer)
+        if (datetime.now().second >= 1 and datetime.now().second <= 2 and not datetime.now().minute == timer):
+            bol, timer = checkTime(timer)
+            bol = True
         if bol == True:
-            RSIvalue = RSI(symbol)[-1]
+            print('a')
+            print(datetime.now())
+            RSIvalue = float(RSI(symbol)[obtainCurrentTime()]['RSI'])
+            print(datetime.now())
+            # print(RSIvalue)
+            # print(obtainCurrentTime())
+            # print(RSIvalue[obtainCurrentTime()])
+            print(RSIvalue)
+            checkNextCandle = findCandleNumber(current, number)
             checkPusdo(current, RSIvalue)
-            signal = obtainResult(checkNextCandle, RSIvalue)
+            print(current)
+            signal = obtainResult(checkNextCandle, RSIvalue, current)
             if signal == "BUY":
+                print("BUY")
                 automaticBuy()
             if signal == "SELL":
+                print("SELL")
                 automaticSell()
-            checkNextCandle = findCandleNumber(current, number)
+            bol = False
+            if (datetime.now().second >= 1 and datetime.now().second <= 2):
+                timer = datetime.now().minute
+
+if __name__ == "__main__":
+    # symbol = input("Symbol: ")
+    # number = input("Number: ")
+    symbol = "CHFJPY"
+    while(True):
+        try:
+            main(symbol, 5)
+        except:
+            print("EROR: PLEASE CHANGE VPN IN WAIT TIME")
+            time.sleep(60)
+
+
 
 
 

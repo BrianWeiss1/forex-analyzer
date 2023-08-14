@@ -1,13 +1,12 @@
 import requests
 
-def STOCH(symbol, month='2021-03', fastkperiod=5, slowkperiod=3, slowdperiod=3, api_key="YOUR_API_KEY"):
+def STOCH(symbol, fastkperiod=5, slowkperiod=3, slowdperiod=3, api_key="YOUR_API_KEY"):
     base_url = "https://www.alphavantage.co/query"
 
     params = {
         'function': 'STOCH',
         'symbol': symbol,
         'interval': '1min',
-        'month': month,
         'fastkperiod': fastkperiod,
         'slowkperiod': slowkperiod,
         'slowdperiod': slowdperiod,
@@ -42,7 +41,7 @@ def checkPusdo(current, percentK, percentD):
     return current
 
 
-def findCandleNumber(current, number=5):
+def findCandleNumber(current, number=1):
     if current[">percentD"] >= number:
         checkNextCandle = 1
     elif current["<percentD"] >= number:

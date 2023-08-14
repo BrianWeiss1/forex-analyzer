@@ -1,5 +1,5 @@
 import pyautogui
-from datetime import datetime
+from datetime import datetime, timedelta
 import time
 def findLocation(wait):
     time.sleep(wait)
@@ -16,4 +16,10 @@ def checkTime(lastMin = -1):
         return True, lastMin
     else:
         return False, lastMin
+def obtainCurrentTime():
+    current_time = datetime.now()
+    previous_minute = current_time - timedelta(minutes=1)
+    formatted_time = previous_minute.strftime('%Y-%m-%d %H:%M')
+    return formatted_time
+
 # def openVPN(VPNopen=()):

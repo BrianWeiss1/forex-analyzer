@@ -44,49 +44,50 @@ def solveForAverageSTOCH(percentKandD, dataPoints, closeDatatime, kValue, dValue
 symbol = "AAPL"
 month = "2019-07"
 closeData, closeDatatime = GrabCloseData(symbol, month)
-bestWinPercent = 0
+bestprofitablity = 0
 besti = 0
 bestj = 0
 bestk = 0
-try:
-    for i in range(1, (100)):
-        print(i)
-        for j in range(1, (10)):
-            for k in range(1, 10):
-                try:
-                    listOfKD = STOCH(symbol, month, i, j, k)
-                    pos, neu, neg = (solveForAverageSTOCH(listOfKD, closeData, closeDatatime, 1, 1, 1))
-                except:
-                    print("eror")
-                    time.sleep(61)
-                    listOfKD = STOCH(symbol, month, i, j, k)
-                    pos, neu, neg = (solveForAverageSTOCH(listOfKD, closeData, closeDatatime, 1, 1, 1))
-                    # yautogui
-                    # openVPN()
-                    # chooseOption()
-                print("Candles: " + str(len(listOfKD)))
-                print("Total Trades: " + str(pos+neg+neu))
-                print("Positive Trades: " + str(pos))
-                print("Neutrol Trades: " + str(neu))
-                print("Negitive Trades: " + str(neg))
-                print("Trade %: " + str(round((Decimal(pos+neg+neu)/Decimal(len(listOfKD))*100), 2)) + "%")
-                if neg+pos == 0 or pos == 0:
-                    print("Diison by 0")
-                else:
-                    nuetPercent = round((neu/(pos+neg+neu))*100, 2)
-                    print("Neut %: " + str(nuetPercent) + "%")
 
-                    winPercent = (pos/(neg+pos))*100
-                    print("Win %: " + str(round((pos/(neg+pos))*100, 2)) + "%")
-                    if winPercent > bestWinPercent:
-                        bestWinPercent = winPercent
-                        besti = i
-                        bestj = j
-                        bestk = k
-    print(bestWinPercent)
-    print(besti)
-    print(bestj)
-except KeyboardInterrupt:
-    print(bestWinPercent)
-    print(besti)
-    print(bestj) 
+try:
+    listOfKD = STOCH(symbol, month, 2, 1, 50)
+    pos, neu, neg = (solveForAverageSTOCH(listOfKD, closeData, closeDatatime, 1, 1, 1))
+except:
+    print("eror")
+    time.sleep(61)
+    listOfKD = STOCH(symbol, month, 2, 1, 50)
+    pos, neu, neg = (solveForAverageSTOCH(listOfKD, closeData, closeDatatime, 1, 1, 1))
+# yautogui
+# openVPN()
+# chooseOption()
+candles = len(listOfKD)
+tradePercent = ((pos+neg+neu)/candles)*100
+print("Candles: " + str(len(listOfKD)))
+print("Total Trades: " + str(pos+neg+neu))
+print("Positive Trades: " + str(pos))
+print("Neutrol Trades: " + str(neu))
+print("Negitive Trades: " + str(neg))
+print("Trade %: " + str(round((Decimal(pos+neg+neu)/Decimal(len(listOfKD))*100), 2)) + "%")
+if neg+pos == 0 or pos == 0:
+    print("Diison by 0")
+else:
+    nuetPercent = round((neu/(pos+neg+neu))*100, 2)
+    print("Neut %: " + str(nuetPercent) + "%")
+
+    winPercent = ((pos/(neg+pos))*100)
+    profitablity = round(candles/winPercent/(pos-((neg+neu)*2)), 2)
+    profitablity = tradePercent * winPercent/(pos-((neg+neu)*2))
+    profitablity = tradePercent * candles /winPercent
+    profitablity = tradePercent * winPercent * 100
+    profitablity = winPercent / tradePercent * 100
+    profitablity = (winPercent*tradePercent)/100
+    print("Win %: " + str(round((pos/(neg+pos))*100, 2)) + "%")
+    print("Profitablity: " + str(profitablity))
+print(bestprofitablity)
+print(besti)
+
+
+
+
+#42.63225333854568
+#1
