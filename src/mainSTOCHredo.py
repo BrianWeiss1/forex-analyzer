@@ -60,7 +60,7 @@ def main(symbol):
                     previousBuy = False
                     previousSell = False
                     
-                listOfKD = STOCH(symbol, 2, 1, 2)
+                listOfKD = STOCH(symbol, 3, 5, 5)
                 # print(listOfKD)
                 # print(listOfKD)
                 f = open('documents/listofKDkeys.txt', 'w')

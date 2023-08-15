@@ -7,7 +7,7 @@ from src.functions.RSI import RSI, checkPusdo, findCandleNumber, obtainResult
 
 symbol = "AUDCAD"
 symbol = "EURUSD"
-symbol = "EURUSD"
+symbol = "XAU"
 month = '2023-02'
 def calculate_supremeRSIaverage(RSIvalues, AMXlist, dataPoints, time, amountOfCandles, ADXlow, ADXhigh):
 
