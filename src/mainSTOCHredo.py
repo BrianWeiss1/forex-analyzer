@@ -37,4 +37,4 @@ def main(symbol):
             time.sleep(50)
 
 if __name__ == "__main__":
-    main("GBPAUD")
+    main("EURCAD")
