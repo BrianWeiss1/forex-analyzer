@@ -59,6 +59,63 @@ def GrabCloseData(symbol, month='2021-03', api_key='FR0QI17GT3B0YBDU'):
             print(data.keys())
     else:
         print('Error occurred while fetching data')
+
+def GrabCurrentData(symbol, api_key='FR0QI17GT3B0YBDU'):
+    # endpoint = f'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol={symbol}&interval=1min&month={month}&outputsize=full&apikey={api_key}'
+    
+    base_url = "https://www.alphavantage.co/query"
+
+    params = {
+        "function": "TIME_SERIES_INTRADAY",
+        "symbol": symbol,
+        "interval": "1min",
+        "outputsize": 'compact',
+        "apikey": api_key,
+    }
+
+    
+
+    response = requests.get(base_url, params=params)
+    # data = response.json()
+
+
+    # # Send a GET request to the API
+    # response = requests.get(endpoint)
+
+    if response.status_code == 200:
+        data = response.json()
+
+        # Extract the most recent data point
+        # prices = {}
+        # times = []
+        # prices['low'] = []
+        # prices['open'] = []
+        # prices['high'] = []
+        # prices['Close'] = []
+        # try:
+        #     for value in data['Time Series (1min)'].values():
+        #         prices['low'].append(float(value['3. low']))
+        #         prices['open'].append(float(value['1. open']))
+        #         prices['high'].append(float(value['2. high']))
+        #         prices['Close'].append(float(value['4. close']))
+        #     for time in data['Time Series (1min)'].keys():
+        #         times.append(time[:-3])
+            # UpdatedTimes = times[0:len(times)-27]
+
+        Closeprices = data['Time Series (1min)']
+
+            # UpdatedClosePrice = Closeprices[0:len(Closeprices)-27]
+            # latest_data = data['Time Series (1min)'][latest_timestamp]
+
+            # Print the most recent data with more decimal places
+            # print(f"Timestamp: {latest_timestamp}")
+            # print(f"Open: {float(latest_data['1. open'])}")
+            # print(f"High: {float(latest_data['2. high'])}") 
+            # print(f"Low: {float(latest_data['3. low'])}")   
+            # print(f"Close: {float(latest_data['4. close'])}") 
+        return Closeprices
+    else:
+        print('Error occurred while fetching data')
 def GrabAllData(symbol, api_key='YOUR_API_KEY'):
     end_time = datetime.utcnow() - timedelta(minutes=1)
     start_time = end_time - timedelta(minutes=55) # grabs data from 55 minutes ago till now

@@ -10,7 +10,8 @@ def STOCH(symbol, fastkperiod=5, slowkperiod=3, slowdperiod=3, api_key="YOUR_API
         'fastkperiod': fastkperiod,
         'slowkperiod': slowkperiod,
         'slowdperiod': slowdperiod,
-        'apikey': api_key
+        'apikey': api_key,
+        "outputsize": 'full'
     }
 
     response = requests.get(base_url, params=params)
@@ -18,6 +19,7 @@ def STOCH(symbol, fastkperiod=5, slowkperiod=3, slowdperiod=3, api_key="YOUR_API
     data = response.json()
     try:
         percentKandD = data['Technical Analysis: STOCH']
+        print(data.keys())
         return percentKandD
     except KeyError:
         print(data)
@@ -56,11 +58,13 @@ def obtainResult(checkNextCandle, current, percentK, percentD):
         if checkNextCandle == 1:
             if percentK < percentD:
                 current[">percentD"] = 0
-                return "SELL"
+                difference = abs(percentK-percentD)
+                return "SELL", difference
         if checkNextCandle == 2:
             if percentK > percentD:
                 current["<percentD"] = 0
-                return "BUY"
+                difference = abs(percentK-percentD)
+                return "BUY", difference
         # if int(checkNextCandle) == 3:
         #     if RSIvalue < percentK:
         #         current[">percentK"] = 0
@@ -69,7 +73,7 @@ def obtainResult(checkNextCandle, current, percentK, percentD):
         #     if RSIvalue > percentK:
         #         current["<percentK"] = 0
         #         return "BUY"
-    return None
+    return None, 0
 
 
 def main():
