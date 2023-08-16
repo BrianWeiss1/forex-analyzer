@@ -76,7 +76,7 @@ def main(symbol, number):
             checkPusdo(current, RSIvalue)
             print(current)
             signal = obtainResult(checkNextCandle, RSIvalue, current)
-            slope, currentADX = findADXslope(symbol, 5) # was getting EURJPY slope
+            slope, currentADX = findADXslope('EURJPY', 5) # was getting EURJPY slope
             continuement = True
             if slope > 0.1:
                 opp = False
@@ -147,3 +147,12 @@ if __name__ == "__main__":
 # 2min: 11 1 5
 # 1 min: 8 3 6
 # 1 trade after: 10 2 4
+
+#EURJPY
+#1min: 6 0 1
+# 2min: 5 0 2
+# 1aft: 2 0 5
+#EURUSD
+# 1min: 2 0 2
+# 2min: 2 0 2
+# 1aft: 3 0 1

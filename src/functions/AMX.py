@@ -44,7 +44,6 @@ def findADXslope(symbol, length, time_period=14, api_key="YOUR_API_KEY"):
             adx_data = data["Technical Analysis: ADX"]
             key = list(adx_data.keys())
             lastKeys = (key[0:length])
-            print(list(adx_data.values())[0])
             arr = []
             for key in lastKeys:
                 arr.append(float((adx_data[key]['ADX'])))
@@ -56,7 +55,7 @@ def findADXslope(symbol, length, time_period=14, api_key="YOUR_API_KEY"):
 
             slope = round(slope, 2)
 
-            return slope, list(adx_data.values())[0]
+            return slope, float(list(adx_data.values())[0]['ADX'])
         except:
             print(data.keys())
             print("Incorrect key")
