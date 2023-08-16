@@ -76,15 +76,20 @@ def main(symbol, number):
             checkPusdo(current, RSIvalue)
             print(current)
             signal = obtainResult(checkNextCandle, RSIvalue, current)
-            slope = findADXslope("EURJPY", 5)
+            slope, currentADX = findADXslope(symbol, 5) # was getting EURJPY slope
+            continuement = True
             if slope > 0.1:
                 opp = False
             elif slope < -0.1:
                 opp = True
             else:
                 opp = None
-
-            if opp != None:
+            # if currentADX < 20:
+            #     continuement = False
+            # if RSIvalue < 55 and RSIvalue > 45:
+            #     continuement = False
+                
+            if opp != None and continuement == True:
                 if (signal == "BUY" and opp == False) or (opp == True and signal == "SELL"):
                     print("BUY")
                     # automaticBuy()
@@ -109,7 +114,7 @@ if __name__ == "__main__":
     symbol2 = 'EURUSD'
     symbol3 = "EURJPY"
     # Create two processes, each running the `my_function` with different inputs
-    process_1 = multiprocessing.Process(target=main, args=(symbol, 1))
+    process_1 = multiprocessing.Process(target=main, args=(symbol3, 1))
     process_2 = multiprocessing.Process(target=main, args=(symbol2, 4))
 
     # Start the two processes
@@ -127,7 +132,7 @@ if __name__ == "__main__":
 
 #IDEAS: 
 
-#1. Dont do anything when ADX < 20
+#1. do opp when ADX < 20
 # dont do anything when RSI < 55 and RSI > 45
 #2. swap the buy and SELL
 
