@@ -16,7 +16,7 @@ try:
             if bol == True:
                 print(datetime.now())
                 now = datetime.now()
-                infoSTOCH['%k'], infoSTOCH['%d'] = get_stochastic_oscillator('d3234f9b98msh636f82f9af5f491p15d26ejsn2b89beb2bdc9', symbol, 1, 3, 3)
+                infoSTOCH['%k'], infoSTOCH['%d'] = get_stochastic_oscillator('d3234f9b98msh636f82f9af5f491p15d26ejsn2b89beb2bdc9', symbol, )
                 print("%K:" + str(infoSTOCH['%k']))
                 print("%D:" + str(infoSTOCH['%d']))
                 pointOfError = 5

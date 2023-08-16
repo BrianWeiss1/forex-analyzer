@@ -1,11 +1,12 @@
-
-
+from functions.AMX import findADXslope
 from functions.GrabData import GrabCurrentData
 from functions.RSI import RSI, checkPusdo, findCandleNumber, obtainResult
 from functions.specialFunctions import automaticBuy, automaticSell, checkTime, obtainCurrentTime, obtainPastTimeFormatted
 from datetime import datetime
 import time
 import multiprocessing
+
+
 
 def main(symbol, number):
     timer = -1
@@ -67,7 +68,7 @@ def main(symbol, number):
             # print(datetime.now())
             # print((RSI(symbol)))
             RSIvalue = float(RSI(symbol)[obtainCurrentTime(1)]['RSI'])
-            print(datetime.now())
+            print(obtainPastTimeFormatted(0))
             # print(RSIvalue)
             # print(obtainCurrentTime())
             # print(RSIvalue[obtainCurrentTime()])
@@ -75,21 +76,28 @@ def main(symbol, number):
             checkPusdo(current, RSIvalue)
             print(current)
             signal = obtainResult(checkNextCandle, RSIvalue, current)
-            if signal == "BUY":
-                print("BUY")
-                # automaticBuy()
-                previousBuy = True
-            if signal == "SELL":
-                print("SELL")
-                # automaticSell()
-                previousSell = True
+            slope = findADXslope("EURJPY", 5)
+            if slope > 0.1:
+                opp = True
+            elif slope < -0.1:
+                opp = False
+            else:
+                opp = None
+
+            if opp != None:
+                if (signal == "BUY" and opp == False) or (opp == True and signal == "SELL"):
+                    print("BUY")
+                    # automaticBuy()
+                    previousBuy = True
+                if (signal == "SELL" and opp == False) or (opp == True and signal == 'BUY'):
+                    print("SELL")
+                    # automaticSell()
+                    previousSell = True
             bol = False
             if (datetime.now().second >= 1 and datetime.now().second <= 2):
                 timer = datetime.now().minute
             try:
                 print(str(pos), str(nuet), str(neg))
-                print(str(sumPos), str(sumNeut), str(sumNeg))
-                print(str(sumPos/pos), str(sumNeut/nuet), str(sumNeg/neg))
             except:
                 print("")
             time.sleep(50)
@@ -110,3 +118,18 @@ if __name__ == "__main__":
     # Wait for the two processes to finish
     process_1.join()
     process_2.join()
+
+
+
+
+
+
+#IDEAS: 
+
+#1. swap the slope
+#2. swap the buy and SELL
+
+
+# 2 min: 7 0 5
+# 1min: 7 0 4
+# 1 trade after: 3 0 3
