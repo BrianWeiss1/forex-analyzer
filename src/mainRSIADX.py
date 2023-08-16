@@ -78,9 +78,9 @@ def main(symbol, number):
             signal = obtainResult(checkNextCandle, RSIvalue, current)
             slope = findADXslope("EURJPY", 5)
             if slope > 0.1:
-                opp = True
-            elif slope < -0.1:
                 opp = False
+            elif slope < -0.1:
+                opp = True
             else:
                 opp = None
 
@@ -91,6 +91,7 @@ def main(symbol, number):
                     previousBuy = True
                 if (signal == "SELL" and opp == False) or (opp == True and signal == 'BUY'):
                     print("SELL")
+                    print(symbol)
                     # automaticSell()
                     previousSell = True
             bol = False
@@ -126,10 +127,18 @@ if __name__ == "__main__":
 
 #IDEAS: 
 
-#1. swap the slope
+#1. Dont do anything when ADX < 20
+# dont do anything when RSI < 55 and RSI > 45
 #2. swap the buy and SELL
 
 
 # 2 min: 7 0 5
 # 1min: 7 0 4
-# 1 trade after: 3 0 3
+# # 1 trade after: 3 0 3
+
+# OTHER:
+
+
+# 2min: 11 1 5
+# 1 min: 8 3 6
+# 1 trade after: 10 2 4
