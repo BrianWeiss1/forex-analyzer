@@ -27,42 +27,42 @@ def main(symbol, number):
             bol = True
         if bol == True:
             if previousBuy == True or previousSell == True:
-                dataClose = GrabCurrentData(symbol)
-                f = open('documents/data.txt', 'w')
-                f.write(str(dataClose))
-                previousPrice = dataClose[obtainPastTimeFormatted(2)]['4. close']
-                currentPrice = dataClose[(obtainPastTimeFormatted(1))]['4. close']
-                print("previously" + str(previousPrice))
-                print("currently: " + str(currentPrice))
-                if previousBuy:
-                    print("Symbol: " + str(symbol))
+                # dataClose = GrabCurrentData(symbol)
+                # f = open('documents/data.txt', 'w')
+                # f.write(str(dataClose))
+                # previousPrice = dataClose[obtainPastTimeFormatted(2)]['4. close']
+                # currentPrice = dataClose[(obtainPastTimeFormatted(1))]['4. close']
+                # print("previously" + str(previousPrice))
+                # print("currently: " + str(currentPrice))
+                # if previousBuy:
+                #     print("Symbol: " + str(symbol))
 
-                    if previousPrice < currentPrice:
-                        print("CORRECT")
-                        pos+=1
-                        sumPos += difference
-                    elif previousPrice == currentPrice:
-                        print("NUETROL")
-                        nuet+=1
-                        sumNeut += difference
-                    else:
-                        print("INCORRECT")
-                        neg+=1
-                        sumNeg += difference
-                if previousSell:
-                    print("Symbol: " + str(symbol))
-                    if previousPrice > currentPrice:
-                        print("CORRECT")
-                        pos+=1
-                        sumPos += difference
-                    elif previousPrice == currentPrice:
-                        print("NUETROL")
-                        nuet+=1
-                        sumNeut += difference
-                    else:
-                        print("INCORRECT")
-                        neg+=1
-                        sumNeg += difference
+                #     if previousPrice < currentPrice:
+                #         print("CORRECT")
+                #         pos+=1
+                #         sumPos += difference
+                #     elif previousPrice == currentPrice:
+                #         print("NUETROL")
+                #         nuet+=1
+                #         sumNeut += difference
+                #     else:
+                #         print("INCORRECT")
+                #         neg+=1
+                #         sumNeg += difference
+                # if previousSell:
+                #     print("Symbol: " + str(symbol))
+                #     if previousPrice > currentPrice:
+                #         print("CORRECT")
+                #         pos+=1
+                #         sumPos += difference
+                #     elif previousPrice == currentPrice:
+                #         print("NUETROL")
+                #         nuet+=1
+                #         sumNeut += difference
+                #     else:
+                #         print("INCORRECT")
+                #         neg+=1
+                #         sumNeg += difference
                 previousBuy = False
                 previousSell = False
             # print(datetime.now())
@@ -76,7 +76,7 @@ def main(symbol, number):
             checkPusdo(current, RSIvalue)
             print(current)
             signal = obtainResult(checkNextCandle, RSIvalue, current)
-            slope, currentADX = findADXslope('EURJPY', 5) # was getting EURJPY slope
+            slope, currentADX = findADXslope(symbol, 5) # was getting EURJPY slope
             continuement = True
             if slope > 0.1:
                 opp = False
@@ -92,6 +92,7 @@ def main(symbol, number):
             if opp != None and continuement == True:
                 if (signal == "BUY" and opp == False) or (opp == True and signal == "SELL"):
                     print("BUY")
+                    print(symbol)
                     # automaticBuy()
                     previousBuy = True
                 if (signal == "SELL" and opp == False) or (opp == True and signal == 'BUY'):
@@ -113,9 +114,10 @@ if __name__ == "__main__":
     symbol = 'EURGBP'
     symbol2 = 'EURUSD'
     symbol3 = "EURJPY"
+    symbol4 = "GBPJPY"
     # Create two processes, each running the `my_function` with different inputs
     process_1 = multiprocessing.Process(target=main, args=(symbol3, 1))
-    process_2 = multiprocessing.Process(target=main, args=(symbol2, 4))
+    process_2 = multiprocessing.Process(target=main, args=(symbol4, 1))
 
     # Start the two processes
     process_1.start()
@@ -149,10 +151,53 @@ if __name__ == "__main__":
 # 1 trade after: 10 2 4
 
 #EURJPY
-#1min: 6 0 1
-# 2min: 5 0 2
-# 1aft: 2 0 5
+#1min: 12 1 2
+# 2min: 12 0 4
+# 1aft: 7 0 8
+# 2aft: 1 0 6
 #EURUSD
-# 1min: 2 0 2
+# 1min: 5 1 3
+# 2min: 5 0 4
+# 1aft: 5 0 4
+
+#8:25pm-Whatever
+
+#EURJPY
+# 1min: 1 0 3
 # 2min: 2 0 2
-# 1aft: 3 0 1
+# 1aft: 2 0 2
+# 2aft: 3 0 1
+#EURUSD
+# 1min: 1 0 1
+# 2min: 2 0 0
+# 1aft: 2 0 0
+# 2aft: 1 0 1
+
+
+#9am-onward:
+#EURJPY
+# 1min: 0 0 2
+# 2min: 0 1 1
+# 1aft: 2 0 0
+# 2aft: / 0 1
+
+
+#GBPJPY
+# 1min: 0 0 1
+# 2min: 0 0 1
+# 1aft: 0 0 1
+# 2aft: 0 0 1
+
+#4pm
+#EURJPY
+# 1min: 0 0 2
+# 2min: 0 0 2
+# 1aft: 0 0 2
+# 2aft: 1 0 1
+
+
+#GBPJPY
+# 1min: 1 0 1
+# 2min: 1 0 1
+# 1aft: 1 0 1
+# 2aft: 1 0 1
