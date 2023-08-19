@@ -19,7 +19,6 @@ def grabHistoricalData(ticker = "EURUSD"):
     # url = f"https://api.tiingo.com/tiingo/fx/{ticker}/prices?resampleFreq={timeFrame}&token={apikey}"
 
     response = requests.get(url)
-    print(response)
 
     if response.status_code == 200:
         data = json.loads(response.content)

@@ -35,8 +35,8 @@ if '__main__' == __name__:
                 pos += 1
             previousSell = False
         length = 4
-        difference = 1
-        STOCHsignal = getSTOCHdataSIM(data, 4, 0, i)
+        difference = 0
+        STOCHsignal = getSTOCHdataSIM(data, length, difference, i)
         if STOCHsignal == None:
             continue
         slope1, slope2 = findMACDslopeSIM(macd_data, 2, 2, i)
