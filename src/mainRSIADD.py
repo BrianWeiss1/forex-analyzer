@@ -128,6 +128,14 @@ if __name__ == "__main__":
     process_2.join()
 
 
+#NOTES:
+
+# AT green
+
+# 2min+: correct
+
+#AT RED
+# 1min only correct
 
 
 
@@ -190,10 +198,10 @@ if __name__ == "__main__":
 
 #4pm
 #EURJPY
-# 1min: 0 0 2
-# 2min: 0 0 2
-# 1aft: 0 0 2
-# 2aft: 1 0 1
+# 1min: 0 0 3
+# 2min: 0 0 3
+# 1aft: 1 0 2
+# 2aft: 2 0 1
 
 
 #GBPJPY
@@ -201,3 +209,58 @@ if __name__ == "__main__":
 # 2min: 1 0 1
 # 1aft: 1 0 1
 # 2aft: 1 0 1
+
+#11:00
+#EURJPY
+# 1min: 1 0 3
+# 2min: 1 0 3
+# 1aft: 3 0 1
+# 2aft: 4 0 0
+
+
+#GBPJPY
+# 1min: 4 0 6
+# 2min: 3 0 7
+# 1aft: 4 2 4
+# 2aft: 5 1 4
+
+#12:00
+#EURJPY
+# 1min: 0 0 0
+# 2min: 0 0 0
+# 1aft: 0 0 0
+# 2aft: 0 0 0
+
+#GBPJPY
+# 1min: 1 0 1
+# 2min: 2 0 0
+# 1aft: 2 0 0
+# 2aft: 1 0 1
+
+
+#1:00pm
+#EURJPY
+# 1min: 3 0 0
+# 2min: 3 0 0
+# 1aft: 1 0 2
+# 2aft: 0 0 3
+
+#GBPJPY
+# 1min: 3 1 2
+# 2min: 3 0 3
+# 1aft: 2 0 4
+# 2aft: 5 0 1
+
+
+#2:00pm  
+#EURJPY
+# 1min: 5 0 2
+# 2min: 4 0 3
+# 1aft: 2 0 5
+# 2aft: 5 0 2
+
+#GBPJPY
+# 1min: 5 0 3
+# 2min: 6 0 2
+# 1aft: 6 0 2
+# 2aft: 4 0 4
