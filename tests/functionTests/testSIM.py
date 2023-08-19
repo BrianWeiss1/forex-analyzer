@@ -14,11 +14,10 @@ if '__main__' == __name__:
     data = data.dropna()
     macd_data = macdData.dropna()
     previousBuy = previousSell = False
-    # print(data)
     neg = nuet = pos = 0
     macd_signal = ""
-    # print(len(data))
-    for i in range(len(data)-2):
+    length = difference = 0
+    for i in range(len(data)-10):
         if previousBuy == True:
             if data['close'][i] < data['open'][i] :
                 neg += 1
@@ -35,10 +34,12 @@ if '__main__' == __name__:
             else:
                 pos += 1
             previousSell = False
-        STOCHsignal = getSTOCHdataSIM(data, 3, 2, i)
+        length = 4
+        difference = 1
+        STOCHsignal = getSTOCHdataSIM(data, 4, 0, i)
         if STOCHsignal == None:
             continue
-        slope1, slope2 = findMACDslopeSIM(macd_data, 2, 3, i)
+        slope1, slope2 = findMACDslopeSIM(macd_data, 2, 2, i)
         if slope1 > 0 and slope2 > 0:
             macd_signal = "BUY"
         if slope1 < 0 and slope2 < 0:
@@ -51,4 +52,7 @@ if '__main__' == __name__:
             previousBuy = True
     print(pos, nuet, neg)
     print("POS/NEG RATIO: " + str(pos/neg))
+    print("Percentage Correct: " + str(pos/(neg+pos)))
     print("CANDLES: " + str(len(data)-2))
+    print("PERCENT OF TRADES: " + str((pos+nuet+neg)/len(data)))
+    print(str(length) + ", " + str(difference) + ":   STOCH")
