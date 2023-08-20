@@ -35,9 +35,9 @@ def getSTOCHdata(df, length, difference):
     if countBUY == length:
         return "BUY"
     return None
-def getSTOCHdataSIM(df, length, difference, i, j):
-    last_datapoints_K = df[f'STOCHk_{j}_3_3'][i:i+length]
-    last_datapoints_D = df[f'STOCHd_{j}_3_3'][i:i+length]
+def getSTOCHdataSIM(df, length, difference, i):
+    last_datapoints_K = df[f'STOCHk_113_2_3'][i-length:i]
+    last_datapoints_D = df[f'STOCHd_113_2_3'][i-length:i]
     countSELL = 0
     countBUY = 0
     for i in range(length):

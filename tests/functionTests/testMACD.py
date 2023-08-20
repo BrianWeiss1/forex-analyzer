@@ -27,8 +27,8 @@ def findMACDslope(MACDdata, amount, amount2):
     return slope3, slope5
 
 def findMACDslopeSIM(MACDdata, amount, amount2, i):
-    last_3_macd = MACDdata['macd'][i:i+(amount)]
-    last_5_macd = MACDdata['macd'][i:i+(amount2)]
+    last_3_macd = MACDdata['macd'][i-amount:i]
+    last_5_macd = MACDdata['macd'][i-amount2:i]
 
     slope3 = solveSlope(last_3_macd)
     slope5 = solveSlope(last_5_macd)
