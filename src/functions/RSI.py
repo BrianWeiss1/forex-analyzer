@@ -72,8 +72,6 @@ def checkPusdo(current, RSI):
             current[">37"] = 1
         else:
             current[">37"] += 1
-        if current[">37"] == 5:
-            print("BOZO")
     else:
         current[">37"] = 0
     if RSI < 67:
