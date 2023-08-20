@@ -1,6 +1,6 @@
 import pandas as pd
 
-def get_rsi(close, lookback):
+def get_rsi(data, close, lookback):
     ret = close.diff()
     up = []
     down = []
@@ -18,5 +18,4 @@ def get_rsi(close, lookback):
     rs = up_ewm/down_ewm
     rsi = 100 - (100 / (1 + rs))
     rsi_df = pd.DataFrame(rsi).rename(columns = {0:'rsi'}).set_index(close.index)
-    rsi_df = rsi_df.dropna()
-    return rsi_df[3:]
+    return rsi_df

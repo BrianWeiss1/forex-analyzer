@@ -72,7 +72,7 @@ symbolsBest = ['EURJPY', 'GBPJPY', 'AUDJPY', 'CHFJPY', 'USDJPY', 'CADJPY']
 symbolsSorted = ['USDJPY', 'CADJPY', 'GBPJPY', 'CHFJPY', 'EURJPY', 'AUDJPY']
 symbolsSorted2 = ['USDJPY', 'CADJPY', 'GBPJPY', 'CHFJPY', 'EURJPY', 'AUDJPY']
 symbolsSorted3 = ['USDJPY', 'CADJPY', 'GBPJPY', 'CHFJPY', 'EURJPY', 'AUDJPY']
-stocks = ['APPL']
+stocks = ['AAPL']
 for symbol in stocks:
     closeData, time2 = GrabCloseData(symbol, month)
     current = {}

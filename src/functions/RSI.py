@@ -72,6 +72,8 @@ def checkPusdo(current, RSI):
             current[">37"] = 1
         else:
             current[">37"] += 1
+        if current[">37"] == 5:
+            print("BOZO")
     else:
         current[">37"] = 0
     if RSI < 67:
@@ -92,38 +94,49 @@ def checkPusdo(current, RSI):
 
 
 def findCandleNumber(current, number=5):
+    lst = []
     if current[">67"] >= number:
         checkNextCandle = 1
-    elif current["<67"] >= number:
+        lst.append(1)
+    if current["<67"] >= number:
         checkNextCandle = 2
-    elif current[">37"] >= number:
+        lst.append(2)
+    if current[">37"] >= number:
         checkNextCandle = 3
-    elif current["<37"] >= number:
+        lst.append(3)
+    if current["<37"] >= number:
         checkNextCandle = 4
+        lst.append(4)
     else:
         checkNextCandle = 0
-    return checkNextCandle
+    return checkNextCandle, lst
 
 
-def obtainResult(checkNextCandle, RSIvalue, current):
-    if checkNextCandle > 0:
+def obtainResult(lst, RSIvalue, current):
+    lst2 = []
+    for checkNextCandle in lst:
         if checkNextCandle == 1:
             if RSIvalue < 67:
                 current[">67"] = 0
-                return "SELL"
+                # return "BUY" # with: 56%
         if int(checkNextCandle) == 2:
             if RSIvalue > 67:
                 current["<67"] = 0
-                return "BUY"
+                lst2.append("BUY")
+                # return "BUY" #59%
         if int(checkNextCandle) == 3:
             if RSIvalue < 37:
                 current[">37"] = 0
-                return "SELL"
+                lst2.append("SELL")
+                # return "SELL"
         if checkNextCandle == 4:
             if RSIvalue > 37:
                 current["<37"] = 0
-                return "BUY"
-    return None
+                # lst2.append("BUY")
+                # return "BUY"
+    if lst2 == []:
+        return None
+    return lst2
 
 
 # if (last 5 candles < 37 and now >=37):
