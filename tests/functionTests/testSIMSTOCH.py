@@ -172,35 +172,53 @@ if "__main__" == __name__:
         if prevSell:
             previousSell = True
         if prevBuy:
-            if dataRSI["rsi"][i] < 70 and data['STOCHk_5_3_3'][i] < 60:
+            if dataRSI["rsi"][i] < 70 and data['STOCHk_5_3_3'][i] < 58:
                 previousBuy = False
                 continue
             else:
                 previousBuy = True
         if prevSell:
-            if dataRSI["rsi"][i] < 70 and data["STOCHk_5_3_3"][i] > 80:
+            if dataRSI["rsi"][i] < 70 and data["STOCHk_5_3_3"][i] > 76:
                 previousSell = False
                 continue
             else:
                 previousSell = True
             
 
-#BEFORE:
+                #BEFORE:
 
-# Percentage Correct: 0.5688822874118084
-# CANDLES: 7032
-# PERCENT OF TRADES: 0.3915268694910435
+                # Percentage Correct: 0.5688822874118084
+                # CANDLES: 7032
+                # PERCENT OF TRADES: 0.3915268694910435
 
-#INTO:
-# if dataRSI["rsi"][i] < 70 and data["STOCHk_5_3_3"][i] > 80:
-    # Percentage Correct: 0.6036745406824147
-    # CANDLES: 7032
-    # PERCENT OF TRADES: 0.1661927779357407
+                '''
+                Percentage Correct: 63.88%
+                CANDLES: 7032
+                PERCENT OF TRADES: 15.33
 
-# if dataRSI["rsi"][i] > 70 and data["STOCHk_5_3_3"][i] > 80:
-    # Percentage Correct: 0.5871238628411477
-    # CANDLES: 7032
-    # PERCENT OF TRADES: 0.2078475973841342
+                if dataRSI["rsi"][i] < 70 and data['STOCHk_5_3_3'][i] < 58:
+                        previousBuy = False
+                        continue
+                    else:
+                        previousBuy = True
+                if prevSell:
+                    if dataRSI["rsi"][i] < 70 and data["STOCHk_5_3_3"][i] > 76:
+                        previousSell = False
+                        continue
+                    else:
+                        previousSell = True
+                '''
+                
+                #INTO:
+                # if dataRSI["rsi"][i] < 70 and data["STOCHk_5_3_3"][i] > 80:
+                    # Percentage Correct: 0.6036745406824147
+                    # CANDLES: 7032
+                    # PERCENT OF TRADES: 0.1661927779357407
+
+                # if dataRSI["rsi"][i] > 70 and data["STOCHk_5_3_3"][i] > 80:
+                    # Percentage Correct: 0.5871238628411477
+                    # CANDLES: 7032
+                    # PERCENT OF TRADES: 0.2078475973841342
 
 
         #     #-----Uncomment: when supertrend code done------#
@@ -238,6 +256,8 @@ if "__main__" == __name__:
         #         previousSell = True
         # ------ uncomment this section -------
 
+
+
     try:
         print(pos, nuet, neg)
         print("POS/NEG RATIO: " + str(pos / neg))
@@ -246,38 +266,41 @@ if "__main__" == __name__:
         print("PERCENT OF TRADES: " + str(round(((pos + nuet + neg) / len(data))*100, 2)))
     except ZeroDivisionError:
         print("ERROR GO BRRRR")
-    profilioSum = 0
-    for i in range(200):
-        profilio = 10
-        betPercent = 0.1
-        winRate = 1.7
-        for i in range(pos + neg + nuet):
-            bet = betPercent * profilio
-            profilio = profilio - (bet)
-            randomNum = random.randint(0, pos + nuet + neg)
-            if randomNum <= neg:  # negitive
-                profilio = profilio
-            elif randomNum <= neg + nuet:  # nuetrol
-                profilio = profilio + (bet)
-            else:
-                profilio = profilio + (bet * winRate)
-        profilioSum+=profilio
-    profilio = profilioSum/10
-    print((profilio))
-    if (profilio) > BestProfilio:
-        BestProfilio = profilio
-        # Bestk = k
-        # Bestj = j
-    if profilio < WorseProfilio:
-        WorseProfilio = profilio
-        # worstk = k
-        # worstj = j
 
-    # print("BEST")
-    # print(BestProfilio)
-    # print(Bestj)
-    # print(Bestk)
-    # print("WORSE")
-    # print(WorseProfilio)
-    # print(worstj)
-    # print(worstk)
+
+    #------Profilio-----
+    # profilioSum = 0
+    # for i in range(200):
+    #     profilio = 10
+    #     betPercent = 0.1
+    #     winRate = 1.7
+    #     for i in range(pos + neg + nuet):
+    #         bet = betPercent * profilio
+    #         profilio = profilio - (bet)
+    #         randomNum = random.randint(0, pos + nuet + neg)
+    #         if randomNum <= neg:  # negitive
+    #             profilio = profilio
+    #         elif randomNum <= neg + nuet:  # nuetrol
+    #             profilio = profilio + (bet)
+    #         else:
+    #             profilio = profilio + (bet * winRate)
+    #     profilioSum+=profilio
+    # profilio = profilioSum/10
+    # print((profilio))
+    # if (profilio) > BestProfilio:
+    #     BestProfilio = profilio
+    #     # Bestk = k
+    #     # Bestj = j
+    # if profilio < WorseProfilio:
+    #     WorseProfilio = profilio
+    #     # worstk = k
+    #     # worstj = j
+
+    # # print("BEST")
+    # # print(BestProfilio)
+    # # print(Bestj)
+    # # print(Bestk)
+    # # print("WORSE")
+    # # print(WorseProfilio)
+    # # print(worstj)
+    # # print(worstk)
