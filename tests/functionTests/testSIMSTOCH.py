@@ -172,13 +172,13 @@ if "__main__" == __name__:
         if prevSell:
             previousSell = True
         if prevBuy:
-            if dataRSI["rsi"][i] < 70 and data['STOCHk_5_3_3'][i] < 58:
+            if dataRSI["rsi"][i] < 45 and data['STOCHk_5_3_3'][i] < 58:
                 previousBuy = False
                 continue
             else:
                 previousBuy = True
         if prevSell:
-            if dataRSI["rsi"][i] < 70 and data["STOCHk_5_3_3"][i] > 76:
+            if dataRSI["rsi"][i] < 100 and data["STOCHk_5_3_3"][i] > 76:
                 previousSell = False
                 continue
             else:
@@ -192,6 +192,12 @@ if "__main__" == __name__:
                 # PERCENT OF TRADES: 0.3915268694910435
 
                 '''
+
+                Percentage Correct: 65.76%
+                CANDLES: 7032
+                PERCENT OF TRADES: 14.47
+                prevSell = 100
+                
                 Percentage Correct: 63.88%
                 CANDLES: 7032
                 PERCENT OF TRADES: 15.33
