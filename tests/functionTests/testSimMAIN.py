@@ -179,7 +179,7 @@ if "__main__" == __name__:
             else:
                 previousBuy = True
         if prevSell:
-            if dataRSI["rsi"][i] < 100 and data["STOCHk_5_3_3"][i] > 76:
+            if data["STOCHk_5_3_3"][i] > 76:
                 previousSell = False
                 continue
             else:
