@@ -2,7 +2,7 @@
 
 from tests.functionTests.testGrabData import grabHistoricalData
 
-symbol = "EURUSD"
+symbol = "EURJPY"
 data = grabHistoricalData(symbol)
 f = open('documents/dataSIM.txt', 'w')
 f.write(str(data))
