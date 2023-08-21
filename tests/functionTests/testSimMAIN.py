@@ -181,7 +181,7 @@ if "__main__" == __name__:
                 else:
                     previousBuy = True
             if prevSell:
-                if dataRSI["rsi"][i] < 100 and data["STOCHk_5_3_3"][i] > 47:
+                if dataRSI["rsi"][i] < 95 and data["STOCHk_5_3_3"][i] > 47: # 47
                     previousSell = False
                     continue
                 else:
@@ -319,7 +319,7 @@ if "__main__" == __name__:
         for i in range(200):
             profilio = 10
             betPercent = 0.1
-            winRate = 1.5
+            winRate = 1.7
             for i in range(pos + neg + nuet):
                 bet = betPercent * profilio
                 profilio = profilio - (bet)
