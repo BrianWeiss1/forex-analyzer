@@ -42,11 +42,15 @@ if "__main__" == __name__:
 
     previousBuy = False
     previousSell = False
-    correctBuy = True
-    correctSell = True
     prevSellRSI = False
     prevBuyRSI = False
+    prevBuySTOCH = False
+    prevSellSTOCH = False
+    correctBuy = True
+    correctSell = True
 
+    contempent = False
+    
     pos = 0
     nuet = 0
     neg = 0
@@ -87,8 +91,8 @@ if "__main__" == __name__:
                 else:
                     neg += 1
                     # print("INNCORECT BUY: " + str(ADXvalue))
-                    previousBuy = False
                     correctBuy == False
+                previousBuy = False
             if previousSell == True:
                 if data["close"][i + n] > data["open"][i + n]:
                     pos += 1
@@ -128,6 +132,9 @@ if "__main__" == __name__:
 
             prevBuyRSI = False
             prevSellRSI = False
+            contempent = False
+            prevBuySTOCH = False
+            prevSellSTOCH = False
 
             def SuperTrendEMA():
                 prevBuy = prevSell = False
@@ -171,34 +178,21 @@ if "__main__" == __name__:
                 return prevBuy, prevSell
 
             prevBuy, prevSell = SuperTrendEMA()
-            Dataset = [prevBuy, prevSell]
+
+            if prevBuy:
+                if dataRSI["rsi_14"][i] < 45 and data['STOCHk_5_3_3'][i] < 100: #43, 58
+                    prevBuySTOCH = False
+                else:
+                    prevBuySTOCH = True
+            if prevSell:
+                if dataRSI["rsi_14"][i] < 95 and data["STOCHk_5_3_3"][i] > 47: # 47
+                    prevSellSTOCH = False
+                else:
+                    prevSellSTOCH = True
 
 
 
-            # if prevBuy:
-            #     if dataRSI["rsi_14"][i] < j and data['STOCHk_5_3_3'][i] < 100: #45, 100
-            #         previousBuy = False
-            #         continue
-            #     else:
-            #         previousBuy = True
-            # if prevSell:
-            #     if dataRSI["rsi_14"][i] < 91 and data["STOCHk_5_3_3"][i] > 67: # 47
-            #         previousSell = False
-            #         continue
-            #     else:
-            #         previousSell = True
-
-            #---------IMPORTANT----------
-            # if prevSell:
-            #     if dataRSI["rsi_14"][i] < 45 or dataRSI["rsi_14"][i] > 55: # 47
-            #         previousSell = False
-            #         continue
-            #     else:
-            #         previousSell = True
-            #-----IMPORTANT 80% sucess with 1% of trades
-
-
-
+            #-----Working Code-----#
             change = "12.38"
             changeNeg = "-12.38"
             change = float(change)
@@ -220,6 +214,13 @@ if "__main__" == __name__:
                 else:
                     # previousSell = True
                     prevSellRSI = True
+
+
+
+            #compareitivness
+            if prevBuyRSI and prevSellRSI:
+                prevSell = False
+                prevBuy = False
             if prevBuyRSI:
                 previousBuy = True
             else:
@@ -229,15 +230,31 @@ if "__main__" == __name__:
                 previousSell = True
             else:
                 previousSell = False
+            
+            if previousSell == True and previousBuy == True:
+                previousBuy = False
+                previousSell = False
+                contempent = True
+
+            #------Working code-------#
+
+            if not contempent:
+                if prevBuySTOCH and prevSellSTOCH:
+                    prevBuySTOCH = False
+                    prevSellSTOCH = False
+                if prevBuySTOCH:
+                    previousBuy = True
+                if prevSellSTOCH:
+                    previousSell = True
+
+            #contentment
+            if previousSell == True and previousBuy == True:
+                previousBuy = False
+                previousSell = False
+                contempent = True
 
 
-            # if previousBuyRSI and previousSellRSI:
-            #     print("A")
-            # else:
-            #     if previousSellRSI:
-            #         previousSell = True
-            #     if previousBuyRSI:
-            #         previousBuy = True
+
 
 
 
@@ -256,9 +273,6 @@ if "__main__" == __name__:
             #         previousSell = True
 
 
-            if previousSell == True and previousBuy == True:
-                previousBuy = False
-                previousSell = False
 
 
 
@@ -266,25 +280,6 @@ if "__main__" == __name__:
 
                 
         
-
-
-        # If previous_position is "none":
-        #     If macd_line crosses above signal_line:
-        #         Set current_position to "buy"
-        #         Set previous_position to "none"
-        #     ElseIf macd_line crosses below signal_line:
-        #         Set current_position to "sell"
-        #         Set previous_position to "none"
-        # Else If current_position is "buy":
-        #     If macd_line crosses below signal_line:
-        #         Set current_position to "sell"
-        #         Set previous_position to "buy"
-        # Else If current_position is "sell":
-        #     If macd_line crosses above signal_line:
-        #         Set current_position to "buy"
-        #         Set previous_position to "sell"
-
-
 
 
 
