@@ -1,37 +1,28 @@
+
+# Update data
 import random
-from src.functions.RSI import checkPusdo, findCandleNumber, obtainResult
-from tests.functionTests.testEMA import calculate_200ema, greaterThenCurrent
-from tests.functionTests.testMACD import get_macd
 from tests.functionTests.testADX import grabADX
+from tests.functionTests.testEMA import calculate_200ema, greaterThenCurrent
 from tests.functionTests.testRSI import get_rsi
-from tests.functionTests.testSTOCH import get_stoch, getSTOCHdata, getSTOCHdataSIM
-from tests.functionTests.testSpecial import formatDataset
+from tests.functionTests.testSTOCH import get_stoch, getSTOCHdataSIM
 from tests.functionTests.testSupertrend import get_supertrend
 
-if "__main__" == __name__:
-    # __INNIT__
-    f = open("documents/dataSIM.txt", "r")
-    data = f.readlines()
-    data = eval(data[0])
-    data = formatDataset(data)
-    ultimateData = data
 
-    # Update data
+def simulate(data):
+    ultimateData = data
     data = grabADX(data)
     ema = calculate_200ema(data, 200)
     rsiValue = 10
     dataRSI = get_rsi(data["close"], rsiValue)
-    dataRSI2 = get_rsi(data["close"], 9)
-    macdData = get_macd(data, 12, 26, 9)
+    # dataRSI2 = get_rsi(data["close"], 9)
+    # macdData = get_macd(data, 12, 26, 9)
     data = get_stoch(ultimateData, 5, 3)
-    data.drop(columns=["n_low", "%K", "%D"])
-    # print(data)
 
     # print(dataRSI)
 
     # MACD setup
-    macd_data = macdData.dropna()
-    macd_signal = ""
+    # macd_data = macdData.dropna()
+    # macd_signal = ""
 
     # STOCH setup
     data = data.dropna()
@@ -290,30 +281,4 @@ if "__main__" == __name__:
             # worstk = k
             worstj = j
         pos = nuet = neg = 0
-
-    if not lst:
-        exit()
-    
-    total = sum(lst)
-    average = total / len(lst)
-
-
-    sorted_arr = sorted(lst)
-    n = len(sorted_arr)
-    
-    if n % 2 == 1:
-        median = sorted_arr[n // 2]
-    else:
-        middle_right = n // 2
-        middle_left = middle_right - 1
-        median = (sorted_arr[middle_left] + sorted_arr[middle_right]) / 2
-
-    print("Average Result: " + str(average))
-    print("Median Result: " + str(median))
-
-    print("Best Profilio: " + str(BestProfilio))
-    print("J:" + str(Bestj))
-    print("K: " + str(Bestk))
-    print("Worst Profilio: " + str(WorseProfilio))
-    print("J: " + str(worstj))
-    print("K: " + str(worstk))
+    return lst, BestProfilio, WorseProfilio, worstj, Bestk
