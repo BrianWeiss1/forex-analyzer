@@ -36,18 +36,18 @@ if "__main__" == __name__:
     data = data.dropna()
 
     # Supertrend setup
-    st, upt, dt = get_supertrend(data["high"], data["low"], data["close"], 42, 1)
-    st2, upt2, dt2 = get_supertrend(data["high"], data["low"], data["close"], 20, 1)
-    st3, upt3, dt3 = get_supertrend(data["high"], data["low"], data["close"], 5, 1)
-    st4, upt4, dt4 = get_supertrend(data["high"], data["low"], data["close"], 1, 1)
+    st, upt, dt = get_supertrend(data["high"], data["low"], data["close"], 21, 1)
+    st2, upt2, dt2 = get_supertrend(data["high"], data["low"], data["close"], 14, 2)
+    st3, upt3, dt3 = get_supertrend(data["high"], data["low"], data["close"], 21, 1)
+    st4, upt4, dt4 = get_supertrend(data["high"], data["low"], data["close"], 2, 1)
     #       POS/NEG RATIO: 3.4464285714285716
     #       Percentage Correct: 77.51%
     #       CANDLES: 6968
     #       PERCENT OF TRADES: 7.33
     #       1099400833.0625887
-    # 2: 20 3 
+    # 2: 20 3
     # 3: 5 2
-    # 4: 1 1 
+    # 4: 1 1
     previousBuy = False
     previousSell = False
     correctBuy = True
@@ -140,11 +140,10 @@ if "__main__" == __name__:
             def SuperTrendEMA():
                 prevBuy = prevSell = False
                 signalSuper = ""
-                if st[i] > data['close'][i]:
+                if st[i] > data["close"][i]:
                     stbuy = True
                 elif st[i] < data["close"][i]:
                     stbuy = False
-
 
                 if st2[i] > data["close"][i]:
                     stbuy2 = True
@@ -161,19 +160,19 @@ if "__main__" == __name__:
 
                 if EMAresult != None:
                     if (
-                        stbuy == True and
-                        stbuy2 == True
-                        and stbuy3 == True
-                        and stbuy4 == True
-                        and EMAresult == True
+                        stbuy == True
+                        and stbuy2 == True
+                        # and stbuy3 == True
+                        # and stbuy4 == True
+                        # and EMAresult == True
                     ):
                         signalSuper = "BUY"
                     if (
-                        stbuy == False and
-                        stbuy2 == False
-                        and stbuy3 == False
-                        and stbuy4 == False
-                        and EMAresult == False
+                        stbuy == False
+                        and stbuy2 == False
+                        # and stbuy3 == False
+                        # and stbuy4 == False
+                        # and EMAresult == False
                     ):
                         signalSuper = "SELL"
 
