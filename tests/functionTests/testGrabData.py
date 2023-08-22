@@ -8,8 +8,8 @@ def grabHistoricalData(ticker = "EURUSD"):
         for item in data:
             del item['ticker']
         return data
-    startDate = "2023-04-05 00:00"
-    endDate = '2023-07-18 16:00'
+    startDate = "2022-02-05 00:00"
+    endDate = '2022-07-18 16:00'
     apikey = '54e4aae1277e71d6e2dd03ba604720662055a9f4'
     timeFrame = "5min"
 
