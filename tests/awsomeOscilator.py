@@ -12,7 +12,7 @@ def ao(data, period1=5, period2=34):
     data['ao'] = pd.DataFrame(ao)
     return data
 
-def AwesomeData(data):
+def AwesomeData(data, i):
     previousBuy = previousSell = None
     if (previousBuy == None or previousBuy == False) and (previousSell == None or previousSell == False):
         if data['ao'][i-1] < 0 and data['ao'][i] > 0:

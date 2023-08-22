@@ -1,6 +1,6 @@
 
 
-from tests.functionTests.testGrabData import grabHistoricalData
+from tests.testGrabData import grabHistoricalData
 
 symbol = "EURJPY"
 data = grabHistoricalData(symbol)

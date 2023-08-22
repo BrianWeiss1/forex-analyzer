@@ -1,7 +1,7 @@
 
 # from functions.RSI import main
 from src.functions.AMX import findADXslope
-from src.functions.specialFunctions import findLocation
+# from src.functions.specialFunctions import findLocation
 
 # symbol = "APPL"
 # # main("APPL", 5)
