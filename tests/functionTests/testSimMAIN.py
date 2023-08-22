@@ -1,6 +1,7 @@
 import random
 from src.functions.RSI import checkPusdo, findCandleNumber, obtainResult
 from tests.functionTests.testEMA import calculate_200ema, greaterThenCurrent
+from tests.functionTests.testHMA import hma
 from tests.functionTests.testMACD import get_macd
 from tests.functionTests.testADX import grabADX
 from tests.functionTests.testRSI import get_rsi
@@ -21,10 +22,12 @@ if "__main__" == __name__:
     ema = calculate_200ema(data, 200)
     rsiValue = 9
     dataRSI = get_rsi(data["close"], rsiValue)
-    # dataRSI2 = get_rsi(data['close'], 9)
+    HMAdata150 = hma(data, 150)
+    HMAdata95 = hma(data, 95)
     macdData = get_macd(data, 12, 26, 9)
     data = get_stoch(ultimateData, 5, 3)
     data.drop(columns=['n_low', '%K', "%D"])
+    print(HMAdata95)
     # print(data)
 
     # print(dataRSI)
@@ -47,6 +50,8 @@ if "__main__" == __name__:
     prevBuyRSI = False
     prevBuySTOCH = False
     prevSellSTOCH = False
+    prevSellHMA = False
+    prevBuyHMA = False
     correctBuy = True
     correctSell = True
 
@@ -79,8 +84,8 @@ if "__main__" == __name__:
     length = difference = 0
 
     # Loop to go through datapoints
-    for j in range(100):
-        for i in range(41, len(data) - 41):
+    for j in range(1, 100):
+        for i in range(20, len(data) - 20):
             # Check for previous decision: then check if correct or incorrect
             if previousBuy == True:
                 if data["close"][i + n] < data["open"][i + n]:
@@ -113,30 +118,16 @@ if "__main__" == __name__:
             currentPrice = data["close"][i]
             EMAresult = greaterThenCurrent(currentEMA, currentPrice)
 
-            # if slope1 > 100 and slope2 > 0.07: # slope2 >, slope1  >
-            #     macd_signal = "BUY"
-            #     # print("BUY")
-            # if slope2 < 0: # slope1 >, slope 2 >
-            #     # print(slope1)
-            #     macd_signal = "SELL"
-            # if slope1 < 0:
-            #     macd_signal = "SELL"
-            #     # print("SELL")
-            # reverse = False
-            # if slope1 < -0.07:
-            #     reverse == True
-
-            # if dataRSI['rsi_14'][i-1] < 37 and dataRSI['rsi_14'][i] > 37:
-            #     previousSell = True
-            # if dataRSI['rsi'][i-1] < 67 and dataRSI['rsi'][i] > 67:
-            #     previousBuy = True
-
             prevBuyRSI = False
             prevSellRSI = False
             contempent = False
             prevBuySTOCH = False
             prevSellSTOCH = False
+            prevSellHMA = False
+            prevBuyHMA = False
 
+
+            #--------Working code----#
             def SuperTrendEMA():
                 prevBuy = prevSell = False
                 signalSuper = ""
@@ -193,7 +184,7 @@ if "__main__" == __name__:
 
             #PREVIOUS: 80% at 7
 
-            #-----Working Code-----#
+            #-----RSI Code-----#
             change = f"16.5"
             changeNeg = f"-16.5"
             change = float(change)
@@ -201,24 +192,17 @@ if "__main__" == __name__:
 
             if prevBuy:
                 if dataRSI[f"rsi_{rsiValue}"][i] < 55+changeNeg or dataRSI[f'rsi_{rsiValue}'][i] > 45+change: #45, 100
-                    # previousBuy = False
                     prevBuyRSI = False
-                    # continue
                 else:
-                    # previousBuy = True
                     prevBuyRSI = True
             if prevSell:
                 if dataRSI[f"rsi_{rsiValue}"][i] < 55+changeNeg or dataRSI[f"rsi_{rsiValue}"][i] > 45+change: # 47
-                    # previousSell = False
                     prevSellRSI = False
-                    # continue
                 else:
-                    # previousSell = True
                     prevSellRSI = True
 
 
-
-            #compareitivness
+            # Comparision
             if prevBuyRSI and prevSellRSI:
                 prevSell = False
                 prevBuy = False
@@ -237,8 +221,8 @@ if "__main__" == __name__:
                 previousSell = False
                 contempent = True
 
-            #------Working code-------#
-
+            #------RSI code-------#
+            # Comparision
             if not contempent:
                 if prevBuySTOCH and prevSellSTOCH:
                     prevBuySTOCH = False
@@ -248,11 +232,35 @@ if "__main__" == __name__:
                 if prevSellSTOCH:
                     previousSell = True
 
-            #contentment
+            # CHECK
             if previousSell == True and previousBuy == True:
                 previousBuy = False
                 previousSell = False
                 contempent = True
+        #---------Working Code-------#
+
+        #---------HULL EFFECT----------#
+        # if HMAdata95[i-1] > HMAdata150[i-1] and HMAdata95[i] < HMAdata150[i] and (dataRSI[f"rsi_{rsiValue}"][i] < 45 or dataRSI[f"rsi_{rsiValue}"][i] > 55):
+        #     prevSellHMA = True
+        # else:
+        #     prevSellHMA = False
+        # if HMAdata95[i-1] < HMAdata150[i-1] and HMAdata95[i] > HMAdata150[i] and (dataRSI[f"rsi_{rsiValue}"][i] < 45 or dataRSI[f"rsi_{rsiValue}"][i] > 55):
+        #     prevBuyHMA = True
+        # else:
+        #     prevBuyHMA = False
+
+        # if not contempent:
+        #     if prevBuyHMA and prevSellHMA:
+        #         prevBuyHMA = False
+        #         prevSellHMA = False
+        #     if prevBuyHMA:
+        #         previousBuy = True
+        #     if prevSellHMA:
+        #         previousSell = True
+
+        # if previousBuy and previousSell:
+        #     previousBuy = False
+        #     previousSell = False
 
     
 
@@ -272,7 +280,7 @@ if "__main__" == __name__:
         for i in range(200):
             profilio = 10
             betPercent = 0.1
-            winRate = 1.7
+            winRate = 1.5
             for i in range(pos + neg + nuet):
                 bet = betPercent * profilio
                 profilio = profilio - (bet)

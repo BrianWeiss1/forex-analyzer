@@ -8,4 +8,5 @@ def hma(df, period):
  np.sum(x * np.arange(1, period+1)) / np.sum(np.arange(1, period+1)), raw=True)
  diff = 2 * wma_1 - wma_2
  hma = diff.rolling(int(np.sqrt(period))).mean()
- df[f'hma_{period}'] = hma
+ return hma
+
