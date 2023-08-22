@@ -176,58 +176,58 @@ if "__main__" == __name__:
             prevBuy, prevSell = SuperTrendEMA()
             Dataset = [prevBuy, prevSell]
 
-            if prevSell:
-                if dataRSI[f"rsi_{rsiValue}"][i] > 57 and data["STOCHk_5_3_3"][i] > 27: # <95, 47
-                    prevSellSTOCH = False
-                else:
-                    prevSellSTOCH = True
-            # -----RSI--------#
-            # change = f"14.27"
-            # changeNeg = f"-14.27"
-            # change = float(change)
-            # changeNeg = float(changeNeg)
-
-            # if prevBuy:
-            #     if (
-            #         dataRSI[f"rsi_{rsiValue}"][i] < 55 + changeNeg
-            #         or dataRSI[f"rsi_{rsiValue}"][i] > 45 + change
-            #     ):  # 45, 100
-            #         # previousBuy = False
-            #         prevBuyRSI = False
-            #         # continue
-            #     else:
-            #         # previousBuy = True
-            #         prevBuyRSI = True
             # if prevSell:
-            #     if (
-            #         dataRSI[f"rsi_{rsiValue}"][i] < 55 + changeNeg
-            #         or dataRSI[f"rsi_{rsiValue}"][i] > 45 + change
-            #     ):  # 47
-            #         # previousSell = False
-            #         prevSellRSI = False
-            #         # continue
+            #     if dataRSI[f"rsi_{rsiValue}"][i] > 57 and data["STOCHk_5_3_3"][i] > 27: # 57, 27
+            #         prevSellSTOCH = False
             #     else:
-            #         # previousSell = True
-            #         prevSellRSI = True
+            #         prevSellSTOCH = True
+            # -----RSI--------#
+            change = f"14.27"
+            changeNeg = f"-14.27"
+            change = float(change)
+            changeNeg = float(changeNeg)
 
-            # #compareitivness
-            # if prevBuyRSI and prevSellRSI:
-            #     prevSell = False
-            #     prevBuy = False
-            # if prevBuyRSI:
-            #     previousBuy = True
-            # else:
-            #     previousBuy = False
+            if prevBuy:
+                if (
+                    dataRSI[f"rsi_{rsiValue}"][i] < 55 + changeNeg
+                    or dataRSI[f"rsi_{rsiValue}"][i] > 45 + change
+                ):  # 45, 100
+                    # previousBuy = False
+                    prevBuyRSI = False
+                    # continue
+                else:
+                    # previousBuy = True
+                    prevBuyRSI = True
+            if prevSell:
+                if (
+                    dataRSI[f"rsi_{rsiValue}"][i] < 55 + changeNeg
+                    or dataRSI[f"rsi_{rsiValue}"][i] > 45 + change
+                ):  # 47
+                    # previousSell = False
+                    prevSellRSI = False
+                    # continue
+                else:
+                    # previousSell = True
+                    prevSellRSI = True
+
+            #compareitivness
+            if prevBuyRSI and prevSellRSI:
+                prevSell = False
+                prevBuy = False
+            if prevBuyRSI:
+                previousBuy = True
+            else:
+                previousBuy = False
             
-            # if prevSellRSI:
-            #     previousSell = True
-            # else:
-            #     previousSell = False
+            if prevSellRSI:
+                previousSell = True
+            else:
+                previousSell = False
             
-            # if previousSell == True and previousBuy == True:
-            #     previousBuy = False
-            #     previousSell = False
-            #     contempent = True
+            if previousSell == True and previousBuy == True:
+                previousBuy = False
+                previousSell = False
+                contempent = True
 
             #------Working code-------#
 
@@ -314,6 +314,6 @@ if "__main__" == __name__:
     print("Best Profilio: " + str(BestProfilio))
     print("J:" + str(Bestj))
     print("K: " + str(Bestk))
-    print("Best Profilio: " + str(WorseProfilio))
+    print("Worst Profilio: " + str(WorseProfilio))
     print("J: " + str(worstj))
     print("K: " + str(worstk))
