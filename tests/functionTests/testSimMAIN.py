@@ -176,74 +176,69 @@ if "__main__" == __name__:
             prevBuy, prevSell = SuperTrendEMA()
             Dataset = [prevBuy, prevSell]
 
-            # if prevBuy:
-            #     if dataRSI[f"rsi_{rsiValue}"][i] < 75 and data['STOCHk_5_3_3'][i] < 95: #45, 100
-            #         prevBuySTOCH = False
-            #     else:
-            #         prevBuySTOCH = True
-            # if prevSell:
-            #     if dataRSI[f"rsi_{rsiValue}"][i] < 97 and data["STOCHk_5_3_3"][i] > 59: # <95, 47
-            #         prevSellSTOCH = False
-            #     else:
-            #         prevSellSTOCH = True
-            # -----RSI--------#
-            change = f"14.27"
-            changeNeg = f"-14.27"
-            change = float(change)
-            changeNeg = float(changeNeg)
-
-            if prevBuy:
-                if (
-                    dataRSI[f"rsi_{rsiValue}"][i] < 55 + changeNeg
-                    or dataRSI[f"rsi_{rsiValue}"][i] > 45 + change
-                ):  # 45, 100
-                    # previousBuy = False
-                    prevBuyRSI = False
-                    # continue
-                else:
-                    # previousBuy = True
-                    prevBuyRSI = True
             if prevSell:
-                if (
-                    dataRSI[f"rsi_{rsiValue}"][i] < 55 + changeNeg
-                    or dataRSI[f"rsi_{rsiValue}"][i] > 45 + change
-                ):  # 47
-                    # previousSell = False
-                    prevSellRSI = False
-                    # continue
+                if dataRSI[f"rsi_{rsiValue}"][i] > 57 and data["STOCHk_5_3_3"][i] > 27: # <95, 47
+                    prevSellSTOCH = False
                 else:
-                    # previousSell = True
-                    prevSellRSI = True
+                    prevSellSTOCH = True
+            # -----RSI--------#
+            # change = f"14.27"
+            # changeNeg = f"-14.27"
+            # change = float(change)
+            # changeNeg = float(changeNeg)
 
-            #compareitivness
-            if prevBuyRSI and prevSellRSI:
-                prevSell = False
-                prevBuy = False
-            if prevBuyRSI:
-                previousBuy = True
-            else:
-                previousBuy = False
+            # if prevBuy:
+            #     if (
+            #         dataRSI[f"rsi_{rsiValue}"][i] < 55 + changeNeg
+            #         or dataRSI[f"rsi_{rsiValue}"][i] > 45 + change
+            #     ):  # 45, 100
+            #         # previousBuy = False
+            #         prevBuyRSI = False
+            #         # continue
+            #     else:
+            #         # previousBuy = True
+            #         prevBuyRSI = True
+            # if prevSell:
+            #     if (
+            #         dataRSI[f"rsi_{rsiValue}"][i] < 55 + changeNeg
+            #         or dataRSI[f"rsi_{rsiValue}"][i] > 45 + change
+            #     ):  # 47
+            #         # previousSell = False
+            #         prevSellRSI = False
+            #         # continue
+            #     else:
+            #         # previousSell = True
+            #         prevSellRSI = True
+
+            # #compareitivness
+            # if prevBuyRSI and prevSellRSI:
+            #     prevSell = False
+            #     prevBuy = False
+            # if prevBuyRSI:
+            #     previousBuy = True
+            # else:
+            #     previousBuy = False
             
-            if prevSellRSI:
-                previousSell = True
-            else:
-                previousSell = False
+            # if prevSellRSI:
+            #     previousSell = True
+            # else:
+            #     previousSell = False
             
-            if previousSell == True and previousBuy == True:
-                previousBuy = False
-                previousSell = False
-                contempent = True
+            # if previousSell == True and previousBuy == True:
+            #     previousBuy = False
+            #     previousSell = False
+            #     contempent = True
 
             #------Working code-------#
 
-            # if not contempent:
-            #     if prevBuySTOCH and prevSellSTOCH:
-            #         prevBuySTOCH = False
-            #         prevSellSTOCH = False
-            #     if prevBuySTOCH:
-            #         previousBuy = True
-            #     if prevSellSTOCH:
-            #         previousSell = True
+            if not contempent:
+                if prevBuySTOCH and prevSellSTOCH:
+                    prevBuySTOCH = False
+                    prevSellSTOCH = False
+                if prevBuySTOCH:
+                    previousBuy = True
+                if prevSellSTOCH:
+                    previousSell = True
 
             #contentment
             if previousSell == True and previousBuy == True:
@@ -285,6 +280,7 @@ if "__main__" == __name__:
             profilioSum += profilio
         profilio = profilioSum / 10
         print((profilio))
+        lst.append(profilio)
         if (profilio) > BestProfilio:
             BestProfilio = profilio
             # Bestk = k
@@ -295,11 +291,29 @@ if "__main__" == __name__:
             worstj = j
         pos = nuet = neg = 0
 
-    print("BEST")
-    print(BestProfilio)
-    print(Bestj)
-    print(Bestk)
-    print("WORSE")
-    print(WorseProfilio)
-    print(worstj)
-    print(worstk)
+    if not lst:
+        exit()
+    
+    total = sum(lst)
+    average = total / len(lst)
+
+
+    sorted_arr = sorted(lst)
+    n = len(sorted_arr)
+    
+    if n % 2 == 1:
+        median = sorted_arr[n // 2]
+    else:
+        middle_right = n // 2
+        middle_left = middle_right - 1
+        median = (sorted_arr[middle_left] + sorted_arr[middle_right]) / 2
+
+    print("Average Result: " + str(average))
+    print("Median Result: " + str(median))
+
+    print("Best Profilio: " + str(BestProfilio))
+    print("J:" + str(Bestj))
+    print("K: " + str(Bestk))
+    print("Best Profilio: " + str(WorseProfilio))
+    print("J: " + str(worstj))
+    print("K: " + str(worstk))
