@@ -19,8 +19,9 @@ if "__main__" == __name__:
     # Update data
     data = grabADX(data)
     ema = calculate_200ema(data, 200)
-    dataRSI = get_rsi(data["close"], 14)
-    dataRSI2 = get_rsi(data['close'], 9)
+    rsiValue = 9
+    dataRSI = get_rsi(data["close"], rsiValue)
+    # dataRSI2 = get_rsi(data['close'], 9)
     macdData = get_macd(data, 12, 26, 9)
     data = get_stoch(ultimateData, 5, 3)
     data.drop(columns=['n_low', '%K', "%D"])
@@ -180,26 +181,26 @@ if "__main__" == __name__:
             prevBuy, prevSell = SuperTrendEMA()
 
             if prevBuy:
-                if dataRSI["rsi_14"][i] < 45 and data['STOCHk_5_3_3'][i] < 100: #43, 58
+                if dataRSI[f"rsi_{rsiValue}"][i] < 39 and data['STOCHk_5_3_3'][i] < 100: #45, 100
                     prevBuySTOCH = False
                 else:
                     prevBuySTOCH = True
             if prevSell:
-                if dataRSI["rsi_14"][i] < 95 and data["STOCHk_5_3_3"][i] > 47: # 47
+                if dataRSI[f"rsi_{rsiValue}"][i] < 95 and data["STOCHk_5_3_3"][i] > 47: # <95, 47
                     prevSellSTOCH = False
                 else:
                     prevSellSTOCH = True
 
-
+            #PREVIOUS: 80% at 7
 
             #-----Working Code-----#
-            change = "12.38"
-            changeNeg = "-12.38"
+            change = f"16.5"
+            changeNeg = f"-16.5"
             change = float(change)
             changeNeg = float(changeNeg)
 
             if prevBuy:
-                if dataRSI["rsi_14"][i] < 55+changeNeg or dataRSI['rsi_14'][i] > 45+change: #45, 100
+                if dataRSI[f"rsi_{rsiValue}"][i] < 55+changeNeg or dataRSI[f'rsi_{rsiValue}'][i] > 45+change: #45, 100
                     # previousBuy = False
                     prevBuyRSI = False
                     # continue
@@ -207,7 +208,7 @@ if "__main__" == __name__:
                     # previousBuy = True
                     prevBuyRSI = True
             if prevSell:
-                if dataRSI["rsi_14"][i] < 55+changeNeg or dataRSI["rsi_14"][i] > 45+change: # 47
+                if dataRSI[f"rsi_{rsiValue}"][i] < 55+changeNeg or dataRSI[f"rsi_{rsiValue}"][i] > 45+change: # 47
                     # previousSell = False
                     prevSellRSI = False
                     # continue
@@ -253,119 +254,7 @@ if "__main__" == __name__:
                 previousSell = False
                 contempent = True
 
-
-
-
-
-
-
-            # if prevBuy:
-            #     if dataRSI["rsi_14"][i] < 73 and data['STOCHk_5_3_3'][i] < 100: #45, 100
-            #         previousBuy = False
-            #         continue
-            #     else:
-            #         previousBuy = True
-            # if prevSell:
-            #     if dataRSI["rsi_14"][i] < 91 and data["STOCHk_5_3_3"][i] > 67: # 47
-            #         previousSell = False
-            #         continue
-            #     else:
-            #         previousSell = True
-
-
-
-
-
-
-
-                
-        
-
-
-
-
-
-
-
-
-
-                    #BEFORE:
-
-                    # Percentage Correct: 0.5688822874118084
-                    # CANDLES: 7032
-                    # PERCENT OF TRADES: 0.3915268694910435
-
-                    
-
-                    # Percentage Correct: 65.76%
-                    # CANDLES: 7032
-                    # PERCENT OF TRADES: 14.47
-                    # prevSell = 100
-                    
-                    # Percentage Correct: 63.88%
-                    # CANDLES: 7032
-                    # PERCENT OF TRADES: 15.33
-
-                    # if dataRSI["rsi"][i] < 70 and data['STOCHk_5_3_3'][i] < 58:
-                    #         previousBuy = False
-                    #         continue
-                    #     else:
-                    #         previousBuy = True
-                    # if prevSell:
-                    #     if dataRSI["rsi"][i] < 70 and data["STOCHk_5_3_3"][i] > 76:
-                    #         previousSell = False
-                    #         continue
-                    #     else:
-                    #         previousSell = True
-                    
-                    
-                    #INTO:
-                    # if dataRSI["rsi"][i] < 70 and data["STOCHk_5_3_3"][i] > 80:
-                        # Percentage Correct: 0.6036745406824147
-                        # CANDLES: 7032
-                        # PERCENT OF TRADES: 0.1661927779357407
-
-                    # if dataRSI["rsi"][i] > 70 and data["STOCHk_5_3_3"][i] > 80:
-                        # Percentage Correct: 0.5871238628411477
-                        # CANDLES: 7032
-                        # PERCENT OF TRADES: 0.2078475973841342
-
-
-            #     #-----Uncomment: when supertrend code done------#
-            #     RSIvalue = dataRSI['rsi'][i]
-            #     ADXvalue = data['adx'][i]
-            #     signal = None
-            #     signal_list = obtainResult(lst, RSIvalue, current) # check 1 data BUY
-            #     checkPusdo(current, RSIvalue) # check 1 data
-            #     checkNextCandle, lst = findCandleNumber(current, 2) # solves for candle
-            #     if signal_list != None:
-            #         if "SELL" in signal_list and "BUY" in signal_list:
-            #             signal_list = []
-            #             signal = None
-            #         elif "SELL" in signal_list:
-            #             signal = "SELL"
-            #         elif "BUY" in signal_list:
-            #             signal = "BUY"
-
-            #     if signal == "SELL":
-            #         if ADXvalue > 10 and ADXvalue < 40:
-            #             previousSell = True
-            #     elif signal == 'BUY':
-            #         if ADXvalue > 10 and ADXvalue < 40:
-            #             previousBuy = True
-            # #-----Uncomment: when supertrend code done------#
-
-            # ----- uncomment this section -----
-            # if macd_signal == 'SELL' and STOCHsignal == 'SELL':
-            #     # if reverse != True:
-            #     if dataRSI['rsi'][i] < 20:
-            #         previousSell = True
-
-            # if STOCHsignal == 'SELL':
-            #     if dataRSI['rsi'][i] < 37:
-            #         previousSell = True
-            # ------ uncomment this section -------
-        # print(macd_data)
+    
 
 
         try:
