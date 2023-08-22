@@ -43,6 +43,7 @@ if "__main__" == __name__:
     st2, upt2, dt2 = get_supertrend(data["high"], data["low"], data["close"], 12, 3)
     st3, upt3, dt3 = get_supertrend(data["high"], data["low"], data["close"], 11, 2)
     st4, upt4, dt4 = get_supertrend(data["high"], data["low"], data["close"], 10, 1)
+    
 
     previousBuy = False
     previousSell = False
@@ -60,6 +61,7 @@ if "__main__" == __name__:
     pos = 0
     nuet = 0
     neg = 0
+    count = 0
 
     number = 0
     BestProfilio = -1
@@ -76,6 +78,7 @@ if "__main__" == __name__:
     stbuy3 = None
     stbuy4 = None
     previousSignal = None
+    count5 = None
 
     lst = []
     current = {}
@@ -185,8 +188,8 @@ if "__main__" == __name__:
             #PREVIOUS: 80% at 7
 
             #-----RSI Code-----#
-            change = f"16.5"
-            changeNeg = f"-16.5"
+            change = f"17.5" #16
+            changeNeg = f"-17.5" #16
             change = float(change)
             changeNeg = float(changeNeg)
 
@@ -240,29 +243,39 @@ if "__main__" == __name__:
         #---------Working Code-------#
 
         #---------HULL EFFECT----------#
-        # if HMAdata95[i-1] > HMAdata150[i-1] and HMAdata95[i] < HMAdata150[i] and (dataRSI[f"rsi_{rsiValue}"][i] < 45 or dataRSI[f"rsi_{rsiValue}"][i] > 55):
-        #     prevSellHMA = True
-        # else:
-        #     prevSellHMA = False
-        # if HMAdata95[i-1] < HMAdata150[i-1] and HMAdata95[i] > HMAdata150[i] and (dataRSI[f"rsi_{rsiValue}"][i] < 45 or dataRSI[f"rsi_{rsiValue}"][i] > 55):
-        #     prevBuyHMA = True
-        # else:
-        #     prevBuyHMA = False
-
-        # if not contempent:
-        #     if prevBuyHMA and prevSellHMA:
-        #         prevBuyHMA = False
-        #         prevSellHMA = False
-        #     if prevBuyHMA:
-        #         previousBuy = True
-        #     if prevSellHMA:
-        #         previousSell = True
-
-        # if previousBuy and previousSell:
-        #     previousBuy = False
-        #     previousSell = False
-
-    
+            # # print('a')
+            # if HMAdata95[i-1] > HMAdata150[i-1] and HMAdata95[i] < HMAdata150[i] and (dataRSI[f"rsi_{rsiValue}"][i] < 7 or dataRSI[f"rsi_{rsiValue}"][i] > j):
+            #     count5 = True
+            #     # print('a')
+            #     prevSellHMA = True
+            # else:
+            #     prevSellHMA = False
+            #     # print('a')
+            # if HMAdata95[i-1] < HMAdata150[i-1] and HMAdata95[i] > HMAdata150[i] and (dataRSI[f"rsi_{rsiValue}"][i] < 7 or dataRSI[f"rsi_{rsiValue}"][i] > j):
+            #     prevBuyHMA = True
+            #     count5 = False
+            #     # print('b')
+            # else:
+            #     prevBuyHMA = False
+            #     # print('b')
+            # if count5 == True or count5 == False:
+            #     count+=1
+            # if count >= 5:
+            #     count = 0
+            #     if not contempent:
+            #         if prevBuyHMA and prevSellHMA:
+            #             prevBuyHMA = False
+            #             prevSellHMA = False
+            #         if count5:
+            #             previousBuy = True
+            #         if not count5:
+            #             previousSell = True
+            #     count5 = None
+            # if previousBuy and previousSell:
+            #     previousBuy = False
+            #     previousSell = False
+            #-------Hull Effect----- (doesnt work dont even try)#
+        
 
 
         try:
