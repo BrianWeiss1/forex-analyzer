@@ -1,6 +1,7 @@
 
 # Update data
 import random
+from tests.simulate2 import obtainResult
 from tests.testADX import grabADX
 from tests.testRSI import get_rsi
 from tests.testSTOCH import get_stoch
@@ -28,12 +29,24 @@ def simulate(data, avgResult, avgInput):
     data = data.dropna()
 
     # Supertrend setup
-    st, upt, dt = get_supertrend(data["high"], data["low"], data["close"], 3, 3)
-    st2, upt2, dt2 = get_supertrend(data["high"], data["low"], data["close"], 30, 2)
+    st, upt, dt = get_supertrend(data["high"], data["low"], data["close"], 164, 1)
+    st2, upt2, dt2 = get_supertrend(data["high"], data["low"], data["close"], 93, 1)
+    st3, upt3, dt3 = get_supertrend(data["high"], data["low"], data["close"], 1, 1)
+    st4, upt4, dt4 = get_supertrend(data["high"], data["low"], data["close"], 77, 1)
+    st5, upt5, dt5 = get_supertrend(data["high"], data["low"], data["close"], 39, 1)
+    st6, upt6, dt6 = get_supertrend(data["high"], data["low"], data["close"], 42, 1) #change to 2
+    st7, upt7, dt7 = get_supertrend(data["high"], data["low"], data["close"], 65, 1)
 
-    st3, upt3, dt3 = get_supertrend(data["high"], data["low"], data["close"], 40, 2)
-    st4, upt4, dt4 = get_supertrend(data["high"], data["low"], data["close"], 1, 1)
-    st5, upt5, dt5 = get_supertrend(data["high"], data["low"], data["close"], 28, 2)
+
+    # Average Result: 1568010824.655752
+    # Median Result: 28360590.612781316
+    # Best Profilio: 162631407085.49048
+
+    # Average Result: 3952144693.0374
+    # Median Result: 5280123.050841998
+    # Best Profilio: 432493562718.766
+
+
 
     #       POS/NEG RATIO: 3.4464285714285716
     #       Percentage Correct: 77.51%
@@ -73,6 +86,7 @@ def simulate(data, avgResult, avgInput):
     stbuy4 = None
     stbuy5 = None
     stbuy6 = None
+    stbuy7 = None
     previousSignal = None
 
     lst = []
@@ -82,212 +96,79 @@ def simulate(data, avgResult, avgInput):
     length = difference = 0
 
     # Loop to go through datapoints
-    for j in range(1, 101):
-        for k in range(1, 5):
-            st6, upt6, dt6 = get_supertrend(data["high"], data["low"], data["close"], j, k)
-            for i in range(41, len(data) - 41):
-                # Check for previous decision: then check if correct or incorrect
-                if previousBuy == True:
-                    if data["close"][i + n] < data["open"][i + n]:
-                        pos += 1
-                        correctBuy == True
-                        # print("correct BUY: " + str(ADXvalue))
-                    elif data["close"][i + n] == data["open"][i + n]:
-                        nuet += 1
-                    else:
-                        neg += 1
-                        # print("INNCORECT BUY: " + str(ADXvalue))
-                        previousBuy = False
-                        correctBuy == False
-                if previousSell == True:
-                    if data["close"][i + n] > data["open"][i + n]:
-                        pos += 1
-                        # print("CORRECT SELL: " + str(ADXvalue))
-                        correctSell == True
-                    elif data["close"][i + n] == data["open"][i + n]:
-                        nuet += 1
-                    else:
-                        neg += 1
-                        correctSell == False
-                        # print("INNCORECT SELL: " + str(ADXvalue))
-                    previousSell = False
+    for j in range(1, 201):
+        # for k in range(1, 5):
+        for i in range(10, len(data) - 10):
+            
+            pos, nuet, neg = findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg)
+            previousSell = previousBuy = False
+            previousBuy, previousSell = obtainResult(i, st, st2, st3, st4, st5, st6, st7, data, dataRSI, rsiValue)
 
-                prevBuyRSI = False
-                prevSellRSI = False
-                prevSellSTOCH = None
-                prevBuySTOCH = None
+        try:
+            print(j)
+            print(pos, nuet, neg)
+            print("POS/NEG RATIO: " + str(pos / neg))
+            print(
+                "Percentage Correct: " + str(round((pos / (neg + pos)) * 100, 2)) + "%"
+            )
+            print("CANDLES: " + str(len(data) - 2))
+            print(
+                "PERCENT OF TRADES: "
+                + str(round(((pos + nuet + neg) / len(data)) * 100, 2))
+            )
+        except ZeroDivisionError:
+            print("ERROR GO BRRRR")
 
-                def SuperTrendEMA():
-                    prevBuy = prevSell = False
-                    signalSuper = ""
-                    if st[i] > data["close"][i]:
-                        stbuy = True
-                    elif st[i] < data["close"][i]:
-                        stbuy = False
+        # ------Profilio-----
 
-                    if st2[i] > data["close"][i]:
-                        stbuy2 = True
-                    elif st2[i] < data["close"][i]:
-                        stbuy2 = False
-                    if st3[i] > data["close"][i]:
-                        stbuy3 = True
-                    elif st3[i] < data["close"][i]:
-                        stbuy3 = False
-                    if st4[i] > data["close"][i]:
-                        stbuy4 = True
-                    elif st4[i] < data["close"][i]:
-                        stbuy4 = False
-                    if st5[i] > data["close"][i]:
-                        stbuy5 = True
-                    elif st5[i] < data["close"][i]:
-                        stbuy5 = False
-                    if st6[i] > data["close"][i]:
-                        stbuy6 = True
-                    elif st6[i] < data["close"][i]:
-                        stbuy6 = False
-
-
-                    if (
-                        stbuy == True
-                        and stbuy2 == True
-                        and stbuy3 == True
-                        and stbuy4 == True
-                        and stbuy5 == True
-                        and stbuy6 == True
-                    ):
-                        signalSuper = "BUY"
-                    if (
-                        stbuy == False
-                        and stbuy2 == False
-                        and stbuy3 == False
-                        and stbuy4 == False
-                        and stbuy5 == False
-                        and stbuy6 == False
-                    ):
-                        signalSuper = "SELL"
-
-                    if signalSuper == "BUY":
-                        prevBuy = True
-
-                    if signalSuper == "SELL":
-                        prevSell = True
-
-                    return prevBuy, prevSell
-
-                prevBuy, prevSell = SuperTrendEMA()
-
-                if prevSell:
-                    if dataRSI[f"rsi_{rsiValue}"][i] > 57 and data["STOCHk_5_3_3"][i] > 27: # 57, 27
-                        prevSellSTOCH = False
-                    else:
-                        prevSellSTOCH = True
-                # -----RSI--------#
-                change = f"14.27"
-                changeNeg = f"-14.27"
-                change = float(change)
-                changeNeg = float(changeNeg)
-
-                if prevBuy:
-                    if (
-                        dataRSI[f"rsi_{rsiValue}"][i] < 55 + changeNeg
-                        or dataRSI[f"rsi_{rsiValue}"][i] > 45 + change
-                    ):  # 45, 100
-                        # previousBuy = False
-                        prevBuyRSI = False
-                        # continue
-                    else:
-                        # previousBuy = True
-                        prevBuyRSI = True
-                if prevSell:
-                    if (
-                        dataRSI[f"rsi_{rsiValue}"][i] < 55 + changeNeg
-                        or dataRSI[f"rsi_{rsiValue}"][i] > 45 + change
-                    ):  # 47
-                        # previousSell = False
-                        prevSellRSI = False
-                        # continue
-                    else:
-                        # previousSell = True
-                        prevSellRSI = True
-
-                #compareitivness
-                if prevBuyRSI and prevSellRSI:
-                    prevSell = False
-                    prevBuy = False
-                if prevBuyRSI:
-                    previousBuy = True
+        pos *=2
+        neg*=2
+        nuet*= 2
+        profilioSum = 0
+        for i in range(1):
+            profilio = 10
+            betPercent = 0.1
+            winRate = 1.6
+            for i in range(pos + neg + nuet):
+                bet = betPercent * profilio
+                profilio = profilio - (bet)
+                randomNum = random.randint(0, pos + nuet + neg)
+                if randomNum <= neg:  # negitive
+                    profilio = profilio
+                elif randomNum <= neg + nuet:  # nuetrol
+                    profilio = profilio + (bet)
                 else:
-                    previousBuy = False
-                
-                if prevSellRSI:
-                    previousSell = True
-                else:
-                    previousSell = False
-                
-                if previousSell == True and previousBuy == True:
-                    previousBuy = False
-                    previousSell = False
-                    contempent = True
-
-                #------Working code-------#
-
-                if not contempent:
-                    if prevBuySTOCH and prevSellSTOCH:
-                        prevBuySTOCH = False
-                        prevSellSTOCH = False
-                    if prevBuySTOCH:
-                        previousBuy = True
-                    if prevSellSTOCH:
-                        previousSell = True
-
-                #contentment
-                if previousSell == True and previousBuy == True:
-                    previousBuy = False
-                    previousSell = False
-                    contempent = True
-
-            try:
-                print(j)
-                print(pos, nuet, neg)
-                print("POS/NEG RATIO: " + str(pos / neg))
-                print(
-                    "Percentage Correct: " + str(round((pos / (neg + pos)) * 100, 2)) + "%"
-                )
-                print("CANDLES: " + str(len(data) - 2))
-                print(
-                    "PERCENT OF TRADES: "
-                    + str(round(((pos + nuet + neg) / len(data)) * 100, 2))
-                )
-            except ZeroDivisionError:
-                print("ERROR GO BRRRR")
-
-            # ------Profilio-----
-            profilioSum = 0
-            for i in range(1):
-                profilio = 10
-                betPercent = avgInput
-                winRate = avgResult
-                for i in range(pos + neg + nuet):
-                    bet = betPercent * profilio
-                    profilio = profilio - (bet)
-                    randomNum = random.randint(0, pos + nuet + neg)
-                    if randomNum <= neg:  # negitive
-                        profilio = profilio
-                    elif randomNum <= neg + nuet:  # nuetrol
-                        profilio = profilio + (bet)
-                    else:
-                        profilio = profilio + (bet * winRate)
-                profilioSum += profilio
-            profilio = profilioSum / 10
-            print((profilio))
-            lst.append(profilio)
-            if (profilio) > BestProfilio:
-                BestProfilio = profilio
-                Bestk = k
-                Bestj = j
-            if profilio < WorseProfilio:
-                WorseProfilio = profilio
-                worstk = k
-                worstj = j
-            pos = nuet = neg = 0
+                    profilio = profilio + (bet * winRate)
+            profilioSum += profilio
+        profilio = profilioSum / 10
+        # print((profilio))
+        lst.append(profilio)
+        if (profilio) > BestProfilio:
+            BestProfilio = profilio
+            # Bestk = k
+            Bestj = j
+        if profilio < WorseProfilio:
+            WorseProfilio = profilio
+            # worstk = k
+            worstj = j
+        pos = nuet = neg = 0
     return lst, BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj
+
+def findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg):
+    if previousBuy == True:
+        if data["close"][i + n] < data["open"][i + n]:
+            pos += 1
+        elif data["close"][i + n] == data["open"][i + n]:
+            nuet += 1
+        else:
+            neg += 1
+        previousBuy = False
+    if previousSell == True:
+        if data["close"][i + n] > data["open"][i + n]:
+            pos += 1
+        elif data["close"][i + n] == data["open"][i + n]:
+            nuet += 1
+        else:
+            neg += 1
+        previousSell = False
+    return pos, nuet, neg
