@@ -1,4 +1,4 @@
-def bandsgoBRRRRR(df, window):
+def get_Bands(df, window):
     df['sma'] = df['close'].rolling(window=window).mean()
     df['std'] = df['close'].rolling(window=window).std()
 

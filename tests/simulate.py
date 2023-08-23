@@ -3,6 +3,7 @@
 import random
 from tests.simulate2 import obtainResult
 from tests.testADX import grabADX
+from tests.testBands import get_Bands
 from tests.testRSI import get_rsi
 from tests.testSTOCH import get_stoch
 from tests.testSupertrend import get_supertrend
@@ -13,14 +14,17 @@ def simulate(data, avgResult, avgInput):
     ultimateData = data
     data = grabADX(data)
     # ema = calculate_200ema(data, 200)
+    print(data)
     rsiValue = 10
     dataRSI, dataRSI2 = get_rsi(data["close"], rsiValue)
     dataRSI3, dataRSI4 = get_rsi(data["close"], rsiValue)
+    
     # dataRSI2 = get_rsi(data["close"], 9)
     # macdData = get_macd(data, 12, 26, 9)
     data = get_stoch(ultimateData, 5, 3)
+    data = get_Bands(data, 17)
+
     # print(dataRSI)
-    print(dataRSI2)
 
     # print(dataRSI)
 
@@ -97,6 +101,7 @@ def simulate(data, avgResult, avgInput):
 
     n = 0
     length = difference = 0
+    print(data)
 
     # Loop to go through datapoints
     for j in range(1, 101):
@@ -104,16 +109,25 @@ def simulate(data, avgResult, avgInput):
         # dataRSI3, dataRSI4 = get_rsi(data["close"], rsiValue)
         # print(dataRSI3)
         for i in range(40, len(data) - 40):
-            j = 0
+              
             
-            
+
+
+            if data['close'][i] > data['upper_band'][i]:
+                previousSell = True
+
+            if data['close'][i] < data['lower_band'][i]:
+                previousBuy = True   
+
+
+
+
+
+
             pos, nuet, neg = findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg)
             previousSell = previousBuy = False
-            previousBuy, previousSell = obtainResult(i, st, st2, st3, st4, st5, st6, st7, data, dataRSI, rsiValue, j)
+            # previousBuy, previousSell = obtainResult(i, st, st2, st3, st4, st5, st6, st7, data, dataRSI, rsiValue, j)
             prevBuyRSI = None
-            if 
-
-
 
             # -------RSI canvus 82%: 4%-------#
             # if dataRSI3[f'rsi_{rsiValue}'][i] > dataRSI4[f'rsi_{rsiValue}'][i]:
@@ -135,23 +149,22 @@ def simulate(data, avgResult, avgInput):
         try:
             print(j)
             print(pos, nuet, neg)
-            print("POS/NEG RATIO: " + str(pos / neg))
-            print(
-                "Percentage Correct: " + str(round((pos / (neg + pos)) * 100, 2)) + "%"
-            )
+            if neg != 0:            
+                print(
+                    "Percentage Correct: " + str(round((pos / (neg + pos)) * 100, 2)) + "%"
+                )
+            else:
+                print("Percentage Correct: 100.00%")
             print("CANDLES: " + str(len(data) - 2))
             print(
                 "PERCENT OF TRADES: "
-                + str(round(((pos + nuet + neg) / len(data)) * 100, 2))
+                + str(round(((pos + nuet + neg) / len(data)) * 100, 2))  + "%"
             )
         except ZeroDivisionError:
             print("ERROR GO BRRRR")
 
         # ------Profilio-----
 
-        pos *=2
-        neg*=2
-        nuet*= 2
         profilioSum = 0
         for i in range(1):
             profilio = 10
