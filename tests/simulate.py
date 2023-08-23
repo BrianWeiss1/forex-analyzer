@@ -14,10 +14,13 @@ def simulate(data, avgResult, avgInput):
     data = grabADX(data)
     # ema = calculate_200ema(data, 200)
     rsiValue = 10
-    dataRSI = get_rsi(data["close"], rsiValue)
+    dataRSI, dataRSI2 = get_rsi(data["close"], rsiValue)
+    dataRSI3, dataRSI4 = get_rsi(data["close"], rsiValue)
     # dataRSI2 = get_rsi(data["close"], 9)
     # macdData = get_macd(data, 12, 26, 9)
     data = get_stoch(ultimateData, 5, 3)
+    # print(dataRSI)
+    print(dataRSI2)
 
     # print(dataRSI)
 
@@ -96,13 +99,38 @@ def simulate(data, avgResult, avgInput):
     length = difference = 0
 
     # Loop to go through datapoints
-    for j in range(1, 201):
-        # for k in range(1, 5):
-        for i in range(10, len(data) - 10):
+    for j in range(1, 101):
+        rsiValue2 = j
+        # dataRSI3, dataRSI4 = get_rsi(data["close"], rsiValue)
+        # print(dataRSI3)
+        for i in range(40, len(data) - 40):
+            j = 0
+            
             
             pos, nuet, neg = findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg)
             previousSell = previousBuy = False
-            previousBuy, previousSell = obtainResult(i, st, st2, st3, st4, st5, st6, st7, data, dataRSI, rsiValue)
+            previousBuy, previousSell = obtainResult(i, st, st2, st3, st4, st5, st6, st7, data, dataRSI, rsiValue, j)
+            prevBuyRSI = None
+            if 
+
+
+
+            # -------RSI canvus 82%: 4%-------#
+            # if dataRSI3[f'rsi_{rsiValue}'][i] > dataRSI4[f'rsi_{rsiValue}'][i]:
+            #     prevBuyRSI = False
+            # if dataRSI3[f'rsi_{rsiValue}'][i] > dataRSI4[f'rsi_{rsiValue}'][i]:
+            #     prevBuyRSI = True
+            # if prevBuyRSI:
+            #     previousBuy = True
+            # if not prevBuyRSI:
+            #     previousSell = True
+            #--------RSI Canvas--------#
+
+
+
+            
+
+
 
         try:
             print(j)
@@ -128,7 +156,7 @@ def simulate(data, avgResult, avgInput):
         for i in range(1):
             profilio = 10
             betPercent = 0.1
-            winRate = 1.6
+            winRate = 1.5
             for i in range(pos + neg + nuet):
                 bet = betPercent * profilio
                 profilio = profilio - (bet)

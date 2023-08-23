@@ -18,4 +18,5 @@ def get_rsi(close, lookback):
     rs = up_ewm/down_ewm
     rsi = 100 - (100 / (1 + rs))
     rsi_df = pd.DataFrame(rsi).rename(columns = {0:f'rsi_{lookback}'}).set_index(close.index)
-    return rsi_df
+    sma = rsi_df.rolling(window=9).mean()
+    return rsi_df, sma

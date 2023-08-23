@@ -8,13 +8,13 @@ def grabHistoricalData(ticker = "EURUSD"):
         for item in data:
             del item['ticker']
         return data
-    startDate = "2023-08-05 00:00"
-    # endDate = '2022-07-18 16:00'
+    startDate = "2023-01-23 9:45"
+    endDate = '2023-08-23 10:14'
     apikey = '54e4aae1277e71d6e2dd03ba604720662055a9f4'
-    timeFrame = "5min"
+    timeFrame = "1min"
 
-    # url = f"https://api.tiingo.com/tiingo/fx/{ticker}/prices?startDate={startDate}&endDate={endDate}&resampleFreq={timeFrame}&token={apikey}"
-    url = f"https://api.tiingo.com/tiingo/fx/{ticker}/prices?startDate={startDate}&resampleFreq={timeFrame}&token={apikey}"
+    url = f"https://api.tiingo.com/tiingo/fx/{ticker}/prices?startDate={startDate}&endDate={endDate}&resampleFreq={timeFrame}&token={apikey}"
+    # url = f"https://api.tiingo.com/tiingo/fx/{ticker}/prices?startDate={startDate}&resampleFreq={timeFrame}&token={apikey}"
     # url = f"https://api.tiingo.com/tiingo/fx/{ticker}/prices&resampleFreq={timeFrame}&token={apikey}"
     # url = f"https://api.tiingo.com/tiingo/fx/{ticker}/prices?resampleFreq={timeFrame}&token={apikey}"
 

@@ -8,8 +8,8 @@ if "__main__" == __name__:
     data = eval(data[0])
     data = formatDataset(data)
     
-    lst, BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj = simulate(data, 1.7, 0.1)
-    
+    lst, BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj = simulate(data, 1.5, 0.1)
+
 
 
     if not lst:
@@ -28,10 +28,12 @@ if "__main__" == __name__:
         middle_right = n // 2
         middle_left = middle_right - 1
         median = (sorted_arr[middle_left] + sorted_arr[middle_right]) / 2
-    print("\n\n")
+
+    
+    print("\n")
     print("Average Result: " + str(average))
     print("Median Result: " + str(median))
-
+    print("\n")
     print("Best Profilio: " + str(BestProfilio))
     print("J:" + str(Bestj))
     print("K: " + str(Bestk))

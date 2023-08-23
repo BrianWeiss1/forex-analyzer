@@ -1,4 +1,4 @@
-def obtainResult(i, st, st2, st3, st4, st5, st6, st7, data, dataRSI, rsiValue):
+def obtainResult(i, st, st2, st3, st4, st5, st6, st7, data, dataRSI, rsiValue, j):
     contempent = False
     prevBuyRSI = False
     prevSellRSI = False
@@ -75,8 +75,8 @@ def obtainResult(i, st, st2, st3, st4, st5, st6, st7, data, dataRSI, rsiValue):
         else:
             prevSellSTOCH = True
     # -----RSI--------#
-    change = f"14.27"
-    changeNeg = f"-14.27"
+    change = f"{j}.27"
+    changeNeg = f"-{j}.27"
     change = float(change)
     changeNeg = float(changeNeg)
 
