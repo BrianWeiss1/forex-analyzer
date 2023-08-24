@@ -3,7 +3,7 @@
 import random
 from tests.simulate2 import obtainResult
 from tests.testADX import grabADX
-from tests.testBands import get_Bands
+from tests.testAroon import aroon
 from tests.testRSI import get_rsi
 from tests.testSTOCH import get_stoch
 from tests.testSupertrend import get_supertrend
@@ -12,19 +12,15 @@ import sys
 
 def simulate(data, avgResult, avgInput):
     ultimateData = data
-    data = grabADX(data)
-    # ema = calculate_200ema(data, 200)
+    data = grabADX(data, 14)
     print(data)
+    # ema = calculate_200ema(data, 200)
+    aroonData = aroon(data, 14)
     rsiValue = 10
-    dataRSI, dataRSI2 = get_rsi(data["close"], rsiValue)
-    dataRSI3, dataRSI4 = get_rsi(data["close"], rsiValue)
-    
+    dataRSI = get_rsi(data["close"], rsiValue)
     # dataRSI2 = get_rsi(data["close"], 9)
     # macdData = get_macd(data, 12, 26, 9)
     data = get_stoch(ultimateData, 5, 3)
-    data = get_Bands(data, 17)
-
-    # print(dataRSI)
 
     # print(dataRSI)
 
@@ -101,70 +97,52 @@ def simulate(data, avgResult, avgInput):
 
     n = 0
     length = difference = 0
-    print(data)
 
     # Loop to go through datapoints
-    for j in range(1, 101):
-        rsiValue2 = j
-        # dataRSI3, dataRSI4 = get_rsi(data["close"], rsiValue)
-        # print(dataRSI3)
-        for i in range(40, len(data) - 40):
-              
+    # for j in range(1, 101):
+    # for j in range(1, 101):
+    for k in range(1, 101):
+        for i in range(10, len(data) - 10):
             
-
-
-            if data['close'][i] > data['upper_band'][i]:
-                previousSell = True
-
-            if data['close'][i] < data['lower_band'][i]:
-                previousBuy = True   
-
-
-
-
-
-
             pos, nuet, neg = findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg)
             previousSell = previousBuy = False
-            # previousBuy, previousSell = obtainResult(i, st, st2, st3, st4, st5, st6, st7, data, dataRSI, rsiValue, j)
-            prevBuyRSI = None
-
-            # -------RSI canvus 82%: 4%-------#
-            # if dataRSI3[f'rsi_{rsiValue}'][i] > dataRSI4[f'rsi_{rsiValue}'][i]:
-            #     prevBuyRSI = False
-            # if dataRSI3[f'rsi_{rsiValue}'][i] > dataRSI4[f'rsi_{rsiValue}'][i]:
-            #     prevBuyRSI = True
-            # if prevBuyRSI:
+            previousBuy, previousSell = obtainResult(i, st, st2, st3, st4, st5, st6, st7, data, dataRSI, rsiValue)
+            # if previousBuy == True:
+            #     if data['adx'][i] < 59 or data['adx'][i] > 7:
+            #         previousBuy = True
+            #     else:
+            #         previousBuy = False
+            # if previousSell == True:
+            #     if data['adx'][i] < 76 or data['adx'][i] > 6:
+            #         previousSell = True
+            #     else:
+            #         previousSell = False            
+            # if aroonData['aroon_indicator'][i] <= 8:
             #     previousBuy = True
-            # if not prevBuyRSI:
+            # if aroonData['aroon_indicator'][i] >= 98:
             #     previousSell = True
-            #--------RSI Canvas--------#
 
-
-
-            
-
-
-
+            # if both are below 50%: colosiating
+            # 30% and 70%
         try:
-            print(j)
             print(pos, nuet, neg)
-            if neg != 0:            
-                print(
-                    "Percentage Correct: " + str(round((pos / (neg + pos)) * 100, 2)) + "%"
-                )
-            else:
-                print("Percentage Correct: 100.00%")
+            print("POS/NEG RATIO: " + str(pos / neg))
+            print(
+                "Percentage Correct: " + str(round((pos / (neg + pos)) * 100, 2)) + "%"
+            )
             print("CANDLES: " + str(len(data) - 2))
             print(
                 "PERCENT OF TRADES: "
-                + str(round(((pos + nuet + neg) / len(data)) * 100, 2))  + "%"
+                + str(round(((pos + nuet + neg) / len(data)) * 100, 2))
             )
         except ZeroDivisionError:
             print("ERROR GO BRRRR")
 
         # ------Profilio-----
 
+        pos *=2
+        neg*=2
+        nuet*= 2
         profilioSum = 0
         for i in range(1):
             profilio = 10
@@ -186,12 +164,12 @@ def simulate(data, avgResult, avgInput):
         lst.append(profilio)
         if (profilio) > BestProfilio:
             BestProfilio = profilio
-            # Bestk = k
-            Bestj = j
+            Bestk = k
+            # Bestj = j
         if profilio < WorseProfilio:
             WorseProfilio = profilio
-            # worstk = k
-            worstj = j
+            worstk = k
+            # worstj = j
         pos = nuet = neg = 0
     return lst, BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj
 

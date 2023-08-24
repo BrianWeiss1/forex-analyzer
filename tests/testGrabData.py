@@ -1,6 +1,7 @@
 import datetime
 import requests
 import json
+import matplotlib
 def grabHistoricalData(ticker = "EURUSD"):
     def dataConvertor(data):
         for item in data:

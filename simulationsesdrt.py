@@ -2,7 +2,6 @@ from tests.simulate import simulate
 from tests.testSpecial import formatDataset
 
 if "__main__" == __name__:
-    # __INNIT__
     f = open("documents/dataSIM.txt", "r")
     data = f.readlines()
     data = eval(data[0])

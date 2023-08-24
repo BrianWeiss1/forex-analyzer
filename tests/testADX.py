@@ -1,6 +1,6 @@
 import pandas as pd
 
-def grabADX(df):
+def grabADX(df, lookback):
     def get_adx(high, low, close, lookback):
         plus_dm = high.diff()
         minus_dm = low.diff()
@@ -20,9 +20,9 @@ def grabADX(df):
         adx = ((dx.shift(1) * (lookback - 1)) + dx) / lookback
         adx_smooth = adx.ewm(alpha = 1/lookback).mean()
         return plus_di, minus_di, adx_smooth
-    df['plus_di'] = pd.DataFrame(get_adx(df['high'], df['low'], df['close'], 14)[0]).rename(columns = {0:'plus_di'})
-    df['minus_di'] = pd.DataFrame(get_adx(df['high'], df['low'], df['close'], 14)[1]).rename(columns = {0:'minus_di'})
-    df['adx'] = pd.DataFrame(get_adx(df['high'], df['low'], df['close'], 14)[2]).rename(columns = {0:'adx'})
+    df['plus_di'] = pd.DataFrame(get_adx(df['high'], df['low'], df['close'], lookback)[0]).rename(columns = {0:'plus_di'})
+    df['minus_di'] = pd.DataFrame(get_adx(df['high'], df['low'], df['close'], lookback)[1]).rename(columns = {0:'minus_di'})
+    df['adx'] = pd.DataFrame(get_adx(df['high'], df['low'], df['close'], lookback)[2]).rename(columns = {0:'adx'})
     df = df.dropna()
     df.tail()
     return df
