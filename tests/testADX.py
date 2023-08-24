@@ -1,4 +1,5 @@
 import pandas as pd
+from ta.trend import ADXIndicator
 
 def grabADX(df, lookback):
     def get_adx(high, low, close, lookback):
@@ -20,12 +21,19 @@ def grabADX(df, lookback):
         adx = ((dx.shift(1) * (lookback - 1)) + dx) / lookback
         adx_smooth = adx.ewm(alpha = 1/lookback).mean()
         return plus_di, minus_di, adx_smooth
+
     df['plus_di'] = pd.DataFrame(get_adx(df['high'], df['low'], df['close'], lookback)[0]).rename(columns = {0:'plus_di'})
     df['minus_di'] = pd.DataFrame(get_adx(df['high'], df['low'], df['close'], lookback)[1]).rename(columns = {0:'minus_di'})
     df['adx'] = pd.DataFrame(get_adx(df['high'], df['low'], df['close'], lookback)[2]).rename(columns = {0:'adx'})
     df = df.dropna()
     df.tail()
     return df
+def get_adx(df, window=4):
+    A_ind = ADXIndicator(df['high'], df['low'], df['close'], window)
+    df['adx'] = pd.DataFrame(ADXIndicator.adx(A_ind)[0]).rename(columns = {0:'adx'})
+    df = df.dropna()
+    return df
+    
 
 
  

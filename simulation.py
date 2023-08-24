@@ -8,7 +8,9 @@ if "__main__" == __name__:
     data = formatDataset(data)
     
     lst, BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj = simulate(data, 1.5, 0.1)
-
+    #720mi
+    # 77mil
+    # 200bil
 
 
     if not lst:

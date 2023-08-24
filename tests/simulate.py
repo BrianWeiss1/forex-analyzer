@@ -13,7 +13,7 @@ import sys
 def simulate(data, avgResult, avgInput):
     ultimateData = data
     data = grabADX(data, 14)
-    print(data)
+    # print(data)
     # ema = calculate_200ema(data, 200)
     aroonData = aroon(data, 14)
     rsiValue = 10
@@ -101,12 +101,21 @@ def simulate(data, avgResult, avgInput):
     # Loop to go through datapoints
     # for j in range(1, 101):
     # for j in range(1, 101):
+
+
+
+
+    profilio = 10
     for k in range(1, 101):
         for i in range(10, len(data) - 10):
             
-            pos, nuet, neg = findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg)
+            pos, nuet, neg, profilio = findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg, profilio)
             previousSell = previousBuy = False
             previousBuy, previousSell = obtainResult(i, st, st2, st3, st4, st5, st6, st7, data, dataRSI, rsiValue)
+
+            if data['adx'][i] < 15:
+                previousBuy = False
+                previousSell = False
             # if previousBuy == True:
             #     if data['adx'][i] < 59 or data['adx'][i] > 7:
             #         previousBuy = True
@@ -135,59 +144,57 @@ def simulate(data, avgResult, avgInput):
                 "PERCENT OF TRADES: "
                 + str(round(((pos + nuet + neg) / len(data)) * 100, 2))
             )
+            print("protfilio: " + str(profilio))
         except ZeroDivisionError:
             print("ERROR GO BRRRR")
-
         # ------Profilio-----
 
-        pos *=2
-        neg*=2
-        nuet*= 2
-        profilioSum = 0
-        for i in range(1):
-            profilio = 10
-            betPercent = 0.1
-            winRate = 1.5
-            for i in range(pos + neg + nuet):
-                bet = betPercent * profilio
-                profilio = profilio - (bet)
-                randomNum = random.randint(0, pos + nuet + neg)
-                if randomNum <= neg:  # negitive
-                    profilio = profilio
-                elif randomNum <= neg + nuet:  # nuetrol
-                    profilio = profilio + (bet)
-                else:
-                    profilio = profilio + (bet * winRate)
-            profilioSum += profilio
-        profilio = profilioSum / 10
-        # print((profilio))
-        lst.append(profilio)
-        if (profilio) > BestProfilio:
-            BestProfilio = profilio
-            Bestk = k
-            # Bestj = j
-        if profilio < WorseProfilio:
-            WorseProfilio = profilio
-            worstk = k
-            # worstj = j
         pos = nuet = neg = 0
+        lst.append(profilio)
+        if profilio > BestProfilio:
+            BestProfilio = profilio
+            # Bestj = j
+            Bestk = k
+        elif profilio < WorseProfilio:
+            WorseProfilio = profilio
+            # worstj = j
+            worstk = k
+        profilio = 10
     return lst, BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj
 
-def findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg):
+def findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg, profilio):
+    betPercent = 0.19066666666666666
+    winRate = 1.6
+        #Kelly Criterium:
+        # p = 0.6965
+        # q = 1-p
+        # b = winRate-1
+        # f = p - (q/b)
+        # betPercent = f
+        # print(betPercent)
+    bet = 0
     if previousBuy == True:
+        bet = betPercent * profilio
+        profilio = profilio - (bet)
         if data["close"][i + n] < data["open"][i + n]:
             pos += 1
+            profilio = profilio + (bet * winRate)
         elif data["close"][i + n] == data["open"][i + n]:
             nuet += 1
+            profilio = profilio + (bet)
         else:
             neg += 1
         previousBuy = False
     if previousSell == True:
+        bet = betPercent * profilio
+        profilio = profilio - (bet)
         if data["close"][i + n] > data["open"][i + n]:
             pos += 1
+            profilio = profilio + (bet * winRate)
         elif data["close"][i + n] == data["open"][i + n]:
             nuet += 1
+            profilio = profilio + (bet)
         else:
             neg += 1
         previousSell = False
-    return pos, nuet, neg
+    return pos, nuet, neg, profilio
