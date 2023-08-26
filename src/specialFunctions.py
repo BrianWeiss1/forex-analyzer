@@ -43,6 +43,7 @@ def obtainResult(i, st, st2, st3, st4, st5, st6, st7, data, dataRSI, rsiValue):
     contempent = False
     prevSellSTOCH = None
     prevBuySTOCH = None
+    previousSell = previousBuy = False
 
 
     def SuperTrendEMA():
@@ -116,6 +117,10 @@ def obtainResult(i, st, st2, st3, st4, st5, st6, st7, data, dataRSI, rsiValue):
         return prevBuy, prevSell
 
     prevBuy, prevSell = SuperTrendEMA()
+    if prevBuy == True:
+        previousBuy = True
+    if prevSell == True:
+        previousSell = True
 
     if prevSell:
         if dataRSI[f"rsi_{rsiValue}"][i] > 57 and data["STOCHk_5_3_3"][i] > 27: # 57, 27
@@ -151,7 +156,7 @@ def obtainResult(i, st, st2, st3, st4, st5, st6, st7, data, dataRSI, rsiValue):
             # previousSell = True
             prevSellRSI = True
 
-    #compareitivness
+
     if prevBuyRSI and prevSellRSI:
         prevSell = False
         prevBuy = False
