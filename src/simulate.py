@@ -1,12 +1,12 @@
 
 # Update data
 import random
-from tests.simulate2 import obtainResult
-from tests.testADX import grabADX
-from tests.testAroon import aroon
-from tests.testRSI import get_rsi
-from tests.testSTOCH import get_stoch
-from tests.testSupertrend import get_supertrend
+from src.specialFunctions import obtainResult
+from src.testADX import grabADX
+from src.testAroon import aroon
+from src.testRSI import get_rsi
+from src.testSTOCH import get_stoch
+from src.testSupertrend import get_supertrend
 import sys
 
 
@@ -113,26 +113,7 @@ def simulate(data, avgResult, avgInput):
             previousSell = previousBuy = False
             previousBuy, previousSell = obtainResult(i, st, st2, st3, st4, st5, st6, st7, data, dataRSI, rsiValue)
 
-            if data['adx'][i] < 15:
-                previousBuy = False
-                previousSell = False
-            # if previousBuy == True:
-            #     if data['adx'][i] < 59 or data['adx'][i] > 7:
-            #         previousBuy = True
-            #     else:
-            #         previousBuy = False
-            # if previousSell == True:
-            #     if data['adx'][i] < 76 or data['adx'][i] > 6:
-            #         previousSell = True
-            #     else:
-            #         previousSell = False            
-            # if aroonData['aroon_indicator'][i] <= 8:
-            #     previousBuy = True
-            # if aroonData['aroon_indicator'][i] >= 98:
-            #     previousSell = True
 
-            # if both are below 50%: colosiating
-            # 30% and 70%
         try:
             print(pos, nuet, neg)
             print("POS/NEG RATIO: " + str(pos / neg))

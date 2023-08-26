@@ -1,13 +1,16 @@
-from tests.simulate import findPos
-from tests.simulate2 import obtainResult
-from tests.testADX import grabADX
-from tests.testGrabData import grabHistoricalData
-from tests.testRSI import get_rsi
-from tests.testSTOCH import get_stoch
-from tests.testSpecial import formatDataset
-from tests.testSupertrend import get_supertrend
+from src.specialFunctions import automaticBuy, automaticSell
+from src.simulate import findPos
+from src.simulate2 import obtainResult
+from src.testADX import grabADX
+from src.testGrabData import grabHistoricalData
+from src.testRSI import get_rsi
+from src.testSTOCH import get_stoch
+from src.testSpecial import formatDataset
+from src.testSupertrend import get_supertrend
 from datetime import datetime, timedelta
 from sys import maxsize
+import time
+
 
 
 def __innit__(symbol):    
@@ -56,6 +59,7 @@ def __innit__(symbol):
             if datetime.now().second > 0 and datetime.now().second < 2:
                 print("\n" + datetime.now().strftime("%H:%M"))
                 data = grabHistoricalData(symbol)
+                # print(data)
                 data = data[len(data)-200:len(data)]
                 data = formatDataset(data)
 
@@ -84,11 +88,18 @@ def __innit__(symbol):
                 previousSell = previousBuy = False
 
                 previousBuy, previousSell = obtainResult(i, st, st2, st3, st4, st5, st6, st7, data, dataRSI, rsiValue)
+                    #Multiple STOCHs:
+                    #Multiple STOCH RSI
+
+
                 # print("HALLLO")
                 if previousBuy == True:
                     print("BUYYYY")
+                    automaticBuy((1018, 501))
                 elif previousSell == True:
                     print("SELL")
+                    automaticSell((1001, 564))
+                time.sleep(55)
 
 
 if "__main__" == __name__:

@@ -1,12 +1,11 @@
-from tests.simulate import findPos
-from tests.simulate2 import obtainResult
-from tests.testADX import grabADX
-from tests.testGrabData import findSpecificData, grabHistoricalData
-from tests.testRSI import get_rsi
-from tests.testSTOCH import get_stoch
-from tests.testSpecial import formatDataset
-from tests.testSupertrend import get_supertrend
-from datetime import datetime, timedelta
+from src.simulate import findPos
+from src.simulate2 import obtainResult
+from src.testGrabData import findSpecificData
+from src.testRSI import get_rsi
+from src.testSTOCH import get_stoch
+from src.testSpecial import formatDataset
+from src.testSupertrend import get_supertrend
+from datetime import datetime
 from sys import maxsize
 
 
