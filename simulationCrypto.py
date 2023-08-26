@@ -1,13 +1,14 @@
-from src.simulate import simulate
+from src.simulate import simulate, simulateCrypto
 from src.testSpecial import formatDataset
 
 if "__main__" == __name__:
-    f = open("documents/dataSIM.txt", "r")
+    f = open("documents/dataCrypto.txt", "r")
     data = f.readlines()
     data = eval(data[0])
     data = formatDataset(data)
+    print(data)
     
-    lst, BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj = simulate(data, 1.5, 0.1)
+    lst, BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj = simulateCrypto(data, 1.5, 0.1)
     #720mi
     # 77mil
     # 200bil

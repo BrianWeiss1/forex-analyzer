@@ -1,6 +1,6 @@
 from src.specialFunctions import automaticBuy, automaticSell
 from src.simulate import findPos
-from src.simulate2 import obtainResult
+from src.specialFunctions import obtainResult
 from src.testADX import grabADX
 from src.testGrabData import grabHistoricalData
 from src.testRSI import get_rsi

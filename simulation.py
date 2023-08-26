@@ -2,7 +2,7 @@ from src.simulate import simulate
 from src.testSpecial import formatDataset
 
 if "__main__" == __name__:
-    f = open("documents/dataSIM.txt", "r")
+    f = open("documents/data.txt", "r")
     data = f.readlines()
     data = eval(data[0])
     data = formatDataset(data)

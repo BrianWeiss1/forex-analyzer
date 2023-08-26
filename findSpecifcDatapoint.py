@@ -1,5 +1,5 @@
 from src.simulate import findPos
-from src.simulate2 import obtainResult
+from src.specialFunctions import obtainResult
 from src.testGrabData import findSpecificData
 from src.testRSI import get_rsi
 from src.testSTOCH import get_stoch
