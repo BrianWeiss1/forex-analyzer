@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import pandas_ta as ta
 
 #Here are the two ideas:
 
@@ -18,6 +19,10 @@ if supertrend says sell when under EMA: sell
 
 
 '''
+def superTrend(data, length, multiplier):
+    supertrend = ta.supertrend(data['high'], data['low'], data['close'], length, multiplier)
+    print(supertrend)
+    return supertrend
 
 def get_supertrend(high, low, close, lookback, multiplier):
     

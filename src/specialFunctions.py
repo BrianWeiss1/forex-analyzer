@@ -38,8 +38,22 @@ def obtainResult(i, st, st2, st3, st4, st5, st6, st7, data, dataRSI, rsiValue):
     prevSellRSI = False
     prevSellSTOCH = None
     prevBuySTOCH = None
+    prevSellRSI = False
+    prevBuyRSI = False
+    contempent = False
+    prevSellSTOCH = None
+    prevBuySTOCH = None
+
 
     def SuperTrendEMA():
+        stbuy = None
+        stbuy1 = None
+        stbuy2 = None
+        stbuy3 = None
+        stbuy4 = None
+        stbuy5 = None
+        stbuy6 = None
+        stbuy7 = None
         prevBuy = prevSell = False
         signalSuper = ""
         if st[i] > data["close"][i]:

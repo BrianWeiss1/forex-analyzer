@@ -7,7 +7,7 @@ from src.testADX import grabADX
 from src.testAroon import aroon
 from src.testRSI import get_rsi
 from src.testSTOCH import get_stoch
-from src.testSupertrend import get_supertrend
+from src.testSupertrend import get_supertrend, superTrend
 import sys
 
 
@@ -204,6 +204,8 @@ def simulateCrypto(data, avgResult, avgInput):
     data = data.dropna()
 
     # Supertrend setup
+    # def getSupertrend():
+
     st, upt, dt = get_supertrend(data["high"], data["low"], data["close"], 164, 1)
     st2, upt2, dt2 = get_supertrend(data["high"], data["low"], data["close"], 93, 1)
     st3, upt3, dt3 = get_supertrend(data["high"], data["low"], data["close"], 1, 1)
@@ -211,6 +213,11 @@ def simulateCrypto(data, avgResult, avgInput):
     st5, upt5, dt5 = get_supertrend(data["high"], data["low"], data["close"], 39, 1)
     st6, upt6, dt6 = get_supertrend(data["high"], data["low"], data["close"], 42, 2) #change to 2
     st7, upt7, dt7 = get_supertrend(data["high"], data["low"], data["close"], 65, 1)
+    # stdata = [164, 1]
+    # st = superTrend(data, stdata[0], stdata[1])
+    # df_filtered = st[[f'SUPERT_{stdata[0]}_{stdata[1]}.0']]
+    # st = df_filtered[f'SUPERT_{stdata[0]}_{stdata[1]}.0']
+    # print(st)
 
 
     # Average Result: 1568010824.655752
@@ -254,14 +261,14 @@ def simulateCrypto(data, avgResult, avgInput):
     Bestk = -1
     worstk = -1
     worstj = -1
-    stbuy = None
-    stbuy1 = None
-    stbuy2 = None
-    stbuy3 = None
-    stbuy4 = None
-    stbuy5 = None
-    stbuy6 = None
-    stbuy7 = None
+    # stbuy = None
+    # stbuy1 = None
+    # stbuy2 = None
+    # stbuy3 = None
+    # stbuy4 = None
+    # stbuy5 = None
+    # stbuy6 = None
+    # stbuy7 = None
     previousSignal = None
 
     lst = []
