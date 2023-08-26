@@ -6,7 +6,7 @@ if "__main__" == __name__:
     data = f.readlines()
     data = eval(data[0])
     data = formatDataset(data)
-    print(data)
+    # print(data)
     
     lst, BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj = simulateCrypto(data, 1.5, 0.1)
     #720mi

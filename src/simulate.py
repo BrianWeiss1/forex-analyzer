@@ -113,9 +113,11 @@ def simulate(data, avgResult, avgInput):
             pos, nuet, neg, profilio = findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg, profilio)
             previousSell = previousBuy = False
             previousBuy, previousSell = obtainResult(i, st, st2, st3, st4, st5, st6, st7, data, dataRSI, rsiValue)
+            
+        
 
 
-        try:
+        try:    
             print(pos, nuet, neg)
             print("POS/NEG RATIO: " + str(pos / neg))
             print(
@@ -142,18 +144,18 @@ def simulate(data, avgResult, avgInput):
             # worstj = j
             worstk = k
         profilio = 10
+        #HERE
     return lst, BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj
 
 def findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg, profilio):
     betPercent = 0.19066666666666666
     winRate = 1.6
-        #Kelly Criterium:
-        # p = 0.6965
-        # q = 1-p
-        # b = winRate-1
-        # f = p - (q/b)
-        # betPercent = f
-        # print(betPercent)
+    p = 0.7818
+    q = 1-p
+    b = winRate-1
+    f = p - (q/b)
+    betPercent = f
+    # print(betPercent)
     bet = 0
     if previousBuy == True:
         bet = betPercent * profilio
@@ -213,6 +215,7 @@ def simulateCrypto(data, avgResult, avgInput):
     st5, upt5, dt5 = get_supertrend(data["high"], data["low"], data["close"], 39, 1)
     st6, upt6, dt6 = get_supertrend(data["high"], data["low"], data["close"], 42, 2) #change to 2
     st7, upt7, dt7 = get_supertrend(data["high"], data["low"], data["close"], 65, 1)
+
     # stdata = [164, 1]
     # st = superTrend(data, stdata[0], stdata[1])
     # df_filtered = st[[f'SUPERT_{stdata[0]}_{stdata[1]}.0']]
@@ -281,54 +284,65 @@ def simulateCrypto(data, avgResult, avgInput):
     # for j in range(1, 101):
     # for j in range(1, 101):
 
-
+    st10 = superTrend(data, 2, 87) # 2, 87
+    # st11 = superTrend(data, 6, 1)
     change = -7
 
     profilio = 10
-    for k in range(1, 101):
-        for j in range(1, 6):
+    for k in range(1, 501):
+        print("K: " + str(k))
+        for j in range(1, 100):
+            st10 = superTrend(data, k, j)
             for i in range(10, len(data) - 10):
                 
                 pos, nuet, neg, profilio = findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg, profilio)
                 previousSell = previousBuy = False
                 previousBuy, previousSell = obtainResult(i, st, st2, st3, st4, st5, st6, st7, data, dataRSI, rsiValue)
 
-                if VWAPdata['VWAP'][i] > data['close'][i]+change and previousSell:
+                if VWAPdata[i] > data['close'][i]+change and previousSell:
                     #only sell
                     previousSell = True
                 else:
                     previousSell = False
-                if VWAPdata['VWAP'][i]+change < data['close'][i] and previousBuy:
+                if VWAPdata[i]+change < data['close'][i] and previousBuy:
                     #only buy
                     previousBuy = True
                 else:
                     previousBuy = False
+                if st10[i] > data['close'][i] and previousBuy:
+                    previousBuy = True
+                else:
+                    previousBuy = False
+                if st10[i] < data['close'][i] and previousSell:
+                    previousSell = True
+                else:
+                    previousSell = False
                     
-            try:
-                print(pos, nuet, neg)
-                print("POS/NEG RATIO: " + str(pos / neg))
-                print(
-                    "Percentage Correct: " + str(round((pos / (neg + pos)) * 100, 2)) + "%"
-                )
-                print("CANDLES: " + str(len(data) - 2))
-                print(
-                    "PERCENT OF TRADES: "
-                    + str(round(((pos + nuet + neg) / len(data)) * 100, 2))
-                )
-                print("protfilio: " + str(profilio))
-            except ZeroDivisionError:
-                print("ERROR GO BRRRR")
+            # try:
+            #     print(pos, nuet, neg)
+            #     print("POS/NEG RATIO: " + str(pos / neg))
+            #     print(
+            #         "Percentage Correct: " + str(round((pos / (neg + pos)) * 100, 2)) + "%"
+            #     )
+            #     print("CANDLES: " + str(len(data) - 2))
+            #     print(
+            #         "PERCENT OF TRADES: "
+            #         + str(round(((pos + nuet + neg) / len(data)) * 100, 2))
+            #     )
+            #     print("protfilio: " + str(profilio))
+            # except ZeroDivisionError:
+            #     print("ERROR GO BRRRR")
             # ------Profilio-----
 
             pos = nuet = neg = 0
             lst.append(profilio)
             if profilio > BestProfilio:
                 BestProfilio = profilio
-                # Bestj = j
+                Bestj = j
                 Bestk = k
             elif profilio < WorseProfilio:
                 WorseProfilio = profilio
-                # worstj = j
+                worstj = j
                 worstk = k
             profilio = 10
     #SEPERATE WHEN TABBING

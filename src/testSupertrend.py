@@ -20,9 +20,10 @@ if supertrend says sell when under EMA: sell
 
 '''
 def superTrend(data, length, multiplier):
-    supertrend = ta.supertrend(data['high'], data['low'], data['close'], length, multiplier)
-    print(supertrend)
-    return supertrend
+    st = ta.supertrend(data['high'], data['low'], data['close'], length, multiplier)
+    df_filtered = st[[f'SUPERT_{length}_{multiplier}.0']]
+    st = df_filtered[f'SUPERT_{length}_{multiplier}.0']
+    return st
 
 def get_supertrend(high, low, close, lookback, multiplier):
     
