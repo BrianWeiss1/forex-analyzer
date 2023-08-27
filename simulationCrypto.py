@@ -1,4 +1,5 @@
-from src.simulate import simulate, simulateCrypto
+
+from src.simulate import simulateCrypto
 from src.testSpecial import formatDataset
 
 if "__main__" == __name__:
