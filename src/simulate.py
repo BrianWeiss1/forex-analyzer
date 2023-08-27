@@ -149,7 +149,7 @@ def simulate(data, avgResult, avgInput):
         #HERE
     return lst, BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj
 
-def findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg, profilio):
+def findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg, profilio, totalPips, countPips):
     betPercent = 0.1
     winRate = 1.6
     # p = 0.
@@ -165,11 +165,14 @@ def findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg, profilio):
         if data["close"][i + n] < data["open"][i + n]:
             pos += 1
             profilio = profilio + (bet * winRate)
+            totalPips += abs((data["open"][i + n]*100)-(data["close"][i + n]*100))
         elif data["close"][i + n] == data["open"][i + n]:
             nuet += 1
             profilio = profilio + (bet)
         else:
             neg += 1
+            totalPips -= abs(100*data["open"][i + n]-data["close"][i + n]*100)
+        countPips+=1
         previousBuy = False
     if previousSell == True:
         bet = betPercent * profilio
@@ -177,13 +180,16 @@ def findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg, profilio):
         if data["close"][i + n] > data["open"][i + n]:
             pos += 1
             profilio = profilio + (bet * winRate)
+            totalPips += abs(100*data["open"][i + n]-data["close"][i + n]*100)
         elif data["close"][i + n] == data["open"][i + n]:
             nuet += 1
             profilio = profilio + (bet)
         else:
             neg += 1
+            totalPips -= abs(100*data["open"][i + n]-data["close"][i + n]*100)
+        countPips+=1
         previousSell = False
-    return pos, nuet, neg, profilio
+    return pos, nuet, neg, profilio, totalPips, countPips
 
 
 
@@ -201,7 +207,8 @@ def simulateCrypto(data, avgResult, avgInput):
     rsiValue = 8
     dataRSI = get_rsi(data["close"], rsiValue)
     data = get_stoch(ultimateData, 5, 3)
-
+    totalPips = 0
+    countPips = 0
     # print(dataRSI)
 
     # MACD setup
@@ -299,10 +306,10 @@ def simulateCrypto(data, avgResult, avgInput):
         for k in range(1, 501):
             print("K: " + str(k))
             # for j in range(1, 100):
-            st10 = superTrend(data, 7, 1)
+            st10 = superTrend(data, 2, 87) #2, 87
             for i in range(10, len(data) - 10):
                 
-                pos, nuet, neg, profilio = findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg, profilio)
+                pos, nuet, neg, profilio, totalPips, countPips = findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg, profilio, totalPips, countPips)
                 previousSell = previousBuy = False
                 previousBuy, previousSell = obtainResult(i, st, st2, st3, st4, st5, st6, st7, data, dataRSI, rsiValue)
 
@@ -344,19 +351,26 @@ def simulateCrypto(data, avgResult, avgInput):
                     "PERCENT OF TRADES: "
                     + str(round(((pos + nuet + neg) / len(data)) * 100, 2))
                 )
-                print("protfilio: " + str(profilio))
+                # print("protfilio: " + str(profilio))
+                print("AVERAGE PIPS: " + str(totalPips/countPips))
             except ZeroDivisionError:
                 print("ERROR GO BRRRR")
             # ------Profilio-----
 
-            pos = nuet = neg = 0
             lst.append(profilio)
-            if profilio > BestProfilio:
-                BestProfilio = profilio
+            # print(pos / (neg + pos))
+            try:
+                ratio = (100-round((pos / (neg + pos)) * 100, 2))/(100-round(((pos + nuet + neg) / len(data)) * 100, 2))*100
+            except ZeroDivisionError:
+                ratio = 0
+            pos = nuet = neg = 0
+            print("Ratio: " + str(ratio))
+            if ratio > BestProfilio:
+                BestProfilio = ratio
                 # Bestj = j
                 Bestk = k
-            elif profilio < WorseProfilio:
-                WorseProfilio = profilio
+            elif ratio < WorseProfilio:
+                WorseProfilio = ratio
                 # worstj = j
                 worstk = k
             profilio = 10
