@@ -2,7 +2,7 @@
 
 from functions.GrabData import GrabCurrentData
 from functions.RSI import RSI, checkPusdo, findCandleNumber, obtainResult
-from functions.specialFunctions import automaticBuy, automaticSell, checkTime, obtainCurrentTime, obtainPastTimeFormatted
+# from src.specialFunctions import checkTime, obtainCurrentTime, obtainPastTimeFormatted
 from datetime import datetime
 import time
 import multiprocessing

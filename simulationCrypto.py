@@ -1,11 +1,12 @@
 
-from src.simulate import simulateCrypto
+from src.simulateCrypto import simulateCrypto
 from src.testSpecial import formatDataset
 
 if "__main__" == __name__:
-    f = open("documents/dataCrypto.txt", "r")
+    f = open("documents/dataCryptoTest.txt", "r")
     data = f.readlines()
     data = eval(data[0])
+    f.close()
     data = formatDataset(data)
     # print(data)
     

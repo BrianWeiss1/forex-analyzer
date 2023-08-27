@@ -54,15 +54,16 @@ def findSpecificData(ticker, date):
         return dataConvertor(data)
     else:
         print("Error: API request failed. Code: {}. Message: {}".format(response.status_code, response.text))
-def grabHistoricalDataBTC(ticker = "BTCUSD"):
+
+
+def grabHistoricalDataBTC(ticker, startDate='2023-07-30 9:45', apikey="54e4aae1277e71d6e2dd03ba604720662055a9f4"):
     def dataConvertor(data):
         for item in data:
             item['date'] = datetime.datetime.strptime(item['date'], '%Y-%m-%dT%H:%M:%S%z').strftime('%Y-%m-%d %H:%M')
         # for item in data:
         #     del item['ticker']
         return data
-    startDate = "2023-07-30 9:45"
-    endDate = '2023-08-23 10:14'
+    endDate = '2023-07-30 9:45'
     apikey = '54e4aae1277e71d6e2dd03ba604720662055a9f4'
     apikey2 = 'a94f963a602203b1ade0d6f3e63a5954740870f3'
     timeFrame = "1min"
@@ -82,3 +83,28 @@ def grabHistoricalDataBTC(ticker = "BTCUSD"):
         return dataConvertor(data)
     else:
         print("Error: API request failed. Code: {}. Message: {}".format(response.status_code, response.text))
+
+def calltimes(ticker, times, startTime='2023-07-30 9:45'):
+    def combine_lists(lst):
+        combined_list = []
+        for sublist in lst:
+            combined_list.extend(sublist)
+        return combined_list
+
+    input_format = "%Y-%m-%d %H:%M"
+
+    initial_time = datetime.datetime.strptime(startTime, input_format)
+    duration_to_add = datetime.timedelta(minutes=5001)
+    lst = []
+    apikey2 = 'a9b4c87998c9ca386388f1eceaf3e64391f61f8d'
+    time = initial_time
+    for i in range(times):
+        lst.append(grabHistoricalDataBTC(ticker, time, apikey2))
+        time = time + duration_to_add
+        print(time)
+
+    f = open('documents/dataCryptoTest.txt', 'w')
+    f.write(str(combine_lists(lst)))
+    f.close()
+
+
