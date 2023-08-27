@@ -45,7 +45,7 @@ def simulateCrypto(data, avgResult, avgInput):
     st3, upt3, dt3 = get_supertrend(data["high"], data["low"], data["close"], 1, 1)
     st4, upt4, dt4 = get_supertrend(data["high"], data["low"], data["close"], 77, 1)
     st5, upt5, dt5 = get_supertrend(data["high"], data["low"], data["close"], 39, 1)
-    st6, upt6, dt6 = get_supertrend(data["high"], data["low"], data["close"], 42, 2) #change to 2
+    st6, upt6, dt6 = get_supertrend(data["high"], data["low"], data["close"], 42, 1) #change to 2
     st7, upt7, dt7 = get_supertrend(data["high"], data["low"], data["close"], 65, 1)
 
     # stdata = [164, 1]
@@ -143,16 +143,16 @@ def simulateCrypto(data, avgResult, avgInput):
                 #     previousBuy = False
 
 
-                # Supertrend
-                if st10[i] > data['close'][i] and previousBuy:
-                    previousBuy = True
-                else:
-                    previousBuy = False
-                if st10[i] < data['close'][i] and previousSell:
-                    previousSell = True
-                else:
-                    previousSell = False
-                # if  
+                # # Supertrend
+                # if st10[i] > data['close'][i] and previousBuy:
+                #     previousBuy = True
+                # else:
+                #     previousBuy = False
+                # if st10[i] < data['close'][i] and previousSell:
+                #     previousSell = True
+                # else:
+                #     previousSell = False
+                # # if  
                 def funct(num, i, VWAP5):
                     if VWAP5[i] > data['close'][i]+num:
                         prevSell = True
