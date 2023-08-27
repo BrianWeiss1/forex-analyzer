@@ -111,20 +111,19 @@ def simulateCrypto(data, avgResult, avgInput):
 
     n = 0
     length = difference = 0
-
+    st10 = superTrend(data, 1, 1) # 2, 87
+    VWAP5 = get_VWAP(data, 5)
     # Loop to go through datapoints
     # for j in range(1, 101):
     # for j in range(1, 101):
 
-    st10 = superTrend(data, 2, 87) # 2, 87
     # st11 = superTrend(data, 6, 1)
-    change = -7
-
+    VWAPdata = get_VWAP(data, 1)
     profilio = 10
     try:
-        for k in range(1, 101):
+        for k in range(-101, 101):
             print("K: " + str(k))
-            # VWAPdata = get_VWAP(data, k)
+            change = k
             # for j in range(1, 100):
             for i in range(10, len(data) - 10):
                 
@@ -132,16 +131,16 @@ def simulateCrypto(data, avgResult, avgInput):
                 previousSell = previousBuy = False
                 previousBuy, previousSell = obtainResult(i, st, st2, st3, st4, st5, st6, st7, data, dataRSI, rsiValue)
 
-                if VWAPdata[i] > data['close'][i]+change and previousSell:
-                    #only sell
-                    previousSell = True
-                else:
-                    previousSell = False
-                if VWAPdata[i] + change < data['close'][i] and previousBuy:
-                    #only buy
-                    previousBuy = True
-                else:
-                    previousBuy = False
+                # if VWAPdata[i] > data['close'][i]+change and previousSell:
+                #     #only sell
+                #     previousSell = True
+                # else:
+                #     previousSell = False
+                # if VWAPdata[i] + change < data['close'][i] and previousBuy:
+                #     #only buy
+                #     previousBuy = True
+                # else:
+                #     previousBuy = False
 
 
                 # Supertrend
@@ -154,8 +153,156 @@ def simulateCrypto(data, avgResult, avgInput):
                 else:
                     previousSell = False
                 # if  
+                def funct(num, i, VWAP5):
+                    if VWAP5[i] > data['close'][i]+num:
+                        prevSell = True
+                    else:
+                        prevSell = False
+                    if VWAPdata[i] + change < data['close'][i] and previousBuy:
+                        #only buy
+                        prevBuy = True
+                    else:
+                        prevBuy = False
+                    return prevBuy, prevSell
+                def callAllFunct(lst, i, VWAP5):
+                    for idsjnewukku in range(len(lst)):
+                        data = funct(lst[idsjnewukku], i, VWAP5)
+                        if data[0] == True:
+                            return {"BUY": True, "SELL": False}
+                        if data[1] == True:
+                            return {"BUY": False, "SELL": True}
+                    return {"BUY": False, "SELL": False}
+                # lstcount = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
+                # value = callAllFunct(lstcount, i, VWAP5)
+                # if value['BUY']:
+                #     previousBuy = True
+                # elif value['SELL']:
+                #     previousSell = True
 
-                
+                ''' AT VWAP 5
+                K: 7
+138 0 41
+POS/NEG RATIO: 3.3658536585365852
+Percentage Correct: 77.09%
+CANDLES: 14987
+PERCENT OF TRADES: 1.19
+AVERAGE PIPS: 490.66515436985947
+Ratio: 23.185912357048878
+K: 8
+104 0 26
+POS/NEG RATIO: 4.0
+Percentage Correct: 80.0%
+CANDLES: 14987
+PERCENT OF TRADES: 0.87
+AVERAGE PIPS: 490.74487276476214
+Ratio: 20.175527085645115
+K: 9
+82 0 20
+POS/NEG RATIO: 4.1
+Percentage Correct: 80.39%
+CANDLES: 14987
+PERCENT OF TRADES: 0.68
+AVERAGE PIPS: 490.8047714445626
+Ratio: 19.744260974627466
+K: 10
+61 0 14
+POS/NEG RATIO: 4.357142857142857
+Percentage Correct: 81.33%
+CANDLES: 14987
+PERCENT OF TRADES: 0.5
+AVERAGE PIPS: 490.8770960698243
+Ratio: 18.763819095477388
+K: 11
+45 0 10
+POS/NEG RATIO: 4.5
+Percentage Correct: 81.82%
+CANDLES: 14987
+PERCENT OF TRADES: 0.37
+AVERAGE PIPS: 490.938906359631
+Ratio: 18.24751580849143
+K: 12
+39 0 6
+POS/NEG RATIO: 6.5
+Percentage Correct: 86.67%
+CANDLES: 14987
+PERCENT OF TRADES: 0.3
+AVERAGE PIPS: 490.9998392310501
+Ratio: 13.370110330992976
+K: 13
+29 0 4
+POS/NEG RATIO: 7.25
+Percentage Correct: 87.88%
+CANDLES: 14987
+PERCENT OF TRADES: 0.22
+AVERAGE PIPS: 491.0607775257159
+Ratio: 12.146722790138309
+K: 14
+19 0 1
+POS/NEG RATIO: 19.0
+Percentage Correct: 95.0%
+CANDLES: 14987
+PERCENT OF TRADES: 0.13
+AVERAGE PIPS: 491.1228671947612
+Ratio: 5.006508460999299
+K: 15
+15 0 1
+POS/NEG RATIO: 15.0
+Percentage Correct: 93.75%
+CANDLES: 14987
+PERCENT OF TRADES: 0.11
+AVERAGE PIPS: 491.17132027923384
+Ratio: 6.256882570827911
+K: 16
+11 0 1
+POS/NEG RATIO: 11.0
+Percentage Correct: 91.67%
+CANDLES: 14987
+PERCENT OF TRADES: 0.08
+AVERAGE PIPS: 491.19481400125346
+Ratio: 8.336669335468374
+K: 17
+7 0 1
+POS/NEG RATIO: 7.0
+Percentage Correct: 87.5%
+CANDLES: 14987
+PERCENT OF TRADES: 0.05
+AVERAGE PIPS: 491.2145910732522
+Ratio: 12.506253126563283
+K: 18
+7 0 1
+POS/NEG RATIO: 7.0
+Percentage Correct: 87.5%
+CANDLES: 14987
+PERCENT OF TRADES: 0.05
+AVERAGE PIPS: 491.2343667108891
+Ratio: 12.506253126563283
+K: 19
+6 0 1
+POS/NEG RATIO: 6.0
+Percentage Correct: 85.71%
+CANDLES: 14987
+PERCENT OF TRADES: 0.05
+AVERAGE PIPS: 491.24552797913174
+Ratio: 14.29714857428715
+K: 20
+5 0 1
+POS/NEG RATIO: 5.0
+Percentage Correct: 83.33%
+CANDLES: 14987
+PERCENT OF TRADES: 0.04
+AVERAGE PIPS: 491.24647623774024
+Ratio: 16.67667066826731
+K: 21
+4 0 1
+POS/NEG RATIO: 4.0
+Percentage Correct: 80.0%
+CANDLES: 14987
+PERCENT OF TRADES: 0.03
+AVERAGE PIPS: 491.2465526359083
+Ratio: 20.00600180054016
+K: 22
+
+                '''
 
                 
                     

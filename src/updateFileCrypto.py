@@ -1,5 +1,5 @@
 
-from src.testGrabData import calltimes, grabHistoricalData, grabHistoricalDataBTC
+from src.testGrabData import calltimes, calltimes5m, grabHistoricalData, grabHistoricalDataBTC
 
 symbol = "BTCUSD"
 # data = grabHistoricalDataBTC(symbol)
@@ -9,4 +9,5 @@ symbol = "BTCUSD"
 
 
 
-calltimes("BTCUSD", 10, "2022-07-30 9:45")
+# calltimes("BTCUSD", 3, "2022-07-30 9:45")
+calltimes5m("BTCUSD", 3, "2022-07-30 9:45")

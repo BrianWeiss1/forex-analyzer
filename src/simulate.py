@@ -152,20 +152,23 @@ def simulate(data, avgResult, avgInput):
 
 def findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg, profilio, totalPips, countPips):
     betPercent = 0.1
-    winRate = 1.6
-    p = 0.
-    q = 1-p
-    b = winRate-1
-    f = p - (q/b)
-    betPercent = f
-    # print(betPercent)
+    multiplierBuy = 1.2
+    multiplierSell = 0.8
+    winRate = 1.65
+
+    # p = 0.
+    # q = 1-p
+    # b = winRate-1
+    # f = p - (q/b)
+    # betPercent = f
+    # # print(betPercent)
     bet = 0
     if previousBuy == True:
         bet = betPercent * profilio
         profilio = profilio - (bet)
         if data["close"][i + n] < data["open"][i + n]:
             pos += 1
-            profilio = profilio + (bet * winRate)
+            profilio = profilio + (bet * multiplierBuy)
             totalPips += abs((data["open"][i + n]*100)-(data["close"][i + n]*100))
         elif data["close"][i + n] == data["open"][i + n]:
             nuet += 1
@@ -173,6 +176,7 @@ def findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg, profilio, tot
         else:
             neg += 1
             totalPips -= abs(100*data["open"][i + n]-data["close"][i + n]*100)
+            profilio = profilio + bet*multiplierSell
         countPips+=1
         previousBuy = False
     if previousSell == True:
@@ -180,11 +184,11 @@ def findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg, profilio, tot
         profilio = profilio - (bet)
         if data["close"][i + n] > data["open"][i + n]:
             pos += 1
-            profilio = profilio + (bet * winRate)
+            profilio = profilio + (bet * multiplierBuy)
             totalPips += abs(100*data["open"][i + n]-data["close"][i + n]*100)
         elif data["close"][i + n] == data["open"][i + n]:
             nuet += 1
-            profilio = profilio + (bet)
+            profilio = profilio + (bet) * multiplierSell
         else:
             neg += 1
             totalPips -= abs(100*data["open"][i + n]-data["close"][i + n]*100)
