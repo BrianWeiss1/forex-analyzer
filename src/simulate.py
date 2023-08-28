@@ -155,7 +155,7 @@ def findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg, profilio, tot
     multiplierBuy = 1.2
     multiplierSell = 0.8
 
-    p = 0.65
+    p = 0.6514
     q = 1-p
     b = 1.2
     f = p - (q/b)
