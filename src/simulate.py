@@ -165,11 +165,11 @@ def findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg, profilio, tot
     if previousBuy == True:
         bet = betPercent * profilio
         profilio = profilio - (bet)
-        if data["close"][i + n] < data["open"][i + n]:
+        if data["close"][i] < data["open"][i + n]:
             pos += 1
             profilio = profilio + (bet * multiplierBuy)
             totalPips += abs((data["open"][i + n]*100)-(data["close"][i + n]*100))
-        elif data["close"][i + n] == data["open"][i + n]:
+        elif data["close"][i] == data["open"][i + n]:
             nuet += 1
             profilio = profilio + (bet)
         else:

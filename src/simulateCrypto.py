@@ -125,6 +125,7 @@ def simulateCrypto(data, avgResult, avgInput):
         for k in range(1, 101):
             print("K: " + str(k))
             # for j in range(1, 100):
+            n = 0
             for i in range(10, len(data) - 10):
                 
                 pos, nuet, neg, profilio, totalPips, countPips = findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg, profilio, totalPips, countPips)
