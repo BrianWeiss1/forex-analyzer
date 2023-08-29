@@ -157,7 +157,7 @@ def findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg, profilio, tot
 
     p = 0.8146
     q = 1-p
-    b = 1.0002
+    b = 1.00048
     f = p - (q/b)
     betPercent = f
     # print(betPercent)
