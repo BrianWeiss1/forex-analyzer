@@ -12,7 +12,7 @@ import sys
 
 from src.testSTOCHRSI import get_STOCHRSI
 from src.testIchi import get_ichimoku
-from testSpecial import formatDataset
+from src.testSpecial import formatDataset
 
 def simulateCrypto(data, avgResult, avgInput):
     
@@ -41,7 +41,7 @@ def simulateCrypto(data, avgResult, avgInput):
 
     # Supertrend setup
     # def getSupertrend():
-
+    j = -1
     st, upt, dt = get_supertrend(data["high"], data["low"], data["close"], 164, 1)
     st2, upt2, dt2 = get_supertrend(data["high"], data["low"], data["close"], 93, 1)
     st3, upt3, dt3 = get_supertrend(data["high"], data["low"], data["close"], 1, 1)
@@ -124,6 +124,11 @@ def simulateCrypto(data, avgResult, avgInput):
     st10 = superTrend(data, 2, 1) # 2, 87
     profilio = 10
     change = 0
+    countPos = 0
+    countNeg = 0
+    posPips = 0
+    negPips = 0
+
     try:
         for k in range(1, 101):
             print("K: " + str(k))
@@ -131,7 +136,7 @@ def simulateCrypto(data, avgResult, avgInput):
             n = 0
             for i in range(10, len(data) - 10):
                 
-                pos, nuet, neg, profilio, totalPips, countPips = findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg, profilio, totalPips, countPips)
+                pos, nuet, neg, profilio, totalPips, countPips, posPips, countPos, negPips, countNeg = findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg, profilio, totalPips, countPips, posPips, countPos, negPips, countNeg)
                 previousSell = previousBuy = False
                 previousBuy, previousSell = obtainResult(i, st, st2, st3, st4, st5, st6, st7, data, dataRSI, rsiValue)
 
@@ -222,6 +227,9 @@ def simulateCrypto(data, avgResult, avgInput):
                 )
                 print("protfilio: " + str(profilio))
                 print("AVERAGE PIPS: " + str(totalPips/countPips))
+                print("POSITIVE PIPS: " + str(posPips/(pos)))
+                print("NEGITIVE PIPS: " + str(negPips/(neg)))
+
                 
             except ZeroDivisionError:
                 print("ERROR GO BRRRR")
@@ -229,21 +237,27 @@ def simulateCrypto(data, avgResult, avgInput):
 
             lst.append(profilio)
             # print(pos / (neg + pos))
-            try:
-                ratio = (100-round((pos / (neg + pos)) * 100, 2))/(100-round(((pos + nuet + neg) / len(data)) * 100, 2))*100
-            except ZeroDivisionError:
-                ratio = 0
+            # try:
+            #     ratio = (100-round((pos / (neg + pos)) * 100, 2))/(100-round(((pos + nuet + neg) / len(data)) * 100, 2))*100
+            # except ZeroDivisionError:
+            #     ratio = 0
             pos = nuet = neg = 0
-            print("Ratio: " + str(ratio))
-            if ratio > BestProfilio:
-                BestProfilio = ratio
-                # Bestj = j
+            # print("Ratio: " + str(ratio))
+            if profilio > BestProfilio:
+                BestProfilio = profilio
+                Bestj = j
                 Bestk = k
-            elif ratio < WorseProfilio:
-                WorseProfilio = ratio
-                # worstj = j
+            elif profilio < WorseProfilio:
+                WorseProfilio = profilio
+                worstj = j
                 worstk = k
             profilio = 10
+            negPips = 0
+            posPips = 0
+            totalPips = 0
+            countPips = 0
+            countPos = 0
+            countNeg = 0
         #SEPERATE WHEN TABBING
         return lst, BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj
     except KeyboardInterrupt:
