@@ -11,6 +11,8 @@ from src.testSupertrend import get_supertrend, superTrend
 import sys
 
 from src.testSTOCHRSI import get_STOCHRSI
+from src.testIchi import get_ichimoku
+from testSpecial import formatDataset
 
 def simulateCrypto(data, avgResult, avgInput):
     
@@ -115,6 +117,7 @@ def simulateCrypto(data, avgResult, avgInput):
     # Loop to go through datapoints
     # for j in range(1, 101):
     # for j in range(1, 101):
+    ichimoku = get_ichimoku(data)
 
     # st11 = superTrend(data, 6, 1)
     VWAPdata = get_VWAP(data, 1)
@@ -132,6 +135,28 @@ def simulateCrypto(data, avgResult, avgInput):
                 previousSell = previousBuy = False
                 previousBuy, previousSell = obtainResult(i, st, st2, st3, st4, st5, st6, st7, data, dataRSI, rsiValue)
 
+                #by itself: 50%, with 80%
+                if data['close'][i] > ichimoku['cover'][i] and data['close'][i] > ichimoku['base'][i] and previousBuy:
+                    previousBuy = True
+                else:
+                    previousBuy = False
+                if data['close'][i] < ichimoku['cover'][i] and data['close'][i] < ichimoku['base'][i] and previousSell:
+                    previousSell = True
+                else:
+                    previousSell = False
+                if previousBuy and previousSell:
+                    previousSell = False
+                    previousBuy = False
+                # if cloud is under price:
+                #     Bullish
+                # if cloud is overprice:
+                #     sellish
+                # the bigger the better
+
+
+                # dont buy if inside the cloud
+
+                
                 # if VWAPdata[i] > data['close'][i]+change and previousSell:
                 #     #only sell
                 #     previousSell = True
@@ -153,26 +178,28 @@ def simulateCrypto(data, avgResult, avgInput):
                 #     previousSell = True
                 # else:
                 #     previousSell = False
-                # # if  
-                def funct(num, i, VWAP5):
-                    if VWAP5[i] > data['close'][i]+num:
-                        prevSell = True
-                    else:
-                        prevSell = False
-                    if VWAPdata[i] + change < data['close'][i] and previousBuy:
-                        #only buy
-                        prevBuy = True
-                    else:
-                        prevBuy = False
-                    return prevBuy, prevSell
-                def callAllFunct(lst, i, VWAP5):
-                    for idsjnewukku in range(len(lst)):
-                        data = funct(lst[idsjnewukku], i, VWAP5)
-                        if data[0] == True:
-                            return {"BUY": True, "SELL": False}
-                        if data[1] == True:
-                            return {"BUY": False, "SELL": True}
-                    return {"BUY": False, "SELL": False}
+
+                    
+                # # # if  
+                # def funct(num, i, VWAP5):
+                #     if VWAP5[i] > data['close'][i]+num:
+                #         prevSell = True
+                #     else:
+                #         prevSell = False
+                #     if VWAPdata[i] + change < data['close'][i] and previousBuy:
+                #         #only buy
+                #         prevBuy = True
+                #     else:
+                #         prevBuy = False
+                #     return prevBuy, prevSell
+                # def callAllFunct(lst, i, VWAP5):
+                #     for idsjnewukku in range(len(lst)):
+                #         data = funct(lst[idsjnewukku], i, VWAP5)
+                #         if data[0] == True:
+                #             return {"BUY": True, "SELL": False}
+                #         if data[1] == True:
+                #             return {"BUY": False, "SELL": True}
+                #     return {"BUY": False, "SELL": False}
                 # lstcount = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
                 # value = callAllFunct(lstcount, i, VWAP5)
                 # if value['BUY']:
@@ -225,3 +252,45 @@ def simulateCrypto(data, avgResult, avgInput):
         print("BEST J: " + str(j))
 
 
+if "__main__" == __name__:
+    f = open("documents/dataCryptoTest.txt", "r")
+    data = f.readlines()
+    data = eval(data[0])
+    f.close()
+    data = formatDataset(data)
+    # print(data)
+    
+    lst, BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj = simulateCrypto(data, 1.5, 0.1)
+    #720mi
+    # 77mil
+    # 200bil
+
+
+    if not lst:
+        exit()
+    
+    total = sum(lst)
+    average = total / len(lst)
+
+
+    sorted_arr = sorted(lst)
+    n = len(sorted_arr)
+    
+    if n % 2 == 1:
+        median = sorted_arr[n // 2]
+    else:
+        middle_right = n // 2
+        middle_left = middle_right - 1
+        median = (sorted_arr[middle_left] + sorted_arr[middle_right]) / 2
+
+    
+    print("\n")
+    print("Average Result: " + str(average))
+    print("Median Result: " + str(median))
+    print("\n")
+    print("Best Portfolio: " + str(BestProfilio))
+    print("J:" + str(Bestj))
+    print("K: " + str(Bestk))
+    print("Worst Portfolio: " + str(WorseProfilio))
+    print("J: " + str(worstj))
+    print("K: " + str(worstk))

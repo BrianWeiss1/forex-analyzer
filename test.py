@@ -2,8 +2,8 @@ import datetime
 import time
 import pyautogui
 from src.testGrabData import grabHistoricalDataBTC
-time.sleep(3)
-print(pyautogui.position()) 
+# time.sleep(3)
+# print(pyautogui.position()) 
 # Point(1414, 946) --> buy
 # Point(1268, 938) --> sell
 

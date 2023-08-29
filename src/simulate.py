@@ -157,7 +157,7 @@ def findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg, profilio, tot
 
     p = 0.6514
     q = 1-p
-    b = 1.2
+    b = 1.0002
     f = p - (q/b)
     betPercent = f
     # print(betPercent)
@@ -181,16 +181,65 @@ def findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg, profilio, tot
     if previousSell == True:
         bet = betPercent * profilio
         profilio = profilio - (bet)
-        if data["close"][i + n] > data["open"][i + n]:
+        if data["close"][i] > data["open"][i]:
             pos += 1
             profilio = profilio + (bet * multiplierBuy)
             totalPips += abs(100*data["open"][i + n]-data["close"][i + n]*100)
-        elif data["close"][i + n] == data["open"][i + n]:
+        elif data["close"][i] == data["open"][i]:
             nuet += 1
             profilio = profilio + (bet)
         else:
             neg += 1
             totalPips -= abs(100*data["open"][i + n]-data["close"][i + n]*100)
+            profilio = profilio + bet * multiplierSell
+        countPips+=1
+        previousSell = False
+    return pos, nuet, neg, profilio, totalPips, countPips
+
+
+
+def findPosLongTerm(data, i, n, previousBuy, previousSell, pos, nuet, neg, profilio, totalPips, countPips):
+    betPercent = 0.1
+    multiplierBuy = 1.2
+    multiplierSell = 0.8
+    n = 5
+
+    p = 0.5
+    q = 1-p
+    b = 1.2
+    f = p - (q/b)
+    betPercent = f
+    # print(betPercent)
+    bet = 0
+    if previousBuy == True:
+        bet = betPercent * profilio
+        profilio = profilio - (bet)
+        if data["close"][i] < data["open"][i + n]:
+            pos += 1
+            profilio = profilio + (bet * multiplierBuy)
+            totalPips += abs((data["open"][i+n]*100)-(data["close"][i]*100))
+        elif data["close"][i] == data["open"][i + n]:
+            nuet += 1
+            profilio = profilio + (bet)
+        else:
+            neg += 1
+            totalPips -= abs(100*data["open"][i+n]-data["close"][i]*100)
+            profilio = profilio + (bet*multiplierSell)
+        countPips+=1
+        previousBuy = False
+    if previousSell == True:
+        bet = betPercent * profilio
+        profilio = profilio - (bet)
+        if data["close"][i] > data["open"][i+n]:
+            pos += 1
+            profilio = profilio + (bet * multiplierBuy)
+            totalPips += abs(100*data["open"][i+n]-data["close"][i]*100)
+        elif data["close"][i] == data["open"][i+n]:
+            nuet += 1
+            profilio = profilio + (bet)
+        else:
+            neg += 1
+            totalPips -= abs(100*data["open"][i+n]-data["close"][i]*100)
             profilio = profilio + bet * multiplierSell
         countPips+=1
         previousSell = False

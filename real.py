@@ -97,11 +97,16 @@ def __innit__(symbol):
                 # print("HALLLO")
                 if previousBuy == True:
                     print("BUYYYY")
-                    automaticBuy((1018, 501))
+                    # automaticBuy((1018, 501))
                 elif previousSell == True:
                     print("SELL")
-                    automaticSell((1001, 564))
+                    # automaticSell((1001, 564))
                 time.sleep(55)
+                print(pos, nuet, neg)
+                try:
+                    print(totalPips/countPips)
+                except:
+                    print("0%")
 
 
 if "__main__" == __name__:
