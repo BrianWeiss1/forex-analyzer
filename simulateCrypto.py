@@ -128,6 +128,7 @@ def simulateCrypto(data, avgResult, avgInput):
     countNeg = 0
     posPips = 0
     negPips = 0
+    bullish = bearish = None
 
     try:
         for k in range(1, 101):
@@ -140,24 +141,35 @@ def simulateCrypto(data, avgResult, avgInput):
                 previousSell = previousBuy = False
                 previousBuy, previousSell = obtainResult(i, st, st2, st3, st4, st5, st6, st7, data, dataRSI, rsiValue)
 
+                # if ichimoku['a'][i] > ichimoku['b'][i]:
+                #     bullish = True
+                # else:
+                #     bullish = False
+                # if ichimoku['a'][i] < ichimoku['b'][i]:
+                #     bearish = True
+                # else:
+                #     bearish = False
+                bullish = True
+                bearish = True
                 #by itself: 50%, with 80%
-                if data['close'][i] > ichimoku['cover'][i] and data['close'][i] > ichimoku['base'][i] and previousBuy:
+                if data['close'][i] > ichimoku['cover'][i] and data['close'][i] > ichimoku['base'][i] and bullish and previousBuy:
                     previousBuy = True
                 else:
                     previousBuy = False
-                if data['close'][i] < ichimoku['cover'][i] and data['close'][i] < ichimoku['base'][i] and previousSell:
+                if data['close'][i] < ichimoku['cover'][i] and data['close'][i] < ichimoku['base'][i] and bearish and previousSell:
                     previousSell = True
                 else:
                     previousSell = False
+                
                 if previousBuy and previousSell:
                     previousSell = False
                     previousBuy = False
+
                 # if cloud is under price:
                 #     Bullish
                 # if cloud is overprice:
                 #     sellish
                 # the bigger the better
-
 
                 # dont buy if inside the cloud
 
