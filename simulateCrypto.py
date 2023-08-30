@@ -2,7 +2,7 @@
 # Update data
 from src.simulate import findPos
 from src.VWAP import get_VWAP
-from src.specialFunctions import obtainResult
+from src.specialFunctions import obtainResult, optimizeResult
 from src.testADX import grabADX
 from src.testAroon import aroon
 from src.testRSI import get_rsi
@@ -13,10 +13,13 @@ import sys
 from src.testSTOCHRSI import get_STOCHRSI
 from src.testIchi import get_ichimoku
 from src.testSpecial import formatDataset
+from src.testEMA import calculate_200ema
+from src.testMACD import get_macd
 
 def simulateCrypto(data, avgResult, avgInput):
     
     ultimateData = data
+    data2 = data
     data = grabADX(data, 14)
     # print(data)
     # ema = calculate_200ema(data, 200)
@@ -49,6 +52,11 @@ def simulateCrypto(data, avgResult, avgInput):
     st5, upt5, dt5 = get_supertrend(data["high"], data["low"], data["close"], 39, 1)
     st6, upt6, dt6 = get_supertrend(data["high"], data["low"], data["close"], 42, 1) #change to 2
     st7, upt7, dt7 = get_supertrend(data["high"], data["low"], data["close"], 65, 1)
+
+
+    st23, upt3, dt3 = get_supertrend(data["high"], data["low"], data["close"], 40, 2)
+    st22, upt2, dt2 = get_supertrend(data["high"], data["low"], data["close"], 30, 2)
+    st20, upt, dt = get_supertrend(data["high"], data["low"], data["close"], 3, 3)
 
     # stdata = [164, 1]
     # st = superTrend(data, stdata[0], stdata[1])
@@ -130,6 +138,19 @@ def simulateCrypto(data, avgResult, avgInput):
     negPips = 0
     bullish = bearish = None
 
+
+
+    ema2 = calculate_200ema(data2, 200)
+    rsiValue2 = 5
+    dataRSI2 = get_rsi(data2["close"], rsiValue2)
+    macdData2 = get_macd(data2, 12, 26, 9)
+    data2 = get_stoch(ultimateData, 5, 3)
+    data2.drop(columns=["n_low", "%K", "%D"])
+    macd_data = macdData2.dropna()
+
+    # STOCH setup
+    data = data.dropna()
+
     try:
         for k in range(1, 101):
             print("K: " + str(k))
@@ -149,6 +170,9 @@ def simulateCrypto(data, avgResult, avgInput):
                 #     bearish = True
                 # else:
                 #     bearish = False
+
+
+                #----82% sucess----#
                 bullish = True
                 bearish = True
                 #by itself: 50%, with 80%
@@ -164,6 +188,35 @@ def simulateCrypto(data, avgResult, avgInput):
                 if previousBuy and previousSell:
                     previousSell = False
                     previousBuy = False
+                #------82% sucess: 5% of tradess----#
+
+
+
+                # if not previousBuy or not previousSell:
+                #     previousBuy, previousSell = optimizeResult(i, data2, ema2, dataRSI2, rsiValue2, macd_data, st23, st22, st20, st3)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                 # if cloud is under price:
                 #     Bullish
@@ -172,6 +225,11 @@ def simulateCrypto(data, avgResult, avgInput):
                 # the bigger the better
 
                 # dont buy if inside the cloud
+
+
+
+
+
 
                 
                 # if VWAPdata[i] > data['close'][i]+change and previousSell:
@@ -186,6 +244,9 @@ def simulateCrypto(data, avgResult, avgInput):
                 #     previousBuy = False
 
 
+
+
+
                 # # Supertrend
                 # if st10[i] > data['close'][i] and previousBuy:
                 #     previousBuy = True
@@ -195,6 +256,9 @@ def simulateCrypto(data, avgResult, avgInput):
                 #     previousSell = True
                 # else:
                 #     previousSell = False
+
+
+
 
                     
                 # # # if  
@@ -279,7 +343,7 @@ def simulateCrypto(data, avgResult, avgInput):
 
 
 if "__main__" == __name__:
-    f = open("documents/dataCryptoTest.txt", "r")
+    f = open("documents/dataCryptoTest5min.txt", "r")
     data = f.readlines()
     data = eval(data[0])
     f.close()

@@ -64,6 +64,7 @@ if "__main__" == __name__:
     stbuy2 = None
     stbuy3 = None
     stbuy4 = None
+    stbuy5 = None
     previousSignal = None
 
     lst = []
@@ -74,6 +75,7 @@ if "__main__" == __name__:
 
     # Loop to go through datapoints
     for j in range(100):
+        st5, upt5, dt5 = get_supertrend(data["high"], data["low"], data["close"], 1, 1)
         for i in range(41, len(data) - 41):
             # Check for previous decision: then check if correct or incorrect
             if previousBuy == True:
@@ -100,12 +102,6 @@ if "__main__" == __name__:
                     correctSell == False
                     # print("INNCORECT SELL: " + str(ADXvalue))
                 previousSell = False
-
-            ADXvalue = data["adx"][i]
-            stochastic_signal = getSTOCHdataSIM(data, 0, 8, i, 5, 3)  # 52 444
-            currentEMA = ema[i]
-            currentPrice = data["close"][i]
-            EMAresult = greaterThenCurrent(currentEMA, currentPrice)
 
             # if slope1 > 100 and slope2 > 0.07: # slope2 >, slope1  >
             #     macd_signal = "BUY"
@@ -144,22 +140,27 @@ if "__main__" == __name__:
                     stbuy4 = True
                 elif st4[i] < data["close"][i]:
                     stbuy4 = False
+                if st5[i] > data["close"][i]:
+                    stbuy5 = True
+                elif st5[i] < data["close"][i]:
+                    stbuy5 = False                
                 
-                if EMAresult != None:
-                    if (
-                        stbuy2 == True
-                        and stbuy3 == True
-                        and stbuy4 == True
-                        and EMAresult == True
-                    ):
-                        signalSuper = "BUY"
-                    if (
-                        stbuy2 == False
-                        and stbuy3 == False
-                        and stbuy4 == False
-                        and EMAresult == False
-                    ):
-                        signalSuper = "SELL"
+                if (
+                    stbuy2 == True
+                    and stbuy3 == True
+                    and stbuy4 == True
+                    and stbuy5 == True
+                    # and EMAresult == True
+                ):
+                    signalSuper = "BUY"
+                if (
+                    stbuy2 == False
+                    and stbuy3 == False
+                    and stbuy4 == False
+                    and stbuy5 == True
+                    # and EMAresult == False
+                ):
+                    signalSuper = "SELL"
 
                 if signalSuper == "BUY":
                     prevBuy = True
