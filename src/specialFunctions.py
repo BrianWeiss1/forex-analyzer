@@ -1,4 +1,4 @@
-import pyautogui
+# import pyautogui
 from datetime import datetime, timedelta
 import time
 import random
@@ -11,15 +11,15 @@ from src.testSpecial import formatDataset
 from src.testSupertrend import get_supertrend
 from src.testIchi import get_ichimoku
 
-def findLocation(wait):
-    time.sleep(wait)
-    print(pyautogui.position())
-def automaticBuy(buy=(1118, 387)):
-    pyautogui.click(buy)
-def automaticReset(automaticReset=(1459, 494)):
-    pyautogui.click(automaticReset)
-def automaticSell(sell=(1123, 462)):
-    pyautogui.click(sell)
+# def findLocation(wait):
+#     time.sleep(wait)
+#     print(pyautogui.position())
+# def automaticBuy(buy=(1118, 387)):
+#     pyautogui.click(buy)
+# def automaticReset(automaticReset=(1459, 494)):
+#     pyautogui.click(automaticReset)
+# def automaticSell(sell=(1123, 462)):
+#     pyautogui.click(sell)
 def checkTime(lastMin = -1):
     if lastMin == datetime.now().minute:
         return False, lastMin

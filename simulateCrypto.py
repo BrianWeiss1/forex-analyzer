@@ -336,7 +336,7 @@ def simulateCrypto(data, avgResult, avgInput):
                 pos = nuet = neg = 0
                 # print("Ratio: " + str(ratio))
                 if avgPips > bestAvgPips:
-                    bestAvgPips = avgPips-1200
+                    bestAvgPips = avgPips
                     bestAvgj = j
                     bestAvgk = k
                 if profilio > BestProfilio:
