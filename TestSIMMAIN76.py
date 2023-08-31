@@ -102,8 +102,8 @@ if "__main__" == __name__:
                 else:
                     neg += 1
                     # print("INNCORECT BUY: " + str(ADXvalue))
-                    previousBuy = False
                     correctBuy == False
+                previousBuy = False
             if previousSell == True:
                 if data["close"][i + n] > data["open"][i + n]:
                     pos += 1
@@ -183,12 +183,6 @@ if "__main__" == __name__:
                     prevSellSTOCH = False
                 else:
                     prevSellSTOCH = True
-             
-            # if prevBuy:
-            #     if dataRSI2[f"rsi_{rsiValue2}"][i] > j and ADXvalue > j: # <95, 47
-            #         prevBuySTOCH = False
-            #     else:
-            #         prevBuySTOCH = True
 
             # -----RSI--------#
             change = f"9.41"

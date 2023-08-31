@@ -205,20 +205,21 @@ def obtainResult(i, st, st2, st3, st4, st5, st6, st7, data, dataRSI, rsiValue):
 
 
 
-def optimizeResult(i, data, ema, dataRSI, rsiValue, macdData, st3, st2, st, st4):
-    # st5, upt5, dt5 = get_supertrend(data["high"], data["low"], data["close"], 1, 1)
-    #       POS/NEG RATIO: 3.4464285714285716
-    #       Percentage Correct: 77.51%
-    #       CANDLES: 6968
-    #       PERCENT OF TRADES: 7.33
-    #       1099400833.0625887
-    # 2: 20 3
-    # 3: 5 2
-    # 4: 1 1
+import random
+from src.testEMA import calculate_200ema, greaterThenCurrent
+from src.testMACD import get_macd
+from src.testADX import grabADX
+from src.testRSI import get_rsi
+from src.testSTOCH import get_stoch, getSTOCHdataSIM
+from src.testSpecial import formatDataset
+from src.testSupertrend import get_supertrend
+from src.testIchi import get_ichimoku
+
+def optimizeResult(i, data, ema, rsiValue, dataRSI, st3, st2, st, st4):
     previousBuy = False
     previousSell = False
-    correctBuy = True
-    correctSell = True
+    # correctBuy = True
+    # correctSell = True
     prevSellRSI = False
     prevBuyRSI = False
     contempent = False
@@ -250,33 +251,6 @@ def optimizeResult(i, data, ema, dataRSI, rsiValue, macdData, st3, st2, st, st4)
 
     n = 0
     length = difference = 0
-    if previousBuy == True:
-        if data["close"][i + n] < data["open"][i + n]:
-            pos += 1
-            correctBuy == True
-            # print("correct BUY: " + str(ADXvalue))
-        elif data["close"][i + n] == data["open"][i + n]:
-            nuet += 1
-        else:
-            neg += 1
-            # print("INNCORECT BUY: " + str(ADXvalue))
-            previousBuy = False
-            correctBuy == False
-    if previousSell == True:
-        if data["close"][i + n] > data["open"][i + n]:
-            pos += 1
-            # print("CORRECT SELL: " + str(ADXvalue))
-            correctSell == True
-        elif data["close"][i + n] == data["open"][i + n]:
-            nuet += 1
-        else:
-            neg += 1
-            correctSell == False
-            # print("INNCORECT SELL: " + str(ADXvalue))
-        previousSell = False
-
-    ADXvalue = data["adx"][i]
-    stochastic_signal = getSTOCHdataSIM(data, 0, 8, i, 5, 3)  # 52 444
     currentEMA = ema[i]
     currentPrice = data["close"][i]
     EMAresult = greaterThenCurrent(currentEMA, currentPrice)
@@ -334,14 +308,13 @@ def optimizeResult(i, data, ema, dataRSI, rsiValue, macdData, st3, st2, st, st4)
         return prevBuy, prevSell
 
     prevBuy, prevSell = SuperTrendEMA()
-    Dataset = [prevBuy, prevSell]
 
     if prevSell:
         if dataRSI[f"rsi_{rsiValue}"][i] > 36 and data["STOCHk_5_3_3"][i] > 36: # <95, 47
             prevSellSTOCH = False
         else:
             prevSellSTOCH = True
-        
+    
     # if prevBuy:
     #     if dataRSI2[f"rsi_{rsiValue2}"][i] > j and ADXvalue > j: # <95, 47
     #         prevBuySTOCH = False
@@ -359,17 +332,22 @@ def optimizeResult(i, data, ema, dataRSI, rsiValue, macdData, st3, st2, st, st4)
             dataRSI[f"rsi_{rsiValue}"][i] < 56 + changeNeg
             or dataRSI[f"rsi_{rsiValue}"][i] > 43 + change
         ):  # 45, 100
+            # previousBuy = False
             prevBuyRSI = False
             # continue
         else:
+            # previousBuy = True
             prevBuyRSI = True
     if prevSell:
         if (
             dataRSI[f"rsi_{rsiValue}"][i] < 56 + changeNeg
             or dataRSI[f"rsi_{rsiValue}"][i] > 43 + change
         ):  # 47
+            # previousSell = False
             prevSellRSI = False
+            # continue
         else:
+            # previousSell = True
             prevSellRSI = True
 
     #compareitivness
@@ -407,4 +385,5 @@ def optimizeResult(i, data, ema, dataRSI, rsiValue, macdData, st3, st2, st, st4)
         previousBuy = False
         previousSell = False
         contempent = True
+
     return previousBuy, previousSell
