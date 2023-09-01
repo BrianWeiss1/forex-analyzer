@@ -28,14 +28,14 @@ def simulateCrypto(data, avgResult, avgInput):
     # dataRSI2 = get_rsi(data["close"], 9)
     # macdData = get_macd(data, 12, 26, 9)
     # STOCHRSI = get_STOCHRSI(data, 14, 3, 3)
-    rsiValue = 8
+    rsiValue = 147 #8, 147
     dataRSI = get_rsi(data["close"], rsiValue)
-    data = get_stoch(ultimateData, 5, 3)
+
     totalPips = 0
     countPips = 0
     bestAvgPips = 0
     # print(dataRSI)
-
+    data = get_stoch(ultimateData, 5, 3)
     # MACD setup
     # macd_data = macdData.dropna()
     # macd_signal = ""
@@ -117,6 +117,8 @@ def simulateCrypto(data, avgResult, avgInput):
     # stbuy6 = None
     # stbuy7 = None
     previousSignal = None
+    bestAvgj = -1
+    bestAvgk = -1
 
     lst = []
     current = {}
@@ -163,52 +165,49 @@ def simulateCrypto(data, avgResult, avgInput):
     # st22, upt2, dt2 = get_supertrend(data["high"], data["low"], data["close"], 30, 2)
     # st20, upt, dt = get_supertrend(data["high"], data["low"], data["close"], 3, 3)
     # st42, upt4, dt4 = get_supertrend(data["high"], data["low"], data["close"], 1, 1)
+#RSI 8
+# Percentage Correct: 83.12%
+# CANDLES: 19985
+# PERCENT OF TRADES: 5.78
+# protfilio: 12.598872318472893
+# AVERAGE PIPS: 1257.955452110898
+#RSI 147
+
+    ichimoku = get_ichimoku(data, 7, 15) # 7, 15
+
+
 
     try:
-        # for k in range(1, 101):
-        print("K: " + str(k))
         for k in range(1, 101):
-            for j in range(1, 201):
-                # for j in range(1, 100):
-                ichimoku = get_ichimoku(data, j, k)
-                n = 0
-                for i in range(10, len(data) - 10):
-                    
-                    pos, nuet, neg, profilio, totalPips, countPips, posPips, countPos, negPips, countNeg = findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg, profilio, totalPips, countPips, posPips, countPos, negPips, countNeg)
-                    previousSell = previousBuy = False
-                    previousBuy, previousSell = obtainResult(i, st, st2, st3, st4, st5, st6, st7, data, dataRSI, rsiValue)
+            print("K: " + str(k))
+            n = 0
+            for i in range(102, len(data) - 102):
+                
+                pos, nuet, neg, profilio, totalPips, countPips, posPips, countPos, negPips, countNeg = findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg, profilio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+                previousSell = previousBuy = False
+                previousBuy, previousSell = obtainResult(i, st, st2, st3, st4, st5, st6, st7, data, dataRSI, rsiValue)
 
-                    # if ichimoku['a'][i] > ichimoku['b'][i]:
-                    #     bullish = True
-                    # else:
-                    #     bullish = False
-                    # if ichimoku['a'][i] < ichimoku['b'][i]:
-                    #     bearish = True
-                    # else:
-                    #     bearish = False
-
-
-                    #----82% sucess----#
-                    bullish = True
-                    bearish = True
-                    #by itself: 50%, with 80%
-                    if data['close'][i] > ichimoku['cover'][i] and data['close'][i] > ichimoku['base'][i] and bullish and previousBuy:
-                        previousBuy = True
-                    else:
-                        previousBuy = False
-                    if data['close'][i] < ichimoku['cover'][i] and data['close'][i] < ichimoku['base'][i] and bearish and previousSell:
-                        previousSell = True
-                    else:
-                        previousSell = False
-                    
-                    if previousBuy and previousSell:
-                        previousSell = False
-                        previousBuy = False
-                    #------82% sucess: 5% of tradess----#
+                #----82% sucess----#
+                bullish = True
+                bearish = True
+                #by itself: 50%, with 80%
+                if data['close'][i] > ichimoku['cover'][i] and data['close'][i] > ichimoku['base'][i] and bullish and previousBuy:
+                    previousBuy = True
+                else:
+                    previousBuy = False
+                if data['close'][i] < ichimoku['cover'][i] and data['close'][i] < ichimoku['base'][i] and bearish and previousSell:
+                    previousSell = True
+                else:
+                    previousSell = False
+                
+                if previousBuy and previousSell:
+                    previousSell = False
+                    previousBuy = False
+                #------83% sucess: 7% of tradess----#
 
 
 
-                    # previousBuy, previousSell = optimizeResult(i, data2, ema2, rsiValue2, dataRSI2, st32, st22, st20, st42)
+                # previousBuy, previousSell = optimizeResult(i, data2, ema2, rsiValue2, dataRSI2, st32, st22, st20, st42)
 
 
 
@@ -233,127 +232,130 @@ def simulateCrypto(data, avgResult, avgInput):
 
 
 
-                    # if cloud is under price:
-                    #     Bullish
-                    # if cloud is overprice:
-                    #     sellish
-                    # the bigger the better
+                # if cloud is under price:
+                #     Bullish
+                # if cloud is overprice:
+                #     sellish
+                # the bigger the better
 
-                    # dont buy if inside the cloud
-
-
-
-
-
-
-                    
-                    # if VWAPdata[i] > data['close'][i]+change and previousSell:
-                    #     #only sell
-                    #     previousSell = True
-                    # else:
-                    #     previousSell = False
-                    # if VWAPdata[i] + change < data['close'][i] and previousBuy:
-                    #     #only buy
-                    #     previousBuy = True
-                    # else:
-                    #     previousBuy = False
+                # dont buy if inside the cloud
 
 
 
 
 
-                    # # Supertrend
-                    # if st10[i] > data['close'][i] and previousBuy:
-                    #     previousBuy = True
-                    # else:
-                    #     previousBuy = False
-                    # if st10[i] < data['close'][i] and previousSell:
-                    #     previousSell = True
-                    # else:
-                    #     previousSell = False
+
+                
+                # if VWAPdata[i] > data['close'][i]+change and previousSell:
+                #     #only sell
+                #     previousSell = True
+                # else:
+                #     previousSell = False
+                # if VWAPdata[i] + change < data['close'][i] and previousBuy:
+                #     #only buy
+                #     previousBuy = True
+                # else:
+                #     previousBuy = False
 
 
 
 
-                        
-                    # # # if  
-                    # def funct(num, i, VWAP5):
-                    #     if VWAP5[i] > data['close'][i]+num:
-                    #         prevSell = True
-                    #     else:
-                    #         prevSell = False
-                    #     if VWAPdata[i] + change < data['close'][i] and previousBuy:
-                    #         #only buy
-                    #         prevBuy = True
-                    #     else:
-                    #         prevBuy = False
-                    #     return prevBuy, prevSell
-                    # def callAllFunct(lst, i, VWAP5):
-                    #     for idsjnewukku in range(len(lst)):
-                    #         data = funct(lst[idsjnewukku], i, VWAP5)
-                    #         if data[0] == True:
-                    #             return {"BUY": True, "SELL": False}
-                    #         if data[1] == True:
-                    #             return {"BUY": False, "SELL": True}
-                    #     return {"BUY": False, "SELL": False}
-                    # lstcount = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
-                    # value = callAllFunct(lstcount, i, VWAP5)
-                    # if value['BUY']:
-                    #     previousBuy = True
-                    # elif value['SELL']:
-                    #     previousSell = True
+
+                # # Supertrend
+                # if st10[i] > data['close'][i] and previousBuy:
+                #     previousBuy = True
+                # else:
+                #     previousBuy = False
+                # if st10[i] < data['close'][i] and previousSell:
+                #     previousSell = True
+                # else:
+                #     previousSell = False
+
+
+
 
                     
-                        
-                try:
-                    print(pos, nuet, neg)
-                    print("POS/NEG RATIO: " + str(pos / neg))
-                    print(
-                        "Percentage Correct: " + str(round((pos / (neg + pos)) * 100, 2)) + "%"
-                    )
-                    print("CANDLES: " + str(len(data) - 2))
-                    print(
-                        "PERCENT OF TRADES: "
-                        + str(round(((pos + nuet + neg) / len(data)) * 100, 2))
-                    )
-                    print("protfilio: " + str(profilio))
-                    avgPips = totalPips/countPips
-                    print("AVERAGE PIPS: " + str(totalPips/countPips))
-                    print("POSITIVE PIPS: " + str(posPips/(pos)))
-                    print("NEGITIVE PIPS: " + str(negPips/(neg)))
+                # # # if  
+                # def funct(num, i, VWAP5):
+                #     if VWAP5[i] > data['close'][i]+num:
+                #         prevSell = True
+                #     else:
+                #         prevSell = False
+                #     if VWAPdata[i] + change < data['close'][i] and previousBuy:
+                #         #only buy
+                #         prevBuy = True
+                #     else:
+                #         prevBuy = False
+                #     return prevBuy, prevSell
+                # def callAllFunct(lst, i, VWAP5):
+                #     for idsjnewukku in range(len(lst)):
+                #         data = funct(lst[idsjnewukku], i, VWAP5)
+                #         if data[0] == True:
+                #             return {"BUY": True, "SELL": False}
+                #         if data[1] == True:
+                #             return {"BUY": False, "SELL": True}
+                #     return {"BUY": False, "SELL": False}
+                # lstcount = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
+                # value = callAllFunct(lstcount, i, VWAP5)
+                # if value['BUY']:
+                #     previousBuy = True
+                # elif value['SELL']:
+                #     previousSell = True
 
+            percentOfTrades = round(((pos + nuet + neg) / len(data)) * 100, 2)
                     
-                except ZeroDivisionError:
-                    print("ERROR GO BRRRR")
-                # ------Profilio-----
+            try:
+                print(pos, nuet, neg)
+                print("POS/NEG RATIO: " + str(pos / neg))
+                print(
+                    "Percentage Correct: " + str(round((pos / (neg + pos)) * 100, 2)) + "%"
+                )
+                print("CANDLES: " + str(len(data) - 2))
+                print(
+                    "PERCENT OF TRADES: "
+                    + str(percentOfTrades)
+                )
+                print("protfilio: " + str(profilio))
+                avgPips = totalPips/countPips
+                print("AVERAGE PIPS: " + str(totalPips/countPips))
+                print("POSITIVE PIPS: " + str(posPips/(pos)))
+                print("NEGITIVE PIPS: " + str(negPips/(neg)))
 
-                lst.append(profilio)
-                # print(pos / (neg + pos))
-                # try:
-                #     ratio = (100-round((pos / (neg + pos)) * 100, 2))/(100-round(((pos + nuet + neg) / len(data)) * 100, 2))*100
-                # except ZeroDivisionError:
-                #     ratio = 0
-                pos = nuet = neg = 0
+                
+            except ZeroDivisionError:
+                print("ERROR GO BRRRR")
+            # ------Profilio-----
+
+            lst.append(profilio)
+            # print(pos / (neg + pos))
+            # try:
+            #     ratio = (100-round((pos / (neg + pos)) * 100, 2))/(100-round(((pos + nuet + neg) / len(data)) * 100, 2))*100
+            # except ZeroDivisionError:
+            #     ratio = 0
+            pos = nuet = neg = 0
+            if avgPips > 1200:
+                avgPips -= 1200
+                avgPips = avgPips * percentOfTrades
                 # print("Ratio: " + str(ratio))
                 if avgPips > bestAvgPips:
                     bestAvgPips = avgPips
                     bestAvgj = j
                     bestAvgk = k
-                if profilio > BestProfilio:
-                    BestProfilio = profilio
-                    Bestj = j
-                    Bestk = k
-                elif profilio < WorseProfilio:
-                    WorseProfilio = profilio
-                    worstj = j
-                    worstk = k
-                profilio = 10
-                negPips = 0
-                posPips = 0
-                totalPips = 0
-                countPips = 0
-                countPos = 0
-                countNeg = 0
+            if profilio > BestProfilio:
+                BestProfilio = profilio
+                Bestj = j
+                Bestk = k
+            elif profilio < WorseProfilio:
+                WorseProfilio = profilio
+                worstj = j
+                worstk = k
+            profilio = 10
+            negPips = 0
+            posPips = 0
+            totalPips = 0
+            countPips = 0
+            countPos = 0
+            countNeg = 0
         #SEPERATE WHEN TABBING
         return lst, BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk
     except KeyboardInterrupt:
