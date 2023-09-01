@@ -1,6 +1,5 @@
 
 # Update data
-from TestSIMMAIN76 import innit2
 from src.simulate import findPos
 from src.VWAP import get_VWAP
 from src.specialFunctions import obtainResult, optimizeResult
@@ -161,11 +160,6 @@ def simulateCrypto(data, avgResult, avgInput):
     # STOCH setup
     data = data.dropna()
 
-    # # Supertrend setup
-    # st32, upt3, dt3 = get_supertrend(data["high"], data["low"], data["close"], 40, 2)
-    # st22, upt2, dt2 = get_supertrend(data["high"], data["low"], data["close"], 30, 2)
-    # st20, upt, dt = get_supertrend(data["high"], data["low"], data["close"], 3, 3)
-    # st42, upt4, dt4 = get_supertrend(data["high"], data["low"], data["close"], 1, 1)
 #RSI 8
 # Percentage Correct: 83.12%
 # CANDLES: 19985
@@ -208,7 +202,6 @@ def simulateCrypto(data, avgResult, avgInput):
     st400, upt400, dt400 = get_supertrend(data["high"], data["low"], data["close"], 1, 1)
     # st5, upt5, dt5 = get_supertrend(data["high"], data["low"], data["close"], 1, 1)
 
-
     try:
         for k in range(1, 101):
             print("K: " + str(k))
@@ -220,27 +213,35 @@ def simulateCrypto(data, avgResult, avgInput):
                 previousBuy, previousSell = obtainResult(i, st, st2, st3, st4, st5, st6, st7, data, dataRSI, rsiValue)
 
                 #----82% sucess----#
-                # bullish = True
-                # bearish = True
-                # #by itself: 50%, with 80%
-                # if data['close'][i] > ichimoku['cover'][i] and data['close'][i] > ichimoku['base'][i] and bullish and previousBuy:
-                #     previousBuy = True
-                # else:
-                #     previousBuy = False
-                # if data['close'][i] < ichimoku['cover'][i] and data['close'][i] < ichimoku['base'][i] and bearish and previousSell:
-                #     previousSell = True
-                # else:
-                #     previousSell = False
+                bullish = True
+                bearish = True
+                #by itself: 50%, with 80%
+                if data['close'][i] > ichimoku['cover'][i] and data['close'][i] > ichimoku['base'][i] and bullish and previousBuy:
+                    previousBuy = True
+                else:
+                    previousBuy = False
+                if data['close'][i] < ichimoku['cover'][i] and data['close'][i] < ichimoku['base'][i] and bearish and previousSell:
+                    previousSell = True
+                else:
+                    previousSell = False
                 
-                # if previousBuy and previousSell:
-                #     previousSell = False
-                #     previousBuy = False
+                if previousBuy and previousSell:
+                    previousSell = False
+                    previousBuy = False
                 #------83% sucess: 7% of tradess----#
 
 
 
-                previousBuy, previousSell = innit2(i, data2, ema2, rsiValue3, dataRSI4, macdData1, st300, st200, st00, st400)
-                
+                prevBuy, prevSell = optimizeResult(i, data2, ema2, rsiValue3, dataRSI4, macdData1, st300, st200, st00, st400)
+                if prevBuy and previousSell:
+                    previousSell = False
+                if prevSell and previousBuy:
+                    previousBuy = False
+                if not previousBuy or not previousSell:
+                    if prevBuy:
+                        previousBuy = True
+                    if prevSell:
+                        previousSell = True
 
 
 

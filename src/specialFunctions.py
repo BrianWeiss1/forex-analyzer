@@ -215,11 +215,38 @@ from src.testSpecial import formatDataset
 from src.testSupertrend import get_supertrend
 from src.testIchi import get_ichimoku
 
-def optimizeResult(i, data, ema, rsiValue, dataRSI, st3, st2, st, st4):
+def optimizeResult(i, data, ema, rsiValue, dataRSI, macdData, st3, st2, st, st4):
+
+    # # Update data
+    # data = grabADX(data, 14)
+    # ema = calculate_200ema(data, 200)
+    # rsiValue = 10
+    # dataRSI = get_rsi(data["close"], rsiValue)
+    # rsiValue2 = 5
+    # dataRSI2 = get_rsi(data["close"], rsiValue2)
+    # macdData = get_macd(data, 12, 26, 9)
+    # data = get_stoch(ultimateData, 5, 3)
+    # data.drop(columns=["n_low", "%K", "%D"])
+    # # print(data)
+
+    # # print(dataRSI)
+
+    # # MACD setup
+    # macd_data = macdData.dropna()
+    # macd_signal = ""
+
+    # # STOCH setup
+    # data = data.dropna()
+
+    # # Supertrend setup
+    # st3, upt3, dt3 = get_supertrend(data["high"], data["low"], data["close"], 40, 2)
+    # st2, upt2, dt2 = get_supertrend(data["high"], data["low"], data["close"], 30, 2)
+    # st, upt, dt = get_supertrend(data["high"], data["low"], data["close"], 3, 3)
+    # st4, upt4, dt4 = get_supertrend(data["high"], data["low"], data["close"], 1, 1)
+    # # st5, upt5, dt5 = get_supertrend(data["high"], data["low"], data["close"], 1, 1)
+
     previousBuy = False
     previousSell = False
-    # correctBuy = True
-    # correctSell = True
     prevSellRSI = False
     prevBuyRSI = False
     contempent = False
@@ -251,6 +278,10 @@ def optimizeResult(i, data, ema, rsiValue, dataRSI, st3, st2, st, st4):
 
     n = 0
     length = difference = 0
+
+    # ADXvalue = data["adx"][i]
+    # print(data)
+    # stochastic_signal = getSTOCHdataSIM(data, 0, 8, i, 5, 3)  # 52 444
     currentEMA = ema[i]
     currentPrice = data["close"][i]
     EMAresult = greaterThenCurrent(currentEMA, currentPrice)
@@ -308,13 +339,14 @@ def optimizeResult(i, data, ema, rsiValue, dataRSI, st3, st2, st, st4):
         return prevBuy, prevSell
 
     prevBuy, prevSell = SuperTrendEMA()
+    Dataset = [prevBuy, prevSell]
 
     if prevSell:
         if dataRSI[f"rsi_{rsiValue}"][i] > 36 and data["STOCHk_5_3_3"][i] > 36: # <95, 47
             prevSellSTOCH = False
         else:
             prevSellSTOCH = True
-    
+        
     # if prevBuy:
     #     if dataRSI2[f"rsi_{rsiValue2}"][i] > j and ADXvalue > j: # <95, 47
     #         prevBuySTOCH = False
@@ -385,5 +417,4 @@ def optimizeResult(i, data, ema, rsiValue, dataRSI, st3, st2, st, st4):
         previousBuy = False
         previousSell = False
         contempent = True
-
     return previousBuy, previousSell

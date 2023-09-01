@@ -1,5 +1,6 @@
 
 # Update data
+from src.WMA import get_WMA
 from src.simulate import findPos
 from src.VWAP import get_VWAP
 from src.specialFunctions import obtainResult, optimizeResult
@@ -21,6 +22,8 @@ def simulateCrypto(data, avgResult, avgInput):
     ultimateData = data
     data2 = data
     data = grabADX(data, 14)
+    WMA = get_WMA(data, 9)
+    print(WMA)
     # print(data)
     # ema = calculate_200ema(data, 200)
     VWAPdata = get_VWAP(data, 5)
@@ -55,35 +58,6 @@ def simulateCrypto(data, avgResult, avgInput):
     st7, upt7, dt7 = get_supertrend(data["high"], data["low"], data["close"], 65, 1)
 
 
-    st23, upt3, dt3 = get_supertrend(data["high"], data["low"], data["close"], 40, 2)
-    st22, upt2, dt2 = get_supertrend(data["high"], data["low"], data["close"], 30, 2)
-    st20, upt, dt = get_supertrend(data["high"], data["low"], data["close"], 3, 3)
-
-    # stdata = [164, 1]
-    # st = superTrend(data, stdata[0], stdata[1])
-    # df_filtered = st[[f'SUPERT_{stdata[0]}_{stdata[1]}.0']]
-    # st = df_filtered[f'SUPERT_{stdata[0]}_{stdata[1]}.0']
-    # print(st)
-
-
-    # Average Result: 1568010824.655752
-    # Median Result: 28360590.612781316
-    # Best Profilio: 162631407085.49048
-
-    # Average Result: 3952144693.0374
-    # Median Result: 5280123.050841998
-    # Best Profilio: 432493562718.766
-
-
-
-    #       POS/NEG RATIO: 3.4464285714285716
-    #       Percentage Correct: 77.51%
-    #       CANDLES: 6968
-    #       PERCENT OF TRADES: 7.33
-    #       1099400833.0625887
-    # 2: 20 3
-    # 3: 5 2
-    # 4: 1 1
     k = -1
     previousBuy = False
     previousSell = False
@@ -166,6 +140,20 @@ def simulateCrypto(data, avgResult, avgInput):
                 previousSell = previousBuy = False
                 previousBuy, previousSell = obtainResult(i, st, st2, st3, st4, st5, st6, st7, data, dataRSI, rsiValue)
                     
+
+                if WMA[i] > data['close'][i] and previousSell:
+                    previousSell = True
+                else:
+                    previousSell = False
+                if WMA[i] < data['close'][i] and previousBuy:
+                    previousBuy = True
+                else:
+                    previousBuy = False
+                
+        
+
+
+
             try:
                 percentOfTrades = round(((pos + nuet + neg) / len(data)) * 100, 2)
                 print(pos, nuet, neg)
