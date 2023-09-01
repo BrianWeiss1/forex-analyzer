@@ -152,8 +152,8 @@ def simulate(data, avgResult, avgInput):
 
 def findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg, profilio, totalPips, countPips, posPips, countPos, countNeg, negPips):
     betPercent = 0.1
-    multiplierBuy = 1.2
-    multiplierSell = 0.8
+    multiplierBuy = 1.000500
+    multiplierSell = 0.99980
 
     p = 0.8146
     q = 1-p

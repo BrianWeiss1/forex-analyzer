@@ -1,8 +1,9 @@
 
 # Update data
+from TestSIMMAIN76 import innit2
 from src.simulate import findPos
 from src.VWAP import get_VWAP
-from src.specialFunctions import obtainResult
+from src.specialFunctions import obtainResult, optimizeResult
 from src.testADX import grabADX
 from src.testAroon import aroon
 from src.testRSI import get_rsi
@@ -13,25 +14,29 @@ import sys
 from src.testSTOCHRSI import get_STOCHRSI
 from src.testIchi import get_ichimoku
 from src.testSpecial import formatDataset
+from src.testEMA import calculate_200ema
+from src.testMACD import get_macd
 
 def simulateCrypto(data, avgResult, avgInput):
     
     ultimateData = data
+    data2 = data
     data = grabADX(data, 14)
     # print(data)
     # ema = calculate_200ema(data, 200)
     VWAPdata = get_VWAP(data, 5)
-    # aroonData = aroon(data, 14)
+    # aroonData = aroon(data, 14)f
     # dataRSI2 = get_rsi(data["close"], 9)
     # macdData = get_macd(data, 12, 26, 9)
     # STOCHRSI = get_STOCHRSI(data, 14, 3, 3)
-    rsiValue = 8
+    rsiValue = 147 #8, 147
     dataRSI = get_rsi(data["close"], rsiValue)
-    data = get_stoch(ultimateData, 5, 3)
+
     totalPips = 0
     countPips = 0
+    bestAvgPips = 0
     # print(dataRSI)
-
+    data = get_stoch(ultimateData, 5, 3)
     # MACD setup
     # macd_data = macdData.dropna()
     # macd_signal = ""
@@ -49,6 +54,11 @@ def simulateCrypto(data, avgResult, avgInput):
     st5, upt5, dt5 = get_supertrend(data["high"], data["low"], data["close"], 39, 1)
     st6, upt6, dt6 = get_supertrend(data["high"], data["low"], data["close"], 42, 1) #change to 2
     st7, upt7, dt7 = get_supertrend(data["high"], data["low"], data["close"], 65, 1)
+
+
+    st23, upt3, dt3 = get_supertrend(data["high"], data["low"], data["close"], 40, 2)
+    st22, upt2, dt2 = get_supertrend(data["high"], data["low"], data["close"], 30, 2)
+    st20, upt, dt = get_supertrend(data["high"], data["low"], data["close"], 3, 3)
 
     # stdata = [164, 1]
     # st = superTrend(data, stdata[0], stdata[1])
@@ -75,6 +85,7 @@ def simulateCrypto(data, avgResult, avgInput):
     # 2: 20 3
     # 3: 5 2
     # 4: 1 1
+    k = -1
     previousBuy = False
     previousSell = False
     correctBuy = True
@@ -107,6 +118,8 @@ def simulateCrypto(data, avgResult, avgInput):
     # stbuy6 = None
     # stbuy7 = None
     previousSignal = None
+    bestAvgj = -1
+    bestAvgk = -1
 
     lst = []
     current = {}
@@ -117,7 +130,6 @@ def simulateCrypto(data, avgResult, avgInput):
     # Loop to go through datapoints
     # for j in range(1, 101):
     # for j in range(1, 101):
-    ichimoku = get_ichimoku(data)
 
     # st11 = superTrend(data, 6, 1)
     VWAPdata = get_VWAP(data, 1)
@@ -128,38 +140,142 @@ def simulateCrypto(data, avgResult, avgInput):
     countNeg = 0
     posPips = 0
     negPips = 0
+    bullish = bearish = None
+
+
+    data2 = grabADX(data2, 14)
+    ema2 = calculate_200ema(data2, 200)
+    rsiValue2 = 10
+    dataRSI2 = get_rsi(data2["close"], rsiValue2)
+    macdData2 = get_macd(data2, 12, 26, 9)
+    data2 = get_stoch(ultimateData, 5, 3)
+    data2.drop(columns=["n_low", "%K", "%D"])
+    # print(data)
+
+    # print(dataRSI)
+
+    # MACD setup
+    macd_data = macdData2.dropna()
+    macd_signal = ""
+
+    # STOCH setup
+    data = data.dropna()
+
+    # # Supertrend setup
+    # st32, upt3, dt3 = get_supertrend(data["high"], data["low"], data["close"], 40, 2)
+    # st22, upt2, dt2 = get_supertrend(data["high"], data["low"], data["close"], 30, 2)
+    # st20, upt, dt = get_supertrend(data["high"], data["low"], data["close"], 3, 3)
+    # st42, upt4, dt4 = get_supertrend(data["high"], data["low"], data["close"], 1, 1)
+#RSI 8
+# Percentage Correct: 83.12%
+# CANDLES: 19985
+# PERCENT OF TRADES: 5.78
+# protfilio: 12.598872318472893
+# AVERAGE PIPS: 1257.955452110898
+#RSI 147
+
+    ichimoku = get_ichimoku(data, 7, 15) # 7, 15
+
+
+
+    ultimateData2 = data2
+
+    # Update data
+    data2 = grabADX(data2, 14)
+    ema2 = calculate_200ema(data2, 200)
+    rsiValue3 = 10
+    dataRSI4 = get_rsi(data2["close"], rsiValue3)
+    rsiValue4 = 5
+    dataRSI3 = get_rsi(data2["close"], rsiValue4)
+    macdData1 = get_macd(data2, 12, 26, 9)
+    data2 = get_stoch(ultimateData, 5, 3)
+    data2.drop(columns=["n_low", "%K", "%D"])
+    # print(data2)
+
+    # print(dataRSI)
+
+    # MACD setup
+    macdData1 = macdData1.dropna()
+
+    # STOCH setup
+    data2 = data.dropna()
+    print(data2)
+
+    # Supertrend setup
+    st300, upt300, dt300 = get_supertrend(data["high"], data["low"], data["close"], 40, 2)
+    st200, upt200, dt200 = get_supertrend(data["high"], data["low"], data["close"], 30, 2)
+    st00, upt00, dt00 = get_supertrend(data["high"], data["low"], data["close"], 3, 3)
+    st400, upt400, dt400 = get_supertrend(data["high"], data["low"], data["close"], 1, 1)
+    # st5, upt5, dt5 = get_supertrend(data["high"], data["low"], data["close"], 1, 1)
+
 
     try:
         for k in range(1, 101):
             print("K: " + str(k))
-            # for j in range(1, 100):
             n = 0
-            for i in range(10, len(data) - 10):
+            for i in range(102, len(data) - 102):
                 
                 pos, nuet, neg, profilio, totalPips, countPips, posPips, countPos, negPips, countNeg = findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg, profilio, totalPips, countPips, posPips, countPos, negPips, countNeg)
                 previousSell = previousBuy = False
                 previousBuy, previousSell = obtainResult(i, st, st2, st3, st4, st5, st6, st7, data, dataRSI, rsiValue)
 
-                #by itself: 50%, with 80%
-                if data['close'][i] > ichimoku['cover'][i] and data['close'][i] > ichimoku['base'][i] and previousBuy:
-                    previousBuy = True
-                else:
-                    previousBuy = False
-                if data['close'][i] < ichimoku['cover'][i] and data['close'][i] < ichimoku['base'][i] and previousSell:
-                    previousSell = True
-                else:
-                    previousSell = False
-                if previousBuy and previousSell:
-                    previousSell = False
-                    previousBuy = False
+                #----82% sucess----#
+                # bullish = True
+                # bearish = True
+                # #by itself: 50%, with 80%
+                # if data['close'][i] > ichimoku['cover'][i] and data['close'][i] > ichimoku['base'][i] and bullish and previousBuy:
+                #     previousBuy = True
+                # else:
+                #     previousBuy = False
+                # if data['close'][i] < ichimoku['cover'][i] and data['close'][i] < ichimoku['base'][i] and bearish and previousSell:
+                #     previousSell = True
+                # else:
+                #     previousSell = False
+                
+                # if previousBuy and previousSell:
+                #     previousSell = False
+                #     previousBuy = False
+                #------83% sucess: 7% of tradess----#
+
+
+
+                previousBuy, previousSell = innit2(i, data2, ema2, rsiValue3, dataRSI4, macdData1, st300, st200, st00, st400)
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 # if cloud is under price:
                 #     Bullish
                 # if cloud is overprice:
                 #     sellish
                 # the bigger the better
 
-
                 # dont buy if inside the cloud
+
+
+
+
+
 
                 
                 # if VWAPdata[i] > data['close'][i]+change and previousSell:
@@ -174,6 +290,9 @@ def simulateCrypto(data, avgResult, avgInput):
                 #     previousBuy = False
 
 
+
+
+
                 # # Supertrend
                 # if st10[i] > data['close'][i] and previousBuy:
                 #     previousBuy = True
@@ -183,6 +302,9 @@ def simulateCrypto(data, avgResult, avgInput):
                 #     previousSell = True
                 # else:
                 #     previousSell = False
+
+
+
 
                     
                 # # # if  
@@ -212,7 +334,7 @@ def simulateCrypto(data, avgResult, avgInput):
                 # elif value['SELL']:
                 #     previousSell = True
 
-                
+            percentOfTrades = round(((pos + nuet + neg) / len(data)) * 100, 2)
                     
             try:
                 print(pos, nuet, neg)
@@ -223,9 +345,10 @@ def simulateCrypto(data, avgResult, avgInput):
                 print("CANDLES: " + str(len(data) - 2))
                 print(
                     "PERCENT OF TRADES: "
-                    + str(round(((pos + nuet + neg) / len(data)) * 100, 2))
+                    + str(percentOfTrades)
                 )
                 print("protfilio: " + str(profilio))
+                avgPips = totalPips/countPips
                 print("AVERAGE PIPS: " + str(totalPips/countPips))
                 print("POSITIVE PIPS: " + str(posPips/(pos)))
                 print("NEGITIVE PIPS: " + str(negPips/(neg)))
@@ -242,7 +365,14 @@ def simulateCrypto(data, avgResult, avgInput):
             # except ZeroDivisionError:
             #     ratio = 0
             pos = nuet = neg = 0
-            # print("Ratio: " + str(ratio))
+            if avgPips > 1200:
+                avgPips -= 1200
+                avgPips = avgPips * percentOfTrades
+                # print("Ratio: " + str(ratio))
+                if avgPips > bestAvgPips:
+                    bestAvgPips = avgPips
+                    bestAvgj = j
+                    bestAvgk = k
             if profilio > BestProfilio:
                 BestProfilio = profilio
                 Bestj = j
@@ -259,11 +389,16 @@ def simulateCrypto(data, avgResult, avgInput):
             countPos = 0
             countNeg = 0
         #SEPERATE WHEN TABBING
-        return lst, BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj
+        return lst, BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk
     except KeyboardInterrupt:
         print("BEST PROFILIO: " + str(BestProfilio) + " must be > 66mil")
         print("BEST K: " + str(k))
         print("BEST J: " + str(j))
+        print("\n")
+        print("BestAVGPips: " + str(bestAvgPips))
+        print("K: " +str(bestAvgk))
+        print("J: " + str(bestAvgj))
+
 
 
 if "__main__" == __name__:
@@ -274,7 +409,7 @@ if "__main__" == __name__:
     data = formatDataset(data)
     # print(data)
     
-    lst, BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj = simulateCrypto(data, 1.5, 0.1)
+    lst, BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk = simulateCrypto(data, 1.5, 0.1)
     #720mi
     # 77mil
     # 200bil
@@ -296,8 +431,13 @@ if "__main__" == __name__:
         middle_right = n // 2
         middle_left = middle_right - 1
         median = (sorted_arr[middle_left] + sorted_arr[middle_right]) / 2
+    print("BestAVGPips: " + str(bestAvgPips))
+    print("K: " +str(bestAvgk))
+    print("J: " + str(bestAvgj))
 
-    
+
+
+    # BestAVGPips*percentOfTrades
     print("\n")
     print("Average Result: " + str(average))
     print("Median Result: " + str(median))
