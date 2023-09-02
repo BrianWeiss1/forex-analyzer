@@ -22,11 +22,9 @@ def simulateCrypto(data, avgResult, avgInput):
     ultimateData = data
     data2 = data
     data = grabADX(data, 14)
-    WMA = get_WMA(data, 9)
-    print(WMA)
     # print(data)
     # ema = calculate_200ema(data, 200)
-    VWAPdata = get_VWAP(data, 5)
+    # VWAPdata = get_VWAP(data, 5)
     # aroonData = aroon(data, 14)f
     # dataRSI2 = get_rsi(data["close"], 9)
     # macdData = get_macd(data, 12, 26, 9)
@@ -99,7 +97,7 @@ def simulateCrypto(data, avgResult, avgInput):
 
     n = 0
     length = difference = 0
-    VWAP5 = get_VWAP(data, 5)
+    # VWAP5 = get_VWAP(data, 5)
     # Loop to go through datapoints
     # for j in range(1, 101):
     # for j in range(1, 101):
@@ -121,6 +119,7 @@ def simulateCrypto(data, avgResult, avgInput):
     macdData2 = get_macd(data2, 12, 26, 9)
     data2 = get_stoch(ultimateData, 5, 3)
     data2.drop(columns=["n_low", "%K", "%D"])
+    avgPips = 0
 
     macd_data = macdData2.dropna()
     macd_signal = ""
@@ -129,15 +128,16 @@ def simulateCrypto(data, avgResult, avgInput):
     data = data.dropna()
 
 
+    WMA = get_WMA(data, 11)
 
     try:
-        for k in range(1, 101):
+        for k in range(2, 101):
             print("K: " + str(k))
             n = 0
             for i in range(102, len(data) - 102):
                 
                 pos, nuet, neg, profilio, totalPips, countPips, posPips, countPos, negPips, countNeg = findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg, profilio, totalPips, countPips, posPips, countPos, negPips, countNeg)
-                previousSell = previousBuy = False
+                previousSell = previousBuy = True
                 previousBuy, previousSell = obtainResult(i, st, st2, st3, st4, st5, st6, st7, data, dataRSI, rsiValue)
                     
 
@@ -149,7 +149,10 @@ def simulateCrypto(data, avgResult, avgInput):
                     previousBuy = True
                 else:
                     previousBuy = False
-                
+                    
+                if previousBuy and previousSell:
+                    previousBuy = False
+                    previousSell = False
         
 
 
@@ -184,8 +187,8 @@ def simulateCrypto(data, avgResult, avgInput):
             # except ZeroDivisionError:
             #     ratio = 0
             pos = nuet = neg = 0
-            if avgPips > 1200:
-                avgPips -= 1200
+            if avgPips > 1000:
+                avgPips -= 1000
                 avgPips = avgPips * percentOfTrades
                 # print("Ratio: " + str(ratio))
                 if avgPips > bestAvgPips:

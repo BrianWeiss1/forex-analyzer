@@ -418,3 +418,14 @@ def optimizeResult(i, data, ema, rsiValue, dataRSI, macdData, st3, st2, st, st4)
         previousSell = False
         contempent = True
     return previousBuy, previousSell
+def optimize2(i, data, WMA, previousBuy, previousSell):
+
+    if WMA[i] > data['close'][i] and previousSell:
+        previousSell = True
+    else:
+        previousSell = False
+    if WMA[i] < data['close'][i] and previousBuy:
+        previousBuy = True
+    else:
+        previousBuy = False
+    return previousBuy, previousSell
