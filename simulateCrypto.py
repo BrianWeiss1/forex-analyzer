@@ -225,14 +225,16 @@ def simulateCrypto(data, avgResult, avgInput):
     st00, upt00, dt00 = get_supertrend(data["high"], data["low"], data["close"], 3, 3)
     st400, upt400, dt400 = get_supertrend(data["high"], data["low"], data["close"], 1, 1)
     # st5, upt5, dt5 = get_supertrend(data["high"], data["low"], data["close"], 1, 1)
-
+    nowPrice = 0
+    nowCount = 0
     try:
         for k in range(1, 101):
             print("K: " + str(k))
             n = 0
             for i in range(102, len(data) - 102):
                 
-
+                nowPrice += data['close'][i]
+                nowCount += 1
 
 
 
@@ -245,7 +247,7 @@ def simulateCrypto(data, avgResult, avgInput):
 
 
                 
-                pos, nuet, neg, profilio, totalPips, countPips, posPips, countPos, negPips, countNeg = findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg, profilio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+                pos, nuet, neg, profilio, totalPips, countPips, posPips, countPos, negPips, countNeg = findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg, profilio, totalPips, countPips, posPips, countPos, countNeg, negPips)
                 previousBuy = previousSell = False
                 previousBuyREM, previousSellREM = obtainResult(i, st, st2, st3, st4, st5, st6, st7, data, dataRSI, rsiValue)
                 #----82% sucess----#
@@ -309,6 +311,7 @@ def simulateCrypto(data, avgResult, avgInput):
             percentOfTrades = round(((pos + nuet + neg) / len(data)) * 100, 2)
                     
             try:
+                AvgPrice = nowPrice/nowCount
                 print(pos, nuet, neg)
                 print("POS/NEG RATIO: " + str(pos / neg))
                 print(
@@ -324,6 +327,9 @@ def simulateCrypto(data, avgResult, avgInput):
                 print("AVERAGE PIPS: " + str(totalPips/countPips))
                 print("POSITIVE PIPS: " + str(posPips/(pos)))
                 print("NEGITIVE PIPS: " + str(negPips/(neg)))
+                print("AVERAGE %: " + str(round((avgPips/AvgPrice), 5)))
+                print("NEG %: " + str(round((negPips/(neg))/AvgPrice, 5)))
+                print("POS %: " + str(round(posPips/(pos)/AvgPrice, 5)))
 
                 
             except ZeroDivisionError:

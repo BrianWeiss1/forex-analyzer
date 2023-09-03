@@ -168,17 +168,17 @@ def findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg, profilio, tot
         if data["close"][i] < data["open"][i + n]:
             pos += 1
             profilio = profilio + (bet * multiplierBuy)
-            totalPips += abs((data["open"][i]*100)-(data["close"][i + n]*100))
-            posPips += abs(100*data["open"][i]-data["close"][i + n]*100)
+            totalPips += abs((data["open"][i + n]*100)-(data["close"][i]*100))
+            posPips += abs(100*data["open"][i + n]-data["close"][i]*100)
             countPos += 1
         elif data["close"][i] == data["open"][i + n]:
             nuet += 1
             profilio = profilio + (bet)
         else:
             neg += 1
-            totalPips -= abs(100*data["open"][i]-data["close"][i + n]*100)
+            totalPips -= abs(100*data["open"][i + n]-data["close"][i]*100)
             profilio = profilio + (bet*multiplierSell)
-            negPips -= abs(100*data["open"][i]-data["close"][i + n]*100)
+            negPips -= abs(100*data["open"][i + n]-data["close"][i]*100)
             countNeg += 1
         countPips+=1
         previousBuy = False
@@ -188,17 +188,17 @@ def findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg, profilio, tot
         if data["close"][i] > data["open"][i + n]:
             pos += 1
             profilio = profilio + (bet * multiplierBuy)
-            totalPips += abs(100*data["open"][i]-data["close"][i + n]*100)
-            posPips += abs(100*data["open"][i]-data["close"][i + n]*100)
+            totalPips += abs(100*data["open"][i + n]-data["close"][i]*100)
+            posPips += abs(100*data["open"][i + n]-data["close"][i]*100)
             countPos += 1
         elif data["close"][i] == data["open"][i]:
             nuet += 1
             profilio = profilio + (bet)
         else:
             neg += 1
-            totalPips -= abs(100*data["open"][i]-data["close"][i + n]*100)
+            totalPips -= abs(100*data["open"][i + n]-data["close"][i]*100)
             countNeg += 1
-            negPips -= abs(100*data["open"][i]-data["close"][i + n]*100)
+            negPips -= abs(100*data["open"][i + n]-data["close"][i]*100)
             profilio = profilio + bet * multiplierSell
         countPips+=1
         previousSell = False
