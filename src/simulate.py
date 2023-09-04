@@ -210,7 +210,6 @@ def findPosLongTerm(data, i, n, previousBuy, previousSell, pos, nuet, neg, profi
     betPercent = 0.1
     multiplierBuy = 1.2
     multiplierSell = 0.8
-    n = 5
 
     p = 0.5
     q = 1-p

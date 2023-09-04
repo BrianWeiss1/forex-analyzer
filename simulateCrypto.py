@@ -80,9 +80,9 @@ def simulateCrypto(data, avgResult, avgInput):
     st7, upt7, dt7 = get_supertrend(data["high"], data["low"], data["close"], 65, 1)
 
 
-    st23, upt3, dt3 = get_supertrend(data["high"], data["low"], data["close"], 40, 2)
-    st22, upt2, dt2 = get_supertrend(data["high"], data["low"], data["close"], 30, 2)
-    st20, upt, dt = get_supertrend(data["high"], data["low"], data["close"], 3, 3)
+    # st23, upt3, dt3 = get_supertrend(data["high"], data["low"], data["close"], 40, 2)
+    # st22, upt2, dt2 = get_supertrend(data["high"], data["low"], data["close"], 30, 2)
+    # st20, upt, dt = get_supertrend(data["high"], data["low"], data["close"], 3, 3)
 
     # stdata = [164, 1]
     # st = superTrend(data, stdata[0], stdata[1])
@@ -228,9 +228,10 @@ def simulateCrypto(data, avgResult, avgInput):
     nowPrice = 0
     nowCount = 0
     try:
-        for k in range(1, 101):
+        for k in range(0, 101):
+            n = k
             print("K: " + str(k))
-            n = 0
+            # n = 0
             for i in range(102, len(data) - 102):
                 
                 nowPrice += data['close'][i]

@@ -162,7 +162,7 @@ def grabCurrentDataBTC(ticker, timeFrame='1min', apikey="54e4aae1277e71d6e2dd03b
     else:
         print("Error: API request failed. Code: {}. Message: {}".format(response.status_code, response.text))
 
-def calltimes(ticker, times, startTime='2023-07-30 9:45'):
+def calltimes(ticker, times, startTime='2023-07-30 9:45', apikey2= 'a9b4c87998c9ca386388f1eceaf3e64391f61f8d'):
     def combine_lists(lst):
         combined_list = []
         for sublist in lst:
@@ -174,7 +174,6 @@ def calltimes(ticker, times, startTime='2023-07-30 9:45'):
     initial_time = datetime.datetime.strptime(startTime, input_format)
     duration_to_add = datetime.timedelta(minutes=5001)
     lst = []
-    apikey2 = 'a9b4c87998c9ca386388f1eceaf3e64391f61f8d'
     time = initial_time
     for i in range(times):
         lst.append(grabHistoricalDataBTC(ticker, time, "1min", apikey2))

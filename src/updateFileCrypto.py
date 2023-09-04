@@ -9,7 +9,7 @@ symbol = "BTCUSD"
 
 
 
-calltimes("LINKUSD", 8, "2023-06-27 9:45")
+calltimes("BTCUSD", 1, "2023-09-3 1:45", 'd3234f9b98msh636f82f9af5f491p15d26ejsn2b89beb2bdc9')
 # calltimes5m("BTCUSD", 3, "2022-07-30 9:45")
 
 # BTCUSD ---> 0.03925
@@ -19,6 +19,18 @@ calltimes("LINKUSD", 8, "2023-06-27 9:45")
 # USDTUSD ---> 0.00121
 # BNBUSD ---> NA
 # ADAUSD ---> 0.05
-# LINKUSD ---> 0.3797053554601738
-# LTCUSD -->
-# BTCUSD --->
+# LINKUSD ---> 0.04927
+# LTCUSD --> 0.08167
+# BCHUSD ---> 0.16165 --> 0.13
+# ETCUSD ---> ---> Very intresting --> if increase accruacy its 0.12
+# EOSUSD ---> 0.01331
+# ALGOUSD --> 0.04584 --> good if u increase
+# DYDXUSD ---> NA
+# TRTXUSD ---> 0.00193
+# DOTUSD ---> 0.0314
+# UNIUSD ---> 0.03
+# FILUSD ---> 0.02
+# AAVEUSD ---> 0.07
+# DOGEUSD ---> 0.05518
+# MANAUSD ---> 0.005
+# SANDUSD ---> 0.01
