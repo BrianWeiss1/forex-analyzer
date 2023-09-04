@@ -4,7 +4,7 @@ def findPos(data, pastI, currentI, BuyOrSell, pos, nuet, neg, portfolio, totalPi
     # multiplierBuy = 1.000500
     # multiplierSell = 0.99980
 
-    p = 0.5
+    p = 0.47
     q = 1-p
     b = 1.00048
     f = p - (q/b)
@@ -23,7 +23,6 @@ def findPos(data, pastI, currentI, BuyOrSell, pos, nuet, neg, portfolio, totalPi
                 percentChange = currentPipChange/currentPrice
                 changeDecimal = percentChange/100
                 portfolio = portfolio + (bet * changeDecimal+1)
-                
                 totalPips += currentPipChange
                 posPips += currentPipChange
                 countPos += 1
@@ -39,9 +38,10 @@ def findPos(data, pastI, currentI, BuyOrSell, pos, nuet, neg, portfolio, totalPi
                 currentPipChange = abs((100*data['close'][pastI[0]])-(data['close'][currentI]*100))
                 currentPrice = data['close'][currentI]
                 percentChange = currentPipChange/currentPrice
-                changeDecimal = percentChange/100    
+                changeDecimal = -percentChange/100  
+                print(bet * changeDecimal+1)
                 portfolio = portfolio + (bet * changeDecimal+1)
-
+                # print(changeDecimal)
 
                 totalPips -= currentPipChange
                 negPips -= currentPipChange
@@ -71,7 +71,7 @@ def findPos(data, pastI, currentI, BuyOrSell, pos, nuet, neg, portfolio, totalPi
                 currentPipChange = abs((100*data['close'][pastI[0]])-(data['close'][currentI]*100))
                 currentPrice = data['close'][currentI]
                 percentChange = currentPipChange/currentPrice
-                changeDecimal = percentChange/100    
+                changeDecimal = -percentChange/100    
                 portfolio = portfolio + (bet * changeDecimal+1)
 
 
@@ -95,7 +95,6 @@ def findPos(data, pastI, currentI, BuyOrSell, pos, nuet, neg, portfolio, totalPi
                     percentChange = currentPipChange/currentPrice
                     changeDecimal = percentChange/100
                     portfolio = portfolio + (bet * changeDecimal+1)
-                    
                     totalPips += currentPipChange
                     posPips += currentPipChange
                     countPos += 1
@@ -110,9 +109,8 @@ def findPos(data, pastI, currentI, BuyOrSell, pos, nuet, neg, portfolio, totalPi
                     currentPrice = data['close'][currentI]
                     percentChange = currentPipChange/currentPrice
                     changeDecimal = percentChange/100    
+                    changeDecimal = -changeDecimal
                     portfolio = portfolio + (bet * changeDecimal+1)
-
-
                     totalPips -= currentPipChange
                     negPips -= currentPipChange
                     countNeg += 1
@@ -123,6 +121,7 @@ def findPos(data, pastI, currentI, BuyOrSell, pos, nuet, neg, portfolio, totalPi
                     # if close is lower than past close, it's a profitable sell
                     pos += 1
                     currentPipChange = abs((data['close'][currentI]*100)-(100*data['close'][pastI[i]]))
+                    # currentPipChange = -currentPipChange
                     currentPrice = data['close'][currentI]
                     percentChange = currentPipChange/currentPrice
                     changeDecimal = percentChange/100
@@ -142,6 +141,8 @@ def findPos(data, pastI, currentI, BuyOrSell, pos, nuet, neg, portfolio, totalPi
                     currentPrice = data['close'][currentI]
                     percentChange = currentPipChange/currentPrice
                     changeDecimal = percentChange/100    
+                    changeDecimal = -changeDecimal
+                    # print(changeDecimal)
                     portfolio = portfolio + (bet * changeDecimal+1)
 
 
@@ -164,7 +165,7 @@ def findSelection(previousBuy, previousSell, longI, shortI, i):
     elif previousSell and longI['buySignal']:
         longI['buySignal'] = False
         shortI['luquidate'] = True
-        shortI['sellSignal'] = True
+        shortI['shortSignal'] = True
         shortI['entry'] = [i]
     elif previousBuy and longI['buySignal']:
         longI['entry'].append(i)
@@ -172,13 +173,11 @@ def findSelection(previousBuy, previousSell, longI, shortI, i):
         shortI['entry'].append(i)
     elif previousBuy:
         shortI['shortSignal'] = False
-        longI['luquidate'] = True
         longI['buySignal'] = True
         longI['entry'] = [i]
     elif previousSell:
         longI['buySignal'] = False
-        shortI['luquidate'] = True
-        shortI['sellSignal'] = True
+        shortI['shortSignal'] = True
         shortI['entry'] = [i]
     return longI, shortI
 
