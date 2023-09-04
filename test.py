@@ -15,4 +15,3 @@ def limit():
     pyautogui.click((1379, 285))
 #Limit/Stop()
 #(1379, 285)
-
