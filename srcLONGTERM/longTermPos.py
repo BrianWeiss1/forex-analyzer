@@ -4,11 +4,13 @@ def findPos(data, pastI, currentI, BuyOrSell, pos, nuet, neg, portfolio, totalPi
     # multiplierBuy = 1.000500
     # multiplierSell = 0.99980
 
-    p = 0.47
+    p = 0.50
     q = 1-p
-    b = 1.00048
+    b = 1.023
     f = p - (q/b)
-    betPercent = f
+    betPercent = 0.1
+    if betPercent < 0:
+        betPercent = 0
 
     if len(pastI) == 1:
         # do normal
@@ -28,8 +30,7 @@ def findPos(data, pastI, currentI, BuyOrSell, pos, nuet, neg, portfolio, totalPi
                 countPos += 1
                 countPips+=1
             elif data['close'][currentI] == data['close'][pastI[0]]:
-                print(pastI)
-                print(currentI)
+
                 nuet += 1
                 portfolio = portfolio + (bet)
             else:
@@ -39,7 +40,7 @@ def findPos(data, pastI, currentI, BuyOrSell, pos, nuet, neg, portfolio, totalPi
                 currentPrice = data['close'][currentI]
                 percentChange = currentPipChange/currentPrice
                 changeDecimal = -percentChange/100  
-                print(bet * changeDecimal+1)
+                # print(bet * changeDecimal+1)
                 portfolio = portfolio + (bet * changeDecimal+1)
                 # print(changeDecimal)
 
@@ -144,7 +145,7 @@ def findPos(data, pastI, currentI, BuyOrSell, pos, nuet, neg, portfolio, totalPi
                     changeDecimal = -changeDecimal
                     # print(changeDecimal)
                     portfolio = portfolio + (bet * changeDecimal+1)
-
+                    # print('a')
 
                     totalPips -= currentPipChange
                     negPips -= currentPipChange

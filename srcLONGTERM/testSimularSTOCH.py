@@ -74,28 +74,19 @@ def simulateCrypto(data):
 
     try:
         for j in range(1, 1000):
-            print("K: " + str(j))
-            get_StochasticOscilator(data, 293, 83, 140) 
-            stochK = data['%K']
-            stochD = data['%D']           
-            get_StochasticOscilator(data, 957, 3, 3) 
-            stochK2 = data['%K']
-            stochD2 = data['%D']
-            get_StochasticOscilator(data, 301, 100, 101) 
-            stochK3 = data['%K']
-            stochD3 = data['%D']
-            get_StochasticOscilator(data, 89, 72, 390) 
-            stochK4 = data['%K']
-            stochD4 = data['%D']       
-            get_StochasticOscilator(data, 872, 2, 69) 
-            stochK5 = data['%K']
-            stochD5 = data['%D']     
-            get_StochasticOscilator(data, 196, 24, 314) 
-            stochK6 = data['%K']
-            stochD6 = data['%D']     
-            get_StochasticOscilator(data, 102, 33, 313) 
-            stochK7 = data['%K']
-            stochD7 = data['%D']    
+            print("J: " + str(j))
+            # get_StochasticOscilator(data, 135, 269, 87) # ---> returns dataframe 90 55 87
+            # stochK = data['%K']
+            # stochD = data['%D']
+            # get_StochasticOscilator(data, 957, 3, 3) 
+            # stochK2 = data['%K']
+            # stochD2 = data['%D']
+            # get_StochasticOscilator(data, 301, 100, 101) 
+            # stochK3 = data['%K']
+            # stochD3 = data['%D']
+            get_StochasticOscilator(data, 17, 91, 5) 
+            stochK8 = data['%K']
+            stochD8 = data['%D']           
             # print("K: " + str(k))
             for i in range(1, len(data) - 1):
                 nowPrice += data['close'][i]
@@ -105,48 +96,67 @@ def simulateCrypto(data):
                 previousSell = previousBuy = False
 
                 # ------ Uncomment ------- #
-                if stochK[i-1] >= stochD[i-1] and stochK[i] < stochD[i]:
-                    previousSell = True
-                if stochK[i-1] <= stochD[i-1] and stochK[i] > stochD[i]:
-                    previousBuy = True            
+                # if stochK[i-1] >= stochD[i-1] and stochK[i] < stochD[i]:
+                #     # print("\nSELL")
+                #     # print(data.index[i] - timedelta(hours=4))
+                #     # print("K: " + str(stochK[i]))
+                #     # print("D: " + str(stochD[i]))
+                #     previousSell = True
+                # else:
+                #     previousSell = False
+                # if stochK[i-1] <= stochD[i-1] and stochK[i] > stochD[i]:
+                #     # print("\nBUY")
+                #     # print(data.index[i] - timedelta(hours=4))
+                #     previousBuy = True
+                # else:
+                #     previousBuy = False                
 
-                if stochK2[i-1] >= stochD2[i-1] and stochK2[i] < stochD2[i]:
+
+                # # if previousBuy:
+                # #     previousBuy = False
+                # #     previousSell = True
+                # # elif previousSell:
+                # #     previousSell = False
+                # #     previousBuy = True
+                
+                # if previousBuy and previousSell:
+                #     previousBuy = False
+                #     previousSell = False
+
+                # if stochK2[i-1] >= stochD2[i-1] and stochK2[i] < stochD2[i]:
+                #     previousSell = True
+                # if stochK2[i-1] <= stochD2[i-1] and stochK2[i] > stochD2[i]:
+                #     previousBuy = True
+
+
+
+                # if previousBuy and previousSell:
+                #     previousBuy = False
+                #     previousSell = False
+
+
+                # if stochK3[i-1] >= stochD3[i-1] and stochK3[i] < stochD3[i]:
+                #     previousSell = True
+                # if stochK3[i-1] <= stochD3[i-1] and stochK3[i] > stochD3[i]:
+                #     previousBuy = True
+            
+                # if previousBuy and previousSell:
+                #     previousBuy = False
+                #     previousSell = False
+
+                # UNCOMMENT #
+
+                if stochK8[i-1] >= stochD8[i-1] and stochK8[i] < stochD8[i]:
                     previousSell = True
-                if stochK2[i-1] <= stochD2[i-1] and stochK2[i] > stochD2[i]:
+                if stochK8[i-1] <= stochD8[i-1] and stochK8[i] > stochD8[i]:
                     previousBuy = True
-
-                if stochK3[i-1] >= stochD3[i-1] and stochK3[i] < stochD3[i]:
-                    previousSell = True
-                if stochK3[i-1] <= stochD3[i-1] and stochK3[i] > stochD3[i]:
-                    previousBuy = True
-
-                if stochK4[i-1] >= stochD4[i-1] and stochK4[i] < stochD4[i]:
-                    previousSell = True
-                if stochK4[i-1] <= stochD4[i-1] and stochK4[i] > stochD4[i]:
-                    previousBuy = True
-
-                if stochK5[i-1] >= stochD5[i-1] and stochK5[i] < stochD5[i]:
-                    previousSell = True
-                if stochK5[i-1] <= stochD5[i-1] and stochK5[i] > stochD5[i]:
-                    previousBuy = True
-
-                if stochK6[i-1] >= stochD6[i-1] and stochK6[i] < stochD6[i]:
-                    previousSell = True
-                if stochK6[i-1] <= stochD6[i-1] and stochK6[i] > stochD6[i]:
-                    previousBuy = True
-
-                if stochK7[i-1] >= stochD7[i-1] and stochK7[i] < stochD7[i]:
-                    previousSell = True
-                if stochK7[i-1] <= stochD7[i-1] and stochK7[i] > stochD7[i]:
-                    previousBuy = True
-
-
-
 
 
                 if previousBuy and previousSell:
                     previousBuy = False
                     previousSell = False
+
+
 
 
             percentOfTrades = round(((pos + nuet + neg) / len(data)) * 100, 2)
@@ -190,17 +200,16 @@ def simulateCrypto(data):
             #     ratio = (100-round((pos / (neg + pos)) * 100, 2))/(100-round(((pos + nuet + neg) / len(data)) * 100, 2))*100
             # except ZeroDivisionError:
             #     ratio = 0
-            pos = nuet = neg = 0
             # if avgPips > 1000:
             #     avgPips -= 1000
             #     avgPips = avgPips * percentOfTrades
                 # print("Ratio: " + str(ratio))
-            if avgPips*percentOfTrades > bestAvgPips:
-                bestAvgPips = avgPips
+            if avgPips*percentOfTrades > bestAvgPips and pos > 0:
+                bestAvgPips = avgPips*percentOfTrades
                 bestAvgj = j
                 bestAvgk = k
             if avgPips*percentOfTrades < worstAvgPips:
-                worstAvgPips = avgPips
+                worstAvgPips = avgPips*percentOfTrades
                 worstAvgj = j
                 worstAvgk = k
             if portfolio > BestProfilio:
@@ -211,6 +220,8 @@ def simulateCrypto(data):
                 WorseProfilio = portfolio
                 worstj = j
                 worstk = k
+            pos = nuet = neg = 0
+
             portfolio = 10
             negPips = 0
             posPips = 0
