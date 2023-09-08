@@ -13,7 +13,8 @@ from src.testIchi import get_ichimoku
 from src.testSpecial import formatDataset
 from src.testEMA import calculate_200ema
 from src.testMACD import get_macd
-from srcLONGTERM.functions import get_STOCH, get_StochasticOscilator, getSTOCGH, getSTOCHHH
+from srcLONGTERM.functions import get_StochasticOscilator, get_StochasticRelitiveStrengthIndex
+from srcLONGTERM.underliningProcesses import STOCH
 
 def simulateCrypto(data):
 
@@ -71,33 +72,37 @@ def simulateCrypto(data):
     STOCHamount2 = 2
     STOCHamount1 = 3
 
-
+    get_StochasticOscilator(data, 293, 83, 140) 
+    stochK = data['%K']
+    stochD = data['%D']           
+    get_StochasticOscilator(data, 142, 10, 385)  # 957, 3, 3
+    stochK2 = data['%K']
+    stochD2 = data['%D']
+    get_StochasticOscilator(data, 301, 100, 101) 
+    stochK3 = data['%K']
+    stochD3 = data['%D']
+    get_StochasticOscilator(data, 89, 72, 390) 
+    stochK4 = data['%K']
+    stochD4 = data['%D']       
+    get_StochasticOscilator(data, 872, 2, 69) 
+    stochK5 = data['%K']
+    stochD5 = data['%D']     
+    get_StochasticOscilator(data, 196, 24, 314) 
+    stochK6 = data['%K']
+    stochD6 = data['%D']     
+    get_StochasticOscilator(data, 102, 33, 313) 
+    stochK7 = data['%K']
+    stochD7 = data['%D']  
     try:
         for j in range(1, 1000):
+
             print("K: " + str(j))
-            get_StochasticOscilator(data, 293, 83, 140) 
-            stochK = data['%K']
-            stochD = data['%D']           
-            get_StochasticOscilator(data, 957, 3, 3) 
-            stochK2 = data['%K']
-            stochD2 = data['%D']
-            get_StochasticOscilator(data, 301, 100, 101) 
-            stochK3 = data['%K']
-            stochD3 = data['%D']
-            get_StochasticOscilator(data, 89, 72, 390) 
-            stochK4 = data['%K']
-            stochD4 = data['%D']       
-            get_StochasticOscilator(data, 872, 2, 69) 
-            stochK5 = data['%K']
-            stochD5 = data['%D']     
-            get_StochasticOscilator(data, 196, 24, 314) 
-            stochK6 = data['%K']
-            stochD6 = data['%D']     
-            get_StochasticOscilator(data, 102, 33, 313) 
-            stochK7 = data['%K']
-            stochD7 = data['%D']    
-            # print("K: " + str(k))
+            stochRSIK, stochRSID = get_StochasticRelitiveStrengthIndex(data, 8, 2, 947)
+            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 25, 751, 23)
+
+
             for i in range(1, len(data) - 1):
+
                 nowPrice += data['close'][i]
                 nowCount += 1
                 longI, shortI = findSelection(previousBuy, previousSell, longI, shortI, i) 
@@ -105,53 +110,28 @@ def simulateCrypto(data):
                 previousSell = previousBuy = False
 
                 # ------ Uncomment ------- #
-                if stochK[i-1] >= stochD[i-1] and stochK[i] < stochD[i]:
-                    previousSell = True
-                if stochK[i-1] <= stochD[i-1] and stochK[i] > stochD[i]:
-                    previousBuy = True            
+                STOCHprevBuy, STOCHprevSell = STOCH(i, stochK, stochD, stochK2, stochD2, stochK3, stochD3, stochK4, stochD4, stochK5, stochD5, stochK6, stochD6, stochK7, stochD7)
+                # if STOCHprevBuy:
+                #     previousBuy = True
+                # if STOCHprevSell:
+                #     previousSell = True
 
-                if stochK2[i-1] >= stochD2[i-1] and stochK2[i] < stochD2[i]:
+                if stochRSIK[i-1] >= stochRSID[i-1] and stochRSIK[i] < stochRSID[i]:
                     previousSell = True
-                if stochK2[i-1] <= stochD2[i-1] and stochK2[i] > stochD2[i]:
+                if stochRSIK[i-1] <= stochRSID[i-1] and stochRSIK[i] > stochRSID[i]:
                     previousBuy = True
 
-                if stochK3[i-1] >= stochD3[i-1] and stochK3[i] < stochD3[i]:
+                if stochRSIK2[i-1] >= stochRSID2[i-1] and stochRSIK2[i] < stochRSID2[i]:
                     previousSell = True
-                if stochK3[i-1] <= stochD3[i-1] and stochK3[i] > stochD3[i]:
+                if stochRSIK2[i-1] <= stochRSID2[i-1] and stochRSIK2[i] > stochRSID2[i]:
                     previousBuy = True
-
-                if stochK4[i-1] >= stochD4[i-1] and stochK4[i] < stochD4[i]:
-                    previousSell = True
-                if stochK4[i-1] <= stochD4[i-1] and stochK4[i] > stochD4[i]:
-                    previousBuy = True
-
-                if stochK5[i-1] >= stochD5[i-1] and stochK5[i] < stochD5[i]:
-                    previousSell = True
-                if stochK5[i-1] <= stochD5[i-1] and stochK5[i] > stochD5[i]:
-                    previousBuy = True
-
-                if stochK6[i-1] >= stochD6[i-1] and stochK6[i] < stochD6[i]:
-                    previousSell = True
-                if stochK6[i-1] <= stochD6[i-1] and stochK6[i] > stochD6[i]:
-                    previousBuy = True
-
-                if stochK7[i-1] >= stochD7[i-1] and stochK7[i] < stochD7[i]:
-                    previousSell = True
-                if stochK7[i-1] <= stochD7[i-1] and stochK7[i] > stochD7[i]:
-                    previousBuy = True
-
-
-
 
 
                 if previousBuy and previousSell:
                     previousBuy = False
-                    previousSell = False
-
-
-            percentOfTrades = round(((pos + nuet + neg) / len(data)) * 100, 2)
-                    
+                    previousSell = False                    
             try:
+                percentOfTrades = round(((pos + nuet + neg) / len(data)) * 100, 2)
                 AvgPrice = nowPrice/nowCount
                 print(pos, nuet, neg)
                 try:

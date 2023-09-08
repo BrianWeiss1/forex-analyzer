@@ -13,7 +13,7 @@ from src.testIchi import get_ichimoku
 from src.testSpecial import formatDataset
 from src.testEMA import calculate_200ema
 from src.testMACD import get_macd
-from srcLONGTERM.functions import get_STOCH, get_StochasticOscilator, getSTOCGH, getSTOCHHH
+from srcLONGTERM.functions import get_StochasticOscilator, get_StochasticRelitiveStrengthIndex
 
 def simulateCrypto(data):
 
@@ -75,18 +75,13 @@ def simulateCrypto(data):
     try:
         for j in range(1, 1000):
             print("J: " + str(j))
-            # get_StochasticOscilator(data, 135, 269, 87) # ---> returns dataframe 90 55 87
-            # stochK = data['%K']
-            # stochD = data['%D']
-            # get_StochasticOscilator(data, 957, 3, 3) 
-            # stochK2 = data['%K']
-            # stochD2 = data['%D']
             # get_StochasticOscilator(data, 301, 100, 101) 
             # stochK3 = data['%K']
             # stochD3 = data['%D']
-            get_StochasticOscilator(data, 17, 91, 5) 
-            stochK8 = data['%K']
-            stochD8 = data['%D']           
+            stochRSIK, stochRSID = get_StochasticRelitiveStrengthIndex(data, 25, 751, 23)
+            # print(stochRSIK, stochRSID)           
+            # stochRSIK = data['%K']
+            # stochRSID = data['%D']           
             # print("K: " + str(k))
             for i in range(1, len(data) - 1):
                 nowPrice += data['close'][i]
@@ -146,9 +141,9 @@ def simulateCrypto(data):
 
                 # UNCOMMENT #
 
-                if stochK8[i-1] >= stochD8[i-1] and stochK8[i] < stochD8[i]:
+                if stochRSIK[i-1] >= stochRSID[i-1] and stochRSIK[i] < stochRSID[i]:
                     previousSell = True
-                if stochK8[i-1] <= stochD8[i-1] and stochK8[i] > stochD8[i]:
+                if stochRSIK[i-1] <= stochRSID[i-1] and stochRSIK[i] > stochRSID[i]:
                     previousBuy = True
 
 
@@ -204,7 +199,7 @@ def simulateCrypto(data):
             #     avgPips -= 1000
             #     avgPips = avgPips * percentOfTrades
                 # print("Ratio: " + str(ratio))
-            if avgPips*percentOfTrades > bestAvgPips and pos > 0:
+            if avgPips*percentOfTrades > bestAvgPips and avgPips > 60000:
                 bestAvgPips = avgPips*percentOfTrades
                 bestAvgj = j
                 bestAvgk = k
