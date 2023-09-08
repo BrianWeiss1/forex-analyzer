@@ -1,5 +1,6 @@
 
 # Update data
+from src.WMA import get_WMA
 from src.simulate import findPos
 from src.VWAP import get_VWAP
 from src.specialFunctions import obtainResult, optimizeResult
@@ -23,7 +24,7 @@ def simulateCrypto(data, avgResult, avgInput):
     data = grabADX(data, 14)
     # print(data)
     # ema = calculate_200ema(data, 200)
-    VWAPdata = get_VWAP(data, 5)
+    # VWAPdata = get_VWAP(data, 5)
     # aroonData = aroon(data, 14)f
     # dataRSI2 = get_rsi(data["close"], 9)
     # macdData = get_macd(data, 12, 26, 9)
@@ -55,35 +56,6 @@ def simulateCrypto(data, avgResult, avgInput):
     st7, upt7, dt7 = get_supertrend(data["high"], data["low"], data["close"], 65, 1)
 
 
-    st23, upt3, dt3 = get_supertrend(data["high"], data["low"], data["close"], 40, 2)
-    st22, upt2, dt2 = get_supertrend(data["high"], data["low"], data["close"], 30, 2)
-    st20, upt, dt = get_supertrend(data["high"], data["low"], data["close"], 3, 3)
-
-    # stdata = [164, 1]
-    # st = superTrend(data, stdata[0], stdata[1])
-    # df_filtered = st[[f'SUPERT_{stdata[0]}_{stdata[1]}.0']]
-    # st = df_filtered[f'SUPERT_{stdata[0]}_{stdata[1]}.0']
-    # print(st)
-
-
-    # Average Result: 1568010824.655752
-    # Median Result: 28360590.612781316
-    # Best Profilio: 162631407085.49048
-
-    # Average Result: 3952144693.0374
-    # Median Result: 5280123.050841998
-    # Best Profilio: 432493562718.766
-
-
-
-    #       POS/NEG RATIO: 3.4464285714285716
-    #       Percentage Correct: 77.51%
-    #       CANDLES: 6968
-    #       PERCENT OF TRADES: 7.33
-    #       1099400833.0625887
-    # 2: 20 3
-    # 3: 5 2
-    # 4: 1 1
     k = -1
     previousBuy = False
     previousSell = False
@@ -125,7 +97,7 @@ def simulateCrypto(data, avgResult, avgInput):
 
     n = 0
     length = difference = 0
-    VWAP5 = get_VWAP(data, 5)
+    # VWAP5 = get_VWAP(data, 5)
     # Loop to go through datapoints
     # for j in range(1, 101):
     # for j in range(1, 101):
@@ -147,6 +119,7 @@ def simulateCrypto(data, avgResult, avgInput):
     macdData2 = get_macd(data2, 12, 26, 9)
     data2 = get_stoch(ultimateData, 5, 3)
     data2.drop(columns=["n_low", "%K", "%D"])
+    avgPips = 0
 
     macd_data = macdData2.dropna()
     macd_signal = ""
@@ -155,17 +128,35 @@ def simulateCrypto(data, avgResult, avgInput):
     data = data.dropna()
 
 
+    WMA = get_WMA(data, 11)
 
     try:
-        for k in range(1, 101):
+        for k in range(2, 101):
             print("K: " + str(k))
             n = 0
             for i in range(102, len(data) - 102):
                 
                 pos, nuet, neg, profilio, totalPips, countPips, posPips, countPos, negPips, countNeg = findPos(data, i, n, previousBuy, previousSell, pos, nuet, neg, profilio, totalPips, countPips, posPips, countPos, negPips, countNeg)
-                previousSell = previousBuy = False
+                previousSell = previousBuy = True
                 previousBuy, previousSell = obtainResult(i, st, st2, st3, st4, st5, st6, st7, data, dataRSI, rsiValue)
                     
+
+                if WMA[i] > data['close'][i] and previousSell:
+                    previousSell = True
+                else:
+                    previousSell = False
+                if WMA[i] < data['close'][i] and previousBuy:
+                    previousBuy = True
+                else:
+                    previousBuy = False
+                    
+                if previousBuy and previousSell:
+                    previousBuy = False
+                    previousSell = False
+        
+
+
+
             try:
                 percentOfTrades = round(((pos + nuet + neg) / len(data)) * 100, 2)
                 print(pos, nuet, neg)
@@ -196,8 +187,8 @@ def simulateCrypto(data, avgResult, avgInput):
             # except ZeroDivisionError:
             #     ratio = 0
             pos = nuet = neg = 0
-            if avgPips > 1200:
-                avgPips -= 1200
+            if avgPips > 1000:
+                avgPips -= 1000
                 avgPips = avgPips * percentOfTrades
                 # print("Ratio: " + str(ratio))
                 if avgPips > bestAvgPips:

@@ -1,0 +1,29 @@
+from ta.momentum import StochRSIIndicator
+from src.testSpecial import formatDataset
+
+
+
+def get_StochasticOscilator(df, periodK, smoothK, periodD):
+    # Calculate %K
+    df['%K'] = (df['close'] - df['low'].rolling(window=periodK).min()) / (
+        df['high'].rolling(window=periodK).max() - df['low'].rolling(window=periodK).min()
+    ) * 100
+
+    # Smooth %K
+    df['%K'] = df['%K'].rolling(window=smoothK).mean()
+
+    # Calculate %D
+    df['%D'] = df['%K'].rolling(window=periodD).mean()
+def get_StochasticRelitiveStrengthIndex(data, window, smooth1, smooth2):
+    stochRSIind = StochRSIIndicator(data['close'], window, smooth1, smooth2)
+    return stochRSIind.stochrsi_k() * 100, stochRSIind.stochrsi_d() * 100
+
+
+if __name__ == '__main__':
+    f = open("documents/dataCryptoTest15min.txt", "r")
+    data = f.readlines()
+    data = eval(data[0])
+    f.close()
+    data = formatDataset(data)
+    stochRSIK, stochRSID = get_StochasticRelitiveStrengthIndex(data, 14, 3, 3)
+    print(stochRSIK, stochRSID)
