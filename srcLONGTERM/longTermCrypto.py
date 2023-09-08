@@ -29,8 +29,8 @@ def simulateCrypto(data):
 
     j = -1
     k = -1
-    previousBuy = False
-    previousSell = False
+    previousBuyStochasticRSI = False
+    previousSellStochasticRSI = False
     pos = 0
     nuet = 0
     neg = 0
@@ -44,7 +44,8 @@ def simulateCrypto(data):
     bestAvgk = -1
     worstAvgj = -1
     worstAvgk = -1
-
+    previousBuyStochastic, previousSellStochastic = False, False
+    previousSellStochasticRSI = previousBuyStochasticRSI = False
     lst = []
 
     n = 60
@@ -55,9 +56,10 @@ def simulateCrypto(data):
     posPips = 0
     negPips = 0
     avgPips = 0
-    longI = {"buySignal": False, 'luquidate': False, 'entry': []}
-    shortI = {'shortSignal': False, 'luquidate': False, 'entry': []}
-
+    longRunSTOCH = {"buySignal": False, 'luquidate': False, 'entry': []}
+    shortRunSTOCH = {'shortSignal': False, 'luquidate': False, 'entry': []}
+    longRunSTOCHRSI = {"buySignal": False, 'luquidate': False, 'entry': []}
+    shortRunSTOCHRSI = {'shortSignal': False, 'luquidate': False, 'entry': []}
 
     # ema2 = calculate_200ema(data2, 200)
     rsiValue2 = 10
@@ -105,31 +107,38 @@ def simulateCrypto(data):
 
                 nowPrice += data['close'][i]
                 nowCount += 1
-                longI, shortI = findSelection(previousBuy, previousSell, longI, shortI, i) 
-                shortI, longI, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortI, longI, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
-                previousSell = previousBuy = False
 
-                # ------ Uncomment ------- #
-                STOCHprevBuy, STOCHprevSell = STOCH(i, stochK, stochD, stochK2, stochD2, stochK3, stochD3, stochK4, stochD4, stochK5, stochD5, stochK6, stochD6, stochK7, stochD7)
-                # if STOCHprevBuy:
-                #     previousBuy = True
-                # if STOCHprevSell:
+                #--------STOCH----------#
+                longRunSTOCH, shortRunSTOCH = findSelection(previousBuyStochastic, previousSellStochastic, longRunSTOCH, shortRunSTOCH, i) 
+                shortRunSTOCH, longRunSTOCH, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCH, longRunSTOCH, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+
+                previousBuyStochastic, previousSellStochastic = False, False
+
+                previousBuyStochastic, previousSellStochastic = STOCH(i, stochK, stochD, stochK2, stochD2, stochK3, stochD3, stochK4, stochD4, stochK5, stochD5, stochK6, stochD6, stochK7, stochD7)
+
+                #-------- STOCH ------------#
+
+                # if stochRSIK[i-1] >= stochRSID[i-1] and stochRSIK[i] < stochRSID[i]:
                 #     previousSell = True
+                # if stochRSIK[i-1] <= stochRSID[i-1] and stochRSIK[i] > stochRSID[i]:
+                #     previousBuy = True
 
-                if stochRSIK[i-1] >= stochRSID[i-1] and stochRSIK[i] < stochRSID[i]:
-                    previousSell = True
-                if stochRSIK[i-1] <= stochRSID[i-1] and stochRSIK[i] > stochRSID[i]:
-                    previousBuy = True
+                #--------STOCH RSI----------#
+                longRunSTOCHRSI, shortRunSTOCHRSI = findSelection(previousBuyStochasticRSI, previousSellStochasticRSI, longRunSTOCHRSI, shortRunSTOCH, i) 
+                shortRunSTOCHRSI, longRunSTOCHRSI, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI, longRunSTOCHRSI, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+    
+                previousSellStochasticRSI = previousBuyStochasticRSI = False
 
                 if stochRSIK2[i-1] >= stochRSID2[i-1] and stochRSIK2[i] < stochRSID2[i]:
-                    previousSell = True
+                    previousSellStochasticRSI = True
                 if stochRSIK2[i-1] <= stochRSID2[i-1] and stochRSIK2[i] > stochRSID2[i]:
-                    previousBuy = True
+                    previousBuyStochasticRSI = True
 
 
-                if previousBuy and previousSell:
-                    previousBuy = False
-                    previousSell = False                    
+                if previousBuyStochasticRSI and previousSellStochasticRSI:
+                    previousBuyStochasticRSI = False
+                    previousSellStochasticRSI = False        
+                #--------STOCH RSI----------#            
             try:
                 percentOfTrades = round(((pos + nuet + neg) / len(data)) * 100, 2)
                 AvgPrice = nowPrice/nowCount
