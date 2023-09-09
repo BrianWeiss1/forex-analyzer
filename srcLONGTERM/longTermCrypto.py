@@ -244,105 +244,103 @@ def simulateCrypto(data):
 
 
                 #--------STOCH1RSI----------#
-                # longRunSTOCHRSI1, shortRunSTOCHRSI1 = findSelection(previousBuyStochasticRSI1, previousSellStochasticRSI1, longRunSTOCHRSI1, shortRunSTOCHRSI1, i) 
-                # shortRunSTOCHRSI1, longRunSTOCHRSI1, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI1, longRunSTOCHRSI1, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+                longRunSTOCHRSI1, shortRunSTOCHRSI1 = findSelection(previousBuyStochasticRSI1, previousSellStochasticRSI1, longRunSTOCHRSI1, shortRunSTOCHRSI1, i) 
+                shortRunSTOCHRSI1, longRunSTOCHRSI1, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI1, longRunSTOCHRSI1, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
     
-                # previousSellStochasticRSI1 = previousBuyStochasticRSI1 = False
+                previousSellStochasticRSI1 = previousBuyStochasticRSI1 = False
 
-                # if stochRSIK1[i-1] >= stochRSID1[i-1] and stochRSIK1[i] < stochRSID1[i]:
-                #     previousSellStochasticRSI1 = True
-                # if stochRSIK1[i-1] <= stochRSID1[i-1] and stochRSIK1[i] > stochRSID1[i]:
-                #     previousBuyStochasticRSI1 = True
+                if stochRSIK1[i-1] >= stochRSID1[i-1] and stochRSIK1[i] < stochRSID1[i]:
+                    previousSellStochasticRSI1 = True
+                if stochRSIK1[i-1] <= stochRSID1[i-1] and stochRSIK1[i] > stochRSID1[i]:
+                    previousBuyStochasticRSI1 = True
 
-                # if previousSellStochasticRSI1 and previousBuyStochasticRSI1:
-                #     previousBuyStochasticRSI1 = False
-                #     previousSellStochasticRSI1 = False   
+                if previousSellStochasticRSI1 and previousBuyStochasticRSI1:
+                    previousBuyStochasticRSI1 = False
+                    previousSellStochasticRSI1 = False   
                 #--------STOCH1RSI----------#  
                    
                 #--------STOCH2RSI----------#
-                # longRunSTOCHRSI2, shortRunSTOCHRSI2 = findSelection(previousBuyStochasticRSI2, previousSellStochasticRSI2, longRunSTOCHRSI2, shortRunSTOCHRSI2, i) 
-                # shortRunSTOCHRSI2, longRunSTOCHRSI2, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI2, longRunSTOCHRSI2, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+                longRunSTOCHRSI2, shortRunSTOCHRSI2 = findSelection(previousBuyStochasticRSI2, previousSellStochasticRSI2, longRunSTOCHRSI2, shortRunSTOCHRSI2, i) 
+                shortRunSTOCHRSI2, longRunSTOCHRSI2, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI2, longRunSTOCHRSI2, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
     
-                # previousSellStochasticRSI2 = previousBuyStochasticRSI2 = False
+                previousSellStochasticRSI2 = previousBuyStochasticRSI2 = False
 
-                # if stochRSIK2[i-1] >= stochRSID2[i-1] and stochRSIK2[i] < stochRSID2[i]:
-                #     previousSellStochasticRSI2 = True
-                # if stochRSIK2[i-1] <= stochRSID2[i-1] and stochRSIK2[i] > stochRSID2[i]:
-                #     previousBuyStochasticRSI2 = True
+                if stochRSIK2[i-1] >= stochRSID2[i-1] and stochRSIK2[i] < stochRSID2[i]:
+                    previousSellStochasticRSI2 = True
+                if stochRSIK2[i-1] <= stochRSID2[i-1] and stochRSIK2[i] > stochRSID2[i]:
+                    previousBuyStochasticRSI2 = True
 
-                # if previousSellStochasticRSI2 and previousBuyStochasticRSI2:
-                #     previousBuyStochasticRSI2 = False
-                #     previousSellStochasticRSI2 = False   
+                if previousSellStochasticRSI2 and previousBuyStochasticRSI2:
+                    previousBuyStochasticRSI2 = False
+                    previousSellStochasticRSI2 = False   
                 #--------STOCH2RSI----------#
 
                 #--------STOCH3RSI----------#
-                # longRunSTOCHRSI3, shortRunSTOCHRSI3 = findSelection(previousBuyStochasticRSI3, previousSellStochasticRSI3, longRunSTOCHRSI3, shortRunSTOCHRSI3, i) 
-                # shortRunSTOCHRSI3, longRunSTOCHRSI3, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI3, longRunSTOCHRSI3, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+                longRunSTOCHRSI3, shortRunSTOCHRSI3 = findSelection(previousBuyStochasticRSI3, previousSellStochasticRSI3, longRunSTOCHRSI3, shortRunSTOCHRSI3, i) 
+                shortRunSTOCHRSI3, longRunSTOCHRSI3, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI3, longRunSTOCHRSI3, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
     
-                # previousSellStochasticRSI3 = previousBuyStochasticRSI3 = False
+                previousSellStochasticRSI3 = previousBuyStochasticRSI3 = False
 
-                # if stochRSIK3[i-1] >= stochRSID3[i-1] and stochRSIK3[i] < stochRSID3[i]:
-                #     previousSellStochasticRSI3 = True
-                # if stochRSIK3[i-1] <= stochRSID3[i-1] and stochRSIK3[i] > stochRSID3[i]:
-                #     previousBuyStochasticRSI3 = True
+                if stochRSIK3[i-1] >= stochRSID3[i-1] and stochRSIK3[i] < stochRSID3[i]:
+                    previousSellStochasticRSI3 = True
+                if stochRSIK3[i-1] <= stochRSID3[i-1] and stochRSIK3[i] > stochRSID3[i]:
+                    previousBuyStochasticRSI3 = True
 
-                # if previousSellStochasticRSI3 and previousBuyStochasticRSI3:
-                #     previousBuyStochasticRSI3 = False
-                #     previousSellStochasticRSI3 = False      
+                if previousSellStochasticRSI3 and previousBuyStochasticRSI3:
+                    previousBuyStochasticRSI3 = False
+                    previousSellStochasticRSI3 = False      
                 #--------STOCH3RSI----------#
 
                 #--------STOCH4RSI----------#
-                # longRunSTOCHRSI4, shortRunSTOCHRSI4 = findSelection(previousBuyStochasticRSI4, previousSellStochasticRSI4, longRunSTOCHRSI4, shortRunSTOCHRSI4, i) 
-                # shortRunSTOCHRSI4, longRunSTOCHRSI4, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI4, longRunSTOCHRSI4, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+                longRunSTOCHRSI4, shortRunSTOCHRSI4 = findSelection(previousBuyStochasticRSI4, previousSellStochasticRSI4, longRunSTOCHRSI4, shortRunSTOCHRSI4, i) 
+                shortRunSTOCHRSI4, longRunSTOCHRSI4, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI4, longRunSTOCHRSI4, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
     
-                # previousSellStochasticRSI4 = previousBuyStochasticRSI4 = False
+                previousSellStochasticRSI4 = previousBuyStochasticRSI4 = False
 
-                # if stochRSIK4[i-1] >= stochRSID4[i-1] and stochRSIK4[i] < stochRSID4[i]:
-                #     previousSellStochasticRSI4 = True
-                # if stochRSIK4[i-1] <= stochRSID4[i-1] and stochRSIK4[i] > stochRSID4[i]:
-                #     previousBuyStochasticRSI4 = True
+                if stochRSIK4[i-1] >= stochRSID4[i-1] and stochRSIK4[i] < stochRSID4[i]:
+                    previousSellStochasticRSI4 = True
+                if stochRSIK4[i-1] <= stochRSID4[i-1] and stochRSIK4[i] > stochRSID4[i]:
+                    previousBuyStochasticRSI4 = True
 
-                # if previousSellStochasticRSI4 and previousBuyStochasticRSI4:
-                #     previousBuyStochasticRSI4 = False
-                #     previousSellStochasticRSI4 = False   
+                if previousSellStochasticRSI4 and previousBuyStochasticRSI4:
+                    previousBuyStochasticRSI4 = False
+                    previousSellStochasticRSI4 = False   
 
                 #--------STOCH4RSI----------#
 
 
                 #--------STOCH5RSI----------#
-                # longRunSTOCHRSI5, shortRunSTOCHRSI5 = findSelection(previousBuyStochasticRSI5, previousSellStochasticRSI5, longRunSTOCHRSI5, shortRunSTOCHRSI5, i) 
-                # shortRunSTOCHRSI5, longRunSTOCHRSI5, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI5, longRunSTOCHRSI5, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+                longRunSTOCHRSI5, shortRunSTOCHRSI5 = findSelection(previousBuyStochasticRSI5, previousSellStochasticRSI5, longRunSTOCHRSI5, shortRunSTOCHRSI5, i) 
+                shortRunSTOCHRSI5, longRunSTOCHRSI5, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI5, longRunSTOCHRSI5, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
     
-                # previousSellStochasticRSI5 = previousBuyStochasticRSI5 = False
+                previousSellStochasticRSI5 = previousBuyStochasticRSI5 = False
 
-                # if stochRSIK5[i-1] >= stochRSID5[i-1] and stochRSIK5[i] < stochRSID5[i]:
-                #     previousSellStochasticRSI5 = True
-                # if stochRSIK5[i-1] <= stochRSID5[i-1] and stochRSIK5[i] > stochRSID5[i]:
-                #     previousBuyStochasticRSI5 = True
+                if stochRSIK5[i-1] >= stochRSID5[i-1] and stochRSIK5[i] < stochRSID5[i]:
+                    previousSellStochasticRSI5 = True
+                if stochRSIK5[i-1] <= stochRSID5[i-1] and stochRSIK5[i] > stochRSID5[i]:
+                    previousBuyStochasticRSI5 = True
 
-                # if previousSellStochasticRSI5 and previousBuyStochasticRSI5:
-                #     previousBuyStochasticRSI5 = False
-                #     previousSellStochasticRSI5 = False   
-
-
+                if previousSellStochasticRSI5 and previousBuyStochasticRSI5:
+                    previousBuyStochasticRSI5 = False
+                    previousSellStochasticRSI5 = False   
                 #--------STOCH5RSI----------#
 
                 #--------STOCH6RSI----------#
-                # longRunSTOCHRSI6, shortRunSTOCHRSI6 = findSelection(previousBuyStochasticRSI6, previousSellStochasticRSI6, longRunSTOCHRSI6, shortRunSTOCHRSI6, i) 
-                # shortRunSTOCHRSI6, longRunSTOCHRSI6, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI6, longRunSTOCHRSI6, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+                longRunSTOCHRSI6, shortRunSTOCHRSI6 = findSelection(previousBuyStochasticRSI6, previousSellStochasticRSI6, longRunSTOCHRSI6, shortRunSTOCHRSI6, i) 
+                shortRunSTOCHRSI6, longRunSTOCHRSI6, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI6, longRunSTOCHRSI6, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
     
-                # previousSellStochasticRSI6 = previousBuyStochasticRSI6 = False
+                previousSellStochasticRSI6 = previousBuyStochasticRSI6 = False
 
-                # if stochRSIK6[i-1] >= stochRSID6[i-1] and stochRSIK6[i] < stochRSID6[i]:
-                #     previousSellStochasticRSI6 = True
-                # if stochRSIK6[i-1] <= stochRSID6[i-1] and stochRSIK6[i] > stochRSID6[i]:
-                #     previousBuyStochasticRSI6 = True
+                if stochRSIK6[i-1] >= stochRSID6[i-1] and stochRSIK6[i] < stochRSID6[i]:
+                    previousSellStochasticRSI6 = True
+                if stochRSIK6[i-1] <= stochRSID6[i-1] and stochRSIK6[i] > stochRSID6[i]:
+                    previousBuyStochasticRSI6 = True
 
-                # previousBuyStochasticRSI6, previousSellStochasticRSI6 = swap(previousBuyStochasticRSI6, previousSellStochasticRSI6)
+                previousBuyStochasticRSI6, previousSellStochasticRSI6 = swap(previousBuyStochasticRSI6, previousSellStochasticRSI6)
 
-                # if previousSellStochasticRSI6 and previousBuyStochasticRSI6:
-                #     previousBuyStochasticRSI6 = False
-                #     previousSellStochasticRSI6 = False   
+                if previousSellStochasticRSI6 and previousBuyStochasticRSI6:
+                    previousBuyStochasticRSI6 = False
+                    previousSellStochasticRSI6 = False   
                 #--------STOCH6RSI----------#
 
                 #--------STOCH7RSI----------#
@@ -415,7 +413,7 @@ def simulateCrypto(data):
                     previousBuyStochasticRSI10 = False
                     previousSellStochasticRSI10 = False   
                 #--------STOCH10RSI----------#
-                
+
                 # #--------STOCH11RSI----------#
                 longRunSTOCHRSI11, shortRunSTOCHRSI11 = findSelection(previousBuyStochasticRSI11, previousSellStochasticRSI11, longRunSTOCHRSI11, shortRunSTOCHRSI11, i) 
                 shortRunSTOCHRSI11, longRunSTOCHRSI11, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI11, longRunSTOCHRSI11, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
