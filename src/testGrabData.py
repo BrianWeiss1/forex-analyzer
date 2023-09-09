@@ -218,9 +218,10 @@ def calltimes15m(ticker, amount):
     timeframe = '30m'
 
     limit = amount 
+    # amount = 
 
     # Fetch historical data
-    ohlcv = binance.fetch_ohlcv(symbol, timeframe, limit=limit)
+    ohlcv = binance.fetch_ohlcv(symbol, timeframe, limit=1000)
 
     # Initialize a list to store the formatted data
     formatted_data = []

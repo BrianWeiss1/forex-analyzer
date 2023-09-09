@@ -74,13 +74,43 @@ def simulateCrypto(data):
 
     try:
         for j in range(1, 1000):
-            print("J: " + str(j))
+            print("J: " + str(j-1))
+            # for k in range(1, 100):
+            countPips = 0
+            avgPips = 0
             # get_StochasticOscilator(data, 301, 100, 101) 
             # stochK3 = data['%K']
             # stochD3 = data['%D']
-            stochRSIK, stochRSID = get_StochasticRelitiveStrengthIndex(data, 25, 751, 23)
-            # print(stochRSIK, stochRSID)           
+            # (1334, 16, 15) -> 0.17 --> 200,000 
+            # (data, 1293, 50, 15) --> 0.24 --> -146,000
+            # (817, 50, 15) --> 0.59 --> -83,000
+            # (817, 220, 15) --> 0.28 --> -110,000
+            # (293, 83, 316) --> 0.21 --> -169,000
+            # (24, 1956, 25) --> 1.05 --> 41,739
+            # (787, 1, 328) --> 0.77 --> -40,000
+            # (560, 5, 200) --> 0.24 --> -125,281
+            # (417, 71, 200) --> 0.21 --> -161,000
+            # (677, 70, 872) --> 0.07 --> 500,000
+            # (535, 127, 137) --> 0.17 --> 127,000
+            # (401, 127, 137) --> 0.21 --> -168,000
+            # (401, 127, 80) --> 0.56 --> -47,272
+            # (401, 127, 153) --> 0.21 --> -169,000
+            # (123, 123, 153) --> 0.59 --> -58,589
+            # (660, 660, 153) --> 0.14 --> 133,000
+            # (154, 263, 586) --> 0.21 --> -136,000
+            # (154, 120, 586) --> 0.49 --> -57,000
+            # (154, 120, 613) --> 0.52 --> -64,000
+            # (133, 120, 133) --> 0.59 --> -62,000
+            # (281, 120, 281) --> 0.21 --> -162,650
+            # (202, 52, 152) --> 0.52 --> -74,000
+            # (468, 9, 152) --> 0.66 --> -55,000
+            # (468, 52, 152) --> 0.24 --> -150,000
+            # (468, 9, 324) --> 0.24 --> -125,458
+
+            stochRSIK, stochRSID = get_StochasticRelitiveStrengthIndex(data, 468, 9, 324) # 12, 153, 962, 324
+            # print(stochRSIK, stochRSID)          
             # stochRSIK = data['%K']
+            # 561, 418 --> bad
             # stochRSID = data['%D']           
             # print("K: " + str(k))
             for i in range(1, len(data) - 1):
@@ -183,7 +213,26 @@ def simulateCrypto(data):
                 print("AVERAGE %: " + str(round((avgPips/AvgPrice), 5)))
                 print("POS %: " + str(round(posPips/(pos)/AvgPrice, 5)))
                 print("NEG %: " + str(round(negPip/AvgPrice, 5)))
-
+                if j == 411:
+                    print('a')
+                if avgPips*percentOfTrades > bestAvgPips and pos > 0 and percentOfTrades > 1:
+                    # if j == 411:
+                    #     print("a")
+                    bestAvgPips = avgPips*percentOfTrades
+                    bestAvgj = j-1
+                    bestAvgk = k-1
+                if avgPips*percentOfTrades < worstAvgPips and avgPips < -40000 and percentOfTrades > 0.5:
+                    worstAvgPips = avgPips*percentOfTrades
+                    worstAvgj = j-1
+                    worstAvgk = k-1
+                if portfolio > BestProfilio:
+                    BestProfilio = portfolio
+                    Bestj = j-1
+                    Bestk = k-1
+                elif portfolio < WorseProfilio:
+                    WorseProfilio = portfolio
+                    worstj = j-1
+                    worstk = k-1
                 
             except ZeroDivisionError:
                 print("ERROR GO BRRRR")
@@ -199,22 +248,7 @@ def simulateCrypto(data):
             #     avgPips -= 1000
             #     avgPips = avgPips * percentOfTrades
                 # print("Ratio: " + str(ratio))
-            if avgPips*percentOfTrades > bestAvgPips and avgPips > 60000:
-                bestAvgPips = avgPips*percentOfTrades
-                bestAvgj = j
-                bestAvgk = k
-            if avgPips*percentOfTrades < worstAvgPips:
-                worstAvgPips = avgPips*percentOfTrades
-                worstAvgj = j
-                worstAvgk = k
-            if portfolio > BestProfilio:
-                BestProfilio = portfolio
-                Bestj = j
-                Bestk = k
-            elif portfolio < WorseProfilio:
-                WorseProfilio = portfolio
-                worstj = j
-                worstk = k
+
             pos = nuet = neg = 0
 
             portfolio = 10
@@ -228,18 +262,18 @@ def simulateCrypto(data):
         return BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj
     except KeyboardInterrupt:
         print("\n\nBEST PROFILIO: " + str(BestProfilio) + " must be > 66mil")
-        print("BEST K: " + str(k))
-        print("BEST J: " + str(j))
+        print("BEST K: " + str(k-1))
+        print("BEST J: " + str(j-1))
         print("\n")
         print("\nBestAVGPips: " + str(bestAvgPips))
-        print("K: " +str(bestAvgk))
-        print("J: " + str(bestAvgj))
+        print("K: " +str(bestAvgk-1))
+        print("J: " + str(bestAvgj-1))
         print("\n\nWorst Portfolio: " + str(WorseProfilio))
-        print("J: " + str(worstj))
-        print("K: " + str(worstk))
+        print("J: " + str(worstj-1))
+        print("K: " + str(worstk-1))
         print("\nWORSTAVGPips: " + str(worstAvgPips))
-        print("K: " +str(worstAvgk))
-        print("J: " + str(worstAvgj))
+        print("K: " +str(worstAvgk-1))
+        print("J: " + str(worstAvgj-1))
 
 
 
@@ -251,9 +285,16 @@ if "__main__" == __name__:
     data = eval(data[0])
     f.close()
     data = formatDataset(data)
+    import pandas as pd
+    df = pd.read_csv('output.csv')
+    df.rename(columns={'High': 'high', 'Low': 'low', "Open": 'open', 'Close':'close'}, inplace=True)
+    df = df.set_index('Datetime')
+    df = df.drop(['Dividends', 'Stock Splits'], axis=1)
+    print(df)    
+
     # print(data)
     
-    BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj = simulateCrypto(data)
+    BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj = simulateCrypto(df)
     #720mi
     # 77mil
     # 200bil
@@ -288,9 +329,9 @@ if "__main__" == __name__:
     # BestAVGPips*percentOfTrades
     print("\n\n\n\n")
     print("Best Portfolio: \n" + str(BestProfilio))
-    print("J:" + str(Bestj))
-    print("K: " + str(Bestk))
+    print("J:" + str(Bestj-1))
+    print("K: " + str(Bestk-1))
     print('\n\n')
     print("Worst Portfolio: \n" + str(WorseProfilio))
-    print("J: " + str(worstj))
-    print("K: " + str(worstk))
+    print("J: " + str(worstj-1))
+    print("K: " + str(worstk-1))

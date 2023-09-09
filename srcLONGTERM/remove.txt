@@ -1,0 +1,18 @@
+                #--------STOCH10RSI----------#
+                longRunSTOCHRSI10, shortRunSTOCHRSI10 = findSelection(previousBuyStochasticRSI10, previousSellStochasticRSI10, longRunSTOCHRSI10, shortRunSTOCHRSI10, i) 
+                shortRunSTOCHRSI10, longRunSTOCHRSI10, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI10, longRunSTOCHRSI10, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+    
+                previousSellStochasticRSI10 = previousBuyStochasticRSI10 = False
+
+                if stochRSIK10[i-1] >= stochRSID10[i-1] and stochRSIK10[i] < stochRSID10[i]:
+                    previousSellStochasticRSI10 = True
+                if stochRSIK10[i-1] <= stochRSID10[i-1] and stochRSIK10[i] > stochRSID10[i]:
+                    previousBuyStochasticRSI10 = True
+                previousBuyStochasticRSI10, previousSellStochasticRSI10 = swap(previousBuyStochasticRSI10, previousSellStochasticRSI10)
+
+                if previousSellStochasticRSI10 and previousBuyStochasticRSI10:
+                    previousBuyStochasticRSI10 = False
+                    previousSellStochasticRSI10 = False   
+                #--------STOCH10RSI----------#
+
+                previousBuyStochasticRSI10, previousSellStochasticRSI10 = swap(previousBuyStochasticRSI10, previousSellStochasticRSI10)
