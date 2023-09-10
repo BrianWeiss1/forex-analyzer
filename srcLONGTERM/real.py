@@ -122,7 +122,7 @@ previousMinute = -1
 pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg, nowPrice, nowCount = 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0
 
 while True:
-    if (datetime.now().minute == 30 or datetime.now().minute == 0) and datetime.now().second == 1 and previousMinute != datetime.now().minute:
+    if ((datetime.now().minute == 31 or datetime.now().minute == 1) and previousMinute != datetime.now().minute) or True:
         previousMinute = datetime.now().minute
         # Grab indicator df, grab df
         # 
@@ -136,7 +136,7 @@ while True:
         df = df.drop(['Dividends', 'Stock Splits'], axis=1)
         i = len(df)-1
         print(df.index[i])
-        
+
         stochRSIK1, stochRSID1 = get_StochasticRelitiveStrengthIndex(df, 677, 70, 872)
         stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(df, 1334, 16, 15)
         stochRSIK3, stochRSID3 = get_StochasticRelitiveStrengthIndex(df, 660, 660, 153)
