@@ -1,6 +1,7 @@
 
+import yfinance as yf
 from testGrabData import calltimes, calltimes15m, calltimes5m, grabHistoricalData, grabHistoricalDataBTC
-
+import pandas as pd
 symbol = "BTCUSD"
 # data = grabHistoricalDataBTC(symbol)
 # print(data)
@@ -11,7 +12,7 @@ symbol = "BTCUSD"
 
 # calltimes("BTCUSD", 1, "2023-09-6 0:45", 'd3234f9b98msh636f82f9af5f491p15d26ejsn2b89beb2bdc9')
 # calltimes5m("BTCUSD", 1, "2022-09-6 0:42")
-calltimes15m("BTCUSD", 5000)
+# calltimes15m("BTCUSD", 5000)
 
 # BTCUSD ---> 0.03925
 # ETHUSD --->  0.0492
@@ -35,3 +36,11 @@ calltimes15m("BTCUSD", 5000)
 # DOGEUSD ---> 0.05518
 # MANAUSD ---> 0.005
 # SANDUSD ---> 0.01
+
+# aapl= yf.Ticker("BTC-USD")
+# aapl_historical = aapl.history(start="2023-07-11", end="2023-09-20", interval="30m")
+# print(aapl_historical)
+# aapl = pd.DataFrame(aapl_historical)
+# aapl.to_csv('output.csv')
+
+

@@ -1,0 +1,22 @@
+        #--------STOCH1RSI----------#
+        longRunSTOCHRSI1, shortRunSTOCHRSI1 = findSelection(previousBuyStochasticRSI1, previousSellStochasticRSI1, longRunSTOCHRSI1, shortRunSTOCHRSI1, i) 
+        shortRunSTOCHRSI1, longRunSTOCHRSI1, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI1, longRunSTOCHRSI1, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+
+        previousSellStochasticRSI1 = previousBuyStochasticRSI1 = False
+
+        if stochRSIK1[i-1] >= stochRSID1[i-1] and stochRSIK1[i] < stochRSID1[i]:
+            previousSellStochasticRSI1 = True
+        if stochRSIK1[i-1] <= stochRSID1[i-1] and stochRSIK1[i] > stochRSID1[i]:
+            previousBuyStochasticRSI1 = True
+        previousBuyStochasticRSI1, previousSellStochasticRSI1 = swap(previousBuyStochasticRSI1, previousSellStochasticRSI1)
+
+        if previousSellStochasticRSI1 and previousBuyStochasticRSI1:
+            previousBuyStochasticRSI1 = False
+            previousSellStochasticRSI1 = False   
+        if previousBuyStochasticRSI1 == True:
+            print("BUY: 1")
+            send_message("BUY: 1", bot)
+        if previousSellStochasticRSI1:
+            print("SELL: 1")
+            send_message("SELL: 1", bot)
+        #--------STOCH1RSI----------#

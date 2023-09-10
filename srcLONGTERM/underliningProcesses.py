@@ -40,3 +40,8 @@ def STOCH(i, stochK, stochD, stochK2, stochD2, stochK3, stochD3, stochK4, stochD
         previousSell = False
 
     return previousBuy, previousSell
+def swap(previousBuyStochasticRSI6, previousSellStochasticRSI6):
+    sell = previousSellStochasticRSI6
+    previousSellStochasticRSI6 = previousBuyStochasticRSI6
+    previousBuyStochasticRSI6 = sell
+    return previousBuyStochasticRSI6, previousSellStochasticRSI6
