@@ -1,8 +1,16 @@
 from datetime import datetime
-from src.testGrabdf import getYahoo
+import telebot
+import time
+from src.testGrabData import getYahoo
 from srcLONGTERM.functions import get_StochasticRelitiveStrengthIndex
 from srcLONGTERM.longTermPos import checkLuquidation, findSelection
 from srcLONGTERM.underliningProcesses import swap
+from srcLONGTERM.sendTelegramMessage import send_message
+
+BOT_TOKEN = '6636169941:AAFysc5k-IA1QCC-1tfKXeTC_qeIdcG15ZI'
+
+bot = telebot.TeleBot(BOT_TOKEN)    
+
 
 longRunSTOCHRSI1 = {"buySignal": False, 'luquidate': False, 'entry': []}    
 shortRunSTOCHRSI1 = {'shortSignal': False, 'luquidate': False, 'entry': []}
@@ -110,10 +118,11 @@ shortRunSTOCHRSI26 = {'shortSignal': False, 'luquidate': False, 'entry': []}
 previousBuyStochasticRSI26, previousSellStochasticRSI26 = False, False
 
 previousMinute = -1
-pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI19, longRunSTOCHRSI19, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg
+
+pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg, nowPrice, nowCount = 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0
 
 while True:
-    if datetime.now().minute == 30 or datetime.now().minute == 0 and datetime.now().second == 1 and previousMinute != datetime.now().minute:
+    if (datetime.now().minute == 30 or datetime.now().minute == 0) and datetime.now().second == 1 and previousMinute != datetime.now().minute:
         previousMinute = datetime.now().minute
         # Grab indicator df, grab df
         # 
@@ -126,7 +135,8 @@ while True:
         df.rename(columns={'High': 'high', 'Low': 'low', "Open": 'open', 'Close':'close'}, inplace=True)
         df = df.drop(['Dividends', 'Stock Splits'], axis=1)
         i = len(df)-1
-
+        print(df.index[i])
+        
         stochRSIK1, stochRSID1 = get_StochasticRelitiveStrengthIndex(df, 677, 70, 872)
         stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(df, 1334, 16, 15)
         stochRSIK3, stochRSID3 = get_StochasticRelitiveStrengthIndex(df, 660, 660, 153)
@@ -168,12 +178,19 @@ while True:
             previousSellStochasticRSI1 = True
         if stochRSIK1[i-1] <= stochRSID1[i-1] and stochRSIK1[i] > stochRSID1[i]:
             previousBuyStochasticRSI1 = True
+        previousBuyStochasticRSI1, previousSellStochasticRSI1 = swap(previousBuyStochasticRSI1, previousSellStochasticRSI1)
 
         if previousSellStochasticRSI1 and previousBuyStochasticRSI1:
             previousBuyStochasticRSI1 = False
             previousSellStochasticRSI1 = False   
-        #--------STOCH1RSI----------#  
-            
+        if previousBuyStochasticRSI1 == True:
+            print("BUY: 1")
+            send_message("BUY: 1", bot)
+        if previousSellStochasticRSI1:
+            print("SELL: 1")
+            send_message("SELL: 1", bot)
+        #--------STOCH1RSI----------#
+
         #--------STOCH2RSI----------#
         longRunSTOCHRSI2, shortRunSTOCHRSI2 = findSelection(previousBuyStochasticRSI2, previousSellStochasticRSI2, longRunSTOCHRSI2, shortRunSTOCHRSI2, i) 
         shortRunSTOCHRSI2, longRunSTOCHRSI2, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI2, longRunSTOCHRSI2, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
@@ -184,11 +201,19 @@ while True:
             previousSellStochasticRSI2 = True
         if stochRSIK2[i-1] <= stochRSID2[i-1] and stochRSIK2[i] > stochRSID2[i]:
             previousBuyStochasticRSI2 = True
+        previousBuyStochasticRSI2, previousSellStochasticRSI2 = swap(previousBuyStochasticRSI2, previousSellStochasticRSI2)
 
         if previousSellStochasticRSI2 and previousBuyStochasticRSI2:
             previousBuyStochasticRSI2 = False
             previousSellStochasticRSI2 = False   
+        if previousBuyStochasticRSI2 == True:
+            print("BUY: 2")
+            send_message("BUY: 2", bot)
+        if previousSellStochasticRSI2:
+            print("SELL: 2")
+            send_message("SELL: 2", bot)
         #--------STOCH2RSI----------#
+
 
         #--------STOCH3RSI----------#
         longRunSTOCHRSI3, shortRunSTOCHRSI3 = findSelection(previousBuyStochasticRSI3, previousSellStochasticRSI3, longRunSTOCHRSI3, shortRunSTOCHRSI3, i) 
@@ -200,11 +225,19 @@ while True:
             previousSellStochasticRSI3 = True
         if stochRSIK3[i-1] <= stochRSID3[i-1] and stochRSIK3[i] > stochRSID3[i]:
             previousBuyStochasticRSI3 = True
+        previousBuyStochasticRSI3, previousSellStochasticRSI3 = swap(previousBuyStochasticRSI3, previousSellStochasticRSI3)
 
         if previousSellStochasticRSI3 and previousBuyStochasticRSI3:
             previousBuyStochasticRSI3 = False
-            previousSellStochasticRSI3 = False      
+            previousSellStochasticRSI3 = False   
+        if previousBuyStochasticRSI3 == True:
+            print("BUY: 3")
+            send_message("BUY: 3", bot)
+        if previousSellStochasticRSI3:
+            print("SELL: 3")
+            send_message("SELL: 3", bot)
         #--------STOCH3RSI----------#
+
 
         #--------STOCH4RSI----------#
         longRunSTOCHRSI4, shortRunSTOCHRSI4 = findSelection(previousBuyStochasticRSI4, previousSellStochasticRSI4, longRunSTOCHRSI4, shortRunSTOCHRSI4, i) 
@@ -216,11 +249,17 @@ while True:
             previousSellStochasticRSI4 = True
         if stochRSIK4[i-1] <= stochRSID4[i-1] and stochRSIK4[i] > stochRSID4[i]:
             previousBuyStochasticRSI4 = True
+        previousBuyStochasticRSI4, previousSellStochasticRSI4 = swap(previousBuyStochasticRSI4, previousSellStochasticRSI4)
 
         if previousSellStochasticRSI4 and previousBuyStochasticRSI4:
             previousBuyStochasticRSI4 = False
             previousSellStochasticRSI4 = False   
-
+        if previousBuyStochasticRSI4 == True:
+            print("BUY: 4")
+            send_message("BUY: 4", bot)
+        if previousSellStochasticRSI4:
+            print("SELL: 4")
+            send_message("SELL: 4", bot)
         #--------STOCH4RSI----------#
 
 
@@ -234,10 +273,17 @@ while True:
             previousSellStochasticRSI5 = True
         if stochRSIK5[i-1] <= stochRSID5[i-1] and stochRSIK5[i] > stochRSID5[i]:
             previousBuyStochasticRSI5 = True
+        previousBuyStochasticRSI5, previousSellStochasticRSI5 = swap(previousBuyStochasticRSI5, previousSellStochasticRSI5)
 
         if previousSellStochasticRSI5 and previousBuyStochasticRSI5:
             previousBuyStochasticRSI5 = False
             previousSellStochasticRSI5 = False   
+        if previousBuyStochasticRSI5 == True:
+            print("BUY: 5")
+            send_message("BUY: 5", bot)
+        if previousSellStochasticRSI5:
+            print("SELL: 5")
+            send_message("SELL: 5", bot)
         #--------STOCH5RSI----------#
 
         #--------STOCH6RSI----------#
@@ -250,13 +296,19 @@ while True:
             previousSellStochasticRSI6 = True
         if stochRSIK6[i-1] <= stochRSID6[i-1] and stochRSIK6[i] > stochRSID6[i]:
             previousBuyStochasticRSI6 = True
-
         previousBuyStochasticRSI6, previousSellStochasticRSI6 = swap(previousBuyStochasticRSI6, previousSellStochasticRSI6)
 
         if previousSellStochasticRSI6 and previousBuyStochasticRSI6:
             previousBuyStochasticRSI6 = False
             previousSellStochasticRSI6 = False   
+        if previousBuyStochasticRSI6 == True:
+            print("BUY: 6")
+            send_message("BUY: 6", bot)
+        if previousSellStochasticRSI6:
+            print("SELL: 6")
+            send_message("SELL: 6", bot)
         #--------STOCH6RSI----------#
+
 
         #--------STOCH7RSI----------#
         longRunSTOCHRSI7, shortRunSTOCHRSI7 = findSelection(previousBuyStochasticRSI7, previousSellStochasticRSI7, longRunSTOCHRSI7, shortRunSTOCHRSI7, i) 
@@ -268,13 +320,19 @@ while True:
             previousSellStochasticRSI7 = True
         if stochRSIK7[i-1] <= stochRSID7[i-1] and stochRSIK7[i] > stochRSID7[i]:
             previousBuyStochasticRSI7 = True
-
         previousBuyStochasticRSI7, previousSellStochasticRSI7 = swap(previousBuyStochasticRSI7, previousSellStochasticRSI7)
 
         if previousSellStochasticRSI7 and previousBuyStochasticRSI7:
             previousBuyStochasticRSI7 = False
             previousSellStochasticRSI7 = False   
+        if previousBuyStochasticRSI7 == True:
+            print("BUY: 7")
+            send_message("BUY: 7", bot)
+        if previousSellStochasticRSI7:
+            print("SELL: 7")
+            send_message("SELL: 7", bot)
         #--------STOCH7RSI----------#
+
 
         #--------STOCH8RSI----------#
         longRunSTOCHRSI8, shortRunSTOCHRSI8 = findSelection(previousBuyStochasticRSI8, previousSellStochasticRSI8, longRunSTOCHRSI8, shortRunSTOCHRSI8, i) 
@@ -286,15 +344,21 @@ while True:
             previousSellStochasticRSI8 = True
         if stochRSIK8[i-1] <= stochRSID8[i-1] and stochRSIK8[i] > stochRSID8[i]:
             previousBuyStochasticRSI8 = True
-
         previousBuyStochasticRSI8, previousSellStochasticRSI8 = swap(previousBuyStochasticRSI8, previousSellStochasticRSI8)
 
         if previousSellStochasticRSI8 and previousBuyStochasticRSI8:
             previousBuyStochasticRSI8 = False
             previousSellStochasticRSI8 = False   
+        if previousBuyStochasticRSI8 == True:
+            print("BUY: 8")
+            send_message("BUY: 8", bot)
+        if previousSellStochasticRSI8:
+            print("SELL: 8")
+            send_message("SELL: 8", bot)
         #--------STOCH8RSI----------#
 
-        # #--------STOCH9RSI----------#
+
+        #--------STOCH9RSI----------#
         longRunSTOCHRSI9, shortRunSTOCHRSI9 = findSelection(previousBuyStochasticRSI9, previousSellStochasticRSI9, longRunSTOCHRSI9, shortRunSTOCHRSI9, i) 
         shortRunSTOCHRSI9, longRunSTOCHRSI9, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI9, longRunSTOCHRSI9, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
 
@@ -304,13 +368,19 @@ while True:
             previousSellStochasticRSI9 = True
         if stochRSIK9[i-1] <= stochRSID9[i-1] and stochRSIK9[i] > stochRSID9[i]:
             previousBuyStochasticRSI9 = True
-
         previousBuyStochasticRSI9, previousSellStochasticRSI9 = swap(previousBuyStochasticRSI9, previousSellStochasticRSI9)
 
         if previousSellStochasticRSI9 and previousBuyStochasticRSI9:
             previousBuyStochasticRSI9 = False
             previousSellStochasticRSI9 = False   
-        # #--------STOCH9RSI----------#
+        if previousBuyStochasticRSI9 == True:
+            print("BUY: 9")
+            send_message("BUY: 9", bot)
+        if previousSellStochasticRSI9:
+            print("SELL: 9")
+            send_message("SELL: 9", bot)
+        #--------STOCH9RSI----------#
+
         
         #--------STOCH10RSI----------#
         longRunSTOCHRSI10, shortRunSTOCHRSI10 = findSelection(previousBuyStochasticRSI10, previousSellStochasticRSI10, longRunSTOCHRSI10, shortRunSTOCHRSI10, i) 
@@ -327,9 +397,16 @@ while True:
         if previousSellStochasticRSI10 and previousBuyStochasticRSI10:
             previousBuyStochasticRSI10 = False
             previousSellStochasticRSI10 = False   
+        if previousBuyStochasticRSI10 == True:
+            print("BUY: 10")
+            send_message("BUY: 10", bot)
+        if previousSellStochasticRSI10:
+            print("SELL: 10")
+            send_message("SELL: 10", bot)
         #--------STOCH10RSI----------#
 
-        # #--------STOCH11RSI----------#
+
+        #--------STOCH11RSI----------#
         longRunSTOCHRSI11, shortRunSTOCHRSI11 = findSelection(previousBuyStochasticRSI11, previousSellStochasticRSI11, longRunSTOCHRSI11, shortRunSTOCHRSI11, i) 
         shortRunSTOCHRSI11, longRunSTOCHRSI11, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI11, longRunSTOCHRSI11, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
 
@@ -344,7 +421,14 @@ while True:
         if previousSellStochasticRSI11 and previousBuyStochasticRSI11:
             previousBuyStochasticRSI11 = False
             previousSellStochasticRSI11 = False   
-        # #--------STOCH11RSI----------#
+        if previousBuyStochasticRSI11 == True:
+            print("BUY: 11")
+            send_message("BUY: 11", bot)
+        if previousSellStochasticRSI11:
+            print("SELL: 11")
+            send_message("SELL: 11", bot)
+        #--------STOCH11RSI----------#
+
 
         #--------STOCH12RSI----------#
         longRunSTOCHRSI12, shortRunSTOCHRSI12 = findSelection(previousBuyStochasticRSI12, previousSellStochasticRSI12, longRunSTOCHRSI12, shortRunSTOCHRSI12, i) 
@@ -361,7 +445,14 @@ while True:
         if previousSellStochasticRSI12 and previousBuyStochasticRSI12:
             previousBuyStochasticRSI12 = False
             previousSellStochasticRSI12 = False   
+        if previousBuyStochasticRSI12 == True:
+            print("BUY: 12")
+            send_message("BUY: 12", bot)
+        if previousSellStochasticRSI12:
+            print("SELL: 12")
+            send_message("SELL: 12", bot)
         #--------STOCH12RSI----------#
+
 
         #--------STOCH13RSI----------#
         longRunSTOCHRSI13, shortRunSTOCHRSI13 = findSelection(previousBuyStochasticRSI13, previousSellStochasticRSI13, longRunSTOCHRSI13, shortRunSTOCHRSI13, i) 
@@ -378,7 +469,14 @@ while True:
         if previousSellStochasticRSI13 and previousBuyStochasticRSI13:
             previousBuyStochasticRSI13 = False
             previousSellStochasticRSI13 = False   
+        if previousBuyStochasticRSI13 == True:
+            print("BUY: 13")
+            send_message("BUY: 13", bot)
+        if previousSellStochasticRSI13:
+            print("SELL: 13")
+            send_message("SELL: 13", bot)
         #--------STOCH13RSI----------#
+
 
         #--------STOCH14RSI----------#
         longRunSTOCHRSI14, shortRunSTOCHRSI14 = findSelection(previousBuyStochasticRSI14, previousSellStochasticRSI14, longRunSTOCHRSI14, shortRunSTOCHRSI14, i) 
@@ -395,9 +493,16 @@ while True:
         if previousSellStochasticRSI14 and previousBuyStochasticRSI14:
             previousBuyStochasticRSI14 = False
             previousSellStochasticRSI14 = False   
+        if previousBuyStochasticRSI14 == True:
+            print("BUY: 14")
+            send_message("BUY: 14", bot)
+        if previousSellStochasticRSI14:
+            print("SELL: 14")
+            send_message("SELL: 14", bot)
         #--------STOCH14RSI----------#
 
-        #--------STOCH15RSI-------#
+
+        #--------STOCH15RSI----------#
         longRunSTOCHRSI15, shortRunSTOCHRSI15 = findSelection(previousBuyStochasticRSI15, previousSellStochasticRSI15, longRunSTOCHRSI15, shortRunSTOCHRSI15, i) 
         shortRunSTOCHRSI15, longRunSTOCHRSI15, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI15, longRunSTOCHRSI15, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
 
@@ -412,7 +517,14 @@ while True:
         if previousSellStochasticRSI15 and previousBuyStochasticRSI15:
             previousBuyStochasticRSI15 = False
             previousSellStochasticRSI15 = False   
+        if previousBuyStochasticRSI15 == True:
+            print("BUY: 15")
+            send_message("BUY: 15", bot)
+        if previousSellStochasticRSI15:
+            print("SELL: 15")
+            send_message("SELL: 15", bot)
         #--------STOCH15RSI----------#
+
 
         #--------STOCH16RSI----------#
         longRunSTOCHRSI16, shortRunSTOCHRSI16 = findSelection(previousBuyStochasticRSI16, previousSellStochasticRSI16, longRunSTOCHRSI16, shortRunSTOCHRSI16, i) 
@@ -429,6 +541,12 @@ while True:
         if previousSellStochasticRSI16 and previousBuyStochasticRSI16:
             previousBuyStochasticRSI16 = False
             previousSellStochasticRSI16 = False   
+        if previousBuyStochasticRSI16 == True:
+            print("BUY: 16")
+            send_message("BUY: 16", bot)
+        if previousSellStochasticRSI16:
+            print("SELL: 16")
+            send_message("SELL: 16", bot)
         #--------STOCH16RSI----------#
 
         #--------STOCH17RSI----------#
@@ -446,7 +564,14 @@ while True:
         if previousSellStochasticRSI17 and previousBuyStochasticRSI17:
             previousBuyStochasticRSI17 = False
             previousSellStochasticRSI17 = False   
+        if previousBuyStochasticRSI17 == True:
+            print("BUY: 17")
+            send_message("BUY: 17", bot)
+        if previousSellStochasticRSI17:
+            print("SELL: 17")
+            send_message("SELL: 17", bot)
         #--------STOCH17RSI----------#
+
 
         #--------STOCH18RSI----------#
         longRunSTOCHRSI18, shortRunSTOCHRSI18 = findSelection(previousBuyStochasticRSI18, previousSellStochasticRSI18, longRunSTOCHRSI18, shortRunSTOCHRSI18, i) 
@@ -463,7 +588,14 @@ while True:
         if previousSellStochasticRSI18 and previousBuyStochasticRSI18:
             previousBuyStochasticRSI18 = False
             previousSellStochasticRSI18 = False   
+        if previousBuyStochasticRSI18 == True:
+            print("BUY: 18")
+            send_message("BUY: 18", bot)
+        if previousSellStochasticRSI18:
+            print("SELL: 18")
+            send_message("SELL: 18", bot)
         #--------STOCH18RSI----------#
+
 
         #--------STOCH19RSI----------#
         longRunSTOCHRSI19, shortRunSTOCHRSI19 = findSelection(previousBuyStochasticRSI19, previousSellStochasticRSI19, longRunSTOCHRSI19, shortRunSTOCHRSI19, i) 
@@ -480,7 +612,14 @@ while True:
         if previousSellStochasticRSI19 and previousBuyStochasticRSI19:
             previousBuyStochasticRSI19 = False
             previousSellStochasticRSI19 = False   
+        if previousBuyStochasticRSI19 == True:
+            print("BUY: 19")
+            send_message("BUY: 19", bot)
+        if previousSellStochasticRSI19:
+            print("SELL: 19")
+            send_message("SELL: 19", bot)
         #--------STOCH19RSI----------#
+
 
         #--------STOCH20RSI----------#
         longRunSTOCHRSI20, shortRunSTOCHRSI20 = findSelection(previousBuyStochasticRSI20, previousSellStochasticRSI20, longRunSTOCHRSI20, shortRunSTOCHRSI20, i) 
@@ -497,6 +636,12 @@ while True:
         if previousSellStochasticRSI20 and previousBuyStochasticRSI20:
             previousBuyStochasticRSI20 = False
             previousSellStochasticRSI20 = False   
+        if previousBuyStochasticRSI20 == True:
+            print("BUY: 20")
+            send_message("BUY: 20", bot)
+        if previousSellStochasticRSI20:
+            print("SELL: 20")
+            send_message("SELL: 20", bot)
         #--------STOCH20RSI----------#
 
         #--------STOCH21RSI----------#
@@ -514,7 +659,14 @@ while True:
         if previousSellStochasticRSI21 and previousBuyStochasticRSI21:
             previousBuyStochasticRSI21 = False
             previousSellStochasticRSI21 = False   
+        if previousBuyStochasticRSI21 == True:
+            print("BUY: 21")
+            send_message("BUY: 21", bot)
+        if previousSellStochasticRSI21:
+            print("SELL: 21")
+            send_message("SELL: 21", bot)
         #--------STOCH21RSI----------#
+
 
         #--------STOCH22RSI----------#
         longRunSTOCHRSI22, shortRunSTOCHRSI22 = findSelection(previousBuyStochasticRSI22, previousSellStochasticRSI22, longRunSTOCHRSI22, shortRunSTOCHRSI22, i) 
@@ -531,7 +683,14 @@ while True:
         if previousSellStochasticRSI22 and previousBuyStochasticRSI22:
             previousBuyStochasticRSI22 = False
             previousSellStochasticRSI22 = False   
+        if previousBuyStochasticRSI22 == True:
+            print("BUY: 22")
+            send_message("BUY: 22", bot)
+        if previousSellStochasticRSI22:
+            print("SELL: 22")
+            send_message("SELL: 22", bot)
         #--------STOCH22RSI----------#
+
 
         #--------STOCH23RSI----------#
         longRunSTOCHRSI23, shortRunSTOCHRSI23 = findSelection(previousBuyStochasticRSI23, previousSellStochasticRSI23, longRunSTOCHRSI23, shortRunSTOCHRSI23, i) 
@@ -548,7 +707,14 @@ while True:
         if previousSellStochasticRSI23 and previousBuyStochasticRSI23:
             previousBuyStochasticRSI23 = False
             previousSellStochasticRSI23 = False   
+        if previousBuyStochasticRSI23 == True:
+            print("BUY: 23")
+            send_message("BUY: 23", bot)
+        if previousSellStochasticRSI23:
+            print("SELL: 23")
+            send_message("SELL: 23", bot)
         #--------STOCH23RSI----------#
+
 
         #--------STOCH24RSI----------#
         longRunSTOCHRSI24, shortRunSTOCHRSI24 = findSelection(previousBuyStochasticRSI24, previousSellStochasticRSI24, longRunSTOCHRSI24, shortRunSTOCHRSI24, i) 
@@ -565,6 +731,12 @@ while True:
         if previousSellStochasticRSI24 and previousBuyStochasticRSI24:
             previousBuyStochasticRSI24 = False
             previousSellStochasticRSI24 = False   
+        if previousBuyStochasticRSI24 == True:
+            print("BUY: 24")
+            send_message("BUY: 24", bot)
+        if previousSellStochasticRSI24:
+            print("SELL: 24")
+            send_message("SELL: 24", bot)
         #--------STOCH24RSI----------#
 
         #--------STOCH25RSI----------#
@@ -582,4 +754,23 @@ while True:
         if previousSellStochasticRSI25 and previousBuyStochasticRSI25:
             previousBuyStochasticRSI25 = False
             previousSellStochasticRSI25 = False   
+        if previousBuyStochasticRSI25 == True:
+            print("BUY: 25")
+            send_message("BUY: 25", bot)
+        if previousSellStochasticRSI25:
+            print("SELL: 25")
+            send_message("SELL: 25", bot)
         #--------STOCH25RSI----------#
+    else:
+        if datetime.now().minute > 30:
+            b = True
+            a = False
+        else:
+            a = True
+            b = False
+        if b:
+            sleepyTime = (60-datetime.now().minute)
+            time.sleep((sleepyTime-1)*60)
+        if a:
+            sleepyTime = (30-datetime.now().minute)
+            time.sleep((sleepyTime-1)*60)
