@@ -37,8 +37,10 @@ symbol = "BTCUSD"
 # MANAUSD ---> 0.005
 # SANDUSD ---> 0.01
 
-aapl= yf.Ticker("BTC-USD")
-aapl_historical = aapl.history(start="2023-07-11", end="2023-09-20", interval="30m")
-print(aapl_historical)
-aapl = pd.DataFrame(aapl_historical)
-aapl.to_csv('output.csv')
+# aapl= yf.Ticker("BTC-USD")
+# aapl_historical = aapl.history(start="2023-07-11", end="2023-09-20", interval="30m")
+# print(aapl_historical)
+# aapl = pd.DataFrame(aapl_historical)
+# aapl.to_csv('output.csv')
+
+

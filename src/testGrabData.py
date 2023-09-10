@@ -2,6 +2,8 @@ import datetime
 import requests
 import json
 import ccxt
+import yfinance as yf
+import pandas as pd
 
 def grabHistoricalData(ticker = "EURJPY"):
     def dataConvertor(data):
@@ -252,3 +254,10 @@ def calltimes15m(ticker, amount):
     f = open('documents/dataCryptoTest15min.txt', 'w')
     f.write(str(formatted_data))
     f.close()
+    return formatted_data
+
+def getYahoo():
+    aapl= yf.Ticker("BTC-USD")
+    aapl_historical = aapl.history(start="2023-07-13", end="2023-09-20", interval="30m")
+    aapl = pd.DataFrame(aapl_historical)
+    return aapl
