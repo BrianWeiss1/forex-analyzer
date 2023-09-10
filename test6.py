@@ -1,0 +1,10 @@
+posLev = 151.51361
+negLev = -34.83314
+SucessPos = 0.5992
+SucessNeg = 1-SucessPos
+print(((posLev/100)+1)*SucessPos + ((negLev/100)+1)*(SucessNeg))
+p = 0.5992
+q = 1-p
+t = 2.5151361
+s = 1-0.3483314
+print(p/s - q/t)

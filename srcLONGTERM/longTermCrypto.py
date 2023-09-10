@@ -210,7 +210,6 @@ def simulateCrypto(data):
     stochRSIK7, stochRSID7 = get_StochasticRelitiveStrengthIndex(data, 401, 127, 80)
     stochRSIK8, stochRSID8 = get_StochasticRelitiveStrengthIndex(data, 468, 9, 152)
     stochRSIK9, stochRSID9 = get_StochasticRelitiveStrengthIndex(data, 154, 120, 586)
-
     stochRSIK10, stochRSID10 = get_StochasticRelitiveStrengthIndex(data, 123, 123, 153)
     stochRSIK11, stochRSID11 = get_StochasticRelitiveStrengthIndex(data, 133, 120, 133)
     stochRSIK12, stochRSID12 = get_StochasticRelitiveStrengthIndex(data, 154, 120, 613)
@@ -228,7 +227,9 @@ def simulateCrypto(data):
     stochRSIK24, stochRSID24 = get_StochasticRelitiveStrengthIndex(data, 293, 83, 316)
     stochRSIK25, stochRSID25 = get_StochasticRelitiveStrengthIndex(data, 401, 127, 153)
 
-
+    get_StochasticOscilator(data, 196, 731, 314)
+    stochK1 = data['%K']
+    stochD1 = data['%D']
  
  
     try:
@@ -707,8 +708,22 @@ def simulateCrypto(data):
                 print("AVERAGE %: " + str(round((avgPips/AvgPrice), 5)))
                 print("POS %: " + str(round(posPips/(pos)/AvgPrice, 5)))
                 print("NEG %: " + str(round(negPip/AvgPrice, 5)))
+                leverage = 50
+                print(f"{leverage}X LEVERAGE")
+                print("AVERAGE %: " + str(round((avgPips/AvgPrice)*leverage, 5)))
+                print("POS %: " + str(round((posPips/(pos)/AvgPrice)*leverage, 5)))
+                print("NEG %: " + str(round((negPip/AvgPrice)*leverage, 5)))
+                p = (pos / (neg + pos))
+                q = 1-p
+                t = (((posPips/(pos)/AvgPrice)*leverage)/100)+1
+                s = ((negPip/AvgPrice)*leverage/100)+1
+                # print(s)
+                KellyCriterum = p/s - q/t
+                print("Best Bet %: " + str(KellyCriterum))
+                amountOfBets = pos + nuet + neg
 
-                
+                amount = 10 * pow((1 + 0.76*1.768), amountOfBets)
+                print(amount)
             except ZeroDivisionError:
                 print("ERROR GO BRRRR")
             # # ------Profilio-----
@@ -823,3 +838,9 @@ if "__main__" == __name__:
     print("Worst Portfolio: \n" + str(WorseProfilio))
     print("J: " + str(worstj))
     print("K: " + str(worstk))
+
+# posLev = 151.51361
+# negLev = -34.83314
+# SucessPos = 0.5992
+# SucessNeg = 1-SucessPos
+#((posLev/100)+1)*SucessPos + ((negLev/100)+1)*(SucessNeg)

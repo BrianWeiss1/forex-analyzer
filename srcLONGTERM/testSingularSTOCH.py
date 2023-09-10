@@ -106,8 +106,10 @@ def simulateCrypto(data):
             # (468, 9, 152) --> 0.66 --> -55,000
             # (468, 52, 152) --> 0.24 --> -150,000
             # (468, 9, 324) --> 0.24 --> -125,458
-
-            stochRSIK, stochRSID = get_StochasticRelitiveStrengthIndex(data, 468, 9, 324) # 12, 153, 962, 324
+            g = 339 #J:239, J: 339
+            get_StochasticOscilator(data, 196, 731, 314) # 6, 303, 920
+            stochK1 = data['%K']
+            stochD1 = data['%D']
             # print(stochRSIK, stochRSID)          
             # stochRSIK = data['%K']
             # 561, 418 --> bad
@@ -120,60 +122,9 @@ def simulateCrypto(data):
                 shortI, longI, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortI, longI, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
                 previousSell = previousBuy = False
 
-                # ------ Uncomment ------- #
-                # if stochK[i-1] >= stochD[i-1] and stochK[i] < stochD[i]:
-                #     # print("\nSELL")
-                #     # print(data.index[i] - timedelta(hours=4))
-                #     # print("K: " + str(stochK[i]))
-                #     # print("D: " + str(stochD[i]))
-                #     previousSell = True
-                # else:
-                #     previousSell = False
-                # if stochK[i-1] <= stochD[i-1] and stochK[i] > stochD[i]:
-                #     # print("\nBUY")
-                #     # print(data.index[i] - timedelta(hours=4))
-                #     previousBuy = True
-                # else:
-                #     previousBuy = False                
-
-
-                # # if previousBuy:
-                # #     previousBuy = False
-                # #     previousSell = True
-                # # elif previousSell:
-                # #     previousSell = False
-                # #     previousBuy = True
-                
-                # if previousBuy and previousSell:
-                #     previousBuy = False
-                #     previousSell = False
-
-                # if stochK2[i-1] >= stochD2[i-1] and stochK2[i] < stochD2[i]:
-                #     previousSell = True
-                # if stochK2[i-1] <= stochD2[i-1] and stochK2[i] > stochD2[i]:
-                #     previousBuy = True
-
-
-
-                # if previousBuy and previousSell:
-                #     previousBuy = False
-                #     previousSell = False
-
-
-                # if stochK3[i-1] >= stochD3[i-1] and stochK3[i] < stochD3[i]:
-                #     previousSell = True
-                # if stochK3[i-1] <= stochD3[i-1] and stochK3[i] > stochD3[i]:
-                #     previousBuy = True
-            
-                # if previousBuy and previousSell:
-                #     previousBuy = False
-                #     previousSell = False
-
-                # UNCOMMENT #
-
-                if stochRSIK[i-1] >= stochRSID[i-1] and stochRSIK[i] < stochRSID[i]:
+                if stochK1[i-1] >= stochD1[i-1] and stochK1[i] < stochD1[i]:
                     previousSell = True
-                if stochRSIK[i-1] <= stochRSID[i-1] and stochRSIK[i] > stochRSID[i]:
+                if stochK1[i-1] <= stochD1[i-1] and stochK1[i] > stochD1[i]:
                     previousBuy = True
 
 
@@ -213,6 +164,11 @@ def simulateCrypto(data):
                 print("AVERAGE %: " + str(round((avgPips/AvgPrice), 5)))
                 print("POS %: " + str(round(posPips/(pos)/AvgPrice, 5)))
                 print("NEG %: " + str(round(negPip/AvgPrice, 5)))
+                leverage = 50
+                print(f"{leverage}X LEVERAGE")
+                print("AVERAGE %: " + str(round((avgPips/AvgPrice)*leverage, 5)))
+                print("POS %: " + str(round((posPips/(pos)/AvgPrice)*leverage, 5)))
+                print("NEG %: " + str(round((negPip/AvgPrice)*leverage, 5)))
                 if j == 411:
                     print('a')
                 if avgPips*percentOfTrades > bestAvgPips and pos > 0 and percentOfTrades > 1:
