@@ -44,4 +44,4 @@ def swap(previousBuyStochasticRSI6, previousSellStochasticRSI6):
     sell = previousSellStochasticRSI6
     previousSellStochasticRSI6 = previousBuyStochasticRSI6
     previousBuyStochasticRSI6 = sell
-    return previousBuyStochasticRSI6, previousSellStochasticRSI6
+    return previousSellStochasticRSI6, previousBuyStochasticRSI6

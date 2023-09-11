@@ -201,31 +201,32 @@ def simulateCrypto(data):
     # stochK7 = data['%K']
     # stochD7 = data['%D']  
 
-    stochRSIK1, stochRSID1 = get_StochasticRelitiveStrengthIndex(data, 677, 70, 872)
-    stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 1334, 16, 15)
-    stochRSIK3, stochRSID3 = get_StochasticRelitiveStrengthIndex(data, 660, 660, 153)
-    stochRSIK4, stochRSID4 = get_StochasticRelitiveStrengthIndex(data, 535, 127, 137)
-    stochRSIK5, stochRSID5 = get_StochasticRelitiveStrengthIndex(data, 24, 1956, 25)
-    stochRSIK6, stochRSID6 = get_StochasticRelitiveStrengthIndex(data, 787, 1, 328)
+    stochRSIK1, stochRSID1 = get_StochasticRelitiveStrengthIndex(data, 223, 418, 132)
+    stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 250, 418, 132)
+    stochRSIK3, stochRSID3 = get_StochasticRelitiveStrengthIndex(data, 66, 70, 131)
+    stochRSIK4, stochRSID4 = get_StochasticRelitiveStrengthIndex(data, 535, 127, 137) # --> 30000
+    stochRSIK5, stochRSID5 = get_StochasticRelitiveStrengthIndex(data, 214, 47, 39)
+    stochRSIK6, stochRSID6 = get_StochasticRelitiveStrengthIndex(data, 180, 33, 132)
     stochRSIK7, stochRSID7 = get_StochasticRelitiveStrengthIndex(data, 401, 127, 80)
-    stochRSIK8, stochRSID8 = get_StochasticRelitiveStrengthIndex(data, 468, 9, 152)
+    stochRSIK8, stochRSID8 = get_StochasticRelitiveStrengthIndex(data, 69, 148, 59)
     stochRSIK9, stochRSID9 = get_StochasticRelitiveStrengthIndex(data, 154, 120, 586)
-    stochRSIK10, stochRSID10 = get_StochasticRelitiveStrengthIndex(data, 123, 123, 153)
-    stochRSIK11, stochRSID11 = get_StochasticRelitiveStrengthIndex(data, 133, 120, 133)
-    stochRSIK12, stochRSID12 = get_StochasticRelitiveStrengthIndex(data, 154, 120, 613)
-    stochRSIK13, stochRSID13 = get_StochasticRelitiveStrengthIndex(data, 202, 52, 152)
-    stochRSIK14, stochRSID14 = get_StochasticRelitiveStrengthIndex(data, 817, 50, 15)
-    stochRSIK15, stochRSID15 = get_StochasticRelitiveStrengthIndex(data, 817, 200, 15)
-    stochRSIK16, stochRSID16 = get_StochasticRelitiveStrengthIndex(data, 560, 5, 200)
-    stochRSIK17, stochRSID17 = get_StochasticRelitiveStrengthIndex(data, 468, 9, 324)
-    stochRSIK18, stochRSID18 = get_StochasticRelitiveStrengthIndex(data, 154, 263, 586)
-    stochRSIK19, stochRSID19 = get_StochasticRelitiveStrengthIndex(data, 1293, 50, 15)
-    stochRSIK20, stochRSID20 = get_StochasticRelitiveStrengthIndex(data, 468, 52, 152)
-    stochRSIK21, stochRSID21 = get_StochasticRelitiveStrengthIndex(data, 417, 71, 200)
-    stochRSIK22, stochRSID22 = get_StochasticRelitiveStrengthIndex(data, 281, 120, 281)
-    stochRSIK23, stochRSID23 = get_StochasticRelitiveStrengthIndex(data, 401, 127, 137)
-    stochRSIK24, stochRSID24 = get_StochasticRelitiveStrengthIndex(data, 293, 83, 316)
+    stochRSIK10, stochRSID10 = get_StochasticRelitiveStrengthIndex(data, 96, 64, 110)
+    stochRSIK11, stochRSID11 = get_StochasticRelitiveStrengthIndex(data, 145, 145, 39)
+    stochRSIK12, stochRSID12 = get_StochasticRelitiveStrengthIndex(data, 153, 53, 56)
+    stochRSIK13, stochRSID13 = get_StochasticRelitiveStrengthIndex(data, 77, 60, 136)
+    stochRSIK14, stochRSID14 = get_StochasticRelitiveStrengthIndex(data, 51, 59, 156) 
+    stochRSIK15, stochRSID15 = get_StochasticRelitiveStrengthIndex(data, 184, 62, 62) # 0%
+    stochRSIK16, stochRSID16 = get_StochasticRelitiveStrengthIndex(data, 143, 143, 62)
+    stochRSIK17, stochRSID17 = get_StochasticRelitiveStrengthIndex(data, 143, 424, 424) # 1%
+    stochRSIK18, stochRSID18 = get_StochasticRelitiveStrengthIndex(data, 143, 49, 210) 
+    stochRSIK19, stochRSID19 = get_StochasticRelitiveStrengthIndex(data, 53, 52, 194)
+    stochRSIK20, stochRSID20 = get_StochasticRelitiveStrengthIndex(data, 53, 53, 199) # 0.8
+    stochRSIK21, stochRSID21 = get_StochasticRelitiveStrengthIndex(data, 171, 57, 150) # 0.7
+    stochRSIK22, stochRSID22 = get_StochasticRelitiveStrengthIndex(data, 65, 150, 65)
+    stochRSIK23, stochRSID23 = get_StochasticRelitiveStrengthIndex(data, 134, 47, 238) # 1.09
+    stochRSIK24, stochRSID24 = get_StochasticRelitiveStrengthIndex(data, 401, 127, 137)
     stochRSIK25, stochRSID25 = get_StochasticRelitiveStrengthIndex(data, 401, 127, 153)
+    stochRSIK26, stochRSID26 = get_StochasticRelitiveStrengthIndex(data, 293, 83, 316)
 
     get_StochasticOscilator(data, 196, 731, 314)
     stochK1 = data['%K']
@@ -274,9 +275,9 @@ def simulateCrypto(data):
                 if previousSellStochasticRSI2 and previousBuyStochasticRSI2:
                     previousBuyStochasticRSI2 = False
                     previousSellStochasticRSI2 = False   
-                #--------STOCH2RSI----------#
+                # #--------STOCH2RSI----------#
 
-                #--------STOCH3RSI----------#
+                # #--------STOCH3RSI----------#
                 longRunSTOCHRSI3, shortRunSTOCHRSI3 = findSelection(previousBuyStochasticRSI3, previousSellStochasticRSI3, longRunSTOCHRSI3, shortRunSTOCHRSI3, i) 
                 shortRunSTOCHRSI3, longRunSTOCHRSI3, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI3, longRunSTOCHRSI3, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
     
@@ -290,9 +291,9 @@ def simulateCrypto(data):
                 if previousSellStochasticRSI3 and previousBuyStochasticRSI3:
                     previousBuyStochasticRSI3 = False
                     previousSellStochasticRSI3 = False      
-                #--------STOCH3RSI----------#
+                # #--------STOCH3RSI----------#
 
-                #--------STOCH4RSI----------#
+                # #--------STOCH4RSI----------#
                 longRunSTOCHRSI4, shortRunSTOCHRSI4 = findSelection(previousBuyStochasticRSI4, previousSellStochasticRSI4, longRunSTOCHRSI4, shortRunSTOCHRSI4, i) 
                 shortRunSTOCHRSI4, longRunSTOCHRSI4, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI4, longRunSTOCHRSI4, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
     
@@ -307,10 +308,10 @@ def simulateCrypto(data):
                     previousBuyStochasticRSI4 = False
                     previousSellStochasticRSI4 = False   
 
-                #--------STOCH4RSI----------#
+                # #--------STOCH4RSI----------#
 
 
-                #--------STOCH5RSI----------#
+                # # #--------STOCH5RSI----------#
                 longRunSTOCHRSI5, shortRunSTOCHRSI5 = findSelection(previousBuyStochasticRSI5, previousSellStochasticRSI5, longRunSTOCHRSI5, shortRunSTOCHRSI5, i) 
                 shortRunSTOCHRSI5, longRunSTOCHRSI5, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI5, longRunSTOCHRSI5, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
     
@@ -324,9 +325,9 @@ def simulateCrypto(data):
                 if previousSellStochasticRSI5 and previousBuyStochasticRSI5:
                     previousBuyStochasticRSI5 = False
                     previousSellStochasticRSI5 = False   
-                #--------STOCH5RSI----------#
+                # # #--------STOCH5RSI----------#
 
-                #--------STOCH6RSI----------#
+                # # #--------STOCH6RSI----------#
                 longRunSTOCHRSI6, shortRunSTOCHRSI6 = findSelection(previousBuyStochasticRSI6, previousSellStochasticRSI6, longRunSTOCHRSI6, shortRunSTOCHRSI6, i) 
                 shortRunSTOCHRSI6, longRunSTOCHRSI6, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI6, longRunSTOCHRSI6, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
     
@@ -342,9 +343,9 @@ def simulateCrypto(data):
                 if previousSellStochasticRSI6 and previousBuyStochasticRSI6:
                     previousBuyStochasticRSI6 = False
                     previousSellStochasticRSI6 = False   
-                #--------STOCH6RSI----------#
+                # # #--------STOCH6RSI----------#
 
-                #--------STOCH7RSI----------#
+                # #--------STOCH7RSI----------#
                 longRunSTOCHRSI7, shortRunSTOCHRSI7 = findSelection(previousBuyStochasticRSI7, previousSellStochasticRSI7, longRunSTOCHRSI7, shortRunSTOCHRSI7, i) 
                 shortRunSTOCHRSI7, longRunSTOCHRSI7, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI7, longRunSTOCHRSI7, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
     
@@ -360,9 +361,9 @@ def simulateCrypto(data):
                 if previousSellStochasticRSI7 and previousBuyStochasticRSI7:
                     previousBuyStochasticRSI7 = False
                     previousSellStochasticRSI7 = False   
-                #--------STOCH7RSI----------#
+                # #--------STOCH7RSI----------#
 
-                #--------STOCH8RSI----------#
+                # # #--------STOCH8RSI----------#
                 longRunSTOCHRSI8, shortRunSTOCHRSI8 = findSelection(previousBuyStochasticRSI8, previousSellStochasticRSI8, longRunSTOCHRSI8, shortRunSTOCHRSI8, i) 
                 shortRunSTOCHRSI8, longRunSTOCHRSI8, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI8, longRunSTOCHRSI8, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
     
@@ -378,9 +379,9 @@ def simulateCrypto(data):
                 if previousSellStochasticRSI8 and previousBuyStochasticRSI8:
                     previousBuyStochasticRSI8 = False
                     previousSellStochasticRSI8 = False   
-                #--------STOCH8RSI----------#
+                # # #--------STOCH8RSI----------#
 
-                # #--------STOCH9RSI----------#
+                # # --------STOCH9RSI----------#
                 longRunSTOCHRSI9, shortRunSTOCHRSI9 = findSelection(previousBuyStochasticRSI9, previousSellStochasticRSI9, longRunSTOCHRSI9, shortRunSTOCHRSI9, i) 
                 shortRunSTOCHRSI9, longRunSTOCHRSI9, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI9, longRunSTOCHRSI9, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
     
@@ -398,7 +399,7 @@ def simulateCrypto(data):
                     previousSellStochasticRSI9 = False   
                 # #--------STOCH9RSI----------#
                 
-                #--------STOCH10RSI----------#
+                # #--------STOCH10RSI----------#
                 longRunSTOCHRSI10, shortRunSTOCHRSI10 = findSelection(previousBuyStochasticRSI10, previousSellStochasticRSI10, longRunSTOCHRSI10, shortRunSTOCHRSI10, i) 
                 shortRunSTOCHRSI10, longRunSTOCHRSI10, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI10, longRunSTOCHRSI10, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
     
@@ -415,7 +416,7 @@ def simulateCrypto(data):
                     previousSellStochasticRSI10 = False   
                 #--------STOCH10RSI----------#
 
-                # #--------STOCH11RSI----------#
+                #--------STOCH11RSI----------#
                 longRunSTOCHRSI11, shortRunSTOCHRSI11 = findSelection(previousBuyStochasticRSI11, previousSellStochasticRSI11, longRunSTOCHRSI11, shortRunSTOCHRSI11, i) 
                 shortRunSTOCHRSI11, longRunSTOCHRSI11, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI11, longRunSTOCHRSI11, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
     
@@ -425,12 +426,12 @@ def simulateCrypto(data):
                     previousSellStochasticRSI11 = True
                 if stochRSIK11[i-1] <= stochRSID11[i-1] and stochRSIK11[i] > stochRSID11[i]:
                     previousBuyStochasticRSI11 = True
-                previousBuyStochasticRSI11, previousSellStochasticRSI11 = swap(previousBuyStochasticRSI11, previousSellStochasticRSI11)
+                # previousBuyStochasticRSI11, previousSellStochasticRSI11 = swap(previousBuyStochasticRSI11, previousSellStochasticRSI11)
 
                 if previousSellStochasticRSI11 and previousBuyStochasticRSI11:
                     previousBuyStochasticRSI11 = False
                     previousSellStochasticRSI11 = False   
-                # #--------STOCH11RSI----------#
+                #--------STOCH11RSI----------#
 
                 #--------STOCH12RSI----------#
                 longRunSTOCHRSI12, shortRunSTOCHRSI12 = findSelection(previousBuyStochasticRSI12, previousSellStochasticRSI12, longRunSTOCHRSI12, shortRunSTOCHRSI12, i) 
@@ -449,7 +450,7 @@ def simulateCrypto(data):
                     previousSellStochasticRSI12 = False   
                 #--------STOCH12RSI----------#
 
-                #--------STOCH13RSI----------#
+                # #--------STOCH13RSI----------#
                 longRunSTOCHRSI13, shortRunSTOCHRSI13 = findSelection(previousBuyStochasticRSI13, previousSellStochasticRSI13, longRunSTOCHRSI13, shortRunSTOCHRSI13, i) 
                 shortRunSTOCHRSI13, longRunSTOCHRSI13, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI13, longRunSTOCHRSI13, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
     
@@ -464,9 +465,9 @@ def simulateCrypto(data):
                 if previousSellStochasticRSI13 and previousBuyStochasticRSI13:
                     previousBuyStochasticRSI13 = False
                     previousSellStochasticRSI13 = False   
-                #--------STOCH13RSI----------#
+                # #--------STOCH13RSI----------#
 
-                #--------STOCH14RSI----------#
+                # #--------STOCH14RSI----------#
                 longRunSTOCHRSI14, shortRunSTOCHRSI14 = findSelection(previousBuyStochasticRSI14, previousSellStochasticRSI14, longRunSTOCHRSI14, shortRunSTOCHRSI14, i) 
                 shortRunSTOCHRSI14, longRunSTOCHRSI14, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI14, longRunSTOCHRSI14, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
     
@@ -481,9 +482,9 @@ def simulateCrypto(data):
                 if previousSellStochasticRSI14 and previousBuyStochasticRSI14:
                     previousBuyStochasticRSI14 = False
                     previousSellStochasticRSI14 = False   
-                #--------STOCH14RSI----------#
+                # #--------STOCH14RSI----------#
 
-                #--------STOCH15RSI-------#
+                # #--------STOCH15RSI-------#
                 longRunSTOCHRSI15, shortRunSTOCHRSI15 = findSelection(previousBuyStochasticRSI15, previousSellStochasticRSI15, longRunSTOCHRSI15, shortRunSTOCHRSI15, i) 
                 shortRunSTOCHRSI15, longRunSTOCHRSI15, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI15, longRunSTOCHRSI15, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
     
@@ -498,9 +499,9 @@ def simulateCrypto(data):
                 if previousSellStochasticRSI15 and previousBuyStochasticRSI15:
                     previousBuyStochasticRSI15 = False
                     previousSellStochasticRSI15 = False   
-                #--------STOCH15RSI----------#
+                # #--------STOCH15RSI----------#
 
-                #--------STOCH16RSI----------#
+                # #--------STOCH16RSI----------#
                 longRunSTOCHRSI16, shortRunSTOCHRSI16 = findSelection(previousBuyStochasticRSI16, previousSellStochasticRSI16, longRunSTOCHRSI16, shortRunSTOCHRSI16, i) 
                 shortRunSTOCHRSI16, longRunSTOCHRSI16, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI16, longRunSTOCHRSI16, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
     
@@ -515,9 +516,9 @@ def simulateCrypto(data):
                 if previousSellStochasticRSI16 and previousBuyStochasticRSI16:
                     previousBuyStochasticRSI16 = False
                     previousSellStochasticRSI16 = False   
-                #--------STOCH16RSI----------#
+                # #--------STOCH16RSI----------#
 
-                #--------STOCH17RSI----------#
+                # #--------STOCH17RSI----------#
                 longRunSTOCHRSI17, shortRunSTOCHRSI17 = findSelection(previousBuyStochasticRSI17, previousSellStochasticRSI17, longRunSTOCHRSI17, shortRunSTOCHRSI17, i) 
                 shortRunSTOCHRSI17, longRunSTOCHRSI17, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI17, longRunSTOCHRSI17, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
     
@@ -532,41 +533,41 @@ def simulateCrypto(data):
                 if previousSellStochasticRSI17 and previousBuyStochasticRSI17:
                     previousBuyStochasticRSI17 = False
                     previousSellStochasticRSI17 = False   
-                #--------STOCH17RSI----------#
+                # #--------STOCH17RSI----------#
 
-                #--------STOCH18RSI----------#
-                longRunSTOCHRSI18, shortRunSTOCHRSI18 = findSelection(previousBuyStochasticRSI18, previousSellStochasticRSI18, longRunSTOCHRSI18, shortRunSTOCHRSI18, i) 
-                shortRunSTOCHRSI18, longRunSTOCHRSI18, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI18, longRunSTOCHRSI18, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+                # #--------STOCH18RSI----------#
+                # longRunSTOCHRSI18, shortRunSTOCHRSI18 = findSelection(previousBuyStochasticRSI18, previousSellStochasticRSI18, longRunSTOCHRSI18, shortRunSTOCHRSI18, i) 
+                # shortRunSTOCHRSI18, longRunSTOCHRSI18, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI18, longRunSTOCHRSI18, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
     
-                previousSellStochasticRSI18 = previousBuyStochasticRSI18 = False
+                # previousSellStochasticRSI18 = previousBuyStochasticRSI18 = False
 
-                if stochRSIK18[i-1] >= stochRSID18[i-1] and stochRSIK18[i] < stochRSID18[i]:
-                    previousSellStochasticRSI18 = True
-                if stochRSIK18[i-1] <= stochRSID18[i-1] and stochRSIK18[i] > stochRSID18[i]:
-                    previousBuyStochasticRSI18 = True
-                previousBuyStochasticRSI18, previousSellStochasticRSI18 = swap(previousBuyStochasticRSI18, previousSellStochasticRSI18)
+                # if stochRSIK18[i-1] >= stochRSID18[i-1] and stochRSIK18[i] < stochRSID18[i]:
+                #     previousSellStochasticRSI18 = True
+                # if stochRSIK18[i-1] <= stochRSID18[i-1] and stochRSIK18[i] > stochRSID18[i]:
+                #     previousBuyStochasticRSI18 = True
+                # previousBuyStochasticRSI18, previousSellStochasticRSI18 = swap(previousBuyStochasticRSI18, previousSellStochasticRSI18)
 
-                if previousSellStochasticRSI18 and previousBuyStochasticRSI18:
-                    previousBuyStochasticRSI18 = False
-                    previousSellStochasticRSI18 = False   
-                #--------STOCH18RSI----------#
+                # if previousSellStochasticRSI18 and previousBuyStochasticRSI18:
+                #     previousBuyStochasticRSI18 = False
+                #     previousSellStochasticRSI18 = False   
+                # #--------STOCH18RSI----------#
 
-                #--------STOCH19RSI----------#
-                longRunSTOCHRSI19, shortRunSTOCHRSI19 = findSelection(previousBuyStochasticRSI19, previousSellStochasticRSI19, longRunSTOCHRSI19, shortRunSTOCHRSI19, i) 
-                shortRunSTOCHRSI19, longRunSTOCHRSI19, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI19, longRunSTOCHRSI19, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+                # #--------STOCH19RSI----------#
+                # longRunSTOCHRSI19, shortRunSTOCHRSI19 = findSelection(previousBuyStochasticRSI19, previousSellStochasticRSI19, longRunSTOCHRSI19, shortRunSTOCHRSI19, i) 
+                # shortRunSTOCHRSI19, longRunSTOCHRSI19, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI19, longRunSTOCHRSI19, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
     
-                previousSellStochasticRSI19 = previousBuyStochasticRSI19 = False
+                # previousSellStochasticRSI19 = previousBuyStochasticRSI19 = False
 
-                if stochRSIK19[i-1] >= stochRSID19[i-1] and stochRSIK19[i] < stochRSID19[i]:
-                    previousSellStochasticRSI19 = True
-                if stochRSIK19[i-1] <= stochRSID19[i-1] and stochRSIK19[i] > stochRSID19[i]:
-                    previousBuyStochasticRSI19 = True
-                previousBuyStochasticRSI19, previousSellStochasticRSI19 = swap(previousBuyStochasticRSI19, previousSellStochasticRSI19)
+                # if stochRSIK19[i-1] >= stochRSID19[i-1] and stochRSIK19[i] < stochRSID19[i]:
+                #     previousSellStochasticRSI19 = True
+                # if stochRSIK19[i-1] <= stochRSID19[i-1] and stochRSIK19[i] > stochRSID19[i]:
+                #     previousBuyStochasticRSI19 = True
+                # previousBuyStochasticRSI19, previousSellStochasticRSI19 = swap(previousBuyStochasticRSI19, previousSellStochasticRSI19)
 
-                if previousSellStochasticRSI19 and previousBuyStochasticRSI19:
-                    previousBuyStochasticRSI19 = False
-                    previousSellStochasticRSI19 = False   
-                #--------STOCH19RSI----------#
+                # if previousSellStochasticRSI19 and previousBuyStochasticRSI19:
+                #     previousBuyStochasticRSI19 = False
+                #     previousSellStochasticRSI19 = False   
+                # #--------STOCH19RSI----------#
 
                 #--------STOCH20RSI----------#
                 longRunSTOCHRSI20, shortRunSTOCHRSI20 = findSelection(previousBuyStochasticRSI20, previousSellStochasticRSI20, longRunSTOCHRSI20, shortRunSTOCHRSI20, i) 
@@ -602,22 +603,22 @@ def simulateCrypto(data):
                     previousSellStochasticRSI21 = False   
                 #--------STOCH21RSI----------#
 
-                #--------STOCH22RSI----------#
-                longRunSTOCHRSI22, shortRunSTOCHRSI22 = findSelection(previousBuyStochasticRSI22, previousSellStochasticRSI22, longRunSTOCHRSI22, shortRunSTOCHRSI22, i) 
-                shortRunSTOCHRSI22, longRunSTOCHRSI22, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI22, longRunSTOCHRSI22, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+                # #--------STOCH22RSI----------#
+                # longRunSTOCHRSI22, shortRunSTOCHRSI22 = findSelection(previousBuyStochasticRSI22, previousSellStochasticRSI22, longRunSTOCHRSI22, shortRunSTOCHRSI22, i) 
+                # shortRunSTOCHRSI22, longRunSTOCHRSI22, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI22, longRunSTOCHRSI22, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
     
-                previousSellStochasticRSI22 = previousBuyStochasticRSI22 = False
+                # previousSellStochasticRSI22 = previousBuyStochasticRSI22 = False
 
-                if stochRSIK22[i-1] >= stochRSID22[i-1] and stochRSIK22[i] < stochRSID22[i]:
-                    previousSellStochasticRSI22 = True
-                if stochRSIK22[i-1] <= stochRSID22[i-1] and stochRSIK22[i] > stochRSID22[i]:
-                    previousBuyStochasticRSI22 = True
-                previousBuyStochasticRSI22, previousSellStochasticRSI22 = swap(previousBuyStochasticRSI22, previousSellStochasticRSI22)
+                # if stochRSIK22[i-1] >= stochRSID22[i-1] and stochRSIK22[i] < stochRSID22[i]:
+                #     previousSellStochasticRSI22 = True
+                # if stochRSIK22[i-1] <= stochRSID22[i-1] and stochRSIK22[i] > stochRSID22[i]:
+                #     previousBuyStochasticRSI22 = True
+                # previousBuyStochasticRSI22, previousSellStochasticRSI22 = swap(previousBuyStochasticRSI22, previousSellStochasticRSI22)
 
-                if previousSellStochasticRSI22 and previousBuyStochasticRSI22:
-                    previousBuyStochasticRSI22 = False
-                    previousSellStochasticRSI22 = False   
-                #--------STOCH22RSI----------#
+                # if previousSellStochasticRSI22 and previousBuyStochasticRSI22:
+                #     previousBuyStochasticRSI22 = False
+                #     previousSellStochasticRSI22 = False   
+                # #--------STOCH22RSI----------#
 
                 #--------STOCH23RSI----------#
                 longRunSTOCHRSI23, shortRunSTOCHRSI23 = findSelection(previousBuyStochasticRSI23, previousSellStochasticRSI23, longRunSTOCHRSI23, shortRunSTOCHRSI23, i) 
@@ -634,9 +635,9 @@ def simulateCrypto(data):
                 if previousSellStochasticRSI23 and previousBuyStochasticRSI23:
                     previousBuyStochasticRSI23 = False
                     previousSellStochasticRSI23 = False   
-                #--------STOCH23RSI----------#
+                # --------STOCH23RSI----------#
 
-                #--------STOCH24RSI----------#
+                # --------STOCH24RSI----------#
                 longRunSTOCHRSI24, shortRunSTOCHRSI24 = findSelection(previousBuyStochasticRSI24, previousSellStochasticRSI24, longRunSTOCHRSI24, shortRunSTOCHRSI24, i) 
                 shortRunSTOCHRSI24, longRunSTOCHRSI24, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI24, longRunSTOCHRSI24, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
     
@@ -651,9 +652,9 @@ def simulateCrypto(data):
                 if previousSellStochasticRSI24 and previousBuyStochasticRSI24:
                     previousBuyStochasticRSI24 = False
                     previousSellStochasticRSI24 = False   
-                #--------STOCH24RSI----------#
+                # --------STOCH24RSI----------#
 
-                #--------STOCH25RSI----------#
+                # --------STOCH25RSI----------#
                 longRunSTOCHRSI25, shortRunSTOCHRSI25 = findSelection(previousBuyStochasticRSI25, previousSellStochasticRSI25, longRunSTOCHRSI25, shortRunSTOCHRSI25, i) 
                 shortRunSTOCHRSI25, longRunSTOCHRSI25, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI25, longRunSTOCHRSI25, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
     
@@ -668,7 +669,7 @@ def simulateCrypto(data):
                 if previousSellStochasticRSI25 and previousBuyStochasticRSI25:
                     previousBuyStochasticRSI25 = False
                     previousSellStochasticRSI25 = False   
-                #--------STOCH25RSI----------#
+                # #--------STOCH25RSI----------#
 
                 #--------STOCH----------#
                 # longRunSTOCH, shortRunSTOCH = findSelection(previousBuyStochastic, previousSellStochastic, longRunSTOCH, shortRunSTOCH, i) 
@@ -720,10 +721,10 @@ def simulateCrypto(data):
                 # print(s)
                 KellyCriterum = p/s - q/t
                 print("Best Bet %: " + str(KellyCriterum))
-                amountOfBets = pos + nuet + neg
+                # amountOfBets = pos + nuet + neg
 
-                amount = 10 * pow((1 + 0.76*1.768), amountOfBets)
-                print(amount)
+                # amount = 10 * pow((1 + 0.76*1.768), amountOfBets)
+                # print(amount)
             except ZeroDivisionError:
                 print("ERROR GO BRRRR")
             # # ------Profilio-----
@@ -784,20 +785,26 @@ def simulateCrypto(data):
 
 
 if "__main__" == __name__:
-    f = open("documents/dataCryptoTest15min.txt", "r")
+    f = open("documents/binance30TEST.txt", "r")
     data = f.readlines()
     data = eval(data[0])
     f.close()
     data = formatDataset(data)
-    df = pd.read_csv('output.csv')
-    df.rename(columns={'High': 'high', 'Low': 'low', "Open": 'open', 'Close':'close'}, inplace=True)
-    df = df.set_index('Datetime')
-    df = df.drop(['Dividends', 'Stock Splits'], axis=1)
-    print(df)    
+    columns_to_convert = ['open', 'high', 'low', 'close', 'volume']
+
+    for column in columns_to_convert:
+        data[column] = data[column].astype(float)
+
+    print(type(data['open'][1]))
+    # df = pd.read_csv('output.csv')
+    # df.rename(columns={'High': 'high', 'Low': 'low', "Open": 'open', 'Close':'close'}, inplace=True)
+    # df = df.set_index('Datetime')
+    # df = df.drop(['Dividends', 'Stock Splits'], axis=1)
+    # print(df)    
 
     # print(data)
     
-    BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj = simulateCrypto(df)
+    BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj = simulateCrypto(data)
     #720mi
     # 77mil
     # 200bil

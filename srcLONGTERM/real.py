@@ -1,11 +1,13 @@
 from datetime import datetime
 import telebot
 import time
+from src.testSpecial import formatDataset
 from src.testGrabData import getYahoo
 from srcLONGTERM.functions import get_StochasticRelitiveStrengthIndex
 from srcLONGTERM.longTermPos import checkLuquidation, findSelection
 from srcLONGTERM.underliningProcesses import swap
 from srcLONGTERM.sendTelegramMessage import send_message
+from src.testGrabData import calltimes15m
 
 BOT_TOKEN = '6636169941:AAFysc5k-IA1QCC-1tfKXeTC_qeIdcG15ZI'
 
@@ -122,7 +124,7 @@ previousMinute = -1
 pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg, nowPrice, nowCount = 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0
 
 while True:
-    if (datetime.now().minute == 30 or datetime.now().minute == 0) and datetime.now().second == 1 and previousMinute != datetime.now().minute:
+    if ((datetime.now().minute == 30 or datetime.now().minute == 0) and previousMinute != datetime.now().minute):
         previousMinute = datetime.now().minute
         # Grab indicator df, grab df
         # 
@@ -130,47 +132,45 @@ while True:
         print('TEST')
 
         print(datetime.now())
+        data = calltimes15m("BTCUSD", 5000)
 
-        df = getYahoo()
-        df.rename(columns={'High': 'high', 'Low': 'low', "Open": 'open', 'Close':'close'}, inplace=True)
-        df = df.drop(['Dividends', 'Stock Splits'], axis=1)
-        i = len(df)-1
-        print(df.index[i])
-        
-        stochRSIK1, stochRSID1 = get_StochasticRelitiveStrengthIndex(df, 677, 70, 872)
-        stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(df, 1334, 16, 15)
-        stochRSIK3, stochRSID3 = get_StochasticRelitiveStrengthIndex(df, 660, 660, 153)
-        stochRSIK4, stochRSID4 = get_StochasticRelitiveStrengthIndex(df, 535, 127, 137)
-        stochRSIK5, stochRSID5 = get_StochasticRelitiveStrengthIndex(df, 24, 1956, 25)
-        stochRSIK6, stochRSID6 = get_StochasticRelitiveStrengthIndex(df, 787, 1, 328)
+        df = formatDataset(data)
+        columns_to_convert = ['open', 'high', 'low', 'close', 'volume']
+        for column in columns_to_convert:
+            df[column] = df[column].astype(float)
+
+        stochRSIK1, stochRSID1 = get_StochasticRelitiveStrengthIndex(df, 223, 418, 132)
+        stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(df, 250, 418, 132)
+        stochRSIK3, stochRSID3 = get_StochasticRelitiveStrengthIndex(df, 66, 70, 131)
+        stochRSIK4, stochRSID4 = get_StochasticRelitiveStrengthIndex(df, 535, 127, 137) # --> 30000
+        stochRSIK5, stochRSID5 = get_StochasticRelitiveStrengthIndex(df, 214, 47, 39)
+        stochRSIK6, stochRSID6 = get_StochasticRelitiveStrengthIndex(df, 180, 33, 132)
         stochRSIK7, stochRSID7 = get_StochasticRelitiveStrengthIndex(df, 401, 127, 80)
-        stochRSIK8, stochRSID8 = get_StochasticRelitiveStrengthIndex(df, 468, 9, 152)
+        stochRSIK8, stochRSID8 = get_StochasticRelitiveStrengthIndex(df, 69, 148, 59)
         stochRSIK9, stochRSID9 = get_StochasticRelitiveStrengthIndex(df, 154, 120, 586)
-        stochRSIK10, stochRSID10 = get_StochasticRelitiveStrengthIndex(df, 123, 123, 153)
-        stochRSIK11, stochRSID11 = get_StochasticRelitiveStrengthIndex(df, 133, 120, 133)
-        stochRSIK12, stochRSID12 = get_StochasticRelitiveStrengthIndex(df, 154, 120, 613)
-        stochRSIK13, stochRSID13 = get_StochasticRelitiveStrengthIndex(df, 202, 52, 152)
-        stochRSIK14, stochRSID14 = get_StochasticRelitiveStrengthIndex(df, 817, 50, 15)
-        stochRSIK15, stochRSID15 = get_StochasticRelitiveStrengthIndex(df, 817, 200, 15)
-        stochRSIK16, stochRSID16 = get_StochasticRelitiveStrengthIndex(df, 560, 5, 200)
-        stochRSIK17, stochRSID17 = get_StochasticRelitiveStrengthIndex(df, 468, 9, 324)
-        stochRSIK18, stochRSID18 = get_StochasticRelitiveStrengthIndex(df, 154, 263, 586)
-        stochRSIK19, stochRSID19 = get_StochasticRelitiveStrengthIndex(df, 1293, 50, 15)
-        stochRSIK20, stochRSID20 = get_StochasticRelitiveStrengthIndex(df, 468, 52, 152)
-        stochRSIK21, stochRSID21 = get_StochasticRelitiveStrengthIndex(df, 417, 71, 200)
-        stochRSIK22, stochRSID22 = get_StochasticRelitiveStrengthIndex(df, 281, 120, 281)
-        stochRSIK23, stochRSID23 = get_StochasticRelitiveStrengthIndex(df, 401, 127, 137)
-        stochRSIK24, stochRSID24 = get_StochasticRelitiveStrengthIndex(df, 293, 83, 316)
+        stochRSIK10, stochRSID10 = get_StochasticRelitiveStrengthIndex(df, 96, 64, 110)
+        stochRSIK11, stochRSID11 = get_StochasticRelitiveStrengthIndex(df, 145, 145, 39)
+        stochRSIK12, stochRSID12 = get_StochasticRelitiveStrengthIndex(df, 153, 53, 56)
+        stochRSIK13, stochRSID13 = get_StochasticRelitiveStrengthIndex(df, 77, 60, 136)
+        stochRSIK14, stochRSID14 = get_StochasticRelitiveStrengthIndex(df, 51, 59, 156) 
+        stochRSIK15, stochRSID15 = get_StochasticRelitiveStrengthIndex(df, 184, 62, 62) # 0%
+        stochRSIK16, stochRSID16 = get_StochasticRelitiveStrengthIndex(df, 143, 143, 62)
+        stochRSIK17, stochRSID17 = get_StochasticRelitiveStrengthIndex(df, 143, 424, 424) # 1%
+        stochRSIK18, stochRSID18 = get_StochasticRelitiveStrengthIndex(df, 143, 49, 210) 
+        stochRSIK19, stochRSID19 = get_StochasticRelitiveStrengthIndex(df, 53, 52, 194)
+        stochRSIK20, stochRSID20 = get_StochasticRelitiveStrengthIndex(df, 53, 53, 199) # 0.8
+        stochRSIK21, stochRSID21 = get_StochasticRelitiveStrengthIndex(df, 171, 57, 150) # 0.7
+        stochRSIK22, stochRSID22 = get_StochasticRelitiveStrengthIndex(df, 65, 150, 65)
+        stochRSIK23, stochRSID23 = get_StochasticRelitiveStrengthIndex(df, 134, 47, 238) # 1.09
+        stochRSIK24, stochRSID24 = get_StochasticRelitiveStrengthIndex(df, 401, 127, 137)
         stochRSIK25, stochRSID25 = get_StochasticRelitiveStrengthIndex(df, 401, 127, 153)
+        stochRSIK26, stochRSID26 = get_StochasticRelitiveStrengthIndex(df, 293, 83, 316)
         print(datetime.now())
-
-        nowPrice += df['close'][i]
-        nowCount += 1
-
+        i = len(df)-1
 
         #--------STOCH1RSI----------#
         longRunSTOCHRSI1, shortRunSTOCHRSI1 = findSelection(previousBuyStochasticRSI1, previousSellStochasticRSI1, longRunSTOCHRSI1, shortRunSTOCHRSI1, i) 
-        shortRunSTOCHRSI1, longRunSTOCHRSI1, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI1, longRunSTOCHRSI1, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+        shortRunSTOCHRSI1, longRunSTOCHRSI1, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI1, longRunSTOCHRSI1, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
 
         previousSellStochasticRSI1 = previousBuyStochasticRSI1 = False
 
@@ -178,11 +178,11 @@ while True:
             previousSellStochasticRSI1 = True
         if stochRSIK1[i-1] <= stochRSID1[i-1] and stochRSIK1[i] > stochRSID1[i]:
             previousBuyStochasticRSI1 = True
-        previousBuyStochasticRSI1, previousSellStochasticRSI1 = swap(previousBuyStochasticRSI1, previousSellStochasticRSI1)
 
         if previousSellStochasticRSI1 and previousBuyStochasticRSI1:
             previousBuyStochasticRSI1 = False
             previousSellStochasticRSI1 = False   
+
         if previousBuyStochasticRSI1 == True:
             print("BUY: 1")
             send_message("BUY: 1", bot)
@@ -193,7 +193,7 @@ while True:
 
         #--------STOCH2RSI----------#
         longRunSTOCHRSI2, shortRunSTOCHRSI2 = findSelection(previousBuyStochasticRSI2, previousSellStochasticRSI2, longRunSTOCHRSI2, shortRunSTOCHRSI2, i) 
-        shortRunSTOCHRSI2, longRunSTOCHRSI2, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI2, longRunSTOCHRSI2, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+        shortRunSTOCHRSI2, longRunSTOCHRSI2, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI2, longRunSTOCHRSI2, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
 
         previousSellStochasticRSI2 = previousBuyStochasticRSI2 = False
 
@@ -201,7 +201,6 @@ while True:
             previousSellStochasticRSI2 = True
         if stochRSIK2[i-1] <= stochRSID2[i-1] and stochRSIK2[i] > stochRSID2[i]:
             previousBuyStochasticRSI2 = True
-        previousBuyStochasticRSI2, previousSellStochasticRSI2 = swap(previousBuyStochasticRSI2, previousSellStochasticRSI2)
 
         if previousSellStochasticRSI2 and previousBuyStochasticRSI2:
             previousBuyStochasticRSI2 = False
@@ -217,7 +216,7 @@ while True:
 
         #--------STOCH3RSI----------#
         longRunSTOCHRSI3, shortRunSTOCHRSI3 = findSelection(previousBuyStochasticRSI3, previousSellStochasticRSI3, longRunSTOCHRSI3, shortRunSTOCHRSI3, i) 
-        shortRunSTOCHRSI3, longRunSTOCHRSI3, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI3, longRunSTOCHRSI3, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+        shortRunSTOCHRSI3, longRunSTOCHRSI3, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI3, longRunSTOCHRSI3, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
 
         previousSellStochasticRSI3 = previousBuyStochasticRSI3 = False
 
@@ -225,11 +224,10 @@ while True:
             previousSellStochasticRSI3 = True
         if stochRSIK3[i-1] <= stochRSID3[i-1] and stochRSIK3[i] > stochRSID3[i]:
             previousBuyStochasticRSI3 = True
-        previousBuyStochasticRSI3, previousSellStochasticRSI3 = swap(previousBuyStochasticRSI3, previousSellStochasticRSI3)
 
         if previousSellStochasticRSI3 and previousBuyStochasticRSI3:
             previousBuyStochasticRSI3 = False
-            previousSellStochasticRSI3 = False   
+            previousSellStochasticRSI3 = False  
         if previousBuyStochasticRSI3 == True:
             print("BUY: 3")
             send_message("BUY: 3", bot)
@@ -241,7 +239,7 @@ while True:
 
         #--------STOCH4RSI----------#
         longRunSTOCHRSI4, shortRunSTOCHRSI4 = findSelection(previousBuyStochasticRSI4, previousSellStochasticRSI4, longRunSTOCHRSI4, shortRunSTOCHRSI4, i) 
-        shortRunSTOCHRSI4, longRunSTOCHRSI4, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI4, longRunSTOCHRSI4, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+        shortRunSTOCHRSI4, longRunSTOCHRSI4, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI4, longRunSTOCHRSI4, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
 
         previousSellStochasticRSI4 = previousBuyStochasticRSI4 = False
 
@@ -249,7 +247,6 @@ while True:
             previousSellStochasticRSI4 = True
         if stochRSIK4[i-1] <= stochRSID4[i-1] and stochRSIK4[i] > stochRSID4[i]:
             previousBuyStochasticRSI4 = True
-        previousBuyStochasticRSI4, previousSellStochasticRSI4 = swap(previousBuyStochasticRSI4, previousSellStochasticRSI4)
 
         if previousSellStochasticRSI4 and previousBuyStochasticRSI4:
             previousBuyStochasticRSI4 = False
@@ -265,7 +262,7 @@ while True:
 
         #--------STOCH5RSI----------#
         longRunSTOCHRSI5, shortRunSTOCHRSI5 = findSelection(previousBuyStochasticRSI5, previousSellStochasticRSI5, longRunSTOCHRSI5, shortRunSTOCHRSI5, i) 
-        shortRunSTOCHRSI5, longRunSTOCHRSI5, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI5, longRunSTOCHRSI5, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+        shortRunSTOCHRSI5, longRunSTOCHRSI5, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI5, longRunSTOCHRSI5, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
 
         previousSellStochasticRSI5 = previousBuyStochasticRSI5 = False
 
@@ -273,7 +270,6 @@ while True:
             previousSellStochasticRSI5 = True
         if stochRSIK5[i-1] <= stochRSID5[i-1] and stochRSIK5[i] > stochRSID5[i]:
             previousBuyStochasticRSI5 = True
-        previousBuyStochasticRSI5, previousSellStochasticRSI5 = swap(previousBuyStochasticRSI5, previousSellStochasticRSI5)
 
         if previousSellStochasticRSI5 and previousBuyStochasticRSI5:
             previousBuyStochasticRSI5 = False
@@ -288,7 +284,7 @@ while True:
 
         #--------STOCH6RSI----------#
         longRunSTOCHRSI6, shortRunSTOCHRSI6 = findSelection(previousBuyStochasticRSI6, previousSellStochasticRSI6, longRunSTOCHRSI6, shortRunSTOCHRSI6, i) 
-        shortRunSTOCHRSI6, longRunSTOCHRSI6, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI6, longRunSTOCHRSI6, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+        shortRunSTOCHRSI6, longRunSTOCHRSI6, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI6, longRunSTOCHRSI6, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
 
         previousSellStochasticRSI6 = previousBuyStochasticRSI6 = False
 
@@ -296,7 +292,8 @@ while True:
             previousSellStochasticRSI6 = True
         if stochRSIK6[i-1] <= stochRSID6[i-1] and stochRSIK6[i] > stochRSID6[i]:
             previousBuyStochasticRSI6 = True
-        previousBuyStochasticRSI6, previousSellStochasticRSI6 = swap(previousBuyStochasticRSI6, previousSellStochasticRSI6)
+
+        # previousBuyStochasticRSI6, previousSellStochasticRSI6 = swap(previousBuyStochasticRSI6, previousSellStochasticRSI6)
 
         if previousSellStochasticRSI6 and previousBuyStochasticRSI6:
             previousBuyStochasticRSI6 = False
@@ -312,7 +309,7 @@ while True:
 
         #--------STOCH7RSI----------#
         longRunSTOCHRSI7, shortRunSTOCHRSI7 = findSelection(previousBuyStochasticRSI7, previousSellStochasticRSI7, longRunSTOCHRSI7, shortRunSTOCHRSI7, i) 
-        shortRunSTOCHRSI7, longRunSTOCHRSI7, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI7, longRunSTOCHRSI7, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+        shortRunSTOCHRSI7, longRunSTOCHRSI7, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI7, longRunSTOCHRSI7, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
 
         previousSellStochasticRSI7 = previousBuyStochasticRSI7 = False
 
@@ -320,11 +317,12 @@ while True:
             previousSellStochasticRSI7 = True
         if stochRSIK7[i-1] <= stochRSID7[i-1] and stochRSIK7[i] > stochRSID7[i]:
             previousBuyStochasticRSI7 = True
-        previousBuyStochasticRSI7, previousSellStochasticRSI7 = swap(previousBuyStochasticRSI7, previousSellStochasticRSI7)
+
+        # previousBuyStochasticRSI7, previousSellStochasticRSI7 = swap(previousBuyStochasticRSI7, previousSellStochasticRSI7)
 
         if previousSellStochasticRSI7 and previousBuyStochasticRSI7:
             previousBuyStochasticRSI7 = False
-            previousSellStochasticRSI7 = False   
+            previousSellStochasticRSI7 = False     
         if previousBuyStochasticRSI7 == True:
             print("BUY: 7")
             send_message("BUY: 7", bot)
@@ -336,7 +334,7 @@ while True:
 
         #--------STOCH8RSI----------#
         longRunSTOCHRSI8, shortRunSTOCHRSI8 = findSelection(previousBuyStochasticRSI8, previousSellStochasticRSI8, longRunSTOCHRSI8, shortRunSTOCHRSI8, i) 
-        shortRunSTOCHRSI8, longRunSTOCHRSI8, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI8, longRunSTOCHRSI8, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+        shortRunSTOCHRSI8, longRunSTOCHRSI8, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI8, longRunSTOCHRSI8, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
 
         previousSellStochasticRSI8 = previousBuyStochasticRSI8 = False
 
@@ -344,7 +342,8 @@ while True:
             previousSellStochasticRSI8 = True
         if stochRSIK8[i-1] <= stochRSID8[i-1] and stochRSIK8[i] > stochRSID8[i]:
             previousBuyStochasticRSI8 = True
-        previousBuyStochasticRSI8, previousSellStochasticRSI8 = swap(previousBuyStochasticRSI8, previousSellStochasticRSI8)
+
+        # previousBuyStochasticRSI8, previousSellStochasticRSI8 = swap(previousBuyStochasticRSI8, previousSellStochasticRSI8)
 
         if previousSellStochasticRSI8 and previousBuyStochasticRSI8:
             previousBuyStochasticRSI8 = False
@@ -368,7 +367,7 @@ while True:
             previousSellStochasticRSI9 = True
         if stochRSIK9[i-1] <= stochRSID9[i-1] and stochRSIK9[i] > stochRSID9[i]:
             previousBuyStochasticRSI9 = True
-        previousBuyStochasticRSI9, previousSellStochasticRSI9 = swap(previousBuyStochasticRSI9, previousSellStochasticRSI9)
+        # previousBuyStochasticRSI9, previousSellStochasticRSI9 = swap(previousBuyStochasticRSI9, previousSellStochasticRSI9)
 
         if previousSellStochasticRSI9 and previousBuyStochasticRSI9:
             previousBuyStochasticRSI9 = False
@@ -392,7 +391,7 @@ while True:
             previousSellStochasticRSI10 = True
         if stochRSIK10[i-1] <= stochRSID10[i-1] and stochRSIK10[i] > stochRSID10[i]:
             previousBuyStochasticRSI10 = True
-        previousBuyStochasticRSI10, previousSellStochasticRSI10 = swap(previousBuyStochasticRSI10, previousSellStochasticRSI10)
+        # previousBuyStochasticRSI10, previousSellStochasticRSI10 = swap(previousBuyStochasticRSI10, previousSellStochasticRSI10)
 
         if previousSellStochasticRSI10 and previousBuyStochasticRSI10:
             previousBuyStochasticRSI10 = False
@@ -416,7 +415,7 @@ while True:
             previousSellStochasticRSI11 = True
         if stochRSIK11[i-1] <= stochRSID11[i-1] and stochRSIK11[i] > stochRSID11[i]:
             previousBuyStochasticRSI11 = True
-        previousBuyStochasticRSI11, previousSellStochasticRSI11 = swap(previousBuyStochasticRSI11, previousSellStochasticRSI11)
+        # previousBuyStochasticRSI11, previousSellStochasticRSI11 = swap(previousBuyStochasticRSI11, previousSellStochasticRSI11)
 
         if previousSellStochasticRSI11 and previousBuyStochasticRSI11:
             previousBuyStochasticRSI11 = False
@@ -440,7 +439,7 @@ while True:
             previousSellStochasticRSI12 = True
         if stochRSIK12[i-1] <= stochRSID12[i-1] and stochRSIK12[i] > stochRSID12[i]:
             previousBuyStochasticRSI12 = True
-        previousBuyStochasticRSI12, previousSellStochasticRSI12 = swap(previousBuyStochasticRSI12, previousSellStochasticRSI12)
+        # previousBuyStochasticRSI12, previousSellStochasticRSI12 = swap(previousBuyStochasticRSI12, previousSellStochasticRSI12)
 
         if previousSellStochasticRSI12 and previousBuyStochasticRSI12:
             previousBuyStochasticRSI12 = False
@@ -464,7 +463,7 @@ while True:
             previousSellStochasticRSI13 = True
         if stochRSIK13[i-1] <= stochRSID13[i-1] and stochRSIK13[i] > stochRSID13[i]:
             previousBuyStochasticRSI13 = True
-        previousBuyStochasticRSI13, previousSellStochasticRSI13 = swap(previousBuyStochasticRSI13, previousSellStochasticRSI13)
+        # previousBuyStochasticRSI13, previousSellStochasticRSI13 = swap(previousBuyStochasticRSI13, previousSellStochasticRSI13)
 
         if previousSellStochasticRSI13 and previousBuyStochasticRSI13:
             previousBuyStochasticRSI13 = False
@@ -488,7 +487,7 @@ while True:
             previousSellStochasticRSI14 = True
         if stochRSIK14[i-1] <= stochRSID14[i-1] and stochRSIK14[i] > stochRSID14[i]:
             previousBuyStochasticRSI14 = True
-        previousBuyStochasticRSI14, previousSellStochasticRSI14 = swap(previousBuyStochasticRSI14, previousSellStochasticRSI14)
+        # previousBuyStochasticRSI14, previousSellStochasticRSI14 = swap(previousBuyStochasticRSI14, previousSellStochasticRSI14)
 
         if previousSellStochasticRSI14 and previousBuyStochasticRSI14:
             previousBuyStochasticRSI14 = False
@@ -512,7 +511,7 @@ while True:
             previousSellStochasticRSI15 = True
         if stochRSIK15[i-1] <= stochRSID15[i-1] and stochRSIK15[i] > stochRSID15[i]:
             previousBuyStochasticRSI15 = True
-        previousBuyStochasticRSI15, previousSellStochasticRSI15 = swap(previousBuyStochasticRSI15, previousSellStochasticRSI15)
+        # previousBuyStochasticRSI15, previousSellStochasticRSI15 = swap(previousBuyStochasticRSI15, previousSellStochasticRSI15)
 
         if previousSellStochasticRSI15 and previousBuyStochasticRSI15:
             previousBuyStochasticRSI15 = False
@@ -536,7 +535,7 @@ while True:
             previousSellStochasticRSI16 = True
         if stochRSIK16[i-1] <= stochRSID16[i-1] and stochRSIK16[i] > stochRSID16[i]:
             previousBuyStochasticRSI16 = True
-        previousBuyStochasticRSI16, previousSellStochasticRSI16 = swap(previousBuyStochasticRSI16, previousSellStochasticRSI16)
+        # previousBuyStochasticRSI16, previousSellStochasticRSI16 = swap(previousBuyStochasticRSI16, previousSellStochasticRSI16)
 
         if previousSellStochasticRSI16 and previousBuyStochasticRSI16:
             previousBuyStochasticRSI16 = False
@@ -559,7 +558,7 @@ while True:
             previousSellStochasticRSI17 = True
         if stochRSIK17[i-1] <= stochRSID17[i-1] and stochRSIK17[i] > stochRSID17[i]:
             previousBuyStochasticRSI17 = True
-        previousBuyStochasticRSI17, previousSellStochasticRSI17 = swap(previousBuyStochasticRSI17, previousSellStochasticRSI17)
+        # previousBuyStochasticRSI17, previousSellStochasticRSI17 = swap(previousBuyStochasticRSI17, previousSellStochasticRSI17)
 
         if previousSellStochasticRSI17 and previousBuyStochasticRSI17:
             previousBuyStochasticRSI17 = False
@@ -583,7 +582,7 @@ while True:
             previousSellStochasticRSI18 = True
         if stochRSIK18[i-1] <= stochRSID18[i-1] and stochRSIK18[i] > stochRSID18[i]:
             previousBuyStochasticRSI18 = True
-        previousBuyStochasticRSI18, previousSellStochasticRSI18 = swap(previousBuyStochasticRSI18, previousSellStochasticRSI18)
+        # previousBuyStochasticRSI18, previousSellStochasticRSI18 = swap(previousBuyStochasticRSI18, previousSellStochasticRSI18)
 
         if previousSellStochasticRSI18 and previousBuyStochasticRSI18:
             previousBuyStochasticRSI18 = False
@@ -607,7 +606,7 @@ while True:
             previousSellStochasticRSI19 = True
         if stochRSIK19[i-1] <= stochRSID19[i-1] and stochRSIK19[i] > stochRSID19[i]:
             previousBuyStochasticRSI19 = True
-        previousBuyStochasticRSI19, previousSellStochasticRSI19 = swap(previousBuyStochasticRSI19, previousSellStochasticRSI19)
+        # previousBuyStochasticRSI19, previousSellStochasticRSI19 = swap(previousBuyStochasticRSI19, previousSellStochasticRSI19)
 
         if previousSellStochasticRSI19 and previousBuyStochasticRSI19:
             previousBuyStochasticRSI19 = False
@@ -631,7 +630,7 @@ while True:
             previousSellStochasticRSI20 = True
         if stochRSIK20[i-1] <= stochRSID20[i-1] and stochRSIK20[i] > stochRSID20[i]:
             previousBuyStochasticRSI20 = True
-        previousBuyStochasticRSI20, previousSellStochasticRSI20 = swap(previousBuyStochasticRSI20, previousSellStochasticRSI20)
+        # previousBuyStochasticRSI20, previousSellStochasticRSI20 = swap(previousBuyStochasticRSI20, previousSellStochasticRSI20)
 
         if previousSellStochasticRSI20 and previousBuyStochasticRSI20:
             previousBuyStochasticRSI20 = False
@@ -654,7 +653,7 @@ while True:
             previousSellStochasticRSI21 = True
         if stochRSIK21[i-1] <= stochRSID21[i-1] and stochRSIK21[i] > stochRSID21[i]:
             previousBuyStochasticRSI21 = True
-        previousBuyStochasticRSI21, previousSellStochasticRSI21 = swap(previousBuyStochasticRSI21, previousSellStochasticRSI21)
+        # previousBuyStochasticRSI21, previousSellStochasticRSI21 = swap(previousBuyStochasticRSI21, previousSellStochasticRSI21)
 
         if previousSellStochasticRSI21 and previousBuyStochasticRSI21:
             previousBuyStochasticRSI21 = False
@@ -678,7 +677,7 @@ while True:
             previousSellStochasticRSI22 = True
         if stochRSIK22[i-1] <= stochRSID22[i-1] and stochRSIK22[i] > stochRSID22[i]:
             previousBuyStochasticRSI22 = True
-        previousBuyStochasticRSI22, previousSellStochasticRSI22 = swap(previousBuyStochasticRSI22, previousSellStochasticRSI22)
+        # previousBuyStochasticRSI22, previousSellStochasticRSI22 = swap(previousBuyStochasticRSI22, previousSellStochasticRSI22)
 
         if previousSellStochasticRSI22 and previousBuyStochasticRSI22:
             previousBuyStochasticRSI22 = False
@@ -702,7 +701,7 @@ while True:
             previousSellStochasticRSI23 = True
         if stochRSIK23[i-1] <= stochRSID23[i-1] and stochRSIK23[i] > stochRSID23[i]:
             previousBuyStochasticRSI23 = True
-        previousBuyStochasticRSI23, previousSellStochasticRSI23 = swap(previousBuyStochasticRSI23, previousSellStochasticRSI23)
+        # previousBuyStochasticRSI23, previousSellStochasticRSI23 = swap(previousBuyStochasticRSI23, previousSellStochasticRSI23)
 
         if previousSellStochasticRSI23 and previousBuyStochasticRSI23:
             previousBuyStochasticRSI23 = False
@@ -726,7 +725,7 @@ while True:
             previousSellStochasticRSI24 = True
         if stochRSIK24[i-1] <= stochRSID24[i-1] and stochRSIK24[i] > stochRSID24[i]:
             previousBuyStochasticRSI24 = True
-        previousBuyStochasticRSI24, previousSellStochasticRSI24 = swap(previousBuyStochasticRSI24, previousSellStochasticRSI24)
+        # previousBuyStochasticRSI24, previousSellStochasticRSI24 = swap(previousBuyStochasticRSI24, previousSellStochasticRSI24)
 
         if previousSellStochasticRSI24 and previousBuyStochasticRSI24:
             previousBuyStochasticRSI24 = False
@@ -749,7 +748,7 @@ while True:
             previousSellStochasticRSI25 = True
         if stochRSIK25[i-1] <= stochRSID25[i-1] and stochRSIK25[i] > stochRSID25[i]:
             previousBuyStochasticRSI25 = True
-        previousBuyStochasticRSI25, previousSellStochasticRSI25 = swap(previousBuyStochasticRSI25, previousSellStochasticRSI25)
+        # previousBuyStochasticRSI25, previousSellStochasticRSI25 = swap(previousBuyStochasticRSI25, previousSellStochasticRSI25)
 
         if previousSellStochasticRSI25 and previousBuyStochasticRSI25:
             previousBuyStochasticRSI25 = False
@@ -762,15 +761,4 @@ while True:
             send_message("SELL: 25", bot)
         #--------STOCH25RSI----------#
     else:
-        if datetime.now().minute > 30:
-            b = True
-            a = False
-        else:
-            a = True
-            b = False
-        if b:
-            sleepyTime = (60-datetime.now().minute)
-            time.sleep((sleepyTime-1)*60)
-        if a:
-            sleepyTime = (30-datetime.now().minute)
-            time.sleep((sleepyTime-1)*60)
+        time.sleep(20)
