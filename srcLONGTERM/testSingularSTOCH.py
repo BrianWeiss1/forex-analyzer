@@ -56,6 +56,10 @@ def simulateCrypto(data):
     avgPips = 0
     longI = {"buySignal": False, 'luquidate': False, 'entry': []}
     shortI = {'shortSignal': False, 'luquidate': False, 'entry': []}
+    hehehhahahaaPIPS2 = 0
+    hehehahhaPer2 = 0
+    hehehhahahaaPIPS = 0
+    hehehahhaPer = 0
 
 
     # ema2 = calculate_200ema(data2, 200)
@@ -106,10 +110,51 @@ def simulateCrypto(data):
             # (468, 9, 152) --> 0.66 --> -55,000
             # (468, 52, 152) --> 0.24 --> -150,000
             # (468, 9, 324) --> 0.24 --> -125,458
+            # # stochRSIK1, stochRSID1 = get_StochasticRelitiveStrengthIndex(data, 677, 70, 872)
+            # stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 1334, 16, 15)
+            # stochRSIK3, stochRSID3 = get_StochasticRelitiveStrengthIndex(data, 660, 660, 153)
+            # stochRSIK4, stochRSID4 = get_StochasticRelitiveStrengthIndex(data, 535, 127, 137) #KEEP
+            # stochRSIK5, stochRSID5 = get_StochasticRelitiveStrengthIndex(data, 24, 1956, 25)
+            # stochRSIK6, stochRSID6 = get_StochasticRelitiveStrengthIndex(data, 180, 33, 132) # --> 0.82 --> 1.1% --> -0.34*(1-0.75) --> -0.085
+            # stochRSIK7, stochRSID7 = get_StochasticRelitiveStrengthIndex(data, 401, 127, 80) # --> 0.36 --> 1.08% --> -0.2*(1-0.36) --> -0.128
+            # stochRSIK8, stochRSID8 = get_StochasticRelitiveStrengthIndex(data, 69, 148, 59) # --> 1.12 --> 1.02% --> -0.7*(1-0.85) --> -0.105
+            # stochRSIK9, stochRSID9 = get_StochasticRelitiveStrengthIndex(data, 154, 120, 586) # --> 0.56 --> 0.91% --> -0.26*(1-0.63) --> -0.0962
+            # stochRSIK10, stochRSID10 = get_StochasticRelitiveStrengthIndex(data, 96, 64, 110) # --> 0.92 --> 0.82% --> -0.25*(1-0.61) --> -0.095
+            # # stochRSIK11, stochRSID11 = get_StochasticRelitiveStrengthIndex(data, 54, 52, 233) --> changed
+            # stochRSIK12, stochRSID12 = get_StochasticRelitiveStrengthIndex(data, 154, 120, 613) # --> 0.41 --> 1.02% --> -0.3*(1-62) --> -0.114
+            # # stochRSIK13, stochRSID13 = get_StochasticRelitiveStrengthIndex(data, 202, 52, 152)
+            # # stochRSIK14, stochRSID14 = get_StochasticRelitiveStrengthIndex(data, 817, 50, 15) 
+            # # stochRSIK15, stochRSID15 = get_StochasticRelitiveStrengthIndex(data, 817, 200, 15) # 0%
+            # # stochRSIK16, stochRSID16 = get_StochasticRelitiveStrengthIndex(data, 560, 5, 200)
+            # stochRSIK17, stochRSID17 = get_StochasticRelitiveStrengthIndex(data, 468, 9, 324) #KEEP
+            # # stochRSIK18, stochRSID18 = get_StochasticRelitiveStrengthIndex(data, 154, 263, 586) 
+            # # stochRSIK19, stochRSID19 = get_StochasticRelitiveStrengthIndex(data, 1293, 50, 15)
+            # stochRSIK20, stochRSID20 = get_StochasticRelitiveStrengthIndex(data, 468, 52, 152) # 0.36 --> 0.81% --> -0.76*(1-0.85) --> -0.114
+            # stochRSIK21, stochRSID21 = get_StochasticRelitiveStrengthIndex(data, 417, 71, 200) # 0.41 --> 0.78% --> -0.8*(1-75) --> -0.2
+            # # stochRSIK22, stochRSID22 = get_StochasticRelitiveStrengthIndex(data, 281, 120, 281)
+            # stochRSIK23, stochRSID23 = get_StochasticRelitiveStrengthIndex(data, 401, 127, 137) # 0.36 --> 1.09% --> -0.12*(1-0.57) --> -0.05
+            # stochRSIK24, stochRSID24 = get_StochasticRelitiveStrengthIndex(data, 293, 83, 316) # 0.15 --> 0.6% --> 0 --> 0
+            # stochRSIK25, stochRSID25 = get_StochasticRelitiveStrengthIndex(data, 401, 127, 153) # 0.36 --> 0.73% --> -0.22(1-71) --> -0.063
+            # # stochRSIK26, stochRSID26 = get_StochasticRelitiveStrengthIndex(data, 401, 103, 153) 
+            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 223, 418, 132)
+            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 250, 418, 132)
+            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 66, 70, 131)
+            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 214, 47, 39)
+            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 145, 145, 39)
+            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 153, 53, 56)
+
+            # -----NEW-----#
+            # (69, 148, 59) -->  1.07 --> 40,000
+            # (180, 33, 132) --> 0.87 --> 44,000
+            # (96, 64, 110) --> 0.97 --> 33,000
+            # (23, 375, 325) --> 1.37 --> -30,000
+
             g = 339 #J:239, J: 339
-            get_StochasticOscilator(data, 196, 731, 314) # 6, 303, 920
-            stochK1 = data['%K']
-            stochD1 = data['%D']
+            a = 20000
+            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, j, 53, 56)
+            # get_StochasticOscilator(data, 196, 731, 314) # 6, 303, 92
+            # stochRSIK2 = data['%K']
+            # stochRSID2 = data['%D']
             # print(stochRSIK, stochRSID)          
             # stochRSIK = data['%K']
             # 561, 418 --> bad
@@ -122,9 +167,9 @@ def simulateCrypto(data):
                 shortI, longI, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortI, longI, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
                 previousSell = previousBuy = False
 
-                if stochK1[i-1] >= stochD1[i-1] and stochK1[i] < stochD1[i]:
+                if stochRSIK2[i-1] >= stochRSID2[i-1] and stochRSIK2[i] < stochRSID2[i]:
                     previousSell = True
-                if stochK1[i-1] <= stochD1[i-1] and stochK1[i] > stochD1[i]:
+                if stochRSIK2[i-1] <= stochRSID2[i-1] and stochRSIK2[i] > stochRSID2[i]:
                     previousBuy = True
 
 
@@ -171,16 +216,20 @@ def simulateCrypto(data):
                 print("NEG %: " + str(round((negPip/AvgPrice)*leverage, 5)))
                 if j == 411:
                     print('a')
-                if avgPips*percentOfTrades > bestAvgPips and pos > 0 and percentOfTrades > 1:
+                if avgPips*percentOfTrades > bestAvgPips and pos > 0:
                     # if j == 411:
                     #     print("a")
                     bestAvgPips = avgPips*percentOfTrades
                     bestAvgj = j-1
                     bestAvgk = k-1
-                if avgPips*percentOfTrades < worstAvgPips and avgPips < -40000 and percentOfTrades > 0.5:
+                    hehehhahahaaPIPS2 = avgPips
+                    hehehahhaPer2 = percentOfTrades
+                if avgPips*percentOfTrades < worstAvgPips and avgPips < -1:
                     worstAvgPips = avgPips*percentOfTrades
                     worstAvgj = j-1
                     worstAvgk = k-1
+                    hehehhahahaaPIPS = avgPips
+                    hehehahhaPer = percentOfTrades
                 if portfolio > BestProfilio:
                     BestProfilio = portfolio
                     Bestj = j-1
@@ -215,42 +264,51 @@ def simulateCrypto(data):
             countPos = 0
             countNeg = 0
         #SEPERATE WHEN TABBING
-        return BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj
+        return BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, hehehhahahaaPIPS, hehehahhaPer, hehehhahahaaPIPS2, hehehahhaPer2
     except KeyboardInterrupt:
-        print("\n\nBEST PROFILIO: " + str(BestProfilio) + " must be > 66mil")
-        print("BEST K: " + str(k-1))
-        print("BEST J: " + str(j-1))
-        print("\n")
-        print("\nBestAVGPips: " + str(bestAvgPips))
+        # print("\n\nBEST PROFILIO: " + str(BestProfilio) + " must be > 66mil")
+        # print("BEST K: " + str(k-1))
+        # print("BEST J: " + str(j-1))
+        # print("\n")
+        print("\nPosPips: " + str(bestAvgPips))
         print("K: " +str(bestAvgk-1))
         print("J: " + str(bestAvgj-1))
-        print("\n\nWorst Portfolio: " + str(WorseProfilio))
-        print("J: " + str(worstj-1))
-        print("K: " + str(worstk-1))
-        print("\nWORSTAVGPips: " + str(worstAvgPips))
+        print("PIPS: "  + str(hehehhahahaaPIPS2))
+        print("PERCENT: " + str(hehehahhaPer2))
+        # print("\n\nWorst Portfolio: " + str(WorseProfilio))
+        # print("J: " + str(worstj-1))
+        # print("K: " + str(worstk-1))
+        print("\nNegPips: " + str(worstAvgPips))
         print("K: " +str(worstAvgk-1))
         print("J: " + str(worstAvgj-1))
+        print("PIPS: "  + str(hehehhahahaaPIPS))
+        print("PERCENT: " + str(hehehahhaPer))
 
 
 
 
 
 if "__main__" == __name__:
-    f = open("documents/dataCryptoTest15min.txt", "r")
+    f = open("documents/binance30TEST.txt", "r")
     data = f.readlines()
     data = eval(data[0])
     f.close()
     data = formatDataset(data)
-    import pandas as pd
-    df = pd.read_csv('output.csv')
-    df.rename(columns={'High': 'high', 'Low': 'low', "Open": 'open', 'Close':'close'}, inplace=True)
-    df = df.set_index('Datetime')
-    df = df.drop(['Dividends', 'Stock Splits'], axis=1)
-    print(df)    
+    columns_to_convert = ['open', 'high', 'low', 'close', 'volume']
+
+    for column in columns_to_convert:
+        data[column] = data[column].astype(float)
+
+    # import pandas as pd
+    # df = pd.read_csv('output.csv')
+    # df.rename(columns={'High': 'high', 'Low': 'low', "Open": 'open', 'Close':'close'}, inplace=True)
+    # df = df.set_index('Datetime')
+    # df = df.drop(['Dividends', 'Stock Splits'], axis=1)
+    # print(df)    
 
     # print(data)
     
-    BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj = simulateCrypto(df)
+    BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, hehehhahahaaPIPS, hehehahhaPer, hehehhahahaaPIPS2, hehehahhaPer2 = simulateCrypto(data)
     #720mi
     # 77mil
     # 200bil
@@ -273,21 +331,25 @@ if "__main__" == __name__:
     #     middle_left = middle_right - 1
     #     median = (sorted_arr[middle_left] + sorted_arr[middle_right]) / 2
     print("\n\nSIMULATION RESULTS: ")
-    print("BestAVGPips: " + str(bestAvgPips))
+    print("PosPips: " + str(bestAvgPips))
     print("K: " +str(bestAvgk))
     print("J: " + str(bestAvgj))
-    print("\nWORSTAVGPips: " + str(worstAvgPips))
+    print("PIPS: "  + str(hehehhahahaaPIPS2))
+    print("PERCENT: " + str(hehehahhaPer2))
+    print("\nNegPips: " + str(worstAvgPips))
     print("K: " +str(worstAvgk))
     print("J: " + str(worstAvgj))
+    print("PIPS: "  + str(hehehhahahaaPIPS))
+    print("PERCENT: " + str(hehehahhaPer))
 
 
 
-    # BestAVGPips*percentOfTrades
-    print("\n\n\n\n")
-    print("Best Portfolio: \n" + str(BestProfilio))
-    print("J:" + str(Bestj-1))
-    print("K: " + str(Bestk-1))
-    print('\n\n')
-    print("Worst Portfolio: \n" + str(WorseProfilio))
-    print("J: " + str(worstj-1))
-    print("K: " + str(worstk-1))
+    # # BestAVGPips*percentOfTrades
+    # print("\n\n\n\n")
+    # print("Best Portfolio: \n" + str(BestProfilio))
+    # print("J:" + str(Bestj-1))
+    # print("K: " + str(Bestk-1))
+    # print('\n\n')
+    # print("Worst Portfolio: \n" + str(WorseProfilio))
+    # print("J: " + str(worstj-1))
+    # print("K: " + str(worstk-1))
