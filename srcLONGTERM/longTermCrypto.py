@@ -224,7 +224,6 @@ def simulateCrypto(data):
     stochRSIK21, stochRSID21 = get_StochasticRelitiveStrengthIndex(data, 171, 57, 150) # 0.7
     stochRSIK22, stochRSID22 = get_StochasticRelitiveStrengthIndex(data, 65, 150, 65)
     stochRSIK23, stochRSID23 = get_StochasticRelitiveStrengthIndex(data, 134, 47, 238) # 1.09
-
     stochRSIK24, stochRSID24 = get_StochasticRelitiveStrengthIndex(data, 401, 127, 137)
     stochRSIK25, stochRSID25 = get_StochasticRelitiveStrengthIndex(data, 401, 127, 153)
     stochRSIK26, stochRSID26 = get_StochasticRelitiveStrengthIndex(data, 293, 83, 316)
