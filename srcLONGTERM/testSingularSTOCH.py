@@ -142,6 +142,17 @@ def simulateCrypto(data):
             stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 214, 47, 39)
             stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 145, 145, 39)
             stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 153, 53, 56)
+            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 77, 60, 136)
+            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 51, 59, 156)
+            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 184, 62, 62)
+            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 143, 143, 62)
+            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 143, 424, 424)
+            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 143, 49, 210)
+            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 53, 52, 194)
+            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 53, 53, 199)
+            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 171, 57, 150)
+            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 65, 150, 65)
+            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 134, 47, 238)
 
             # -----NEW-----#
             # (69, 148, 59) -->  1.07 --> 40,000
@@ -150,8 +161,8 @@ def simulateCrypto(data):
             # (23, 375, 325) --> 1.37 --> -30,000
 
             g = 339 #J:239, J: 339
-            a = 20000
-            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, j, 53, 56)
+            a = 40000
+            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 134, 47, 238)
             # get_StochasticOscilator(data, 196, 731, 314) # 6, 303, 92
             # stochRSIK2 = data['%K']
             # stochRSID2 = data['%D']
@@ -216,7 +227,7 @@ def simulateCrypto(data):
                 print("NEG %: " + str(round((negPip/AvgPrice)*leverage, 5)))
                 if j == 411:
                     print('a')
-                if avgPips*percentOfTrades > bestAvgPips and pos > 0:
+                if avgPips*percentOfTrades > bestAvgPips and pos > 0 and avgPips > a:
                     # if j == 411:
                     #     print("a")
                     bestAvgPips = avgPips*percentOfTrades
