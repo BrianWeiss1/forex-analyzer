@@ -136,23 +136,32 @@ def simulateCrypto(data):
             # stochRSIK24, stochRSID24 = get_StochasticRelitiveStrengthIndex(data, 293, 83, 316) # 0.15 --> 0.6% --> 0 --> 0
             # stochRSIK25, stochRSID25 = get_StochasticRelitiveStrengthIndex(data, 401, 127, 153) # 0.36 --> 0.73% --> -0.22(1-71) --> -0.063
             # # stochRSIK26, stochRSID26 = get_StochasticRelitiveStrengthIndex(data, 401, 103, 153) 
-            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 223, 418, 132)
-            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 250, 418, 132)
-            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 66, 70, 131)
-            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 214, 47, 39)
-            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 145, 145, 39)
-            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 153, 53, 56)
-            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 77, 60, 136)
-            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 51, 59, 156)
-            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 184, 62, 62)
-            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 143, 143, 62)
-            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 143, 424, 424)
-            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 143, 49, 210)
-            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 53, 52, 194)
-            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 53, 53, 199)
-            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 171, 57, 150)
-            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 65, 150, 65)
-            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 134, 47, 238)
+            # stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 223, 418, 132)
+            # stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 250, 418, 132)
+            # stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 66, 70, 131)
+            # stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 214, 47, 39)
+            # stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 145, 145, 39)
+            # stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 153, 53, 56)
+            # stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 77, 60, 136)
+            # stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 51, 59, 156)
+            # stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 184, 62, 62)
+            # stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 143, 143, 62)
+            # stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 143, 424, 424)
+            # stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 143, 49, 210)
+            # stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 53, 52, 194)
+            # stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 53, 53, 199)
+            # stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 171, 57, 150)
+            # stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 65, 150, 65)
+            # stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 134, 47, 238)
+            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 165, 48, 181) # 45k --> 0.77
+            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 151, 122, 76) # 43k --> 0.77
+            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 112, 122, 79) # 39k --> 0.87
+            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 82, 136, 82) # 37k --> 0.97
+            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 170, 108, 72) # 38k --> 0.77
+            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 66, 141, 76) # 40k --> 1.18
+            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 66, 110, 121) # 40k --> 1.07
+            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 46, 58, 211) # 36k --> 1.18
+
 
             # -----NEW-----#
             # (69, 148, 59) -->  1.07 --> 40,000
@@ -161,9 +170,10 @@ def simulateCrypto(data):
             # (23, 375, 325) --> 1.37 --> -30,000
 
             g = 339 #J:239, J: 339
-            a = 40000
-            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 134, 47, 238)
-            # get_StochasticOscilator(data, 196, 731, 314) # 6, 303, 92
+            a = 30000
+            print2 = True
+            stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 170, 108, 72)
+            # get_StochasticOscilator(data, 196, 731, 314) # 6, 303, 9
             # stochRSIK2 = data['%K']
             # stochRSID2 = data['%D']
             # print(stochRSIK, stochRSID)          
@@ -192,41 +202,42 @@ def simulateCrypto(data):
 
 
             percentOfTrades = round(((pos + nuet + neg) / len(data)) * 100, 2)
-                    
+            
             try:
                 AvgPrice = nowPrice/nowCount
-                print(pos, nuet, neg)
-                try:
-                    print("POS/NEG RATIO: " + str(pos / neg))
+                if print2 == True:
+                    print(pos, nuet, neg)
+                    try:
+                        print("POS/NEG RATIO: " + str(pos / neg))
+                        print(
+                            "Percentage Correct: " + str(round((pos / (neg + pos)) * 100, 2)) + "%"
+                        )
+                    except: 
+                        print("ERROR 404")
+                    print("CANDLES: " + str(len(data) - 2))
                     print(
-                        "Percentage Correct: " + str(round((pos / (neg + pos)) * 100, 2)) + "%"
+                        "PERCENT OF TRADES: "
+                        + str(percentOfTrades)
                     )
-                except: 
-                    print("ERROR 404")
-                print("CANDLES: " + str(len(data) - 2))
-                print(
-                    "PERCENT OF TRADES: "
-                    + str(percentOfTrades)
-                )
-                print("protfilio: " + str(portfolio))
+                    print("protfilio: " + str(portfolio))
                 avgPips = totalPips/countPips
-                print("AVERAGE PIPS: " + str(totalPips/countPips))
-                print("POSITIVE PIPS: " + str(posPips/(countPos)))
+                if print2:
+                    print("AVERAGE PIPS: " + str(totalPips/countPips))
+                    print("POSITIVE PIPS: " + str(posPips/(countPos)))
                 try:
                     negPip = negPips/(neg)
                 except:
                     negPip = 0
-                print("NEGITIVE PIPS: " + str(negPip))
-                print("AVERAGE %: " + str(round((avgPips/AvgPrice), 5)))
-                print("POS %: " + str(round(posPips/(pos)/AvgPrice, 5)))
-                print("NEG %: " + str(round(negPip/AvgPrice, 5)))
-                leverage = 50
-                print(f"{leverage}X LEVERAGE")
-                print("AVERAGE %: " + str(round((avgPips/AvgPrice)*leverage, 5)))
-                print("POS %: " + str(round((posPips/(pos)/AvgPrice)*leverage, 5)))
-                print("NEG %: " + str(round((negPip/AvgPrice)*leverage, 5)))
-                if j == 411:
-                    print('a')
+                if print2:
+                    print("NEGITIVE PIPS: " + str(negPip))
+                    print("AVERAGE %: " + str(round((avgPips/AvgPrice), 5)))
+                    print("POS %: " + str(round(posPips/(pos)/AvgPrice, 5)))
+                    print("NEG %: " + str(round(negPip/AvgPrice, 5)))
+                    leverage = 50
+                    print(f"{leverage}X LEVERAGE")
+                    print("AVERAGE %: " + str(round((avgPips/AvgPrice)*leverage, 5)))
+                    print("POS %: " + str(round((posPips/(pos)/AvgPrice)*leverage, 5)))
+                    print("NEG %: " + str(round((negPip/AvgPrice)*leverage, 5)))
                 if avgPips*percentOfTrades > bestAvgPips and pos > 0 and avgPips > a:
                     # if j == 411:
                     #     print("a")
@@ -251,7 +262,8 @@ def simulateCrypto(data):
                     worstk = k-1
                 
             except ZeroDivisionError:
-                print("ERROR GO BRRRR")
+                if print2 == True:
+                    print("ERROR GO BRRRR")
             # # ------Profilio-----
 
             lst.append(portfolio)
@@ -300,7 +312,7 @@ def simulateCrypto(data):
 
 
 if "__main__" == __name__:
-    f = open("documents/binance30TEST.txt", "r")
+    f = open("documents/binance30.txt", "r")
     data = f.readlines()
     data = eval(data[0])
     f.close()
