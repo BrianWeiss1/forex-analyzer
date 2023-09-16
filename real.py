@@ -126,12 +126,6 @@ pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, cou
 while True:
     if ((datetime.now().minute == 30 or datetime.now().minute == 0) and previousMinute != datetime.now().minute):
         previousMinute = datetime.now().minute
-        # Grab indicator df, grab df
-        # 
-
-        print('TEST')
-
-        print(datetime.now())
         data = calltimes15m("BTCUSD", 5000)
 
         df = formatDataset(data)
