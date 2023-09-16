@@ -185,12 +185,12 @@ def findSelection(previousBuy, previousSell, longI, shortI, i):
 def checkLuquidation(shortI, longI, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg):
     if shortI['luquidate']:
         BuyOrSell = False
-        pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = findPos(data, longI['entry'], i, BuyOrSell, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg) # Logic to close short position
+        # pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = findPos(data, longI['entry'], i, BuyOrSell, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg) # Logic to close short position
         longI['entry'] = []
         shortI['luquidate'] = False
     if longI['luquidate']:
         BuyOrSell = True
-        pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = findPos(data, shortI['entry'], i, BuyOrSell, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg) # Logic to close long position
+        # pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = findPos(data, shortI['entry'], i, BuyOrSell, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg) # Logic to close long position
         shortI['entry'] = []
         longI['luquidate'] = False
     return shortI, longI, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg
