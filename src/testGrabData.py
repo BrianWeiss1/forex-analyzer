@@ -214,7 +214,6 @@ def calltimes5m(ticker, times, startTime='2023-07-30 9:45'):
 def calltimes15m(ticker, amount):
     binance = ccxt.binance()
     ticker = ticker.split("USD")
-    print(ticker)
     ticker = ticker[0]
     symbol = f'{ticker}/USDT'
     timeframe = '30m'
@@ -249,7 +248,7 @@ def calltimes15m(ticker, amount):
 
         formatted_data.append(formatted_candle)
 
-    print(len(formatted_data))
+    # print(len(formatted_data))
 
     f = open('documents/dataCryptoTest15min.txt', 'w')
     f.write(str(formatted_data))
