@@ -11,7 +11,7 @@ def get_StochasticOscilator(df, periodK, smoothK, periodD):
 
 def get_StochasticRelitiveStrengthIndex(data, window, smooth1, smooth2):
     stochRSIind = StochRSIIndicator(data['close'], window, smooth1, smooth2)
-    return stochRSIind.stochrsi_k() * 100, stochRSIind.stochrsi_d() * 100
+    return stochRSIind.stochrsi_k(), stochRSIind.stochrsi_d()
 
 
 if __name__ == '__main__':

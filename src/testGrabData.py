@@ -266,10 +266,10 @@ def calltimes30():
     api_key = "0imfnc8mVLWwsAawjYr4RxAf50DDqtlx"
     symbol = "BTCUSDT"
     interval = "30m"
-    start_time = '2023-07-01'
+    start_time = '2023-06-05'
     date_obj = datetime.datetime.strptime(start_time, "%Y-%m-%d")
     timestamp_ms = int(date_obj.timestamp()) * 1000
-    end_time = '2023-08-11'
+    end_time = '2023-08-17'
     date_obj = datetime.datetime.strptime(end_time, "%Y-%m-%d")
     timestamp_ms2 = int(date_obj.timestamp()) * 1000
 
@@ -328,5 +328,5 @@ def calltimes30():
 
         formatted_data.append(formatted_candle)
     print(formatted_data)
-    f = open('documents/binance30TEST.txt', 'w')
+    f = open('documents/binance30.txt', 'w')
     f.write(str(formatted_data))

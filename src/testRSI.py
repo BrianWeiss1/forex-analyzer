@@ -5,11 +5,11 @@ def get_rsi(close, lookback):
     up = []
     down = []
     for i in range(len(ret)):
-        if ret[i] < 0:
+        if ret.iloc[i] < 0:
             up.append(0)
-            down.append(ret[i])
+            down.append(ret.iloc[i])
         else:
-            up.append(ret[i])
+            up.append(ret.iloc[i])
             down.append(0)
     up_series = pd.Series(up)
     down_series = pd.Series(down).abs()
