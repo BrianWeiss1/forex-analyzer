@@ -20,3 +20,80 @@
             print("SELL: 1")
             send_message("SELL: 1", bot)
         #--------STOCH1RSI----------#
+
+
+get_StochasticOscilator(data, 34, 34, 34) # -21% 
+stochRSIK1 = data['%K']
+stochRSID1 = data['%D']
+get_StochasticOscilator(data, 460, 351, 4) # 23%
+stochRSIK2 = data['%K']
+stochRSID2 = data['%D']
+get_StochasticOscilator(data, 30, 387, 35) # -21%
+stochRSIK3 = data['%K']
+stochRSID3 = data['%D']
+get_StochasticOscilator(data, 79, 34, 17) # -26%
+stochRSIK4 = data['%K']
+stochRSID4 = data['%D']
+get_StochasticOscilator(data, 46, 344, 25) # 26%
+stochRSIK5 = data['%K']
+stochRSID5 = data['%D']
+get_StochasticOscilator(data, 158, 439, 8) # 23%
+stochRSIK6 = data['%K']
+stochRSID6 = data['%D']
+get_StochasticOscilator(data, 232, 446, 5) # 22%
+stochRSIK7 = data['%K']
+stochRSID7 = data['%D']
+get_StochasticOscilator(data, 42, 345, 25) # 23%
+stochRSIK8 = data['%K']
+stochRSID8 = data['%D']
+get_StochasticOscilator(data, 271, 441, 4) # 24%
+stochRSIK9 = data['%K']
+stochRSID9 = data['%D']
+get_StochasticOscilator(data, 327, 441, 3) # 24%
+stochRSIK10 = data['%K']
+stochRSID10 = data['%D']
+get_StochasticOscilator(data, 66, 396, 10) # -21%
+stochRSIK11 = data['%K']
+stochRSID11 = data['%D']
+get_StochasticOscilator(data, 136, 441, 10) # 23%
+stochRSIK12 = data['%K']
+stochRSID12 = data['%D']
+get_StochasticOscilator(data, 6, 73, 1251) # 22%
+stochRSIK13 = data['%K']
+stochRSID13 = data['%D']
+get_StochasticOscilator(data, 327, 327, 4) # 21%
+stochRSIK14 = data['%K']
+stochRSID14 = data['%D']
+get_StochasticOscilator(data, 442, 442, 3) # 24%
+stochRSIK15 = data['%K']
+stochRSID15 = data['%D']
+get_StochasticOscilator(data, 209, 437, 5) # 24%
+stochRSIK16 = data['%K']
+stochRSID16 = data['%D']
+get_StochasticOscilator(data, 207, 439, 5) # 27%
+stochRSIK17 = data['%K']
+stochRSID17 = data['%D']
+get_StochasticOscilator(data, 207, 439, 6) # 28%
+stochRSIK18 = data['%K']
+stochRSID18 = data['%D']
+get_StochasticOscilator(data, 430, 442, 3) # 24.5%
+stochRSIK19 = data['%K']
+stochRSID19 = data['%D']
+get_StochasticOscilator(data, 36, 388, 24) # 21%
+stochRSIK20 = data['%K']
+stochRSID20 = data['%D']
+get_StochasticOscilator(data, 39, 346, 31) # 25%
+stochRSIK21 = data['%K']
+stochRSID21 = data['%D']
+get_StochasticOscilator(data, 439, 205, 4) # 23%
+stochRSIK22 = data['%K']
+stochRSID22 = data['%D']
+get_StochasticOscilator(data, 31, 387, 36) # 20%
+stochRSIK23 = data['%K']
+stochRSID23 = data['%D']
+get_StochasticOscilator(data, 31, 290, 37) # 19%
+stochRSIK24 = data['%K']
+stochRSID24 = data['%D']
+get_StochasticOscilator(data, 328, 441, 3) # 23%
+stochRSIK25 = data['%K']
+stochRSID25 = data['%D']

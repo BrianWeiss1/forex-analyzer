@@ -78,24 +78,35 @@ def simulateCrypto(data):
     STOCHamount1 = 3
 
     stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 18, 883, 22) # 13%
-    get_StochasticOscilator(data, 34, 34, 34) # -21%
-    get_StochasticOscilator(data, 460, 351, 4) # 23%
-    get_StochasticOscilator(data, 30, 387, 35) # -19%
-    get_StochasticOscilator(data, 79, 34, 17) # -26%
-    get_StochasticOscilator(data, 46, 344, 25) # 26%
-    get_StochasticOscilator(data, 158, 439, 8) # 23%
-    get_StochasticOscilator(data, 232, 446, 5) # 22%
-    get_StochasticOscilator(data, 42, 345, 25) # 23%
-    get_StochasticOscilator(data, 271, 441, 4) # 24%
-    get_StochasticOscilator(data, 327, 441, 3) # 24%
-    get_StochasticOscilator(data, 66, 396, 10) # -21%
-    get_StochasticOscilator(data, 136, 441, 10) # 23%
-    get_StochasticOscilator(data, 6, 73, 1251) # 22%
-    get_StochasticOscilator(data, 327, 327, 4) # 21%
-    
+    get_StochasticOscilator(data, 34, 34, 34) # -21%    1
+    get_StochasticOscilator(data, 460, 351, 4) # 23%    2
+    get_StochasticOscilator(data, 30, 387, 35) # -21%   3
+    get_StochasticOscilator(data, 79, 34, 17) # -26%    4
+    get_StochasticOscilator(data, 46, 344, 25) # 26%    5
+    get_StochasticOscilator(data, 158, 439, 8) # 23%    6
+    get_StochasticOscilator(data, 232, 446, 5) # 22%    7
+    get_StochasticOscilator(data, 42, 345, 25) # 23%    8
+    get_StochasticOscilator(data, 271, 441, 4) # 24%    9
+    get_StochasticOscilator(data, 327, 441, 3) # 24%    10
+    get_StochasticOscilator(data, 66, 396, 10) # -21%   11
+    get_StochasticOscilator(data, 136, 441, 10) # 23%   12
+    get_StochasticOscilator(data, 6, 73, 1251) # 22%    13
+    get_StochasticOscilator(data, 327, 327, 4) # 21%    14
+    get_StochasticOscilator(data, 442, 442, 3) # 24%    15
+    get_StochasticOscilator(data, 209, 437, 5) # 24%    16
+    get_StochasticOscilator(data, 207, 439, 5) # 27%    17
+    get_StochasticOscilator(data, 207, 439, 6) # 28%    18
+    get_StochasticOscilator(data, 430, 442, 3) # 24.5%  19
+    get_StochasticOscilator(data, 36, 388, 24) # 21%    20
+    get_StochasticOscilator(data, 39, 346, 31) # 25%    21
+    get_StochasticOscilator(data, 439, 205, 4) # 23%    22
+    get_StochasticOscilator(data, 31, 387, 36) # 20%    23
+    get_StochasticOscilator(data, 31, 290, 37) # 19%    24
+    get_StochasticOscilator(data, 328, 441, 3) # 23%    25
     try:
-        for j in range(1, 3000):
+        for j in range(0, 500):
             print("J: " + str(j-1))
+            # for k in range(1, 200):
             # for k in range(1, 100):
             countPips = 0
             avgPips = 0
@@ -121,7 +132,7 @@ def simulateCrypto(data):
             # a = 00000
             g = j
             print2 = True
-            get_StochasticOscilator(data, j, j, 2) # 21%, 25, 345, 25, (772, 511, 345) 1248
+            get_StochasticOscilator(data, 327, 327, 4)# 31, 290, 36
             stochRSIK2 = data['%K']
             stochRSID2 = data['%D']
             # get_StochasticOscilator(da ta, 196, 731, 314) # 6, 303, 9
@@ -266,7 +277,7 @@ def simulateCrypto(data):
 
 
 if "__main__" == __name__:
-    f = open("documents/binance30.txt", "r")
+    f = open("documents/TESTbinance30.txt", "r")
     data = f.readlines()
     data = eval(data[0])
     f.close()
