@@ -135,16 +135,16 @@ def simulateCrypto(data):
             v = 1
             
             for i in range(1, len(data)):
-                nowPrice += data['close'].iloc[i]
+                nowPrice += data['close'][i]
                 nowCount += 1
                 longI, shortI = findSelection(previousBuy, previousSell, longI, shortI, i) 
                 shortI, longI, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortI, longI, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
                 previousSell = previousBuy = False
                 # dif = stochRSIK2[i-v]/stochRSID2[i-v]
 
-                if stochRSIK2.iloc[i-v] >= stochRSID2.iloc[i-v] and stochRSIK2.iloc[i] < stochRSID2.iloc[i]:
+                if stochRSIK2[i-v] >= stochRSID2[i-v] and stochRSIK2[i] < stochRSID2[i]:
                     previousSell = True
-                if stochRSIK2.iloc[i-v] <= stochRSID2.iloc[i-v] and stochRSIK2.iloc[i] > stochRSID2.iloc[i]:
+                if stochRSIK2[i-v] <= stochRSID2[i-v] and stochRSIK2[i] > stochRSID2[i]:
                     previousBuy = True
 
 
