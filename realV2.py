@@ -9,7 +9,7 @@ from srcLONGTERM.underliningProcesses import swap
 from srcLONGTERM.sendTelegramMessage import send_message
 from src.testGrabData import calltimes15m
 
-BOT_TOKEN = '6636169941:AAFysc5k-IA1QCC-1tfKXeTC_qeIdcG15ZI'
+BOT_TOKEN = '6409435847:AAEALhA4BHqg5H3DJyUP_fNbPJ2i82lY0oE'
 
 bot = telebot.TeleBot(BOT_TOKEN)    
 
