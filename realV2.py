@@ -3,7 +3,7 @@ import telebot
 import time
 from src.testSpecial import formatDataset
 from src.testGrabData import getYahoo
-from srcLONGTERM.functions import get_StochasticRelitiveStrengthIndex
+from srcLONGTERM.functions import get_StochasticRelitiveStrengthIndex, get_StochasticOscilator
 from srcLONGTERM.longTermPos import checkLuquidation, findSelection
 from srcLONGTERM.underliningProcesses import swap
 from srcLONGTERM.sendTelegramMessage import send_message
