@@ -216,9 +216,9 @@ while True:
 
         # previousSellStochasticRSI1 = previousBuyStochasticRSI1 = False
 
-        # if stochRSIK1[i-1] >= stochRSID1[i-1] and stochRSIK1[i] < stochRSID1[i]:
+        # if stochRSIK1.iloc[i-1] >= stochRSID1.iloc[i-1] and stochRSIK1.iloc[i] < stochRSID1.iloc[i]:
         #     previousSellStochasticRSI1 = True
-        # if stochRSIK1[i-1] <= stochRSID1[i-1] and stochRSIK1[i] > stochRSID1[i]:
+        # if stochRSIK1.iloc[i-1] <= stochRSID1.iloc[i-1] and stochRSIK1.iloc[i] > stochRSID1.iloc[i]:
         #     previousBuyStochasticRSI1 = True
 
         # if previousSellStochasticRSI1 and previousBuyStochasticRSI1:
@@ -239,9 +239,9 @@ while True:
 
         previousSellStochasticRSI2 = previousBuyStochasticRSI2 = False
 
-        if stochRSIK2[i-1] >= stochRSID2[i-1] and stochRSIK2[i] < stochRSID2[i]:
+        if stochRSIK2.iloc[i-1] >= stochRSID2.iloc[i-1] and stochRSIK2.iloc[i] < stochRSID2.iloc[i]:
             previousSellStochasticRSI2 = True
-        if stochRSIK2[i-1] <= stochRSID2[i-1] and stochRSIK2[i] > stochRSID2[i]:
+        if stochRSIK2.iloc[i-1] <= stochRSID2.iloc[i-1] and stochRSIK2.iloc.iloc[i] > stochRSID2.iloc.iloc[i]:
             previousBuyStochasticRSI2 = True
 
         if previousSellStochasticRSI2 and previousBuyStochasticRSI2:
@@ -262,9 +262,9 @@ while True:
 
         # previousSellStochasticRSI3 = previousBuyStochasticRSI3 = False
 
-        # if stochRSIK3[i-1] >= stochRSID3[i-1] and stochRSIK3[i] < stochRSID3[i]:
+        # if stochRSIK3.iloc[i-1] >= stochRSID3.iloc[i-1] and stochRSIK3.iloc[i] < stochRSID3.iloc[i]:
         #     previousSellStochasticRSI3 = True
-        # if stochRSIK3[i-1] <= stochRSID3[i-1] and stochRSIK3[i] > stochRSID3[i]:
+        # if stochRSIK3.iloc[i-1] <= stochRSID3.iloc[i-1] and stochRSIK3.iloc[i] > stochRSID3.iloc[i]:
         #     previousBuyStochasticRSI3 = True
 
         # if previousSellStochasticRSI3 and previousBuyStochasticRSI3:
@@ -285,9 +285,9 @@ while True:
 
         # previousSellStochasticRSI4 = previousBuyStochasticRSI4 = False
 
-        # if stochRSIK4[i-1] >= stochRSID4[i-1] and stochRSIK4[i] < stochRSID4[i]:
+        # if stochRSIK4.iloc[i-1] >= stochRSID4.iloc[i-1] and stochRSIK4.iloc[i] < stochRSID4.iloc[i]:
         #     previousSellStochasticRSI4 = True
-        # if stochRSIK4[i-1] <= stochRSID4[i-1] and stochRSIK4[i] > stochRSID4[i]:
+        # if stochRSIK4.iloc[i-1] <= stochRSID4.iloc[i-1] and stochRSIK4.iloc[i] > stochRSID4.iloc[i]:
         #     previousBuyStochasticRSI4 = True
 
         # if previousSellStochasticRSI4 and previousBuyStochasticRSI4:
@@ -308,9 +308,9 @@ while True:
 
         previousSellStochasticRSI5 = previousBuyStochasticRSI5 = False
 
-        if stochRSIK5[i-1] >= stochRSID5[i-1] and stochRSIK5[i] < stochRSID5[i]:
+        if stochRSIK5.iloc[i-1] >= stochRSID5.iloc[i-1] and stochRSIK5.iloc[i] < stochRSID5.iloc[i]:
             previousSellStochasticRSI5 = True
-        if stochRSIK5[i-1] <= stochRSID5[i-1] and stochRSIK5[i] > stochRSID5[i]:
+        if stochRSIK5.iloc[i-1] <= stochRSID5.iloc[i-1] and stochRSIK5.iloc[i] > stochRSID5.iloc[i]:
             previousBuyStochasticRSI5 = True
 
         if previousSellStochasticRSI5 and previousBuyStochasticRSI5:
@@ -330,9 +330,9 @@ while True:
 
         previousSellStochasticRSI6 = previousBuyStochasticRSI6 = False
 
-        if stochRSIK6[i-1] >= stochRSID6[i-1] and stochRSIK6[i] < stochRSID6[i]:
+        if stochRSIK6.iloc[i-1] >= stochRSID6.iloc[i-1] and stochRSIK6.iloc[i] < stochRSID6.iloc[i]:
             previousSellStochasticRSI6 = True
-        if stochRSIK6[i-1] <= stochRSID6[i-1] and stochRSIK6[i] > stochRSID6[i]:
+        if stochRSIK6.iloc[i-1] <= stochRSID6.iloc[i-1] and stochRSIK6.iloc[i] > stochRSID6.iloc[i]:
             previousBuyStochasticRSI6 = True
 
         # previousBuyStochasticRSI6, previousSellStochasticRSI6 = swap(previousBuyStochasticRSI6, previousSellStochasticRSI6)
@@ -355,9 +355,9 @@ while True:
 
         previousSellStochasticRSI7 = previousBuyStochasticRSI7 = False
 
-        if stochRSIK7[i-1] >= stochRSID7[i-1] and stochRSIK7[i] < stochRSID7[i]:
+        if stochRSIK7.iloc[i-1] >= stochRSID7.iloc[i-1] and stochRSIK7.iloc[i] < stochRSID7.iloc[i]:
             previousSellStochasticRSI7 = True
-        if stochRSIK7[i-1] <= stochRSID7[i-1] and stochRSIK7[i] > stochRSID7[i]:
+        if stochRSIK7.iloc[i-1] <= stochRSID7.iloc[i-1] and stochRSIK7.iloc[i] > stochRSID7.iloc[i]:
             previousBuyStochasticRSI7 = True
 
         # previousBuyStochasticRSI7, previousSellStochasticRSI7 = swap(previousBuyStochasticRSI7, previousSellStochasticRSI7)
@@ -380,9 +380,9 @@ while True:
 
         previousSellStochasticRSI8 = previousBuyStochasticRSI8 = False
 
-        if stochRSIK8[i-1] >= stochRSID8[i-1] and stochRSIK8[i] < stochRSID8[i]:
+        if stochRSIK8.iloc[i-1] >= stochRSID8.iloc[i-1] and stochRSIK8.iloc[i] < stochRSID8.iloc[i]:
             previousSellStochasticRSI8 = True
-        if stochRSIK8[i-1] <= stochRSID8[i-1] and stochRSIK8[i] > stochRSID8[i]:
+        if stochRSIK8.iloc[i-1] <= stochRSID8.iloc[i-1] and stochRSIK8.iloc[i] > stochRSID8.iloc[i]:
             previousBuyStochasticRSI8 = True
 
         # previousBuyStochasticRSI8, previousSellStochasticRSI8 = swap(previousBuyStochasticRSI8, previousSellStochasticRSI8)
@@ -405,9 +405,9 @@ while True:
 
         previousSellStochasticRSI9 = previousBuyStochasticRSI9 = False
 
-        if stochRSIK9[i-1] >= stochRSID9[i-1] and stochRSIK9[i] < stochRSID9[i]:
+        if stochRSIK9.iloc[i-1] >= stochRSID9.iloc[i-1] and stochRSIK9.iloc[i] < stochRSID9.iloc[i]:
             previousSellStochasticRSI9 = True
-        if stochRSIK9[i-1] <= stochRSID9[i-1] and stochRSIK9[i] > stochRSID9[i]:
+        if stochRSIK9.iloc[i-1] <= stochRSID9.iloc[i-1] and stochRSIK9.iloc[i] > stochRSID9.iloc[i]:
             previousBuyStochasticRSI9 = True
         # previousBuyStochasticRSI9, previousSellStochasticRSI9 = swap(previousBuyStochasticRSI9, previousSellStochasticRSI9)
 
@@ -429,9 +429,9 @@ while True:
 
         previousSellStochasticRSI10 = previousBuyStochasticRSI10 = False
 
-        if stochRSIK10[i-1] >= stochRSID10[i-1] and stochRSIK10[i] < stochRSID10[i]:
+        if stochRSIK10.iloc[i-1] >= stochRSID10.iloc[i-1] and stochRSIK10.iloc[i] < stochRSID10.iloc[i]:
             previousSellStochasticRSI10 = True
-        if stochRSIK10[i-1] <= stochRSID10[i-1] and stochRSIK10[i] > stochRSID10[i]:
+        if stochRSIK10.iloc[i-1] <= stochRSID10.iloc[i-1] and stochRSIK10.iloc[i] > stochRSID10.iloc[i]:
             previousBuyStochasticRSI10 = True
         # previousBuyStochasticRSI10, previousSellStochasticRSI10 = swap(previousBuyStochasticRSI10, previousSellStochasticRSI10)
 
@@ -453,9 +453,9 @@ while True:
 
         # previousSellStochasticRSI11 = previousBuyStochasticRSI11 = False
 
-        # if stochRSIK11[i-1] >= stochRSID11[i-1] and stochRSIK11[i] < stochRSID11[i]:
+        # if stochRSIK11.iloc[i-1] >= stochRSID11.iloc[i-1] and stochRSIK11.iloc[i] < stochRSID11.iloc[i]:
         #     previousSellStochasticRSI11 = True
-        # if stochRSIK11[i-1] <= stochRSID11[i-1] and stochRSIK11[i] > stochRSID11[i]:
+        # if stochRSIK11.iloc[i-1] <= stochRSID11.iloc[i-1] and stochRSIK11.iloc[i] > stochRSID11.iloc[i]:
         #     previousBuyStochasticRSI11 = True
         # # previousBuyStochasticRSI11, previousSellStochasticRSI11 = swap(previousBuyStochasticRSI11, previousSellStochasticRSI11)
 
@@ -477,9 +477,9 @@ while True:
 
         previousSellStochasticRSI12 = previousBuyStochasticRSI12 = False
 
-        if stochRSIK12[i-1] >= stochRSID12[i-1] and stochRSIK12[i] < stochRSID12[i]:
+        if stochRSIK12.iloc[i-1] >= stochRSID12.iloc[i-1] and stochRSIK12.iloc[i] < stochRSID12.iloc[i]:
             previousSellStochasticRSI12 = True
-        if stochRSIK12[i-1] <= stochRSID12[i-1] and stochRSIK12[i] > stochRSID12[i]:
+        if stochRSIK12.iloc[i-1] <= stochRSID12.iloc[i-1] and stochRSIK12.iloc[i] > stochRSID12.iloc[i]:
             previousBuyStochasticRSI12 = True
         # previousBuyStochasticRSI12, previousSellStochasticRSI12 = swap(previousBuyStochasticRSI12, previousSellStochasticRSI12)
 
@@ -501,9 +501,9 @@ while True:
 
         previousSellStochasticRSI13 = previousBuyStochasticRSI13 = False
 
-        if stochRSIK13[i-1] >= stochRSID13[i-1] and stochRSIK13[i] < stochRSID13[i]:
+        if stochRSIK13.iloc[i-1] >= stochRSID13.iloc[i-1] and stochRSIK13.iloc[i] < stochRSID13.iloc[i]:
             previousSellStochasticRSI13 = True
-        if stochRSIK13[i-1] <= stochRSID13[i-1] and stochRSIK13[i] > stochRSID13[i]:
+        if stochRSIK13.iloc[i-1] <= stochRSID13.iloc[i-1] and stochRSIK13.iloc[i] > stochRSID13.iloc[i]:
             previousBuyStochasticRSI13 = True
         # previousBuyStochasticRSI13, previousSellStochasticRSI13 = swap(previousBuyStochasticRSI13, previousSellStochasticRSI13)
 
@@ -525,9 +525,9 @@ while True:
 
         previousSellStochasticRSI14 = previousBuyStochasticRSI14 = False
 
-        if stochRSIK14[i-1] >= stochRSID14[i-1] and stochRSIK14[i] < stochRSID14[i]:
+        if stochRSIK14.iloc[i-1] >= stochRSID14.iloc[i-1] and stochRSIK14.iloc[i] < stochRSID14.iloc[i]:
             previousSellStochasticRSI14 = True
-        if stochRSIK14[i-1] <= stochRSID14[i-1] and stochRSIK14[i] > stochRSID14[i]:
+        if stochRSIK14.iloc[i-1] <= stochRSID14.iloc[i-1] and stochRSIK14.iloc[i] > stochRSID14.iloc[i]:
             previousBuyStochasticRSI14 = True
         # previousBuyStochasticRSI14, previousSellStochasticRSI14 = swap(previousBuyStochasticRSI14, previousSellStochasticRSI14)
 
@@ -549,9 +549,9 @@ while True:
 
         previousSellStochasticRSI15 = previousBuyStochasticRSI15 = False
 
-        if stochRSIK15[i-1] >= stochRSID15[i-1] and stochRSIK15[i] < stochRSID15[i]:
+        if stochRSIK15.iloc[i-1] >= stochRSID15.iloc[i-1] and stochRSIK15.iloc[i] < stochRSID15.iloc[i]:
             previousSellStochasticRSI15 = True
-        if stochRSIK15[i-1] <= stochRSID15[i-1] and stochRSIK15[i] > stochRSID15[i]:
+        if stochRSIK15.iloc[i-1] <= stochRSID15.iloc[i-1] and stochRSIK15.iloc[i] > stochRSID15.iloc[i]:
             previousBuyStochasticRSI15 = True
         # previousBuyStochasticRSI15, previousSellStochasticRSI15 = swap(previousBuyStochasticRSI15, previousSellStochasticRSI15)
 
@@ -573,9 +573,9 @@ while True:
 
         previousSellStochasticRSI16 = previousBuyStochasticRSI16 = False
 
-        if stochRSIK16[i-1] >= stochRSID16[i-1] and stochRSIK16[i] < stochRSID16[i]:
+        if stochRSIK16.iloc[i-1] >= stochRSID16.iloc[i-1] and stochRSIK16.iloc[i] < stochRSID16.iloc[i]:
             previousSellStochasticRSI16 = True
-        if stochRSIK16[i-1] <= stochRSID16[i-1] and stochRSIK16[i] > stochRSID16[i]:
+        if stochRSIK16.iloc[i-1] <= stochRSID16.iloc[i-1] and stochRSIK16.iloc[i] > stochRSID16.iloc[i]:
             previousBuyStochasticRSI16 = True
         # previousBuyStochasticRSI16, previousSellStochasticRSI16 = swap(previousBuyStochasticRSI16, previousSellStochasticRSI16)
 
@@ -596,9 +596,9 @@ while True:
 
         previousSellStochasticRSI17 = previousBuyStochasticRSI17 = False
 
-        if stochRSIK17[i-1] >= stochRSID17[i-1] and stochRSIK17[i] < stochRSID17[i]:
+        if stochRSIK17.iloc[i-1] >= stochRSID17.iloc[i-1] and stochRSIK17.iloc[i] < stochRSID17.iloc[i]:
             previousSellStochasticRSI17 = True
-        if stochRSIK17[i-1] <= stochRSID17[i-1] and stochRSIK17[i] > stochRSID17[i]:
+        if stochRSIK17.iloc[i-1] <= stochRSID17.iloc[i-1] and stochRSIK17.iloc[i] > stochRSID17.iloc[i]:
             previousBuyStochasticRSI17 = True
         # previousBuyStochasticRSI17, previousSellStochasticRSI17 = swap(previousBuyStochasticRSI17, previousSellStochasticRSI17)
 
@@ -620,9 +620,9 @@ while True:
 
         previousSellStochasticRSI18 = previousBuyStochasticRSI18 = False
 
-        if stochRSIK18[i-1] >= stochRSID18[i-1] and stochRSIK18[i] < stochRSID18[i]:
+        if stochRSIK18.iloc[i-1] >= stochRSID18.iloc[i-1] and stochRSIK18.iloc[i] < stochRSID18.iloc[i]:
             previousSellStochasticRSI18 = True
-        if stochRSIK18[i-1] <= stochRSID18[i-1] and stochRSIK18[i] > stochRSID18[i]:
+        if stochRSIK18.iloc[i-1] <= stochRSID18.iloc[i-1] and stochRSIK18.iloc[i] > stochRSID18.iloc[i]:
             previousBuyStochasticRSI18 = True
         # previousBuyStochasticRSI18, previousSellStochasticRSI18 = swap(previousBuyStochasticRSI18, previousSellStochasticRSI18)
 
@@ -644,9 +644,9 @@ while True:
 
         previousSellStochasticRSI19 = previousBuyStochasticRSI19 = False
 
-        if stochRSIK19[i-1] >= stochRSID19[i-1] and stochRSIK19[i] < stochRSID19[i]:
+        if stochRSIK19.iloc[i-1] >= stochRSID19.iloc[i-1] and stochRSIK19.iloc[i] < stochRSID19.iloc[i]:
             previousSellStochasticRSI19 = True
-        if stochRSIK19[i-1] <= stochRSID19[i-1] and stochRSIK19[i] > stochRSID19[i]:
+        if stochRSIK19.iloc[i-1] <= stochRSID19.iloc[i-1] and stochRSIK19.iloc[i] > stochRSID19.iloc[i]:
             previousBuyStochasticRSI19 = True
         # previousBuyStochasticRSI19, previousSellStochasticRSI19 = swap(previousBuyStochasticRSI19, previousSellStochasticRSI19)
 
@@ -668,9 +668,9 @@ while True:
 
         # previousSellStochasticRSI20 = previousBuyStochasticRSI20 = False
 
-        # if stochRSIK20[i-1] >= stochRSID20[i-1] and stochRSIK20[i] < stochRSID20[i]:
+        # if stochRSIK20.iloc[i-1] >= stochRSID20.iloc[i-1] and stochRSIK20.iloc[i] < stochRSID20.iloc[i]:
         #     previousSellStochasticRSI20 = True
-        # if stochRSIK20[i-1] <= stochRSID20[i-1] and stochRSIK20[i] > stochRSID20[i]:
+        # if stochRSIK20.iloc[i-1] <= stochRSID20.iloc[i-1] and stochRSIK20.iloc[i] > stochRSID20.iloc[i]:
         #     previousBuyStochasticRSI20 = True
         # # previousBuyStochasticRSI20, previousSellStochasticRSI20 = swap(previousBuyStochasticRSI20, previousSellStochasticRSI20)
 
@@ -691,9 +691,9 @@ while True:
 
         previousSellStochasticRSI21 = previousBuyStochasticRSI21 = False
 
-        if stochRSIK21[i-1] >= stochRSID21[i-1] and stochRSIK21[i] < stochRSID21[i]:
+        if stochRSIK21.iloc[i-1] >= stochRSID21.iloc[i-1] and stochRSIK21.iloc[i] < stochRSID21.iloc[i]:
             previousSellStochasticRSI21 = True
-        if stochRSIK21[i-1] <= stochRSID21[i-1] and stochRSIK21[i] > stochRSID21[i]:
+        if stochRSIK21.iloc[i-1] <= stochRSID21.iloc[i-1] and stochRSIK21.iloc[i] > stochRSID21.iloc[i]:
             previousBuyStochasticRSI21 = True
         # previousBuyStochasticRSI21, previousSellStochasticRSI21 = swap(previousBuyStochasticRSI21, previousSellStochasticRSI21)
 
@@ -715,9 +715,9 @@ while True:
 
         previousSellStochasticRSI22 = previousBuyStochasticRSI22 = False
 
-        if stochRSIK22[i-1] >= stochRSID22[i-1] and stochRSIK22[i] < stochRSID22[i]:
+        if stochRSIK22.iloc[i-1] >= stochRSID22.iloc[i-1] and stochRSIK22.iloc[i] < stochRSID22.iloc[i]:
             previousSellStochasticRSI22 = True
-        if stochRSIK22[i-1] <= stochRSID22[i-1] and stochRSIK22[i] > stochRSID22[i]:
+        if stochRSIK22.iloc[i-1] <= stochRSID22.iloc[i-1] and stochRSIK22.iloc[i] > stochRSID22.iloc[i]:
             previousBuyStochasticRSI22 = True
         # previousBuyStochasticRSI22, previousSellStochasticRSI22 = swap(previousBuyStochasticRSI22, previousSellStochasticRSI22)
 
@@ -739,9 +739,9 @@ while True:
 
         # previousSellStochasticRSI23 = previousBuyStochasticRSI23 = False
 
-        # if stochRSIK23[i-1] >= stochRSID23[i-1] and stochRSIK23[i] < stochRSID23[i]:
+        # if stochRSIK23.iloc[i-1] >= stochRSID23.iloc[i-1] and stochRSIK23.iloc[i] < stochRSID23.iloc[i]:
         #     previousSellStochasticRSI23 = True
-        # if stochRSIK23[i-1] <= stochRSID23[i-1] and stochRSIK23[i] > stochRSID23[i]:
+        # if stochRSIK23.iloc[i-1] <= stochRSID23.iloc[i-1] and stochRSIK23.iloc[i] > stochRSID23.iloc[i]:
         #     previousBuyStochasticRSI23 = True
         # # previousBuyStochasticRSI23, previousSellStochasticRSI23 = swap(previousBuyStochasticRSI23, previousSellStochasticRSI23)
 
@@ -763,9 +763,9 @@ while True:
 
         previousSellStochasticRSI24 = previousBuyStochasticRSI24 = False
 
-        if stochRSIK24[i-1] >= stochRSID24[i-1] and stochRSIK24[i] < stochRSID24[i]:
+        if stochRSIK24.iloc[i-1] >= stochRSID24.iloc[i-1] and stochRSIK24.iloc[i] < stochRSID24.iloc[i]:
             previousSellStochasticRSI24 = True
-        if stochRSIK24[i-1] <= stochRSID24[i-1] and stochRSIK24[i] > stochRSID24[i]:
+        if stochRSIK24.iloc[i-1] <= stochRSID24.iloc[i-1] and stochRSIK24.iloc[i] > stochRSID24.iloc[i]:
             previousBuyStochasticRSI24 = True
         # previousBuyStochasticRSI24, previousSellStochasticRSI24 = swap(previousBuyStochasticRSI24, previousSellStochasticRSI24)
 
@@ -786,9 +786,9 @@ while True:
 
         previousSellStochasticRSI25 = previousBuyStochasticRSI25 = False
 
-        if stochRSIK25[i-1] >= stochRSID25[i-1] and stochRSIK25[i] < stochRSID25[i]:
+        if stochRSIK25.iloc[i-1] >= stochRSID25.iloc[i-1] and stochRSIK25.iloc[i] < stochRSID25.iloc[i]:
             previousSellStochasticRSI25 = True
-        if stochRSIK25[i-1] <= stochRSID25[i-1] and stochRSIK25[i] > stochRSID25[i]:
+        if stochRSIK25.iloc[i-1] <= stochRSID25.iloc[i-1] and stochRSIK25.iloc[i] > stochRSID25.iloc[i]:
             previousBuyStochasticRSI25 = True
         # previousBuyStochasticRSI25, previousSellStochasticRSI25 = swap(previousBuyStochasticRSI25, previousSellStochasticRSI25)
 
