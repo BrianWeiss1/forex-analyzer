@@ -2,12 +2,11 @@ from datetime import datetime
 import telebot
 import time
 from src.testSpecial import formatDataset
-from src.testGrabData import getYahoo
+from src.testGrabData import getYahoo, calltimes15m
 from srcLONGTERM.functions import get_StochasticRelitiveStrengthIndex, get_StochasticOscilator
 from srcLONGTERM.longTermPos import checkLuquidation, findSelection
 from srcLONGTERM.underliningProcesses import swap
 from srcLONGTERM.sendTelegramMessage import send_message
-from src.testGrabData import calltimes15m
 
 BOT_TOKEN = '6409435847:AAEALhA4BHqg5H3DJyUP_fNbPJ2i82lY0oE'
 
@@ -124,7 +123,7 @@ previousMinute = -1
 pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg, nowPrice, nowCount = 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0
 
 while True:
-    if ((datetime.now().minute == 30 or datetime.now().minute == 0) and previousMinute != datetime.now().minute):
+    if ((datetime.now().minute == 47 or datetime.now().minute == 0) and previousMinute != datetime.now().minute):
         previousMinute = datetime.now().minute
         data = calltimes15m("BTCUSD", 5000)
 
@@ -132,88 +131,88 @@ while True:
         columns_to_convert = ['open', 'high', 'low', 'close', 'volume']
         for column in columns_to_convert:
             df[column] = df[column].astype(float)
-                
-        # get_StochasticOscilator(data, 34, 34, 34) # -21% 
-        # stochRSIK1 = data['%K']
-        # stochRSID1 = data['%D']
-        get_StochasticOscilator(data, 460, 351, 4) # 23%
-        stochRSIK2 = data['%K']
-        stochRSID2 = data['%D']
-        # get_StochasticOscilator(data, 30, 387, 35) # -21%
-        # stochRSIK3 = data['%K']
-        # stochRSID3 = data['%D']
-        # get_StochasticOscilator(data, 79, 34, 17) # -26%
-        # stochRSIK4 = data['%K']
-        # stochRSID4 = data['%D']
-        get_StochasticOscilator(data, 46, 344, 25) # 26%
-        stochRSIK5 = data['%K']
-        stochRSID5 = data['%D']
-        get_StochasticOscilator(data, 158, 439, 8) # 23%
-        stochRSIK6 = data['%K']
-        stochRSID6 = data['%D']
-        get_StochasticOscilator(data, 232, 446, 5) # 22%
-        stochRSIK7 = data['%K']
-        stochRSID7 = data['%D']
-        get_StochasticOscilator(data, 42, 345, 25) # 23%
-        stochRSIK8 = data['%K']
-        stochRSID8 = data['%D']
-        get_StochasticOscilator(data, 271, 441, 4) # 24%
-        stochRSIK9 = data['%K']
-        stochRSID9 = data['%D']
-        get_StochasticOscilator(data, 327, 441, 3) # 24%
-        stochRSIK10 = data['%K']
-        stochRSID10 = data['%D']
-        # get_StochasticOscilator(data, 66, 396, 10) # -21%
-        # stochRSIK11 = data['%K']
-        # stochRSID11 = data['%D']
-        get_StochasticOscilator(data, 136, 441, 10) # 23%
-        stochRSIK12 = data['%K']
-        stochRSID12 = data['%D']
-        get_StochasticOscilator(data, 6, 73, 1251) # 22%
-        stochRSIK13 = data['%K']
-        stochRSID13 = data['%D']
-        get_StochasticOscilator(data, 327, 327, 4) # 21%
-        stochRSIK14 = data['%K']
-        stochRSID14 = data['%D']
-        get_StochasticOscilator(data, 442, 442, 3) # 24%
-        stochRSIK15 = data['%K']
-        stochRSID15 = data['%D']
-        get_StochasticOscilator(data, 209, 437, 5) # 24%
-        stochRSIK16 = data['%K']
-        stochRSID16 = data['%D']
-        get_StochasticOscilator(data, 207, 439, 5) # 27%
-        stochRSIK17 = data['%K']
-        stochRSID17 = data['%D']
-        get_StochasticOscilator(data, 207, 439, 6) # 28%
-        stochRSIK18 = data['%K']
-        stochRSID18 = data['%D']
-        get_StochasticOscilator(data, 430, 442, 3) # 24.5%
-        stochRSIK19 = data['%K']
-        stochRSID19 = data['%D']
-        # get_StochasticOscilator(data, 36, 388, 24) # 21%
-        # stochRSIK20 = data['%K']
-        # stochRSID20 = data['%D']
-        get_StochasticOscilator(data, 39, 346, 31) # 25%
-        stochRSIK21 = data['%K']
-        stochRSID21 = data['%D']
-        get_StochasticOscilator(data, 439, 205, 4) # 23%
-        stochRSIK22 = data['%K']
-        stochRSID22 = data['%D']
-        # get_StochasticOscilator(data, 31, 387, 36) # 20%
-        # stochRSIK23 = data['%K']
-        # stochRSID23 = data['%D']
-        get_StochasticOscilator(data, 31, 290, 37) # 19%
-        stochRSIK24 = data['%K']
-        stochRSID24 = data['%D']
-        get_StochasticOscilator(data, 328, 441, 3) # 23%
-        stochRSIK25 = data['%K']
-        stochRSID25 = data['%D'] 
+
+        # get_StochasticOscilator(df, 34, 34, 34) # -21% 
+        # stochRSIK1 = df['%K']
+        # stochRSID1 = df['%D']
+        get_StochasticOscilator(df, 460, 351, 4) # 23%
+        stochRSIK2 = df['%K']
+        stochRSID2 = df['%D']
+        # get_StochasticOscilator(df, 30, 387, 35) # -21%
+        # stochRSIK3 = df['%K']
+        # stochRSID3 = df['%D']
+        # get_StochasticOscilator(df, 79, 34, 17) # -26%
+        # stochRSIK4 = df['%K']
+        # stochRSID4 = df['%D']
+        get_StochasticOscilator(df, 46, 344, 25) # 26%
+        stochRSIK5 = df['%K']
+        stochRSID5 = df['%D']
+        get_StochasticOscilator(df, 158, 439, 8) # 23%
+        stochRSIK6 = df['%K']
+        stochRSID6 = df['%D']
+        get_StochasticOscilator(df, 232, 446, 5) # 22%
+        stochRSIK7 = df['%K']
+        stochRSID7 = df['%D']
+        get_StochasticOscilator(df, 42, 345, 25) # 23%
+        stochRSIK8 = df['%K']
+        stochRSID8 = df['%D']
+        get_StochasticOscilator(df, 271, 441, 4) # 24%
+        stochRSIK9 = df['%K']
+        stochRSID9 = df['%D']
+        get_StochasticOscilator(df, 327, 441, 3) # 24%
+        stochRSIK10 = df['%K']
+        stochRSID10 = df['%D']
+        # get_StochasticOscilator(df, 66, 396, 10) # -21%
+        # stochRSIK11 = df['%K']
+        # stochRSID11 = df['%D']
+        get_StochasticOscilator(df, 136, 441, 10) # 23%
+        stochRSIK12 = df['%K']
+        stochRSID12 = df['%D']
+        get_StochasticOscilator(df, 6, 73, 1251) # 22%
+        stochRSIK13 = df['%K']
+        stochRSID13 = df['%D']
+        get_StochasticOscilator(df, 327, 327, 4) # 21%
+        stochRSIK14 = df['%K']
+        stochRSID14 = df['%D']
+        get_StochasticOscilator(df, 442, 442, 3) # 24%
+        stochRSIK15 = df['%K']
+        stochRSID15 = df['%D']
+        get_StochasticOscilator(df, 209, 437, 5) # 24%
+        stochRSIK16 = df['%K']
+        stochRSID16 = df['%D']
+        get_StochasticOscilator(df, 207, 439, 5) # 27%
+        stochRSIK17 = df['%K']
+        stochRSID17 = df['%D']
+        get_StochasticOscilator(df, 207, 439, 6) # 28%
+        stochRSIK18 = df['%K']
+        stochRSID18 = df['%D']
+        get_StochasticOscilator(df, 430, 442, 3) # 24.5%
+        stochRSIK19 = df['%K']
+        stochRSID19 = df['%D']
+        # get_StochasticOscilator(df, 36, 388, 24) # 21%
+        # stochRSIK20 = df['%K']
+        # stochRSID20 = df['%D']
+        get_StochasticOscilator(df, 39, 346, 31) # 25%
+        stochRSIK21 = df['%K']
+        stochRSID21 = df['%D']
+        get_StochasticOscilator(df, 439, 205, 4) # 23%
+        stochRSIK22 = df['%K']
+        stochRSID22 = df['%D']
+        # get_StochasticOscilator(df, 31, 387, 36) # 20%
+        # stochRSIK23 = df['%K']
+        # stochRSID23 = df['%D']
+        get_StochasticOscilator(df, 31, 290, 37) # 19%
+        stochRSIK24 = df['%K']
+        stochRSID24 = df['%D']
+        get_StochasticOscilator(df, 328, 441, 3) # 23%
+        stochRSIK25 = df['%K']
+        stochRSID25 = df['%D'] 
         print(datetime.now())
         i = len(df)-1
 
         #--------STOCH1RSI----------#
         # longRunSTOCHRSI1, shortRunSTOCHRSI1 = findSelection(previousBuyStochasticRSI1, previousSellStochasticRSI1, longRunSTOCHRSI1, shortRunSTOCHRSI1, i) 
-        # shortRunSTOCHRSI1, longRunSTOCHRSI1, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI1, longRunSTOCHRSI1, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+        # shortRunSTOCHRSI1, longRunSTOCHRSI1, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI1, longRunSTOCHRSI1, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
 
         # previousSellStochasticRSI1 = previousBuyStochasticRSI1 = False
 
@@ -236,7 +235,7 @@ while True:
 
         #--------STOCH2RSI----------#
         longRunSTOCHRSI2, shortRunSTOCHRSI2 = findSelection(previousBuyStochasticRSI2, previousSellStochasticRSI2, longRunSTOCHRSI2, shortRunSTOCHRSI2, i) 
-        shortRunSTOCHRSI2, longRunSTOCHRSI2, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI2, longRunSTOCHRSI2, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+        shortRunSTOCHRSI2, longRunSTOCHRSI2, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI2, longRunSTOCHRSI2, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
 
         previousSellStochasticRSI2 = previousBuyStochasticRSI2 = False
 
@@ -259,7 +258,7 @@ while True:
 
         #--------STOCH3RSI----------#
         # longRunSTOCHRSI3, shortRunSTOCHRSI3 = findSelection(previousBuyStochasticRSI3, previousSellStochasticRSI3, longRunSTOCHRSI3, shortRunSTOCHRSI3, i) 
-        # shortRunSTOCHRSI3, longRunSTOCHRSI3, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI3, longRunSTOCHRSI3, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+        # shortRunSTOCHRSI3, longRunSTOCHRSI3, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI3, longRunSTOCHRSI3, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
 
         # previousSellStochasticRSI3 = previousBuyStochasticRSI3 = False
 
@@ -282,7 +281,7 @@ while True:
 
         #--------STOCH4RSI----------#
         # longRunSTOCHRSI4, shortRunSTOCHRSI4 = findSelection(previousBuyStochasticRSI4, previousSellStochasticRSI4, longRunSTOCHRSI4, shortRunSTOCHRSI4, i) 
-        # shortRunSTOCHRSI4, longRunSTOCHRSI4, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI4, longRunSTOCHRSI4, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+        # shortRunSTOCHRSI4, longRunSTOCHRSI4, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI4, longRunSTOCHRSI4, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
 
         # previousSellStochasticRSI4 = previousBuyStochasticRSI4 = False
 
@@ -305,7 +304,7 @@ while True:
 
         #--------STOCH5RSI----------#
         longRunSTOCHRSI5, shortRunSTOCHRSI5 = findSelection(previousBuyStochasticRSI5, previousSellStochasticRSI5, longRunSTOCHRSI5, shortRunSTOCHRSI5, i) 
-        shortRunSTOCHRSI5, longRunSTOCHRSI5, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI5, longRunSTOCHRSI5, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+        shortRunSTOCHRSI5, longRunSTOCHRSI5, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI5, longRunSTOCHRSI5, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
 
         previousSellStochasticRSI5 = previousBuyStochasticRSI5 = False
 
@@ -327,7 +326,7 @@ while True:
 
         #--------STOCH6RSI----------#
         longRunSTOCHRSI6, shortRunSTOCHRSI6 = findSelection(previousBuyStochasticRSI6, previousSellStochasticRSI6, longRunSTOCHRSI6, shortRunSTOCHRSI6, i) 
-        shortRunSTOCHRSI6, longRunSTOCHRSI6, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI6, longRunSTOCHRSI6, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+        shortRunSTOCHRSI6, longRunSTOCHRSI6, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI6, longRunSTOCHRSI6, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
 
         previousSellStochasticRSI6 = previousBuyStochasticRSI6 = False
 
@@ -352,7 +351,7 @@ while True:
 
         #--------STOCH7RSI----------#
         longRunSTOCHRSI7, shortRunSTOCHRSI7 = findSelection(previousBuyStochasticRSI7, previousSellStochasticRSI7, longRunSTOCHRSI7, shortRunSTOCHRSI7, i) 
-        shortRunSTOCHRSI7, longRunSTOCHRSI7, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI7, longRunSTOCHRSI7, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+        shortRunSTOCHRSI7, longRunSTOCHRSI7, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI7, longRunSTOCHRSI7, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
 
         previousSellStochasticRSI7 = previousBuyStochasticRSI7 = False
 
@@ -377,7 +376,7 @@ while True:
 
         #--------STOCH8RSI----------#
         longRunSTOCHRSI8, shortRunSTOCHRSI8 = findSelection(previousBuyStochasticRSI8, previousSellStochasticRSI8, longRunSTOCHRSI8, shortRunSTOCHRSI8, i) 
-        shortRunSTOCHRSI8, longRunSTOCHRSI8, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI8, longRunSTOCHRSI8, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+        shortRunSTOCHRSI8, longRunSTOCHRSI8, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI8, longRunSTOCHRSI8, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
 
         previousSellStochasticRSI8 = previousBuyStochasticRSI8 = False
 
