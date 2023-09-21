@@ -124,7 +124,7 @@ pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, cou
 yes = False
 while True:
     yes = False
-    if ((datetime.now().minute == 47 or datetime.now().minute == 0) and previousMinute != datetime.now().minute):
+    if ((datetime.now().minute == 30 or datetime.now().minute == 0) and previousMinute != datetime.now().minute):
         while (yes):
             try:
                 previousMinute = datetime.now().minute
