@@ -8,7 +8,7 @@ from srcLONGTERM.longTermPos import checkLuquidation, findSelection
 from srcLONGTERM.underliningProcesses import swap
 from srcLONGTERM.sendTelegramMessage import send_message
 
-BOT_TOKEN = '6409435847:AAEALhA4BHqg5H3DJyUP_fNbPJ2i82lY0oE'
+BOT_TOKEN = '6691054026:AAF02ZeOR5evr7xJk6s2bOkittBqKUXtaqk'
 
 bot = telebot.TeleBot(BOT_TOKEN)    
 
@@ -123,9 +123,11 @@ previousMinute = -1
 pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg, nowPrice, nowCount = 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0
 yes = False
 while True:
+    count = 0
     yes = False
     if ((datetime.now().minute == 30 or datetime.now().minute == 0) and previousMinute != datetime.now().minute):
-        while (yes):
+        while (yes and count < 5):
+            count += 1
             try:
                 previousMinute = datetime.now().minute
                 data = calltimes15m("BTCUSD", 5000)
