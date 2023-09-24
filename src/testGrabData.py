@@ -260,13 +260,14 @@ def getYahoo():
     aapl_historical = aapl.history(start="2023-07-13", end="2023-09-20", interval="30m")
     aapl = pd.DataFrame(aapl_historical)
     return aapl
-def calltimes30():
+def calltimes30(symbol, start_time = '2023-02-23'):
     endpoint = "https://api.binance.com/api/v1/klines"
 
-    api_key = "0imfnc8mVLWwsAawjYr4RxAf50DDqtlx"
-    symbol = "BTCUSDT"
+    api_key = "0imfnc8mVLWwsAawjYr4RxAf50DDqtle" # 0imfnc8mVLWwsAawjYr4RxAf50DDqtlx
+    symbol.split()
+    symbol = symbol
     interval = "30m"
-    start_time = '2023-02-23'
+    start_time = '2023-02-23' # prev 2023-02-23
     date_obj = datetime.datetime.strptime(start_time, "%Y-%m-%d")
     timestamp_ms = int(date_obj.timestamp()) * 1000
     end_time = '2023-06-04'
@@ -327,6 +328,6 @@ def calltimes30():
         }
 
         formatted_data.append(formatted_candle)
-    print(formatted_data)
-    f = open('documents/TESTbinance30.txt', 'w')
+    # print(formatted_data)
+    f = open('documents/binance30.txt', 'w')
     f.write(str(formatted_data))

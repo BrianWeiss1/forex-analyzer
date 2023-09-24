@@ -7,8 +7,10 @@ from srcLONGTERM.functions import get_StochasticRelitiveStrengthIndex, get_Stoch
 from srcLONGTERM.longTermPos import checkLuquidation, findSelection
 from srcLONGTERM.underliningProcesses import swap
 from srcLONGTERM.sendTelegramMessage import send_message
+import pandas_datareader
+import pandas
 
-BOT_TOKEN = '6691054026:AAF02ZeOR5evr7xJk6s2bOkittBqKUXtaqk'
+BOT_TOKEN = '6544880301:AAHg7mY97eTLOt1r3TLfI2Ww-DhdTu9E52g'
 
 bot = telebot.TeleBot(BOT_TOKEN)    
 
@@ -126,7 +128,7 @@ yes = False
 while True:
     count = 0
     yes = False
-    if ((datetime.now().minute == 30 or datetime.now().minute == 0) and previousMinute != datetime.now().minute):
+    if ((datetime.now().minute == 30 or datetime.now().minute == 3) and previousMinute != datetime.now().minute):
         yes = True
         while (yes and count < 5):
             count += 1
@@ -216,7 +218,7 @@ while True:
                 stochRSID25 = df['%D'] 
                 print(datetime.now())
                 i = len(df)-1
-
+                
                 #--------STOCH1RSI----------#
                 # longRunSTOCHRSI1, shortRunSTOCHRSI1 = findSelection(previousBuyStochasticRSI1, previousSellStochasticRSI1, longRunSTOCHRSI1, shortRunSTOCHRSI1, i) 
                 # shortRunSTOCHRSI1, longRunSTOCHRSI1, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI1, longRunSTOCHRSI1, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
@@ -809,10 +811,10 @@ while True:
                     print("SELL: 25")
                     send_message("SELL: 25", bot)
                 #--------STOCH25RSI----------#
-                yes = True
+                yes = False
                 break
             except Exception as e:
-                yes = False
+                yes = True
                 print(e)
     else:
         # print('L BOZO')

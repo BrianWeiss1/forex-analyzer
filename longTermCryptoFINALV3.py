@@ -32,6 +32,7 @@ def simulateCrypto(data):
     previousBuyStochasticRSI = False
     previousSellStochasticRSI = False
     pos = 0
+    AvgPercent = 0
     nuet = 0
     neg = 0
     BestProfilio = -sys.maxsize
@@ -750,6 +751,7 @@ def simulateCrypto(data):
                     negPip = negPips/(neg)
                 except:
                     negPip = 0
+                AvgPercent = round((avgPips/AvgPrice), 5)
                 print("NEGITIVE PIPS: " + str(negPip))
                 print("AVERAGE %: " + str(round((avgPips/AvgPrice), 5)))
                 print("POS %: " + str(round(posPips/(pos)/AvgPrice, 5)))
@@ -809,7 +811,7 @@ def simulateCrypto(data):
             countPos = 0
             countNeg = 0
         #SEPERATE WHEN TABBING
-        return BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj
+        return BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent
     except KeyboardInterrupt:
         print("\n\nBEST PROFILIO: " + str(BestProfilio) + " must be > 66mil")
         print("BEST K: " + str(k))
@@ -830,7 +832,7 @@ def simulateCrypto(data):
 
 
 if "__main__" == __name__:
-    f = open("documents/TESTbinance30.txt", "r")
+    f = open("documents/binance30.txt", "r")
     data = f.readlines()
     data = eval(data[0])
     f.close()
@@ -840,7 +842,7 @@ if "__main__" == __name__:
     for column in columns_to_convert:
         data[column] = data[column].astype(float)
 
-    print(type(data['open'][1]))
+    # print(type(data['open'][1]))
     # df = pd.read_csv('output.csv')
     # df.rename(columns={'High': 'high', 'Low': 'low', "Open": 'open', 'Close':'close'}, inplace=True)
     # df = df.set_index('Datetime')
@@ -849,7 +851,7 @@ if "__main__" == __name__:
 
     # print(data)
     
-    BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj = simulateCrypto(data)
+    BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent = simulateCrypto(data)
     #720mi
     # 77mil
     # 200bil
