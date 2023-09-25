@@ -55,11 +55,17 @@ from longTermCryptoFINALV3 import simulateCrypto
 from src.testSpecial import formatDataset
 import time
 
-def process_symbol(dataSymbol, best_results, worst_results):
+def process_symbol(dataSymbol, best_results, worst_results, lst):
     bestAvgPercent = 0
     worstAvgPercent = 0
     bestSymbol = None
     worstSymbol = None
+    bestNumSymbol = None
+    worstNumSymbol = None
+    worstNumPercent = 0
+    bestNumPercent = 0
+    
+    
 
     for i in range(len(dataSymbol)):
         print(i)
@@ -76,28 +82,45 @@ def process_symbol(dataSymbol, best_results, worst_results):
             for column in columns_to_convert:
                 data[column] = data[column].astype(float)
             
-            BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent = simulateCrypto(data)
+            BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, specialNum = simulateCrypto(data)
             # time.sleep(5)
+            lst.append([dataSymbol[i], specialNum])
             if AvgPercent > bestAvgPercent:
                 bestAvgPercent = AvgPercent
+                bestSymbol = dataSymbol[i]
                 bestSymbol = dataSymbol[i]
             if AvgPercent < worstAvgPercent:
                 worstAvgPercent = AvgPercent
                 worstSymbol = dataSymbol[i]
+            if specialNum > bestNumPercent:
+                bestNumPercent = specialNum
+                bestNumSymbol = dataSymbol[i]
+            if specialNum < worstNumPercent:
+                worstNumPercent = specialNum
+                worstNumSymbol = dataSymbol[i]
         except Exception as e:
             print(e)
+            
+    bestSymbol = bestNumSymbol
+    worstSymbol = worstNumSymbol
+    bestAvgPercent = bestNumPercent
+    worstAvgPercent = worstNumPercent 
     
     best_results.append((bestSymbol, bestAvgPercent))
     worst_results.append((worstSymbol, worstAvgPercent))
+    # bestNumSymbol.append()
 
 if __name__ == '__main__':
+    
     f = open('documents/binanceSymbols.txt', 'r')
     dataSymbol = f.readlines()
     dataSymbol = eval(dataSymbol[0])
     f.close()
+    print(len(dataSymbol))
+    lst = []
 
     # Number of threads you want to create
-    num_threads = 40  # Adjust this as needed
+    num_threads = 10  # Adjust this as needed
     
     # Split the dataSymbol list into chunks for parallel processing
     chunk_size = len(dataSymbol) // num_threads
@@ -108,7 +131,7 @@ if __name__ == '__main__':
 
     threads = []
     for chunk in data_chunks:
-        thread = threading.Thread(target=process_symbol, args=(chunk, best_results, worst_results))
+        thread = threading.Thread(target=process_symbol, args=(chunk, best_results, worst_results, lst))
         threads.append(thread)
         thread.start()
 
@@ -123,9 +146,12 @@ if __name__ == '__main__':
     # Find the best and worst results from all threads
     best_result = max(best_results, key=lambda x: x[1])
     worst_result = min(worst_results, key=lambda x: x[1])
-
+    print(lst)
     print("END OF SIMULATION: \n\n\n")
-    print("BestPercent: " + str(best_result[1]))
     print('\nSYMBOL: ' + str(best_result[0]))
-    print("WorstPercent: " + str(worst_result[1]))
+    print("BestPercent: " + str(best_result[1]))
     print('\nSYMBOL: ' + str(worst_result[0]))
+    print("WorstPercent: " + str(worst_result[1]))
+
+    
+    

@@ -331,3 +331,5 @@ def calltimes30(symbol, start_time = '2023-02-23'):
     # print(formatted_data)
     f = open('documents/binance30.txt', 'w')
     f.write(str(formatted_data))
+    f.close()
+    return formatted_data

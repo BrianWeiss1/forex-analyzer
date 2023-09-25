@@ -125,6 +125,7 @@ previousMinute = -1
 pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg, nowPrice, nowCount = 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0
 
 yes = False
+opp = True
 while True:
     count = 0
     yes = False
@@ -134,7 +135,8 @@ while True:
             count += 1
             try:
                 previousMinute = datetime.now().minute
-                data = calltimes15m("BTCUSD", 5000)
+                data = calltimes15m("RADUSDT")
+                opp = True
 
                 df = formatDataset(data)
                 columns_to_convert = ['open', 'high', 'low', 'close', 'volume']
@@ -235,11 +237,11 @@ while True:
                 #     previousSellStochasticRSI1 = False   
 
                 # if previousBuyStochasticRSI1 == True:
-                #     print("BUY: 1")
-                #     send_message("BUY: 1", bot)
-                # if previousSellStochasticRSI1:
                 #     print("SELL: 1")
                 #     send_message("SELL: 1", bot)
+                # if previousSellStochasticRSI1:
+                #     print("BUY: 1")
+                #     send_message("BUY: 1", bot)
                 #--------STOCH1RSI----------#
 
                 #--------STOCH2RSI----------#
@@ -257,11 +259,11 @@ while True:
                     previousBuyStochasticRSI2 = False
                     previousSellStochasticRSI2 = False   
                 if previousBuyStochasticRSI2 == True:
-                    print("BUY: 2")
-                    send_message("BUY: 2", bot)
-                if previousSellStochasticRSI2:
                     print("SELL: 2")
                     send_message("SELL: 2", bot)
+                if previousSellStochasticRSI2:
+                    print("BUY: 2")
+                    send_message("BUY: 2", bot)
                 #--------STOCH2RSI----------#
 
 
@@ -280,11 +282,11 @@ while True:
                 #     previousBuyStochasticRSI3 = False
                 #     previousSellStochasticRSI3 = False  
                 # if previousBuyStochasticRSI3 == True:
-                #     print("BUY: 3")
-                #     send_message("BUY: 3", bot)
-                # if previousSellStochasticRSI3:
                 #     print("SELL: 3")
                 #     send_message("SELL: 3", bot)
+                # if previousSellStochasticRSI3:
+                #     print("BUY: 3")
+                #     send_message("BUY: 3", bot)
                 #--------STOCH3RSI----------#
 
 
@@ -303,11 +305,11 @@ while True:
                 #     previousBuyStochasticRSI4 = False
                 #     previousSellStochasticRSI4 = False   
                 # if previousBuyStochasticRSI4 == True:
-                #     print("BUY: 4")
-                #     send_message("BUY: 4", bot)
-                # if previousSellStochasticRSI4:
                 #     print("SELL: 4")
                 #     send_message("SELL: 4", bot)
+                # if previousSellStochasticRSI4:
+                #     print("BUY: 4")
+                #     send_message("BUY: 4", bot)
                 #--------STOCH4RSI----------#
 
 
@@ -326,11 +328,11 @@ while True:
                     previousBuyStochasticRSI5 = False
                     previousSellStochasticRSI5 = False   
                 if previousBuyStochasticRSI5 == True:
-                    print("BUY: 5")
-                    send_message("BUY: 5", bot)
-                if previousSellStochasticRSI5:
                     print("SELL: 5")
                     send_message("SELL: 5", bot)
+                if previousSellStochasticRSI5:
+                    print("BUY: 5")
+                    send_message("BUY: 5", bot)
                 #--------STOCH5RSI----------#
 
                 #--------STOCH6RSI----------#
@@ -350,11 +352,11 @@ while True:
                     previousBuyStochasticRSI6 = False
                     previousSellStochasticRSI6 = False   
                 if previousBuyStochasticRSI6 == True:
-                    print("BUY: 6")
-                    send_message("BUY: 6", bot)
-                if previousSellStochasticRSI6:
                     print("SELL: 6")
                     send_message("SELL: 6", bot)
+                if previousSellStochasticRSI6:
+                    print("BUY: 6")
+                    send_message("BUY: 6", bot)
                 #--------STOCH6RSI----------#
 
 
@@ -375,11 +377,11 @@ while True:
                     previousBuyStochasticRSI7 = False
                     previousSellStochasticRSI7 = False     
                 if previousBuyStochasticRSI7 == True:
-                    print("BUY: 7")
-                    send_message("BUY: 7", bot)
-                if previousSellStochasticRSI7:
                     print("SELL: 7")
                     send_message("SELL: 7", bot)
+                if previousSellStochasticRSI7:
+                    print("BUY: 7")
+                    send_message("BUY: 7", bot)
                 #--------STOCH7RSI----------#
 
 
@@ -400,11 +402,11 @@ while True:
                     previousBuyStochasticRSI8 = False
                     previousSellStochasticRSI8 = False   
                 if previousBuyStochasticRSI8 == True:
-                    print("BUY: 8")
-                    send_message("BUY: 8", bot)
-                if previousSellStochasticRSI8:
                     print("SELL: 8")
                     send_message("SELL: 8", bot)
+                if previousSellStochasticRSI8:
+                    print("BUY: 8")
+                    send_message("BUY: 8", bot)
                 #--------STOCH8RSI----------#
 
 
@@ -424,11 +426,11 @@ while True:
                     previousBuyStochasticRSI9 = False
                     previousSellStochasticRSI9 = False   
                 if previousBuyStochasticRSI9 == True:
-                    print("BUY: 9")
-                    send_message("BUY: 9", bot)
-                if previousSellStochasticRSI9:
                     print("SELL: 9")
                     send_message("SELL: 9", bot)
+                if previousSellStochasticRSI9:
+                    print("BUY: 9")
+                    send_message("BUY: 9", bot)
                 #--------STOCH9RSI----------#
 
                 
@@ -448,11 +450,11 @@ while True:
                     previousBuyStochasticRSI10 = False
                     previousSellStochasticRSI10 = False   
                 if previousBuyStochasticRSI10 == True:
-                    print("BUY: 10")
-                    send_message("BUY: 10", bot)
-                if previousSellStochasticRSI10:
                     print("SELL: 10")
                     send_message("SELL: 10", bot)
+                if previousSellStochasticRSI10:
+                    print("BUY: 10")
+                    send_message("BUY: 10", bot)
                 #--------STOCH10RSI----------#
 
 
@@ -472,11 +474,11 @@ while True:
                 #     previousBuyStochasticRSI11 = False
                 #     previousSellStochasticRSI11 = False   
                 # if previousBuyStochasticRSI11 == True:
-                #     print("BUY: 11")
-                #     send_message("BUY: 11", bot)
-                # if previousSellStochasticRSI11:
                 #     print("SELL: 11")
                 #     send_message("SELL: 11", bot)
+                # if previousSellStochasticRSI11:
+                #     print("BUY: 11")
+                #     send_message("BUY: 11", bot)
                 #--------STOCH11RSI----------#
 
 
@@ -496,11 +498,11 @@ while True:
                     previousBuyStochasticRSI12 = False
                     previousSellStochasticRSI12 = False   
                 if previousBuyStochasticRSI12 == True:
-                    print("BUY: 12")
-                    send_message("BUY: 12", bot)
-                if previousSellStochasticRSI12:
                     print("SELL: 12")
                     send_message("SELL: 12", bot)
+                if previousSellStochasticRSI12:
+                    print("BUY: 12")
+                    send_message("BUY: 12", bot)
                 #--------STOCH12RSI----------#
 
 
@@ -520,11 +522,11 @@ while True:
                     previousBuyStochasticRSI13 = False
                     previousSellStochasticRSI13 = False   
                 if previousBuyStochasticRSI13 == True:
-                    print("BUY: 13")
-                    send_message("BUY: 13", bot)
-                if previousSellStochasticRSI13:
                     print("SELL: 13")
                     send_message("SELL: 13", bot)
+                if previousSellStochasticRSI13:
+                    print("BUY: 13")
+                    send_message("BUY: 13", bot)
                 #--------STOCH13RSI----------#
 
 
@@ -544,11 +546,11 @@ while True:
                     previousBuyStochasticRSI14 = False
                     previousSellStochasticRSI14 = False   
                 if previousBuyStochasticRSI14 == True:
-                    print("BUY: 14")
-                    send_message("BUY: 14", bot)
-                if previousSellStochasticRSI14:
                     print("SELL: 14")
                     send_message("SELL: 14", bot)
+                if previousSellStochasticRSI14:
+                    print("BUY: 14")
+                    send_message("BUY: 14", bot)
                 #--------STOCH14RSI----------#
 
 
@@ -568,11 +570,11 @@ while True:
                     previousBuyStochasticRSI15 = False
                     previousSellStochasticRSI15 = False   
                 if previousBuyStochasticRSI15 == True:
-                    print("BUY: 15")
-                    send_message("BUY: 15", bot)
-                if previousSellStochasticRSI15:
                     print("SELL: 15")
                     send_message("SELL: 15", bot)
+                if previousSellStochasticRSI15:
+                    print("BUY: 15")
+                    send_message("BUY: 15", bot)
                 #--------STOCH15RSI----------#
 
 
@@ -592,11 +594,11 @@ while True:
                     previousBuyStochasticRSI16 = False
                     previousSellStochasticRSI16 = False   
                 if previousBuyStochasticRSI16 == True:
-                    print("BUY: 16")
-                    send_message("BUY: 16", bot)
-                if previousSellStochasticRSI16:
                     print("SELL: 16")
                     send_message("SELL: 16", bot)
+                if previousSellStochasticRSI16:
+                    print("BUY: 16")
+                    send_message("BUY: 16", bot)
                 #--------STOCH16RSI----------#
 
                 #--------STOCH17RSI----------#
@@ -615,11 +617,11 @@ while True:
                     previousBuyStochasticRSI17 = False
                     previousSellStochasticRSI17 = False   
                 if previousBuyStochasticRSI17 == True:
-                    print("BUY: 17")
-                    send_message("BUY: 17", bot)
-                if previousSellStochasticRSI17:
                     print("SELL: 17")
                     send_message("SELL: 17", bot)
+                if previousSellStochasticRSI17:
+                    print("BUY: 17")
+                    send_message("BUY: 17", bot)
                 #--------STOCH17RSI----------#
 
 
@@ -639,11 +641,11 @@ while True:
                     previousBuyStochasticRSI18 = False
                     previousSellStochasticRSI18 = False   
                 if previousBuyStochasticRSI18 == True:
-                    print("BUY: 18")
-                    send_message("BUY: 18", bot)
-                if previousSellStochasticRSI18:
                     print("SELL: 18")
                     send_message("SELL: 18", bot)
+                if previousSellStochasticRSI18:
+                    print("BUY: 18")
+                    send_message("BUY: 18", bot)
                 #--------STOCH18RSI----------#
 
 
@@ -663,11 +665,11 @@ while True:
                     previousBuyStochasticRSI19 = False
                     previousSellStochasticRSI19 = False   
                 if previousBuyStochasticRSI19 == True:
-                    print("BUY: 19")
-                    send_message("BUY: 19", bot)
-                if previousSellStochasticRSI19:
                     print("SELL: 19")
                     send_message("SELL: 19", bot)
+                if previousSellStochasticRSI19:
+                    print("BUY: 19")
+                    send_message("BUY: 19", bot)
                 #--------STOCH19RSI----------#
 
 
@@ -687,11 +689,11 @@ while True:
                 #     previousBuyStochasticRSI20 = False
                 #     previousSellStochasticRSI20 = False   
                 # if previousBuyStochasticRSI20 == True:
-                #     print("BUY: 20")
-                #     send_message("BUY: 20", bot)
-                # if previousSellStochasticRSI20:
                 #     print("SELL: 20")
                 #     send_message("SELL: 20", bot)
+                # if previousSellStochasticRSI20:
+                #     print("BUY: 20")
+                #     send_message("BUY: 20", bot)
                 #--------STOCH20RSI----------#
 
                 #--------STOCH21RSI----------#
@@ -710,11 +712,11 @@ while True:
                     previousBuyStochasticRSI21 = False
                     previousSellStochasticRSI21 = False   
                 if previousBuyStochasticRSI21 == True:
-                    print("BUY: 21")
-                    send_message("BUY: 21", bot)
-                if previousSellStochasticRSI21:
                     print("SELL: 21")
                     send_message("SELL: 21", bot)
+                if previousSellStochasticRSI21:
+                    print("BUY: 21")
+                    send_message("BUY: 21", bot)
                 #--------STOCH21RSI----------#
 
 
@@ -734,11 +736,11 @@ while True:
                     previousBuyStochasticRSI22 = False
                     previousSellStochasticRSI22 = False   
                 if previousBuyStochasticRSI22 == True:
-                    print("BUY: 22")
-                    send_message("BUY: 22", bot)
-                if previousSellStochasticRSI22:
                     print("SELL: 22")
                     send_message("SELL: 22", bot)
+                if previousSellStochasticRSI22:
+                    print("BUY: 22")
+                    send_message("BUY: 22", bot)
                 #--------STOCH22RSI----------#
 
 
@@ -758,11 +760,11 @@ while True:
                 #     previousBuyStochasticRSI23 = False
                 #     previousSellStochasticRSI23 = False   
                 # if previousBuyStochasticRSI23 == True:
-                #     print("BUY: 23")
-                #     send_message("BUY: 23", bot)
-                # if previousSellStochasticRSI23:
                 #     print("SELL: 23")
                 #     send_message("SELL: 23", bot)
+                # if previousSellStochasticRSI23:
+                #     print("BUY: 23")
+                #     send_message("BUY: 23", bot)
                 #--------STOCH23RSI----------#
 
 
@@ -782,11 +784,11 @@ while True:
                     previousBuyStochasticRSI24 = False
                     previousSellStochasticRSI24 = False   
                 if previousBuyStochasticRSI24 == True:
-                    print("BUY: 24")
-                    send_message("BUY: 24", bot)
-                if previousSellStochasticRSI24:
                     print("SELL: 24")
                     send_message("SELL: 24", bot)
+                if previousSellStochasticRSI24:
+                    print("BUY: 24")
+                    send_message("BUY: 24", bot)
                 #--------STOCH24RSI----------#
 
                 #--------STOCH25RSI----------#
@@ -805,11 +807,11 @@ while True:
                     previousBuyStochasticRSI25 = False
                     previousSellStochasticRSI25 = False   
                 if previousBuyStochasticRSI25 == True:
-                    print("BUY: 25")
-                    send_message("BUY: 25", bot)
-                if previousSellStochasticRSI25:
                     print("SELL: 25")
                     send_message("SELL: 25", bot)
+                if previousSellStochasticRSI25:
+                    print("BUY: 25")
+                    send_message("BUY: 25", bot)
                 #--------STOCH25RSI----------#
                 yes = False
                 break

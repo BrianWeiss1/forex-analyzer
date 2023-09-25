@@ -46,6 +46,7 @@ def simulateCrypto(data):
     worstAvgj = -1
     worstAvgk = -1
     previousBuyStochastic, previousSellStochastic = False, False
+
     lst = []
 
     n = 60
@@ -751,16 +752,25 @@ def simulateCrypto(data):
                     negPip = negPips/(neg)
                 except:
                     negPip = 0
+                posPercent = round((posPips/(pos)/AvgPrice), 5)
+                negPercent = round((negPip/AvgPrice), 5)
                 AvgPercent = round((avgPips/AvgPrice), 5)
                 print("NEGITIVE PIPS: " + str(negPip))
-                print("AVERAGE %: " + str(round((avgPips/AvgPrice), 5)))
-                print("POS %: " + str(round(posPips/(pos)/AvgPrice, 5)))
-                print("NEG %: " + str(round(negPip/AvgPrice, 5)))
+                print("AVERAGE %: " + str(AvgPercent))
+                print("POS %: " + str(posPercent))
+                print("NEG %: " + str(negPercent))
                 leverage = 50
                 print(f"{leverage}X LEVERAGE")
-                print("AVERAGE %: " + str(round((avgPips/AvgPrice)*leverage, 5)))
-                print("POS %: " + str(round((posPips/(pos)/AvgPrice)*leverage, 5)))
-                print("NEG %: " + str(round((negPip/AvgPrice)*leverage, 5)))
+                print("AVERAGE %: " + str(AvgPercent*leverage))
+                print("POS %: " + str(posPercent*leverage))
+                print("NEG %: " + str(negPercent*leverage))
+                difference = (posPercent + negPercent)
+                correctness = round((pos / (neg + pos)), 2)
+                accuracy = correctness-0.5
+                tradeDecimal = percentOfTrades/100
+                SpecialValue = difference * accuracy * tradeDecimal         
+                
+                print(SpecialValue)
                 p = (pos / (neg + pos))
                 q = 1-p
                 t = (((posPips/(pos)/AvgPrice)*leverage)/100)+1
@@ -811,7 +821,7 @@ def simulateCrypto(data):
             countPos = 0
             countNeg = 0
         #SEPERATE WHEN TABBING
-        return BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent
+        return BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue
     except KeyboardInterrupt:
         print("\n\nBEST PROFILIO: " + str(BestProfilio) + " must be > 66mil")
         print("BEST K: " + str(k))
@@ -851,7 +861,7 @@ if "__main__" == __name__:
 
     # print(data)
     
-    BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent = simulateCrypto(data)
+    BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(data)
     #720mi
     # 77mil
     # 200bil
