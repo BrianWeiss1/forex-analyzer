@@ -13,7 +13,7 @@ symbol = "BTCUSD"
 # calltimes("BTCUSD", 1, "2023-09-6 0:45", 'd3234f9b98msh636f82f9af5f491p15d26ejsn2b89beb2bdc9')
 # calltimes5m("BTCUSD", 1, "2022-09-6 0:42")
 # calltimes15m("BTCUSD", 5000)
-calltimes30('RADUSDT')
+calltimes30('IDUSDT')
 # BTCUSD ---> 0.03925
 # ETHUSD --->  0.0492
 # SOLUSD ---> 0.1017

@@ -135,7 +135,7 @@ while True:
             count += 1
             try:
                 previousMinute = datetime.now().minute
-                data = calltimes15m("RADUSDT")
+                data = calltimes15m("IDUSDT")
                 opp = True
 
                 df = formatDataset(data)
