@@ -129,7 +129,7 @@ opp = True
 while True:
     count = 0
     yes = False
-    if ((datetime.now().minute == 48 or datetime.now().minute == 0) and previousMinute != datetime.now().minute) or True:
+    if ((datetime.now().minute == 30 or datetime.now().minute == 0) and previousMinute != datetime.now().minute):
         yes = True
         while (yes and count < 5):
             count += 1
