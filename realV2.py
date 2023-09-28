@@ -2,7 +2,7 @@ from datetime import datetime
 import telebot
 import time
 from src.testSpecial import formatDataset
-from src.testGrabData import getYahoo, calltimes15m, calltimes30
+from src.testGrabData import getYahoo, calltimes15m, calltimes30FIXED
 from srcLONGTERM.functions import get_StochasticRelitiveStrengthIndex, get_StochasticOscilator
 from srcLONGTERM.longTermPos import checkLuquidation, findSelection
 from srcLONGTERM.underliningProcesses import swap
@@ -135,7 +135,7 @@ while True:
             count += 1
             try:
                 previousMinute = datetime.now().minute
-                data = calltimes30("RADUSDT")
+                data = calltimes30FIXED("RADUSDT")
                 opp = True
 
                 df = formatDataset(data)

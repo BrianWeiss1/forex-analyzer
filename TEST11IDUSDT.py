@@ -2,7 +2,7 @@ from datetime import datetime
 import telebot
 import time
 from src.testSpecial import formatDataset
-from src.testGrabData import getYahoo, calltimes15m, calltimes30
+from src.testGrabData import getYahoo, calltimes15m, calltimes30FIXED
 from srcLONGTERM.functions import get_StochasticRelitiveStrengthIndex, get_StochasticOscilator
 from srcLONGTERM.longTermPos import checkLuquidation, findSelection
 from srcLONGTERM.underliningProcesses import swap
@@ -129,20 +129,21 @@ opp = True
 while True:
     count = 0
     yes = False
-    if ((datetime.now().minute == 33 or datetime.now().minute == 0) and previousMinute != datetime.now().minute):
+    if ((datetime.now().minute == 48 or datetime.now().minute == 0) and previousMinute != datetime.now().minute) or True:
         yes = True
         while (yes and count < 5):
             count += 1
             # try:
             print("LEVEL 1")
             previousMinute = datetime.now().minute
-            data = calltimes30("IDUSDT")
+            data = calltimes30FIXED("IDUSDT")
             opp = True
 
             df = formatDataset(data)
             columns_to_convert = ['open', 'high', 'low', 'close', 'volume']
             for column in columns_to_convert:
                 df[column] = df[column].astype(float)
+            print(df)
 
             # get_StochasticOscilator(df, 34, 34, 34) # -21% 
             # stochRSIK1 = df['%K']
