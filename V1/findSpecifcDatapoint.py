@@ -3,7 +3,7 @@ from src.specialFunctions import obtainResult
 from src.testGrabData import findSpecificData
 from src.testRSI import get_rsi
 from src.testSTOCH import get_stoch
-from src.testSpecial import formatDataset
+from SpecialFunctions import formatDataset
 from src.testSupertrend import get_supertrend
 from datetime import datetime
 from sys import maxsize

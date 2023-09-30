@@ -1,7 +1,7 @@
 # Update data
 
 # from src.WMA import get_WMA
-from srcLONGTERM.longTermPos import checkLuquidation, findSelection
+from src.longTermPos import checkLuquidation, findSelection
 # from src.VWAP import get_VWAP
 # from src.specialFunctions import optimize2
 # from src.testADX import grabADX
@@ -10,10 +10,10 @@ from srcLONGTERM.longTermPos import checkLuquidation, findSelection
 import sys
 # from datetime import timedelta
 # from src.testIchi import get_ichimoku
-from src.testSpecial import formatDataset
+from SpecialFunctions import formatDataset
 # from src.testEMA import calculate_200ema
 # from src.testMACD import get_macd
-from srcLONGTERM.functions import get_StochasticOscilator, get_StochasticRelitiveStrengthIndex
+from src.functions import get_StochasticOscilator, get_StochasticRelitiveStrengthIndex
 
 def simulateCrypto(data):
 

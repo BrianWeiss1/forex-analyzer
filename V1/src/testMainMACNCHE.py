@@ -3,7 +3,7 @@ from src.testADX import grabADX
 from src.testGrabData import grabHistoricalData
 from src.testRSI import get_rsi
 from src.testSTOCH import get_stoch, getSTOCHdata
-from src.testSpecial import formatDataset
+from SpecialFunctions import formatDataset
 
 if '__main__' == __name__:
     symbol = "EURJPY"

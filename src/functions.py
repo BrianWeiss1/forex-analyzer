@@ -1,5 +1,5 @@
 from ta.momentum import StochRSIIndicator
-from src.testSpecial import formatDataset
+from SpecialFunctions import formatDataset
 
 def get_StochasticOscilator(df, periodK, smoothK, periodD):
     # Calculate %K

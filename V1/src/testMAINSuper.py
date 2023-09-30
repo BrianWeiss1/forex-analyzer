@@ -1,4 +1,4 @@
-from testSpecial import formatDataset
+from SpecialFunctions import formatDataset
 from testSupertrend import get_supertrend
 from testGrabData import grabHistoricalData
 

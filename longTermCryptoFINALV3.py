@@ -1,26 +1,14 @@
 
 # Update data
-from src.WMA import get_WMA
-from srcLONGTERM.longTermPos import checkLuquidation, findPos, findSelection
-from src.VWAP import get_VWAP
-from src.specialFunctions import optimize2
-from src.testADX import grabADX
-from src.testRSI import get_rsi
-from src.testSupertrend import superTrend
+from src.longTermPos import checkLuquidation, findPos, findSelection
 import sys
 from datetime import timedelta
-from src.testIchi import get_ichimoku
-from src.testSpecial import formatDataset
-from src.testEMA import calculate_200ema
-from src.testMACD import get_macd
-from srcLONGTERM.functions import get_StochasticOscilator, get_StochasticRelitiveStrengthIndex
-from srcLONGTERM.underliningProcesses import STOCH, swap
+from SpecialFunctions import formatDataset
+from src.functions import get_StochasticOscilator, get_StochasticRelitiveStrengthIndex
+from src.underliningProcesses import swap
 import pandas as pd
 def simulateCrypto(data):
 
-    data = grabADX(data, 14)
-    rsiValue = 147 #8, 147
-    dataRSI = get_rsi(data["close"], rsiValue)
     totalPips = 0
     countPips = 0
     bestAvgPips = -sys.maxsize
@@ -29,8 +17,6 @@ def simulateCrypto(data):
 
     j = -1
     k = -1
-    previousBuyStochasticRSI = False
-    previousSellStochasticRSI = False
     pos = 0
     AvgPercent = 0
     nuet = 0
@@ -45,18 +31,17 @@ def simulateCrypto(data):
     bestAvgk = -1
     worstAvgj = -1
     worstAvgk = -1
-    previousBuyStochastic, previousSellStochastic = False, False
 
     lst = []
 
-    n = 60
-    st10 = superTrend(data, 2, 1) # 2, 87
     portfolio = 10
     countPos = 0
     countNeg = 0
     posPips = 0
     negPips = 0
     avgPips = 0
+    nowPrice = 0
+    nowCount = 0
     longRunSTOCH = {"buySignal": False, 'luquidate': False, 'entry': []}
     shortRunSTOCH = {'shortSignal': False, 'luquidate': False, 'entry': []}
 
@@ -166,20 +151,6 @@ def simulateCrypto(data):
     longRunSTOCHRSI26 = {"buySignal": False, 'luquidate': False, 'entry': []}    
     shortRunSTOCHRSI26 = {'shortSignal': False, 'luquidate': False, 'entry': []}
     previousBuyStochasticRSI26, previousSellStochasticRSI26 = False, False
-
-
-    # ema2 = calculate_200ema(data2, 200)
-    rsiValue2 = 10
-    # dataRSI2 = get_rsi(data2["close"], rsiValue2)
-    WMA = get_WMA(data, 11)
-    ichimoku = get_ichimoku(data, 7, 15) # 7, 15
-    # get_StochasticOscilator(data, 14, 10, 3) # ---> returns dataframe
-    # stochK = data['%K']
-    # stochD = data['%D']
-    nowPrice = 0
-    nowCount = 0
-    STOCHamount2 = 2
-    STOCHamount1 = 3
 
     # get_StochasticOscilator(data, 293, 83, 140) 
     # stochK = data['%K']

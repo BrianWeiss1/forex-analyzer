@@ -1,12 +1,12 @@
 from datetime import datetime
 import telebot
 import time
-from src.testSpecial import formatDataset
+from SpecialFunctions import formatDataset
 from src.testGrabData import getYahoo
-from srcLONGTERM.functions import get_StochasticRelitiveStrengthIndex
-from srcLONGTERM.longTermPos import checkLuquidation, findSelection
-from srcLONGTERM.underliningProcesses import swap
-from srcLONGTERM.sendTelegramMessage import send_message
+from src.functions import get_StochasticRelitiveStrengthIndex
+from src.longTermPos import checkLuquidation, findSelection
+from src.underliningProcesses import swap
+from src.sendTelegramMessage import send_message
 from src.testGrabData import calltimes15m
 
 BOT_TOKEN = '6636169941:AAFysc5k-IA1QCC-1tfKXeTC_qeIdcG15ZI'

@@ -1,5 +1,5 @@
 from src.simulate import simulate
-from src.testSpecial import formatDataset
+from SpecialFunctions import formatDataset
 
 if "__main__" == __name__:
     f = open("documents/data.txt", "r")

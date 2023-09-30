@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from src.testSpecial import formatDataset
+from SpecialFunctions import formatDataset
 
 # Sample price data (replace with your own data)
 f = open("documents/dataCryptoTest.txt", "r")

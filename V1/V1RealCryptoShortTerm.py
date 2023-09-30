@@ -6,9 +6,9 @@ from src.specialFunctions import automaticBuy, automaticSell, obtainResult
 from src.testGrabData import grabCurrentDataBTC, grabHistoricalDataBTC
 from src.testRSI import get_rsi
 from src.testSTOCH import get_stoch
-from src.testSpecial import formatDataset
+from SpecialFunctions import formatDataset
 from src.testSupertrend import get_supertrend
-from test import limit, market
+from tests.autoClick import limit, market
 
 
 def __innit__(symbol):    

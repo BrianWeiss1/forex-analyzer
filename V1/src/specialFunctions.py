@@ -7,7 +7,7 @@ from src.testMACD import get_macd
 from src.testADX import grabADX
 from src.testRSI import get_rsi
 from src.testSTOCH import get_stoch, getSTOCHdataSIM
-from src.testSpecial import formatDataset
+from SpecialFunctions import formatDataset
 from src.testSupertrend import get_supertrend
 from src.testIchi import get_ichimoku
 
@@ -211,7 +211,7 @@ from src.testMACD import get_macd
 from src.testADX import grabADX
 from src.testRSI import get_rsi
 from src.testSTOCH import get_stoch, getSTOCHdataSIM
-from src.testSpecial import formatDataset
+from SpecialFunctions import formatDataset
 from src.testSupertrend import get_supertrend
 from src.testIchi import get_ichimoku
 

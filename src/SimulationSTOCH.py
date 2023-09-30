@@ -10,7 +10,7 @@ from src.testSupertrend import superTrend
 import sys
 from datetime import timedelta
 from src.testIchi import get_ichimoku
-from src.testSpecial import formatDataset
+from SpecialFunctions import formatDataset
 from src.testEMA import calculate_200ema
 from src.testMACD import get_macd
 from srcLONGTERM.functions import get_StochasticOscilator, get_StochasticRelitiveStrengthIndex
