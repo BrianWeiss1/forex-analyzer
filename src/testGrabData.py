@@ -340,7 +340,7 @@ def calltimes30(symbol, start_time = '2023-02-23'):
     symbol.split()
     symbol = symbol
     interval = "30m"
-    start_time = '2023-05-23' # prev 2023-02-23
+    start_time = start_time # prev 2023-02-23, '2023-05-23
     date_obj = datetime.datetime.strptime(start_time, "%Y-%m-%d")
     timestamp_ms = int(date_obj.timestamp()) * 1000
     end_time = '2023-09-30'

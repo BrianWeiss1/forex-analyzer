@@ -18,7 +18,7 @@ def process_symbol(dataSymbol, best_results, worst_results, lst):
     for i in range(len(dataSymbol)):
         print(i)
         try:
-            calltimes30(dataSymbol[i])
+            calltimes30(dataSymbol[i], '2022-02-23')
             # time.sleep(5)
             f = open("documents/binance30.txt", "r")
             data = f.readlines()

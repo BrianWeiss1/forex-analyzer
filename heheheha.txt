@@ -1,0 +1,35 @@
+                #--------STOCH1RSI----------#
+                longRunSTOCHRSI1, shortRunSTOCHRSI1 = findSelection(previousBuyStochasticRSI1, previousSellStochasticRSI1, longRunSTOCHRSI1, shortRunSTOCHRSI1, i) 
+                shortRunSTOCHRSI1, longRunSTOCHRSI1, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI1, longRunSTOCHRSI1, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+
+                previousSellStochasticRSI1 = previousBuyStochasticRSI1 = False
+
+                if stochRSIK1[i-1] >= stochRSID1[i-1] and stochRSIK1[i] < stochRSID1[i]:
+                    previousSellStochasticRSI1 = True
+                if stochRSIK1[i-1] <= stochRSID1[i-1] and stochRSIK1[i] > stochRSID1[i]:
+                    previousBuyStochasticRSI1 = True
+                # previousSellStochasticRSI1, previousBuyStochasticRSI1 = previousBuyStochasticRSI1, previousSellStochasticRSI1)
+
+                if previousSellStochasticRSI1 and previousBuyStochasticRSI1:
+                    previousBuyStochasticRSI1 = False
+                    previousSellStochasticRSI1 = False   
+                if previousBuyStochasticRSI1 == True:
+                    print("SELL: 1")
+                    send_message("SELL: 1", bot)
+                    if count1 > 0:
+                        closeLong(bingx_client, symbol, betAmount, maxLev)
+                        buyShort(bingx_client, symbol, betAmount, maxLev)
+                    else:
+                        buyShort(bingx_client, symbol, betAmount, maxLev)
+                    count1+=1
+                
+                if previousSellStochasticRSI1:
+                    print("BUY: 1")
+                    send_message("BUY: 1", bot)
+                    if count1 > 0:
+                        closeShort(bingx_client, symbol, betAmount, maxLev)
+                        buyLong(bingx_client, symbol, betAmount, maxLev)
+                    else:
+                        buyLong(bingx_client, symbol, betAmount, maxLev)
+                    count1+=1
+                #--------STOCH1RSI----------#
