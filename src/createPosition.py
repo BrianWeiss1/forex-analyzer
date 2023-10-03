@@ -3,8 +3,10 @@ from bingX.perpetual.v2.types import (
     PositionSide,
     Side,
 )
+from bingX.perpetual.v2 import PerpetualV2
 
-def buyLong(bingx_client, symbol, betAmount, maxLev):
+
+def buyLong(bingx_client: PerpetualV2, symbol, betAmount, maxLev):
     bingx_client.trade.change_leverage(symbol=symbol, positionSide=PositionSide.LONG, leverage=maxLev)
     assetPrice = float(bingx_client.market.get_latest_price_of_trading_pair(symbol)['price'])
     
@@ -40,3 +42,5 @@ def closeShort(bingx_client, symbol, betAmount, maxLev):
     # print(Quanity)
     # time.sleep(5)
     bingx_client.trade.create_order(Order(symbol=symbol, side=Side.BUY, positionSide=PositionSide.SHORT, quantity=Quanity))
+    
+                # Trade.change_leverage() got an unexpected keyword argument 'positionSide'
