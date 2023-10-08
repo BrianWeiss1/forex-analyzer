@@ -805,111 +805,62 @@ def simulateCrypto(df, days=None, printing=True, endday = 0):
 
 
 if "__main__" == __name__:
-
-    symbolVolume = "STORJUSDT"
-    # dic = {}
-    printing = True
-    # count = 0
-    # totalAmount = 0
-    df = formatDataset1(formatDataset(calltimes30FIXED(symbolVolume, (datetime.now()-timedelta(days=365)).strftime('%Y-%m-%d'))))
-    print(df)
-    # for x in range(45):
-    #     expFormula = 5*(pow(1.1, -x))
-    #     dic[x] = expFormula
-    # # print(dic)
-    # for key, value in dic.items():
-    #     # print(key)
-    #     BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, key, False, 1)
-    #     totalAmount += AvgPercent * value
-    #     print(AvgPercent)
-    #     count += value
-    # print("AVG PERCENT: " + str(totalAmount/count))
-    # BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, 1, False, 0)
-    # print(AvgPercent)
+    betTest = True
+    if betTest:
+        symbolVolume = "STORJUSDT"
+        dic = {}
+        printing = False
+        count = 0
+        totalAmount = 0
+        df = formatDataset1(formatDataset(calltimes30FIXED(symbolVolume, (datetime.now()-timedelta(days=100)).strftime('%Y-%m-%d'))))
+        for x in range(45):
+            expFormula = 5*(pow(1.1, -x))
+            dic[x] = expFormula
+        # print(dic)
+        for key, value in dic.items():
+            # print(key)
+            BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, key, False, 1)
+            totalAmount += AvgPercent * value
+            print(AvgPercent)
+            count += value
+        print("AVG PERCENT: " + str(totalAmount/count))
+        BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, 1, False, 0)
+        print(AvgPercent)
+    else:
+        symbolVolume = "STORJUSDT"
+        # dic = {}
+        printing = True
+        # count = 0
+        # totalAmount = 0
+        df = formatDataset1(formatDataset(calltimes30FIXED(symbolVolume, (datetime.now()-timedelta(days=365)).strftime('%Y-%m-%d'))))
+        print(df)
+        # for x in range(45):
+        #     expFormula = 5*(pow(1.1, -x))
+        #     dic[x] = expFormula
+        # # print(dic)
+        # for key, value in dic.items():
+        #     # print(key)
+        #     BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, key, False, 1)
+        #     totalAmount += AvgPercent * value
+        #     print(AvgPercent)
+        #     count += value
+        # print("AVG PERCENT: " + str(totalAmount/count))
+        # BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, 1, False, 0)
+        # print(AvgPercent)
+            
+        BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, 1, True, 0)
+        BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, 2, True, 0)
+        BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, 3, True, 0)
+        BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, 5, True, 0)
+        BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, 10, True, 0)
+        BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, 14, True, 0)
         
-        
-
-    # BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, 1, False)
-    # print("DAY AMOUNT: " + str(1))
-    # print("AVG %: " + str(AvgPercent))
-    # # print("TRADES: " + str(trades))
-
-    # BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, 7, False)
-    # print("DAY AMOUNT: " + str(7))
-    # print("AVG %: " + str(AvgPercent))
-
-
-    # BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, 30, False)
-    # print("DAY AMOUNT: " + str(30))
-    # print("AVG %: " + str(AvgPercent))
-    
-
-    # BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, 365, False)
-    # print("DAY AMOUNT: " + str(365))
-    # print("AVG %: " + str(AvgPercent))
-
-    # print(type(data['open'][1]))
-    # df = pd.read_csv('output.csv')
-    # df.rename(columns={'High': 'high', 'Low': 'low', "Open": 'open', 'Close':'close'}, inplace=True)
-    # df = df.set_index('Datetime')
-    # df = df.drop(['Dividends', 'Stock Splits'], axis=1)
-    # print(df)    
-
-    # print(data)
-    
-    # df = formatDataset1(formatDataset(calltimes30FIXED(symbolVolume, (datetime.now()-timedelta(days=30)).strftime('%Y-%m-%d'))))
-    BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, 1, True, 0)
-    BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, 2, True, 0)
-    BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, 3, True, 0)
-    BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, 5, True, 0)
-    BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, 10, True, 0)
-    BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, 14, True, 0)
-
-    #720mi
-    # 77mil
-    # 200bil
-
-
-    # if not lst:
-    #     exit()
-    
-    # total = sum(lst)
-    # average = total / len(lst)
-
-
-    # sorted_arr = sorted(lst)
-    # n = len(sorted_arr)
-    
-    # if n % 2 == 1:
-    #     median = sorted_arr[n // 2]
-    # else:
-    #     middle_right = n // 2
-    #     middle_left = middle_right - 1
-    #     median = (sorted_arr[middle_left] + sorted_arr[middle_right]) / 2
-    
-    if printing:
-        print("\n\nSIMULATION RESULTS: ")
-        print("BestAVGPips: " + str(bestAvgPips))
-        print("K: " +str(bestAvgk))
-        print("J: " + str(bestAvgj))
-        print("\nWORSTAVGPips: " + str(worstAvgPips))
-        print("K: " +str(worstAvgk))
-        print("J: " + str(worstAvgj))
-
-
-
-        # BestAVGPips*percentOfTrades
-        print("\n\n\n\n")
-        print("Best Portfolio: \n" + str(BestProfilio))
-        print("J:" + str(Bestj))
-        print("K: " + str(Bestk))
-        print('\n\n')
-        print("Worst Portfolio: \n" + str(WorseProfilio))
-        print("J: " + str(worstj))
-        print("K: " + str(worstk))
-
-# posLev = 151.51361
-# negLev = -34.83314
-# SucessPos = 0.5992
-# SucessNeg = 1-SucessPos
-#((posLev/100)+1)*SucessPos + ((negLev/100)+1)*(SucessNeg)
+        if printing:
+            print("\n\nSIMULATION RESULTS: ")
+            print("BestAVGPips: " + str(bestAvgPips))
+            print("K: " +str(bestAvgk))
+            print("J: " + str(bestAvgj))
+            print("\nWORSTAVGPips: " + str(worstAvgPips))
+            print("K: " +str(worstAvgk))
+            print("J: " + str(worstAvgj))
+            print("\n\n\n\n")
