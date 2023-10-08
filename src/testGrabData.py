@@ -406,14 +406,14 @@ def calltimes30(symbol, start_time = '2023-02-23'):
     f.write(str(formatted_data))
     f.close()
     return formatted_data
-def calltimes30FIXED(symbol, start_time = '2030-02-23'):
+def calltimes30FIXED(symbol, start_time = '2023-08-27'):
     endpoint = "https://api.binance.com/api/v1/klines"
 
     api_key = "0imfnc8mVLWwsAawjYr4RxAf50DDqtle" # 0imfnc8mVLWwsAawjYr4RxAf50DDqtlx
     symbol.split()
     symbol = symbol
     interval = "30m"
-    start_time = '2023-08-27' # prev 2023-02-23
+    start_time = start_time # prev 2023-02-23
     date_obj = datetime.datetime.strptime(start_time, "%Y-%m-%d")
     timestamp_ms = int(date_obj.timestamp()) * 1000
     end_time = '2030-02-23'

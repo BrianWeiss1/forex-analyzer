@@ -9,7 +9,7 @@ from src.underliningProcesses import swap
 import pandas as pd
 from src.testGrabData import getYahoo, calltimes15m, calltimes30FIXED
 
-def simulateCrypto(df, days=None, printing=True, endday = 0):
+def simulateCrypto(df, days=0, printing=True, endday = 0):
     
     totalPips = 0
     countPips = 0
@@ -232,8 +232,6 @@ def simulateCrypto(df, days=None, printing=True, endday = 0):
     # df = df[len(df)-(days*48):len(df)]
 
     SpecialValue = 0
-    if days == None:
-        days = len(df)/48
     # days = days + endday
     # print(df)
     # countAAA = 0
@@ -241,6 +239,7 @@ def simulateCrypto(df, days=None, printing=True, endday = 0):
         for j in range(1, 2):
             if printing:
                 print("K: " + str(j))
+
 
             for i in range(len(df)-(days*48), (len(df) - 1)-(endday*48)):
                 # countAAA += 1
@@ -690,6 +689,7 @@ def simulateCrypto(df, days=None, printing=True, endday = 0):
                 percentOfTrades = round(((pos + nuet + neg) / len(df)) * 100, 2)
                 AvgPrice = nowPrice/nowCount
                 if printing:
+                    print(pos, nuet, neg)
                     try:
                         print("POS/NEG RATIO: " + str(pos / neg))
                         print(
@@ -807,25 +807,24 @@ def simulateCrypto(df, days=None, printing=True, endday = 0):
 if "__main__" == __name__:
 
     symbolVolume = "STORJUSDT"
-    # dic = {}
-    printing = True
-    # count = 0
-    # totalAmount = 0
-    df = formatDataset1(formatDataset(calltimes30FIXED(symbolVolume, (datetime.now()-timedelta(days=365)).strftime('%Y-%m-%d'))))
-    print(df)
-    # for x in range(45):
-    #     expFormula = 5*(pow(1.1, -x))
-    #     dic[x] = expFormula
-    # # print(dic)
-    # for key, value in dic.items():
-    #     # print(key)
-    #     BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, key, False, 1)
-    #     totalAmount += AvgPercent * value
-    #     print(AvgPercent)
-    #     count += value
-    # print("AVG PERCENT: " + str(totalAmount/count))
-    # BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, 1, False, 0)
-    # print(AvgPercent)
+    dic = {}
+    printing = False
+    count = 0
+    totalAmount = 0
+    df = formatDataset1(formatDataset(calltimes30FIXED(symbolVolume, (datetime.now()-timedelta(days=100)).strftime('%Y-%m-%d'))))
+    for x in range(45):
+        expFormula = 5*(pow(1.1, -x))
+        dic[x] = expFormula
+    # print(dic)
+    for key, value in dic.items():
+        # print(key)
+        BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, key, False, 1)
+        totalAmount += AvgPercent * value
+        print(AvgPercent)
+        count += value
+    print("AVG PERCENT: " + str(totalAmount/count))
+    BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, 1, False, 0)
+    print(AvgPercent)
         
         
 
@@ -857,14 +856,7 @@ if "__main__" == __name__:
 
     # print(data)
     
-    # df = formatDataset1(formatDataset(calltimes30FIXED(symbolVolume, (datetime.now()-timedelta(days=30)).strftime('%Y-%m-%d'))))
-    BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, 1, True, 0)
-    BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, 2, True, 0)
-    BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, 3, True, 0)
-    BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, 5, True, 0)
-    BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, 10, True, 0)
-    BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, 14, True, 0)
-
+    BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, 0, False)
     #720mi
     # 77mil
     # 200bil

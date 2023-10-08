@@ -1,7 +1,10 @@
 import threading
 from src.testGrabData import calltimes30
 from longTermCryptoFINALV3 import simulateCrypto
-from SpecialFunctions import formatDataset
+from SpecialFunctions import formatDataset, formatDataset1
+from src.testGrabData import calltimes30FIXED
+from datetime import datetime, timedelta
+
 
 def process_symbol(dataSymbol, best_results, worst_results, lst):
     bestAvgPercent = 0
@@ -18,20 +21,33 @@ def process_symbol(dataSymbol, best_results, worst_results, lst):
     for i in range(len(dataSymbol)):
         print(i)
         try:
-            calltimes30(dataSymbol[i], '2022-02-23')
-            # time.sleep(5)
-            f = open("documents/binance30.txt", "r")
-            data = f.readlines()
-            data = eval(data[0])
-            f.close()
-            data = formatDataset(data)
-            columns_to_convert = ['open', 'high', 'low', 'close', 'volume']
+            # calltimes30(dataSymbol[i], '2022-02-23')
+            # # time.sleep(5)
+            # f = open("documents/binance30.txt", "r")
+            # data = f.readlines()
+            # data = eval(data[0])
+            # f.close()
+            # data = formatDataset(data)
+            # columns_to_convert = ['open', 'high', 'low', 'close', 'volume']
 
-            for column in columns_to_convert:
-                data[column] = data[column].astype(float)
+            # for column in columns_to_convert:
+            #     data[column] = data[column].astype(float)
             
-            BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, specialNum = simulateCrypto(data)
-            # time.sleep(5)
+            dic = {}
+            count = 0
+            totalAmount = 0
+            df = formatDataset1(formatDataset(calltimes30FIXED(dataSymbol[i], (datetime.now()-timedelta(days=100)).strftime('%Y-%m-%d'))))
+            for x in range(45):
+                expFormula = 5*(pow(1.1, -x))
+                dic[x] = expFormula
+            # print(dic)
+            for key, value in dic.items():
+                # print(key)
+                BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, key, False, 1)
+                totalAmount += AvgPercent * value
+                count += value
+            print("AVG PERCENT: " + str(totalAmount/count))
+            specialNum = totalAmount/count
             lst.append([dataSymbol[i], specialNum])
             if AvgPercent > bestAvgPercent:
                 bestAvgPercent = AvgPercent
