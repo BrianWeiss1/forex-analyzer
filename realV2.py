@@ -29,8 +29,8 @@ f = open('documents/api_key.txt', 'r')
 APIKEY = 'zGnYUEbpDvOI36v9DnPIvMLQEVz44Vgme7AUAyFeonkUAusiLDi9PFM65nyjAuijESmpmC2eGAuqmFfHVQ'
 SECRETKEY = f.readline()
 f.close()
-sim = "RAD"
-maxLev = 25
+sim = "STORJ"
+maxLev = 20
 betAmount = 0.1
 symbol = f'{sim}-USDT'
 symbolVolume = f'{sim}USDT'
@@ -185,7 +185,7 @@ opp = False
 while True:
     count = 0
     yes = False
-    if ((datetime.now().minute == 30 or datetime.now().minute == 0) and previousMinute != datetime.now().minute) or True:
+    if ((datetime.now().minute == 30 or datetime.now().minute == 0) and previousMinute != datetime.now().minute):
         yes = True
         while (yes and count < 5):
             count += 1
