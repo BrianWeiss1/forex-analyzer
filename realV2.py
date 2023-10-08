@@ -180,7 +180,7 @@ previousMinute = -1
 pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg, nowPrice, nowCount = 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0
 
 yes = False
-opp = True
+opp = False
 
 while True:
     count = 0
