@@ -1,6 +1,6 @@
 import threading
 from src.testGrabData import calltimes30
-from longTermCryptoFINALV3 import simulateCrypto
+from longTermFINALV3 import simulateCrypto
 from SpecialFunctions import formatDataset, formatDataset1
 from src.testGrabData import calltimes30FIXED
 from datetime import datetime, timedelta
@@ -20,6 +20,7 @@ def process_symbol(dataSymbol, best_results, worst_results, lst):
 
     for i in range(len(dataSymbol)):
         print(i)
+        continment = True
         try:
             # calltimes30(dataSymbol[i], '2022-02-23')
             # # time.sleep(5)
@@ -32,23 +33,53 @@ def process_symbol(dataSymbol, best_results, worst_results, lst):
 
             # for column in columns_to_convert:
             #     data[column] = data[column].astype(float)
-            
+            DIFFERENCEYOUWANT = 10
             dic = {}
+            printing = False
             count = 0
             totalAmount = 0
-            df = formatDataset1(formatDataset(calltimes30FIXED(dataSymbol[i], (datetime.now()-timedelta(days=100)).strftime('%Y-%m-%d'))))
-            for x in range(45):
+            df = formatDataset1(formatDataset(calltimes30FIXED(dataSymbol[i], (datetime.now()-timedelta(days=70)).strftime('%Y-%m-%d'))))
+            # print(symbolVolume + ":")
+            for i in range(len(df)):
+                # print((df.index[i]))
+                if (df.index[i]).strftime('%H:%M:%S') == "12:00:00":
+                    df = df[i-1:len(df)]
+                    # print(df)
+                    break
+            for x in range(48, 0, -1):
                 expFormula = 5*(pow(1.1, -x))
                 dic[x] = expFormula
             # print(dic)
             for key, value in dic.items():
                 # print(key)
-                BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, key, False, 1)
+                BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, key, False, 1+DIFFERENCEYOUWANT)
                 totalAmount += AvgPercent * value
+                # print(AvgPercent)
                 count += value
-            print("AVG PERCENT: " + str(totalAmount/count))
-            specialNum = totalAmount/count
-            lst.append([dataSymbol[i], specialNum])
+            predictedPercent = totalAmount/count
+            print("PREDICTED PERCENT: " + str(round(predictedPercent, 3)) + "%")
+            avgSum = 0
+            countAAAAAAAAAA = 0
+            for i in range(6, 1, -1):
+                BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, i, False, 0)
+                # print(AvgPercent)
+                avgSum += AvgPercent
+                countAAAAAAAAAA += 1
+            actualPercent = avgSum/countAAAAAAAAAA
+            print("ACTUAL PERCENT: " + str(round(actualPercent, 2)) + "%")
+            percentError = (abs(actualPercent-predictedPercent)/actualPercent)*100 # Percent error formula
+            print("PERCENT ERROR: " + str(round(percentError, 2)) + "%")
+            lst.append([dataSymbol[i], percentError])
+            specialNum = 0
+            AvgPercent = 0
+            bestAvgPercent = 0
+            worstAvgPercent = 0
+            bestSymbol = 0
+            worstSymbol = 0
+            bestNumSymbol = 0
+            worstNumSymbol = 0
+            worstNumPercent = 0
+            bestNumPercent = 0
             if AvgPercent > bestAvgPercent:
                 bestAvgPercent = AvgPercent
                 bestSymbol = dataSymbol[i]

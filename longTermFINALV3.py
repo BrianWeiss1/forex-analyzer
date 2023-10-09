@@ -234,7 +234,8 @@ def simulateCrypto(df, days=None, printing=True, endday = 0):
     SpecialValue = 0
     if days == None:
         days = len(df)/48
-    # days = days + endday
+        
+    days = days + endday
     # print(df)
     # countAAA = 0
     try:
@@ -819,13 +820,14 @@ if "__main__" == __name__:
         # print(dic)
         for key, value in dic.items():
             # print(key)
-            BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, key, False, 1)
+            BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, key, False, 5)
             totalAmount += AvgPercent * value
             print(AvgPercent)
             count += value
         print("AVG PERCENT: " + str(totalAmount/count))
-        BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, 1, False, 0)
-        print(AvgPercent)
+        for i in range(1, 6):
+            BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, i, False, 0)
+            print(AvgPercent)
     else:
         symbolVolume = "STORJUSDT"
         # dic = {}
