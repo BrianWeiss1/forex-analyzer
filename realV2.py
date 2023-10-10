@@ -30,8 +30,8 @@ APIKEY = 'zGnYUEbpDvOI36v9DnPIvMLQEVz44Vgme7AUAyFeonkUAusiLDi9PFM65nyjAuijESmpmC
 SECRETKEY = f.readline()
 f.close()
 sim = "STORJ"
-maxLev = 20
-betAmount = 0.1
+maxLev = 13
+betAmount = 0.14
 symbol = f'{sim}-USDT'
 symbolVolume = f'{sim}USDT'
 
@@ -275,8 +275,8 @@ while True:
                 stochRSIK25 = df['%K']
                 stochRSID25 = df['%D'] 
                 print(datetime.now())
-                i = len(df)-1
-                
+                i = len(df)-1-6
+        
                 #--------STOCH1RSI----------#
                 # longRunSTOCHRSI1, shortRunSTOCHRSI1 = findSelection(previousBuyStochasticRSI1, previousSellStochasticRSI1, longRunSTOCHRSI1, shortRunSTOCHRSI1, i) 
                 # shortRunSTOCHRSI1, longRunSTOCHRSI1, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI1, longRunSTOCHRSI1, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
