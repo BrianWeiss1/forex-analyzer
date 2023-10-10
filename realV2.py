@@ -1393,7 +1393,8 @@ while True:
                 break
             except Exception as e:
                 yes = True
-                print(e)
+                send_message(str(e), bot)
     else:
         # print('L BOZO')
+        
         time.sleep(59)
