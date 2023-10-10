@@ -46,7 +46,7 @@ class Order(DictMixin):
     quantity: float | None = None
     type: OrderType = OrderType.MARKET
     price: float | None = None
-    stop_price: float | None = None
+    stopPrice: float | None = None
     recv_window: int | None = None
 
     def __post_init__(self):
@@ -57,10 +57,10 @@ class Order(DictMixin):
             if self.quantity is None:
                 raise OrderException("MARKET order must have quantity")
         elif self.type == OrderType.TRIGGER_LIMIT:
-            if (self.quantity is None) or (self.stop_price is None) or (self.price is None):
+            if (self.quantity is None) or (self.stopPrice is None) or (self.price is None):
                 raise OrderException("TRIGGER_LIMIT order must have quantity, stop_price and price")
         elif self.type in [OrderType.STOP_MARKET, OrderType.TAKE_PROFIT_MARKET, OrderType.TRIGGER_MARKET]:
-            if (self.quantity is None) or (self.stop_price is None):
+            if (self.quantity is None) or (self.stopPrice is None):
                 raise OrderException("STOP_MARKET, TAKE_PROFIT_MARKET and TRIGGER_MARKET orders must have quantity and stop_price")
 
 

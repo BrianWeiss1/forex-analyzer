@@ -176,6 +176,7 @@ shortRunSTOCHRSI26 = {'shortSignal': False, 'luquidate': False, 'entry': []}
 previousBuyStochasticRSI26, previousSellStochasticRSI26 = False, False
 
 previousMinute = -1
+stopLoss = 0.5
 
 pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg, nowPrice, nowCount = 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0
 
@@ -191,6 +192,7 @@ while True:
             count += 1
             try:
                 previousMinute = datetime.now().minute
+                print(datetime.now())
                 data = calltimes30FIXED(symbolVolume)
                 opp = True
 
@@ -198,6 +200,7 @@ while True:
                 columns_to_convert = ['open', 'high', 'low', 'close', 'volume']
                 for column in columns_to_convert:
                     df[column] = df[column].astype(float)
+                i = len(df)-1
 
                 # get_StochasticOscilator(df, 34, 34, 34) # -21% 
                 # stochRSIK1 = df['%K']
@@ -274,8 +277,6 @@ while True:
                 get_StochasticOscilator(df, 328, 441, 3) # 23%
                 stochRSIK25 = df['%K']
                 stochRSID25 = df['%D'] 
-                print(datetime.now())
-                i = len(df)-1-6
         
                 #--------STOCH1RSI----------#
                 # longRunSTOCHRSI1, shortRunSTOCHRSI1 = findSelection(previousBuyStochasticRSI1, previousSellStochasticRSI1, longRunSTOCHRSI1, shortRunSTOCHRSI1, i) 
@@ -307,9 +308,9 @@ while True:
                 #     send_message("BUY: 1", bot)
                 #     if count1 > 0:
                 #         closeShort(bingx_client, symbol, betAmount, maxLev)
-                #         buyLong(bingx_client, symbol, betAmount, maxLev)
+                #         buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                 #     else:
-                #         buyLong(bingx_client, symbol, betAmount, maxLev)
+                #         buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                 #     count1+=1
                 #--------STOCH1RSI----------#
 
@@ -335,12 +336,12 @@ while True:
                     if count2 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev)
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")       
-                            buyShort(bingx_client, symbol, betAmount, maxLev)             
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)             
                     else:
-                        buyShort(bingx_client, symbol, betAmount, maxLev)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count2+=1
                 
                 if previousBuyStochasticRSI2 == True:
@@ -349,13 +350,13 @@ while True:
                     if count2 > 0:
                         try:
                             closeShort(bingx_client, symbol, betAmount, maxLev)
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                             print("No position to close RQTRQT")
 
                     else:
-                        buyLong(bingx_client, symbol, betAmount, maxLev)
+                        buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count2+=1
                 #--------STOCH2RSI----------#
 
@@ -390,9 +391,9 @@ while True:
                 #     send_message("BUY: 3", bot)
                 #     if count3 > 0:
                 #         closeShort(bingx_client, symbol, betAmount, maxLev)
-                #         buyLong(bingx_client, symbol, betAmount, maxLev)
+                #         buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                 #     else:
-                #         buyLong(bingx_client, symbol, betAmount, maxLev)
+                #         buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                 #     count3+=1
                 #--------STOCH3RSI----------#
 
@@ -428,9 +429,9 @@ while True:
                 #     send_message("BUY: 4", bot)
                 #     if count4 > 0:
                 #         closeShort(bingx_client, symbol, betAmount, maxLev)
-                #         buyLong(bingx_client, symbol, betAmount, maxLev)
+                #         buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                 #     else:
-                #         buyLong(bingx_client, symbol, betAmount, maxLev)
+                #         buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                 #     count4+=1
                 #--------STOCH4RSI----------#
 
@@ -457,12 +458,12 @@ while True:
                     if count5 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev)
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")
-                            buyShort(bingx_client, symbol, betAmount, maxLev)
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     else:
-                        buyShort(bingx_client, symbol, betAmount, maxLev)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count5+=1
                 
                 if previousBuyStochasticRSI5 == True:
@@ -471,13 +472,13 @@ while True:
                     if count5 > 0:
                         try:
                             closeShort(bingx_client, symbol, betAmount, maxLev)
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                             print("No position to close RQTRQT")
 
                     else:
-                        buyLong(bingx_client, symbol, betAmount, maxLev)
+                        buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count5+=1
                 #--------STOCH5RSI----------#
 
@@ -503,12 +504,12 @@ while True:
                     if count6 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev)
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")       
-                            buyShort(bingx_client, symbol, betAmount, maxLev)             
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)             
                     else:
-                        buyShort(bingx_client, symbol, betAmount, maxLev)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count6+=1
                 
                 if previousBuyStochasticRSI6 == True:
@@ -517,13 +518,13 @@ while True:
                     if count6 > 0:
                         try:
                             closeShort(bingx_client, symbol, betAmount, maxLev)
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                             print("No position to close RQTRQT")
 
                     else:
-                        buyLong(bingx_client, symbol, betAmount, maxLev)
+                        buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count6+=1
                 #--------STOCH6RSI----------#
 
@@ -550,12 +551,12 @@ while True:
                     if count7 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev)
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")       
-                            buyShort(bingx_client, symbol, betAmount, maxLev)             
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)             
                     else:
-                        buyShort(bingx_client, symbol, betAmount, maxLev)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count7+=1
                 
                 if previousBuyStochasticRSI7 == True:
@@ -564,13 +565,13 @@ while True:
                     if count7 > 0:
                         try:
                             closeShort(bingx_client, symbol, betAmount, maxLev)
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                             print("No position to close RQTRQT")
 
                     else:
-                        buyLong(bingx_client, symbol, betAmount, maxLev)
+                        buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count7+=1
                 #--------STOCH7RSI----------#
 
@@ -597,12 +598,12 @@ while True:
                     if count8 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev)
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")       
-                            buyShort(bingx_client, symbol, betAmount, maxLev)             
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)             
                     else:
-                        buyShort(bingx_client, symbol, betAmount, maxLev)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count8+=1
                 
                 if previousBuyStochasticRSI8 == True:
@@ -611,13 +612,13 @@ while True:
                     if count8 > 0:
                         try:
                             closeShort(bingx_client, symbol, betAmount, maxLev)
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                             print("No position to close RQTRQT")
 
                     else:
-                        buyLong(bingx_client, symbol, betAmount, maxLev)
+                        buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count8+=1
                 #--------STOCH8RSI----------#
 
@@ -644,12 +645,12 @@ while True:
                     if count9 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev)
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")       
-                            buyShort(bingx_client, symbol, betAmount, maxLev)             
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)             
                     else:
-                        buyShort(bingx_client, symbol, betAmount, maxLev)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count9+=1
                 
                 if previousBuyStochasticRSI9 == True:
@@ -658,13 +659,13 @@ while True:
                     if count9 > 0:
                         try:
                             closeShort(bingx_client, symbol, betAmount, maxLev)
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                             print("No position to close RQTRQT")
 
                     else:
-                        buyLong(bingx_client, symbol, betAmount, maxLev)
+                        buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count9+=1
                 #--------STOCH9RSI----------#
 
@@ -691,12 +692,12 @@ while True:
                     if count10 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev)
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")       
-                            buyShort(bingx_client, symbol, betAmount, maxLev)             
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)             
                     else:
-                        buyShort(bingx_client, symbol, betAmount, maxLev)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count10+=1
                 
                 if previousBuyStochasticRSI10 == True:
@@ -705,13 +706,13 @@ while True:
                     if count10 > 0:
                         try:
                             closeShort(bingx_client, symbol, betAmount, maxLev)
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                             print("No position to close RQTRQT")
 
                     else:
-                        buyLong(bingx_client, symbol, betAmount, maxLev)
+                        buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count10+=1
                 #--------STOCH10RSI----------#
 
@@ -747,9 +748,9 @@ while True:
                 #     send_message("BUY: 11", bot)
                 #     if count11 > 0:
                 #         closeShort(bingx_client, symbol, betAmount, maxLev)
-                #         buyLong(bingx_client, symbol, betAmount, maxLev)
+                #         buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                 #     else:
-                #         buyLong(bingx_client, symbol, betAmount, maxLev)
+                #         buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                 #     count11+=1
                 #--------STOCH11RSI----------#
 
@@ -776,12 +777,12 @@ while True:
                     if count12 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev)
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")       
-                            buyShort(bingx_client, symbol, betAmount, maxLev)             
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)             
                     else:
-                        buyShort(bingx_client, symbol, betAmount, maxLev)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count12+=1
                 
                 if previousBuyStochasticRSI12 == True:
@@ -791,13 +792,13 @@ while True:
                     if count12 > 0:
                         try:
                             closeShort(bingx_client, symbol, betAmount, maxLev)
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                             print("No position to close RQTRQT")
 
                     else:
-                        buyLong(bingx_client, symbol, betAmount, maxLev)
+                        buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count12+=1
                 #--------STOCH12RSI----------#
 
@@ -824,12 +825,12 @@ while True:
                     if count13 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev)
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")       
-                            buyShort(bingx_client, symbol, betAmount, maxLev)             
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)             
                     else:
-                        buyShort(bingx_client, symbol, betAmount, maxLev)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count13+=1
                 
                 if previousBuyStochasticRSI13 == True:
@@ -838,13 +839,13 @@ while True:
                     if count13 > 0:
                         try:
                             closeShort(bingx_client, symbol, betAmount, maxLev)
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                             print("No position to close RQTRQT")
 
                     else:
-                        buyLong(bingx_client, symbol, betAmount, maxLev)
+                        buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count13+=1
                 #--------STOCH13RSI----------#
 
@@ -871,12 +872,12 @@ while True:
                     if count14 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev)
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")       
-                            buyShort(bingx_client, symbol, betAmount, maxLev)             
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)             
                     else:
-                        buyShort(bingx_client, symbol, betAmount, maxLev)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count14+=1
                 
                 if previousBuyStochasticRSI14 == True:
@@ -885,13 +886,13 @@ while True:
                     if count14 > 0:
                         try:
                             closeShort(bingx_client, symbol, betAmount, maxLev)
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                             print("No position to close RQTRQT")
 
                     else:
-                        buyLong(bingx_client, symbol, betAmount, maxLev)
+                        buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count14+=1
                 #--------STOCH14RSI----------#
 
@@ -917,12 +918,12 @@ while True:
                     if count15 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev)
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")       
-                            buyShort(bingx_client, symbol, betAmount, maxLev)             
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)             
                     else:
-                        buyShort(bingx_client, symbol, betAmount, maxLev)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count15+=1
                 
                 if previousBuyStochasticRSI15 == True:
@@ -931,13 +932,13 @@ while True:
                     if count15 > 0:
                         try:
                             closeShort(bingx_client, symbol, betAmount, maxLev)
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                             print("No position to close RQTRQT")
 
                     else:
-                        buyLong(bingx_client, symbol, betAmount, maxLev)
+                        buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count15+=1
                 #--------STOCH15RSI----------#
 
@@ -964,12 +965,12 @@ while True:
                     if count16 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev)
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")       
-                            buyShort(bingx_client, symbol, betAmount, maxLev)             
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)             
                     else:
-                        buyShort(bingx_client, symbol, betAmount, maxLev)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count16+=1
                 
                 if previousBuyStochasticRSI16 == True:
@@ -978,13 +979,13 @@ while True:
                     if count16 > 0:
                         try:
                             closeShort(bingx_client, symbol, betAmount, maxLev)
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                             print("No position to close RQTRQT")
 
                     else:
-                        buyLong(bingx_client, symbol, betAmount, maxLev)
+                        buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count16+=1
                 #--------STOCH16RSI----------#
 
@@ -1010,12 +1011,12 @@ while True:
                     if count17 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev)
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")
-                            buyShort(bingx_client, symbol, betAmount, maxLev)                    
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)                    
                     else:
-                        buyShort(bingx_client, symbol, betAmount, maxLev)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count17+=1
                 
                 if previousBuyStochasticRSI17 == True:
@@ -1024,13 +1025,13 @@ while True:
                     if count17 > 0:
                         try:
                             closeShort(bingx_client, symbol, betAmount, maxLev)
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                             print("No position to close RQTRQT")
 
                     else:
-                        buyLong(bingx_client, symbol, betAmount, maxLev)
+                        buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count17+=1
                 #--------STOCH17RSI----------#
 
@@ -1057,12 +1058,12 @@ while True:
                     if count18 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev)
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")       
-                            buyShort(bingx_client, symbol, betAmount, maxLev)             
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)             
                     else:
-                        buyShort(bingx_client, symbol, betAmount, maxLev)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count18+=1
                 
                 if previousBuyStochasticRSI18 == True:
@@ -1071,13 +1072,13 @@ while True:
                     if count18 > 0:
                         try:
                             closeShort(bingx_client, symbol, betAmount, maxLev)
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                             print("No position to close RQTRQT")
 
                     else:
-                        buyLong(bingx_client, symbol, betAmount, maxLev)
+                        buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count18+=1
                 #--------STOCH18RSI----------#
 
@@ -1104,12 +1105,12 @@ while True:
                     if count19 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev)
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")       
-                            buyShort(bingx_client, symbol, betAmount, maxLev)             
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)             
                     else:
-                        buyShort(bingx_client, symbol, betAmount, maxLev)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count19+=1
                 
                 if previousBuyStochasticRSI19 == True:
@@ -1118,13 +1119,13 @@ while True:
                     if count19 > 0:
                         try:
                             closeShort(bingx_client, symbol, betAmount, maxLev)
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                             print("No position to close RQTRQT")
 
                     else:
-                        buyLong(bingx_client, symbol, betAmount, maxLev)
+                        buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count19+=1
                 #--------STOCH19RSI----------#
 
@@ -1160,9 +1161,9 @@ while True:
                 #     send_message("BUY: 20", bot)
                 #     if count20 > 0:
                 #         closeShort(bingx_client, symbol, betAmount, maxLev)
-                #         buyLong(bingx_client, symbol, betAmount, maxLev)
+                #         buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                 #     else:
-                #         buyLong(bingx_client, symbol, betAmount, maxLev)
+                #         buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                 #     count20+=1
                 #--------STOCH20RSI----------#
 
@@ -1188,12 +1189,12 @@ while True:
                     if count21 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev)
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")       
-                            buyShort(bingx_client, symbol, betAmount, maxLev)             
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)             
                     else:
-                        buyShort(bingx_client, symbol, betAmount, maxLev)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count21+=1
                 
                 if previousBuyStochasticRSI21 == True:
@@ -1202,13 +1203,13 @@ while True:
                     if count21 > 0:
                         try:
                             closeShort(bingx_client, symbol, betAmount, maxLev)
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                             print("No position to close RQTRQT")
 
                     else:
-                        buyLong(bingx_client, symbol, betAmount, maxLev)
+                        buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count21+=1
                 #--------STOCH21RSI----------#
 
@@ -1235,12 +1236,12 @@ while True:
                     if count22 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev)
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")       
-                            buyShort(bingx_client, symbol, betAmount, maxLev)             
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)             
                     else:
-                        buyShort(bingx_client, symbol, betAmount, maxLev)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count22+=1
                 
                 if previousBuyStochasticRSI22 == True:
@@ -1249,13 +1250,13 @@ while True:
                     if count22 > 0:
                         try:
                             closeShort(bingx_client, symbol, betAmount, maxLev)
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                             print("No position to close RQTRQT")
 
                     else:
-                        buyLong(bingx_client, symbol, betAmount, maxLev)
+                        buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count22+=1
                 #--------STOCH22RSI----------#
 
@@ -1291,9 +1292,9 @@ while True:
                 #     send_message("BUY: 23", bot)
                 #     if count23 > 0:
                 #         closeShort(bingx_client, symbol, betAmount, maxLev)
-                #         buyLong(bingx_client, symbol, betAmount, maxLev)
+                #         buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                 #     else:
-                #         buyLong(bingx_client, symbol, betAmount, maxLev)
+                #         buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                 #     count23+=1
                 #--------STOCH23RSI----------#
 
@@ -1320,12 +1321,12 @@ while True:
                     if count24 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev)
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")       
-                            buyShort(bingx_client, symbol, betAmount, maxLev)             
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)             
                     else:
-                        buyShort(bingx_client, symbol, betAmount, maxLev)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count24+=1
                 
                 if previousBuyStochasticRSI24 == True:
@@ -1334,14 +1335,14 @@ while True:
                     if count24 > 0:
                         try:
                             closeShort(bingx_client, symbol, betAmount, maxLev)
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                             print("No position to close RQTRQT")
 
 
                     else:
-                        buyLong(bingx_client, symbol, betAmount, maxLev)
+                        buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count24+=1
                 #--------STOCH24RSI----------#
 
@@ -1366,12 +1367,12 @@ while True:
                     if count25 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev)
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")       
-                            buyShort(bingx_client, symbol, betAmount, maxLev)             
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)             
                     else:
-                        buyShort(bingx_client, symbol, betAmount, maxLev)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count25+=1
                 
                 if previousBuyStochasticRSI25 == True:
@@ -1380,13 +1381,13 @@ while True:
                     if count25 > 0:
                         try:
                             closeShort(bingx_client, symbol, betAmount, maxLev)
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
-                            buyLong(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                             print("No position to close RQTRQT")
 
                     else:
-                        buyLong(bingx_client, symbol, betAmount, maxLev)
+                        buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count25+=1
                 #--------STOCH25RSI----------#
                 yes = False
