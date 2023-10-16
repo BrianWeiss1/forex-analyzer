@@ -48,7 +48,7 @@ def process_symbol(dataSymbol, best_results, worst_results, lst):
                 count += value
             print("AVG PERCENT: " + str(totalAmount/count))
             specialNum = totalAmount/count
-            
+            specialNum = SpecialValue
             lst.append([dataSymbol[i], specialNum])
             if AvgPercent > bestAvgPercent:
                 bestAvgPercent = AvgPercent

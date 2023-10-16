@@ -808,7 +808,7 @@ def simulateCrypto(df, days=None, printing=True, endday = 0):
 if "__main__" == __name__:
     betTest = True
     if betTest:
-        symbolVolume = "STORJUSDT"
+        symbolVolume = "PERPUSDT"
         dic = {}
         printing = False
         count = 0
@@ -829,12 +829,12 @@ if "__main__" == __name__:
             BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, i, False, 0)
             print(AvgPercent)
     else:
-        symbolVolume = "STORJUSDT"
+        symbolVolume = "PERPUSDT"
         # dic = {}
         printing = True
         # count = 0
         # totalAmount = 0
-        df = formatDataset1(formatDataset(calltimes30FIXED(symbolVolume, (datetime.now()-timedelta(days=365)).strftime('%Y-%m-%d'))))
+        df = formatDataset1(formatDataset(calltimes30FIXED(symbolVolume, (datetime.now()-timedelta(days=30)).strftime('%Y-%m-%d'))))
         print(df)
         # for x in range(45):
         #     expFormula = 5*(pow(1.1, -x))
