@@ -813,7 +813,7 @@ if "__main__" == __name__:
     betTest = True
     if betTest:
         DIFFERENCEYOUWANT = 10
-        symbolVolume = "STORJUSDT"
+        symbolVolume = "GTCUSDT"
         dic = {}
         printing = False
         count = 0
@@ -834,7 +834,7 @@ if "__main__" == __name__:
             # print(key)
             BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, key, False, 1+DIFFERENCEYOUWANT)
             totalAmount += AvgPercent * value
-            # print(AvgPercent)
+            print(AvgPercent)
             count += value
         predictedPercent = totalAmount/count
         print("PREDICTED PERCENT: " + str(round(predictedPercent, 3)) + "%")
