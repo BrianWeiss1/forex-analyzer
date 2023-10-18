@@ -25,17 +25,17 @@ from bingX.perpetual.v2.types import (
 
 
 APIURL = "https://open-api.bingx.com"
-f = open('documents/api_key2.txt', 'r')
-APIKEY = '4kBokBizUrJ8SPGUR0Vr4Aul6vVgKJwB4Fas0qzhYbvf5WRKQGyaBW9DMJqI7pTOn4BzDh96ycgAE2WH1Vg'
+f = open('documents/api_key.txt', 'r')
+APIKEY = 'zGnYUEbpDvOI36v9DnPIvMLQEVz44Vgme7AUAyFeonkUAusiLDi9PFM65nyjAuijESmpmC2eGAuqmFfHVQ'
 SECRETKEY = f.readline()
 f.close()
-sim = "GTC"
-maxLev = 25
-betAmount = 0.14
+sim = "BOND"
+maxLev = 10
+betAmount = 0.2
 symbol = f'{sim}-USDT'
 symbolVolume = f'{sim}USDT'
 
-BOT_TOKEN = '6544880301:AAHg7mY97eTLOt1r3TLfI2Ww-DhdTu9E52g'
+BOT_TOKEN = '6489205899:AAEmww0VewKJRpLYLzGMijQHGQM-elQYsJE'
 
 bingx_client = PerpetualV2(api_key=APIKEY, secret_key=SECRETKEY)
 
@@ -186,13 +186,12 @@ opp = False
 while True:
     count = 0
     yes = False
-    if ((datetime.now().minute == 30 or datetime.now().minute == 0) and previousMinute != datetime.now().minute):
+    if ((datetime.now().minute == 30 or datetime.now().minute == 0) and previousMinute != datetime.now().minute) or True:
         yes = True
         while (yes and count < 5):
             count += 1
             try:
                 previousMinute = datetime.now().minute
-                print(datetime.now())
                 data = calltimes30FIXED(symbolVolume)
                 opp = True
 
@@ -200,118 +199,69 @@ while True:
                 columns_to_convert = ['open', 'high', 'low', 'close', 'volume']
                 for column in columns_to_convert:
                     df[column] = df[column].astype(float)
-                i = len(df)-1-2
+                i = len(df)-8
 
-                # get_StochasticOscilator(df, 34, 34, 34) # -21% 
-                # stochRSIK1 = df['%K']
-                # stochRSID1 = df['%D']
-                get_StochasticOscilator(df, 460, 351, 4) # 23%
-                stochRSIK2 = df['%K']
-                stochRSID2 = df['%D']
-                # get_StochasticOscilator(df, 30, 387, 35) # -21%
-                # stochRSIK3 = df['%K']
-                # stochRSID3 = df['%D']
-                # get_StochasticOscilator(df, 79, 34, 17) # -26%
-                # stochRSIK4 = df['%K']
-                # stochRSID4 = df['%D']
-                get_StochasticOscilator(df, 46, 344, 25) # 26%
-                stochRSIK5 = df['%K']
-                stochRSID5 = df['%D']
-                get_StochasticOscilator(df, 158, 439, 8) # 23%
-                stochRSIK6 = df['%K']
-                stochRSID6 = df['%D']
-                get_StochasticOscilator(df, 232, 446, 5) # 22%
-                stochRSIK7 = df['%K']
-                stochRSID7 = df['%D']
-                get_StochasticOscilator(df, 42, 345, 25) # 23%
-                stochRSIK8 = df['%K']
-                stochRSID8 = df['%D']
-                get_StochasticOscilator(df, 271, 441, 4) # 24%
-                stochRSIK9 = df['%K']
-                stochRSID9 = df['%D']
-                get_StochasticOscilator(df, 327, 441, 3) # 24%
-                stochRSIK10 = df['%K']
-                stochRSID10 = df['%D']
-                # get_StochasticOscilator(df, 66, 396, 10) # -21%
-                # stochRSIK11 = df['%K']
-                # stochRSID11 = df['%D']
-                get_StochasticOscilator(df, 136, 441, 10) # 23%
-                stochRSIK12 = df['%K']
-                stochRSID12 = df['%D']
-                get_StochasticOscilator(df, 6, 73, 1251) # 22%
-                stochRSIK13 = df['%K']
-                stochRSID13 = df['%D']
-                get_StochasticOscilator(df, 327, 327, 4) # 21%
-                stochRSIK14 = df['%K']
-                stochRSID14 = df['%D']
-                get_StochasticOscilator(df, 442, 442, 3) # 24%
-                stochRSIK15 = df['%K']
-                stochRSID15 = df['%D']
-                get_StochasticOscilator(df, 209, 437, 5) # 24%
-                stochRSIK16 = df['%K']
-                stochRSID16 = df['%D']
-                get_StochasticOscilator(df, 207, 439, 5) # 27%
-                stochRSIK17 = df['%K']
-                stochRSID17 = df['%D']
-                get_StochasticOscilator(df, 207, 439, 6) # 28%
-                stochRSIK18 = df['%K']
-                stochRSID18 = df['%D']
-                get_StochasticOscilator(df, 430, 442, 3) # 24.5%
-                stochRSIK19 = df['%K']
-                stochRSID19 = df['%D']
-                # get_StochasticOscilator(df, 36, 388, 24) # 21%
-                # stochRSIK20 = df['%K']
-                # stochRSID20 = df['%D']
-                get_StochasticOscilator(df, 39, 346, 31) # 25%
-                stochRSIK21 = df['%K']
-                stochRSID21 = df['%D']
-                get_StochasticOscilator(df, 439, 205, 4) # 23%
-                stochRSIK22 = df['%K']
-                stochRSID22 = df['%D']
-                # get_StochasticOscilator(df, 31, 387, 36) # 20%
-                # stochRSIK23 = df['%K']
-                # stochRSID23 = df['%D']
-                get_StochasticOscilator(df, 31, 290, 37) # 19%
-                stochRSIK24 = df['%K']
-                stochRSID24 = df['%D']
-                get_StochasticOscilator(df, 328, 441, 3) # 23%
-                stochRSIK25 = df['%K']
-                stochRSID25 = df['%D'] 
-        
+                stochRSIK1, stochRSID1 = get_StochasticRelitiveStrengthIndex(df, 223, 418, 132)
+                stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(df, 250, 418, 132)
+                stochRSIK3, stochRSID3 = get_StochasticRelitiveStrengthIndex(df, 66, 70, 131)
+                stochRSIK4, stochRSID4 = get_StochasticRelitiveStrengthIndex(df, 535, 127, 137) # --> 30000
+                stochRSIK5, stochRSID5 = get_StochasticRelitiveStrengthIndex(df, 214, 47, 39)
+                stochRSIK6, stochRSID6 = get_StochasticRelitiveStrengthIndex(df, 180, 33, 132)
+                stochRSIK7, stochRSID7 = get_StochasticRelitiveStrengthIndex(df, 401, 127, 80)
+                stochRSIK8, stochRSID8 = get_StochasticRelitiveStrengthIndex(df, 69, 148, 59)
+                stochRSIK9, stochRSID9 = get_StochasticRelitiveStrengthIndex(df, 154, 120, 586)
+                stochRSIK10, stochRSID10 = get_StochasticRelitiveStrengthIndex(df, 96, 64, 110)
+                stochRSIK11, stochRSID11 = get_StochasticRelitiveStrengthIndex(df, 145, 145, 39)
+                stochRSIK12, stochRSID12 = get_StochasticRelitiveStrengthIndex(df, 153, 53, 56)
+                stochRSIK13, stochRSID13 = get_StochasticRelitiveStrengthIndex(df, 77, 60, 136)
+                stochRSIK14, stochRSID14 = get_StochasticRelitiveStrengthIndex(df, 51, 59, 156) 
+                stochRSIK15, stochRSID15 = get_StochasticRelitiveStrengthIndex(df, 184, 62, 62) # 0%
+                stochRSIK16, stochRSID16 = get_StochasticRelitiveStrengthIndex(df, 143, 143, 62)
+                stochRSIK17, stochRSID17 = get_StochasticRelitiveStrengthIndex(df, 143, 424, 424) # 1%
+                stochRSIK18, stochRSID18 = get_StochasticRelitiveStrengthIndex(df, 143, 49, 210) 
+                stochRSIK19, stochRSID19 = get_StochasticRelitiveStrengthIndex(df, 53, 52, 194)
+                stochRSIK20, stochRSID20 = get_StochasticRelitiveStrengthIndex(df, 53, 53, 199) # 0.8
+                stochRSIK21, stochRSID21 = get_StochasticRelitiveStrengthIndex(df, 171, 57, 150) # 0.7
+                stochRSIK22, stochRSID22 = get_StochasticRelitiveStrengthIndex(df, 65, 150, 65)
+                stochRSIK23, stochRSID23 = get_StochasticRelitiveStrengthIndex(df, 134, 47, 238) # 1.09
+                stochRSIK24, stochRSID24 = get_StochasticRelitiveStrengthIndex(df, 401, 127, 137)
+                stochRSIK25, stochRSID25 = get_StochasticRelitiveStrengthIndex(df, 401, 127, 153)
+                stochRSIK26, stochRSID26 = get_StochasticRelitiveStrengthIndex(df, 293, 83, 316)
+                    
                 #--------STOCH1RSI----------#
-                # longRunSTOCHRSI1, shortRunSTOCHRSI1 = findSelection(previousBuyStochasticRSI1, previousSellStochasticRSI1, longRunSTOCHRSI1, shortRunSTOCHRSI1, i) 
-                # shortRunSTOCHRSI1, longRunSTOCHRSI1, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI1, longRunSTOCHRSI1, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+                longRunSTOCHRSI1, shortRunSTOCHRSI1 = findSelection(previousBuyStochasticRSI1, previousSellStochasticRSI1, longRunSTOCHRSI1, shortRunSTOCHRSI1, i) 
+                shortRunSTOCHRSI1, longRunSTOCHRSI1, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI1, longRunSTOCHRSI1, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
 
-                # previousSellStochasticRSI1 = previousBuyStochasticRSI1 = False
+                previousSellStochasticRSI1 = previousBuyStochasticRSI1 = False
 
-                # if stochRSIK1[i-1] >= stochRSID1[i-1] and stochRSIK1[i] < stochRSID1[i]:
-                #     previousSellStochasticRSI1 = True
-                # if stochRSIK1[i-1] <= stochRSID1[i-1] and stochRSIK1[i] > stochRSID1[i]:
-                #     previousBuyStochasticRSI1 = True
-                # # previousSellStochasticRSI1, previousBuyStochasticRSI1 = previousBuyStochasticRSI1, previousSellStochasticRSI1)
+                if stochRSIK1[i-1] >= stochRSID1[i-1] and stochRSIK1[i] < stochRSID1[i]:
+                    previousSellStochasticRSI1 = True
+                if stochRSIK1[i-1] <= stochRSID1[i-1] and stochRSIK1[i] > stochRSID1[i]:
+                    previousBuyStochasticRSI1 = True
+                # previousSellStochasticRSI1, previousBuyStochasticRSI1 = previousBuyStochasticRSI1, previousSellStochasticRSI1)
 
-                # if previousSellStochasticRSI1 and previousBuyStochasticRSI1:
-                #     previousBuyStochasticRSI1 = False
-                #     previousSellStochasticRSI1 = False   
-                # if previousSellStochasticRSI1 == True:
-                #     print("SELL: 1")
-                #     send_message("SELL: 1", bot)
-                #     if count1 > 0:
-                #         closeLong(bingx_client, symbol, betAmount, maxLev)
-                #         buyShort(bingx_client, symbol, betAmount, maxLev)
-                #     else:
-                #         buyShort(bingx_client, symbol, betAmount, maxLev)
-                #     count1+=1
+                if previousSellStochasticRSI1 and previousBuyStochasticRSI1:
+                    previousBuyStochasticRSI1 = False
+                    previousSellStochasticRSI1 = False   
+                if previousSellStochasticRSI1 == True:
+                    print("SELL: 1")
+                    send_message("SELL: 1", bot)
+                    if count1 > 0:
+                        closeLong(bingx_client, symbol, betAmount, maxLev)
+                        buyShort(bingx_client, symbol, betAmount, maxLev)
+                    else:
+                        buyShort(bingx_client, symbol, betAmount, maxLev)
+                    count1+=1
                 
-                # if previousBuyStochasticRSI1 == True:
-                #     print("BUY: 1")
-                #     send_message("BUY: 1", bot)
-                #     if count1 > 0:
-                #         closeShort(bingx_client, symbol, betAmount, maxLev)
-                #         buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
-                #     else:
-                #         buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
-                #     count1+=1
+                if previousBuyStochasticRSI1 == True:
+                    print("BUY: 1")
+                    send_message("BUY: 1", bot)
+                    if count1 > 0:
+                        closeShort(bingx_client, symbol, betAmount, maxLev)
+                        buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                    else:
+                        buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                    count1+=1
                 #--------STOCH1RSI----------#
 
 
@@ -362,77 +312,77 @@ while True:
 
 
                 #--------STOCH3RSI----------#
-                # longRunSTOCHRSI3, shortRunSTOCHRSI3 = findSelection(previousBuyStochasticRSI3, previousSellStochasticRSI3, longRunSTOCHRSI3, shortRunSTOCHRSI3, i) 
-                # shortRunSTOCHRSI3, longRunSTOCHRSI3, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI3, longRunSTOCHRSI3, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+                longRunSTOCHRSI3, shortRunSTOCHRSI3 = findSelection(previousBuyStochasticRSI3, previousSellStochasticRSI3, longRunSTOCHRSI3, shortRunSTOCHRSI3, i) 
+                shortRunSTOCHRSI3, longRunSTOCHRSI3, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI3, longRunSTOCHRSI3, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
 
-                # previousSellStochasticRSI3 = previousBuyStochasticRSI3 = False
+                previousSellStochasticRSI3 = previousBuyStochasticRSI3 = False
 
-                # if stochRSIK3[i-1] >= stochRSID3[i-1] and stochRSIK3[i] < stochRSID3[i]:
-                #     previousSellStochasticRSI3 = True
-                # if stochRSIK3[i-1] <= stochRSID3[i-1] and stochRSIK3[i] > stochRSID3[i]:
-                #     previousBuyStochasticRSI3 = True
-                # # previousSellStochasticRSI3, previousBuyStochasticRSI3 = previousBuyStochasticRSI3, previousSellStochasticRSI3)
+                if stochRSIK3[i-1] >= stochRSID3[i-1] and stochRSIK3[i] < stochRSID3[i]:
+                    previousSellStochasticRSI3 = True
+                if stochRSIK3[i-1] <= stochRSID3[i-1] and stochRSIK3[i] > stochRSID3[i]:
+                    previousBuyStochasticRSI3 = True
+                # previousSellStochasticRSI3, previousBuyStochasticRSI3 = previousBuyStochasticRSI3, previousSellStochasticRSI3)
 
-                # if previousSellStochasticRSI3 and previousBuyStochasticRSI3:
-                #     previousBuyStochasticRSI3 = False
-                #     previousSellStochasticRSI3 = False   
-                # if previousSellStochasticRSI3 == True:
-                #     print("SELL: 3")
-                #     send_message("SELL: 3", bot)
-                #     if count3 > 0:
-                #         closeLong(bingx_client, symbol, betAmount, maxLev)
-                #         buyShort(bingx_client, symbol, betAmount, maxLev)
-                #     else:
-                #         buyShort(bingx_client, symbol, betAmount, maxLev)
-                #     count3+=1
+                if previousSellStochasticRSI3 and previousBuyStochasticRSI3:
+                    previousBuyStochasticRSI3 = False
+                    previousSellStochasticRSI3 = False   
+                if previousSellStochasticRSI3 == True:
+                    print("SELL: 3")
+                    send_message("SELL: 3", bot)
+                    if count3 > 0:
+                        closeLong(bingx_client, symbol, betAmount, maxLev)
+                        buyShort(bingx_client, symbol, betAmount, maxLev)
+                    else:
+                        buyShort(bingx_client, symbol, betAmount, maxLev)
+                    count3+=1
                 
-                # if previousBuyStochasticRSI3 == True:
-                #     print("BUY: 3")
-                #     send_message("BUY: 3", bot)
-                #     if count3 > 0:
-                #         closeShort(bingx_client, symbol, betAmount, maxLev)
-                #         buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
-                #     else:
-                #         buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
-                #     count3+=1
+                if previousBuyStochasticRSI3 == True:
+                    print("BUY: 3")
+                    send_message("BUY: 3", bot)
+                    if count3 > 0:
+                        closeShort(bingx_client, symbol, betAmount, maxLev)
+                        buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                    else:
+                        buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                    count3+=1
                 #--------STOCH3RSI----------#
 
 
 
                 #--------STOCH4RSI----------#
-                # longRunSTOCHRSI4, shortRunSTOCHRSI4 = findSelection(previousBuyStochasticRSI4, previousSellStochasticRSI4, longRunSTOCHRSI4, shortRunSTOCHRSI4, i) 
-                # shortRunSTOCHRSI4, longRunSTOCHRSI4, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI4, longRunSTOCHRSI4, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+                longRunSTOCHRSI4, shortRunSTOCHRSI4 = findSelection(previousBuyStochasticRSI4, previousSellStochasticRSI4, longRunSTOCHRSI4, shortRunSTOCHRSI4, i) 
+                shortRunSTOCHRSI4, longRunSTOCHRSI4, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI4, longRunSTOCHRSI4, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
 
-                # previousSellStochasticRSI4 = previousBuyStochasticRSI4 = False
+                previousSellStochasticRSI4 = previousBuyStochasticRSI4 = False
 
-                # if stochRSIK4[i-1] >= stochRSID4[i-1] and stochRSIK4[i] < stochRSID4[i]:
-                #     previousSellStochasticRSI4 = True
-                # if stochRSIK4[i-1] <= stochRSID4[i-1] and stochRSIK4[i] > stochRSID4[i]:
-                #     previousBuyStochasticRSI4 = True
-                # # previousSellStochasticRSI4, previousBuyStochasticRSI4 = previousBuyStochasticRSI4, previousSellStochasticRSI4)
+                if stochRSIK4[i-1] >= stochRSID4[i-1] and stochRSIK4[i] < stochRSID4[i]:
+                    previousSellStochasticRSI4 = True
+                if stochRSIK4[i-1] <= stochRSID4[i-1] and stochRSIK4[i] > stochRSID4[i]:
+                    previousBuyStochasticRSI4 = True
+                # previousSellStochasticRSI4, previousBuyStochasticRSI4 = previousBuyStochasticRSI4, previousSellStochasticRSI4)
 
-                # if previousSellStochasticRSI4 and previousBuyStochasticRSI4:
-                #     previousBuyStochasticRSI4 = False
-                #     previousSellStochasticRSI4 = False   
-                # if previousSellStochasticRSI4 == True:
-                #     print("SELL: 4")
-                #     send_message("SELL: 4", bot)
-                #     if count4 > 0:
-                #         closeLong(bingx_client, symbol, betAmount, maxLev)
-                #         buyShort(bingx_client, symbol, betAmount, maxLev)
-                #     else:
-                #         buyShort(bingx_client, symbol, betAmount, maxLev)
-                #     count4+=1
+                if previousSellStochasticRSI4 and previousBuyStochasticRSI4:
+                    previousBuyStochasticRSI4 = False
+                    previousSellStochasticRSI4 = False   
+                if previousSellStochasticRSI4 == True:
+                    print("SELL: 4")
+                    send_message("SELL: 4", bot)
+                    if count4 > 0:
+                        closeLong(bingx_client, symbol, betAmount, maxLev)
+                        buyShort(bingx_client, symbol, betAmount, maxLev)
+                    else:
+                        buyShort(bingx_client, symbol, betAmount, maxLev)
+                    count4+=1
                 
-                # if previousBuyStochasticRSI4 == True:
-                #     print("BUY: 4")
-                #     send_message("BUY: 4", bot)
-                #     if count4 > 0:
-                #         closeShort(bingx_client, symbol, betAmount, maxLev)
-                #         buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
-                #     else:
-                #         buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
-                #     count4+=1
+                if previousBuyStochasticRSI4 == True:
+                    print("BUY: 4")
+                    send_message("BUY: 4", bot)
+                    if count4 > 0:
+                        closeShort(bingx_client, symbol, betAmount, maxLev)
+                        buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                    else:
+                        buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                    count4+=1
                 #--------STOCH4RSI----------#
 
 
@@ -719,39 +669,39 @@ while True:
 
 
                 #--------STOCH11RSI----------#
-                # longRunSTOCHRSI11, shortRunSTOCHRSI11 = findSelection(previousBuyStochasticRSI11, previousSellStochasticRSI11, longRunSTOCHRSI11, shortRunSTOCHRSI11, i) 
-                # shortRunSTOCHRSI11, longRunSTOCHRSI11, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI11, longRunSTOCHRSI11, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+                longRunSTOCHRSI11, shortRunSTOCHRSI11 = findSelection(previousBuyStochasticRSI11, previousSellStochasticRSI11, longRunSTOCHRSI11, shortRunSTOCHRSI11, i) 
+                shortRunSTOCHRSI11, longRunSTOCHRSI11, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI11, longRunSTOCHRSI11, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
 
-                # previousSellStochasticRSI11 = previousBuyStochasticRSI11 = False
+                previousSellStochasticRSI11 = previousBuyStochasticRSI11 = False
 
-                # if stochRSIK11[i-1] >= stochRSID11[i-1] and stochRSIK11[i] < stochRSID11[i]:
-                #     previousSellStochasticRSI11 = True
-                # if stochRSIK11[i-1] <= stochRSID11[i-1] and stochRSIK11[i] > stochRSID11[i]:
-                #     previousBuyStochasticRSI11 = True
-                # # previousSellStochasticRSI11, previousBuyStochasticRSI11 = previousBuyStochasticRSI11, previousSellStochasticRSI11)
+                if stochRSIK11[i-1] >= stochRSID11[i-1] and stochRSIK11[i] < stochRSID11[i]:
+                    previousSellStochasticRSI11 = True
+                if stochRSIK11[i-1] <= stochRSID11[i-1] and stochRSIK11[i] > stochRSID11[i]:
+                    previousBuyStochasticRSI11 = True
+                # previousSellStochasticRSI11, previousBuyStochasticRSI11 = previousBuyStochasticRSI11, previousSellStochasticRSI11)
 
-                # if previousSellStochasticRSI11 and previousBuyStochasticRSI11:
-                #     previousBuyStochasticRSI11 = False
-                #     previousSellStochasticRSI11 = False   
-                # if previousSellStochasticRSI11 == True:
-                #     print("SELL: 11")
-                #     send_message("SELL: 11", bot)
-                #     if count11 > 0:
-                #         closeLong(bingx_client, symbol, betAmount, maxLev)
-                #         buyShort(bingx_client, symbol, betAmount, maxLev)
-                #     else:
-                #         buyShort(bingx_client, symbol, betAmount, maxLev)
-                #     count11+=1
+                if previousSellStochasticRSI11 and previousBuyStochasticRSI11:
+                    previousBuyStochasticRSI11 = False
+                    previousSellStochasticRSI11 = False   
+                if previousSellStochasticRSI11 == True:
+                    print("SELL: 11")
+                    send_message("SELL: 11", bot)
+                    if count11 > 0:
+                        closeLong(bingx_client, symbol, betAmount, maxLev)
+                        buyShort(bingx_client, symbol, betAmount, maxLev)
+                    else:
+                        buyShort(bingx_client, symbol, betAmount, maxLev)
+                    count11+=1
                 
-                # if previousBuyStochasticRSI11 == True:
-                #     print("BUY: 11")
-                #     send_message("BUY: 11", bot)
-                #     if count11 > 0:
-                #         closeShort(bingx_client, symbol, betAmount, maxLev)
-                #         buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
-                #     else:
-                #         buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
-                #     count11+=1
+                if previousBuyStochasticRSI11 == True:
+                    print("BUY: 11")
+                    send_message("BUY: 11", bot)
+                    if count11 > 0:
+                        closeShort(bingx_client, symbol, betAmount, maxLev)
+                        buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                    else:
+                        buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                    count11+=1
                 #--------STOCH11RSI----------#
 
 
@@ -1132,39 +1082,39 @@ while True:
 
 
                 #--------STOCH20RSI----------#
-                # longRunSTOCHRSI20, shortRunSTOCHRSI20 = findSelection(previousBuyStochasticRSI20, previousSellStochasticRSI20, longRunSTOCHRSI20, shortRunSTOCHRSI20, i) 
-                # shortRunSTOCHRSI20, longRunSTOCHRSI20, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI20, longRunSTOCHRSI20, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+                longRunSTOCHRSI20, shortRunSTOCHRSI20 = findSelection(previousBuyStochasticRSI20, previousSellStochasticRSI20, longRunSTOCHRSI20, shortRunSTOCHRSI20, i) 
+                shortRunSTOCHRSI20, longRunSTOCHRSI20, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI20, longRunSTOCHRSI20, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
 
-                # previousSellStochasticRSI20 = previousBuyStochasticRSI20 = False
+                previousSellStochasticRSI20 = previousBuyStochasticRSI20 = False
 
-                # if stochRSIK20[i-1] >= stochRSID20[i-1] and stochRSIK20[i] < stochRSID20[i]:
-                #     previousSellStochasticRSI20 = True
-                # if stochRSIK20[i-1] <= stochRSID20[i-1] and stochRSIK20[i] > stochRSID20[i]:
-                #     previousBuyStochasticRSI20 = True
-                # # previousSellStochasticRSI20, previousBuyStochasticRSI20 = previousBuyStochasticRSI20, previousSellStochasticRSI20)
+                if stochRSIK20[i-1] >= stochRSID20[i-1] and stochRSIK20[i] < stochRSID20[i]:
+                    previousSellStochasticRSI20 = True
+                if stochRSIK20[i-1] <= stochRSID20[i-1] and stochRSIK20[i] > stochRSID20[i]:
+                    previousBuyStochasticRSI20 = True
+                # previousSellStochasticRSI20, previousBuyStochasticRSI20 = previousBuyStochasticRSI20, previousSellStochasticRSI20)
 
-                # if previousSellStochasticRSI20 and previousBuyStochasticRSI20:
-                #     previousBuyStochasticRSI20 = False
-                #     previousSellStochasticRSI20 = False   
-                # if previousSellStochasticRSI20 == True:
-                #     print("SELL: 20")
-                #     send_message("SELL: 20", bot)
-                #     if count20 > 0:
-                #         closeLong(bingx_client, symbol, betAmount, maxLev)
-                #         buyShort(bingx_client, symbol, betAmount, maxLev)
-                #     else:
-                #         buyShort(bingx_client, symbol, betAmount, maxLev)
-                #     count20+=1
+                if previousSellStochasticRSI20 and previousBuyStochasticRSI20:
+                    previousBuyStochasticRSI20 = False
+                    previousSellStochasticRSI20 = False   
+                if previousSellStochasticRSI20 == True:
+                    print("SELL: 20")
+                    send_message("SELL: 20", bot)
+                    if count20 > 0:
+                        closeLong(bingx_client, symbol, betAmount, maxLev)
+                        buyShort(bingx_client, symbol, betAmount, maxLev)
+                    else:
+                        buyShort(bingx_client, symbol, betAmount, maxLev)
+                    count20+=1
                 
-                # if previousBuyStochasticRSI20 == True:
-                #     print("BUY: 20")
-                #     send_message("BUY: 20", bot)
-                #     if count20 > 0:
-                #         closeShort(bingx_client, symbol, betAmount, maxLev)
-                #         buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
-                #     else:
-                #         buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
-                #     count20+=1
+                if previousBuyStochasticRSI20 == True:
+                    print("BUY: 20")
+                    send_message("BUY: 20", bot)
+                    if count20 > 0:
+                        closeShort(bingx_client, symbol, betAmount, maxLev)
+                        buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                    else:
+                        buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                    count20+=1
                 #--------STOCH20RSI----------#
 
 
@@ -1263,39 +1213,39 @@ while True:
 
 
                 #--------STOCH23RSI----------#
-                # longRunSTOCHRSI23, shortRunSTOCHRSI23 = findSelection(previousBuyStochasticRSI23, previousSellStochasticRSI23, longRunSTOCHRSI23, shortRunSTOCHRSI23, i) 
-                # shortRunSTOCHRSI23, longRunSTOCHRSI23, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI23, longRunSTOCHRSI23, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+                longRunSTOCHRSI23, shortRunSTOCHRSI23 = findSelection(previousBuyStochasticRSI23, previousSellStochasticRSI23, longRunSTOCHRSI23, shortRunSTOCHRSI23, i) 
+                shortRunSTOCHRSI23, longRunSTOCHRSI23, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI23, longRunSTOCHRSI23, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
 
-                # previousSellStochasticRSI23 = previousBuyStochasticRSI23 = False
+                previousSellStochasticRSI23 = previousBuyStochasticRSI23 = False
 
-                # if stochRSIK23[i-1] >= stochRSID23[i-1] and stochRSIK23[i] < stochRSID23[i]:
-                #     previousSellStochasticRSI23 = True
-                # if stochRSIK23[i-1] <= stochRSID23[i-1] and stochRSIK23[i] > stochRSID23[i]:
-                #     previousBuyStochasticRSI23 = True
-                # # previousSellStochasticRSI23, previousBuyStochasticRSI23 = previousBuyStochasticRSI23, previousSellStochasticRSI23)
+                if stochRSIK23[i-1] >= stochRSID23[i-1] and stochRSIK23[i] < stochRSID23[i]:
+                    previousSellStochasticRSI23 = True
+                if stochRSIK23[i-1] <= stochRSID23[i-1] and stochRSIK23[i] > stochRSID23[i]:
+                    previousBuyStochasticRSI23 = True
+                # previousSellStochasticRSI23, previousBuyStochasticRSI23 = previousBuyStochasticRSI23, previousSellStochasticRSI23)
 
-                # if previousSellStochasticRSI23 and previousBuyStochasticRSI23:
-                #     previousBuyStochasticRSI23 = False
-                #     previousSellStochasticRSI23 = False   
-                # if previousSellStochasticRSI23 == True:
-                #     print("SELL: 23")
-                #     send_message("SELL: 23", bot)
-                #     if count23 > 0:
-                #         closeLong(bingx_client, symbol, betAmount, maxLev)
-                #         buyShort(bingx_client, symbol, betAmount, maxLev)
-                #     else:
-                #         buyShort(bingx_client, symbol, betAmount, maxLev)
-                #     count23+=1
+                if previousSellStochasticRSI23 and previousBuyStochasticRSI23:
+                    previousBuyStochasticRSI23 = False
+                    previousSellStochasticRSI23 = False   
+                if previousSellStochasticRSI23 == True:
+                    print("SELL: 23")
+                    send_message("SELL: 23", bot)
+                    if count23 > 0:
+                        closeLong(bingx_client, symbol, betAmount, maxLev)
+                        buyShort(bingx_client, symbol, betAmount, maxLev)
+                    else:
+                        buyShort(bingx_client, symbol, betAmount, maxLev)
+                    count23+=1
                 
-                # if previousBuyStochasticRSI23 == True:
-                #     print("BUY: 23")
-                #     send_message("BUY: 23", bot)
-                #     if count23 > 0:
-                #         closeShort(bingx_client, symbol, betAmount, maxLev)
-                #         buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
-                #     else:
-                #         buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
-                #     count23+=1
+                if previousBuyStochasticRSI23 == True:
+                    print("BUY: 23")
+                    send_message("BUY: 23", bot)
+                    if count23 > 0:
+                        closeShort(bingx_client, symbol, betAmount, maxLev)
+                        buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                    else:
+                        buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                    count23+=1
                 #--------STOCH23RSI----------#
 
 
@@ -1391,11 +1341,11 @@ while True:
                     count25+=1
                 #--------STOCH25RSI----------#
                 yes = False
+                print(datetime.now())
                 break
             except Exception as e:
                 yes = True
                 send_message(str(e), bot)
     else:
         # print('L BOZO')
-        
         time.sleep(59)

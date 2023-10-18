@@ -1,5 +1,5 @@
 import threading
-from longTermFINALV3 import simulateCrypto
+from longTermFINALV3 import simulateCryptoSTOCHRSI
 from SpecialFunctions import formatDataset, formatDataset1
 from V3.testGrabData import calltimes30FIXED
 from datetime import datetime, timedelta
@@ -42,10 +42,10 @@ def process_symbol(dataSymbol, best_results, worst_results, lst):
             # print(dic)
             for key, value in dic.items():
                 # print(key)
-                BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCrypto(df, key, False, 1)
+                BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCryptoSTOCHRSI(df, key, False, 1)
                 totalAmount += AvgPercent * value
                 count += value
-            print("AVG PERCENT: " + str(totalAmount/count))
+            # print("AVG PERCENT: " + str(totalAmount/count))
             specialNum = totalAmount/count
             specialNum = SpecialValue
             lst.append([dataSymbol[i], specialNum])
@@ -64,7 +64,7 @@ def process_symbol(dataSymbol, best_results, worst_results, lst):
                 worstNumSymbol = dataSymbol[i]
         except Exception as e:
             print(e)
-            
+      
     bestSymbol = bestNumSymbol
     worstSymbol = worstNumSymbol
     bestAvgPercent = bestNumPercent
@@ -84,7 +84,7 @@ if __name__ == '__main__':
     lst = []
 
     # Number of threads you want to create
-    num_threads = 10  # Adjust this as needed
+    num_threads = 5  # Adjust this as needed
     
     # Split the dataSymbol list into chunks for parallel processing
     chunk_size = len(dataSymbol) // num_threads

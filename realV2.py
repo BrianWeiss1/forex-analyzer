@@ -2,7 +2,7 @@ from datetime import datetime
 import telebot
 import time
 from SpecialFunctions import formatDataset
-from src.testGrabData import getYahoo, calltimes15m, calltimes30FIXED
+from V3.testGrabData import getYahoo, calltimes15m, calltimes30FIXED
 from src.functions import get_StochasticRelitiveStrengthIndex, get_StochasticOscilator
 from src.longTermPos import checkLuquidation, findSelection
 from src.underliningProcesses import swap

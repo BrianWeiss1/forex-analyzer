@@ -7,7 +7,7 @@ from SpecialFunctions import formatDataset, formatDataset1
 from src.functions import get_StochasticOscilator, get_StochasticRelitiveStrengthIndex
 from src.underliningProcesses import swap
 import pandas as pd
-from src.testGrabData import getYahoo, calltimes15m, calltimes30FIXED
+from V3.testGrabData import getYahoo, calltimes15m, calltimes30FIXED
 
 def simulateCrypto(df, days=None, printing=True, endday = 0):
     
