@@ -16,7 +16,8 @@ def simulateCrypto(df, days=None, printing=True, endday = 0):
     bestAvgPips = -sys.maxsize
     worstAvgPips = sys.maxsize
     df = df.dropna()
-
+    bestSpecialValue = -sys.maxsize
+    worstSpecialValue = sys.maxsize
     j = -1
     k = -1
     pos = 0
@@ -33,6 +34,8 @@ def simulateCrypto(df, days=None, printing=True, endday = 0):
     bestAvgk = -1
     worstAvgj = -1
     worstAvgk = -1
+    BestSpecialValues = (0, 0)
+    WorstSpecialValues = (0, 0)
 
     lst = []
 
@@ -262,7 +265,7 @@ def simulateCrypto(df, days=None, printing=True, endday = 0):
                 # if stochRSIK1[i-1] <= stochRSID1[i-1] and stochRSIK1[i] > stochRSID1[i]:
                 #     previousBuyStochasticRSI1 = True
                     
-                # previousBuyStochasticRSI6, previousSellStochasticRSI6 = swap(previousBuyStochasticRSI6, previousSellStochasticRSI6)
+                # previousBuyStochasticRSI1, previousSellStochasticRSI1 = swap(previousBuyStochasticRSI1, previousSellStochasticRSI1)
                 
                 # if previousSellStochasticRSI1 and previousBuyStochasticRSI1:
                 #     previousBuyStochasticRSI1 = False
@@ -730,7 +733,6 @@ def simulateCrypto(df, days=None, printing=True, endday = 0):
                 correctness = round((pos / (neg + pos)), 2)
                 accuracy = correctness-0.5
                 tradeDecimal = percentOfTrades/100
-                SpecialValue = difference * accuracy * tradeDecimal         
                 if printing:
                     print(SpecialValue)
                 p = (pos / (neg + pos))
@@ -761,6 +763,17 @@ def simulateCrypto(df, days=None, printing=True, endday = 0):
             #     avgPips -= 1000
             #     avgPips = avgPips * percentOfTrades
                 # print("Ratio: " + str(ratio))
+            try: 
+                SpecialValue = difference * accuracy * tradeDecimal   
+                if SpecialValue > bestSpecialValue:
+                    bestSpecialValue = SpecialValue
+                    BestSpecialValues = (j, k)
+                if SpecialValue < worstSpecialValue:
+                    worstSpecialValue = SpecialValue
+                    WorstSpecialValues = (j, k)
+            except:
+                a = j
+                
             if avgPips*percentOfTrades > bestAvgPips and avgPips > 52000:
                 bestAvgPips = avgPips*percentOfTrades
                 bestAvgj = j
@@ -785,7 +798,9 @@ def simulateCrypto(df, days=None, printing=True, endday = 0):
             countPos = 0
             countNeg = 0
         #SEPERATE WHEN TABBING
-        return BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue
+        
+        
+        return bestSpecialValue, worstSpecialValue, BestSpecialValues, WorstSpecialValues, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue
     except KeyboardInterrupt:
         print("\n\nBEST PROFILIO: " + str(BestProfilio) + " must be > 66mil")
         print("BEST K: " + str(k))
@@ -1596,7 +1611,7 @@ def simulateCryptoSTOCHRSI(df, days=None, printing=True, endday = 0):
 if "__main__" == __name__:
     simulation = 1
     if simulation == 1:
-    `    betTest = True
+        betTest = False
         if betTest:
             symbolVolume = "PERPUSDT"
             dic = {}
@@ -1624,7 +1639,7 @@ if "__main__" == __name__:
             printing = True
             # count = 0
             # totalAmount = 0
-            df = formatDataset1(formatDataset(calltimes30FIXED(symbolVolume, (datetime.now()-timedelta(days=30)).strftime('%Y-%m-%d'))))
+            df = formatDataset1(formatDataset(calltimes30FIXED(symbolVolume, (datetime.now()-timedelta(days=90)).strftime('%Y-%m-%d'))))
             print(df)
             # for x in range(45):
             #     expFormula = 5*(pow(1.1, -x))
@@ -1656,4 +1671,3 @@ if "__main__" == __name__:
                 print("K: " +str(worstAvgk))
                 print("J: " + str(worstAvgj))
                 print("\n\n\n\n")
-    else:

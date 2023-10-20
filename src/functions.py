@@ -1,5 +1,6 @@
 from ta.momentum import StochRSIIndicator
 from SpecialFunctions import formatDataset
+import pandas_ta as ta
 
 def get_StochasticOscilator(df, periodK, smoothK, periodD):
     # Calculate %K
@@ -12,7 +13,13 @@ def get_StochasticOscilator(df, periodK, smoothK, periodD):
 def get_StochasticRelitiveStrengthIndex(data, window, smooth1, smooth2):
     stochRSIind = StochRSIIndicator(data['close'], window, smooth1, smooth2)
     return stochRSIind.stochrsi_k(), stochRSIind.stochrsi_d()
-
+def get_supertrend(data, length, multiplier):
+    st = ta.supertrend(data['high'], data['low'], data['close'], length, multiplier)
+    st['data'] = data['close']
+    print(st)
+    df_filtered = st[[f'SUPERT_{length}_{multiplier}.0']]
+    st['supertrend'] = df_filtered[f'SUPERT_{length}_{multiplier}.0']
+    return st    
 
 if __name__ == '__main__':
     f = open("documents/dataCryptoTest15min.txt", "r")

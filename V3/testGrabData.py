@@ -5,6 +5,9 @@ import ccxt
 import yfinance as yf
 import pandas as pd
 
+from SpecialFunctions import formatDataset, formatDataset3
+
+
 def grabHistoricalData(ticker = "EURJPY"):
     def dataConvertor(data):
         for item in data:
@@ -479,3 +482,28 @@ def calltimes30FIXED(symbol, start_time = '2023-08-27'):
     f.write(str(formatted_data))
     f.close()
     return formatted_data
+
+def grabForex(values):
+    # Define your API key
+    api_key = "d6e8542914aa439e92fceaccca1c2708"
+
+    # Define the API endpoint URL
+    base_url = "https://api.twelvedata.com/time_series"
+
+    # Define the parameters for the request
+    params = {
+        "symbol": "EUR/USD",  # The forex symbol you want to retrieve
+        "interval": "30min",   # Time interval (e.g., 1min, 1day)
+        "outputsize": values,     # Number of data points to retrieve
+        "apikey": api_key     # Your Twelve Data API key
+        
+    }
+
+    # Make the API request
+    response = requests.get(base_url, params=params)
+    data = response.json()
+    
+    return data['values']
+    
+if __name__ == '__main__':
+    print(formatDataset3(grabForex(100)))

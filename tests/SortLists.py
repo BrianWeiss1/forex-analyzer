@@ -9,6 +9,7 @@ if __name__ == '__main__':
     BestPercentNumOct14 = openFileArray('bestPercentOct14.txt')
     specialValueOct15 = openFileArray('lstSpecialValueOct15.txt')
     specialValueSTOCHRSIOct18 = openFileArray('lstSpecialValueSTOCHRSIOct18.txt')
+    specialValueOct20 = openFileArray('lstSpecialValyueOct20.txt')
     ALllist = specialValueSTOCHRSIOct18 
     dic = {}
     for i in range(len(ALllist)):

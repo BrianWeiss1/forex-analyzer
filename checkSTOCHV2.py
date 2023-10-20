@@ -103,154 +103,153 @@ def simulateCrypto(data):
     # get_StochasticOscilator(data, 31, 290, 37) # 19%    24
     # get_StochasticOscilator(data, 328, 441, 3) # 23%    25
     try:
-        for j in range(1, 500):
-            print("J: " + str(j-1))
-            # stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, j, 883, j) # 13%
-            # for k in range(1, 200):
-            # for k in range(1, 100):
-            countPips = 0
-            avgPips = 0
-            
-            # stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 165, 48, 181) # 45k --> 0.77
-            # stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 151, 122, 76) # 43k --> 0.77
-            # stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 112, 122, 79) # 39k --> 0.87
-            # stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 82, 136, 82) # 37k --> 0.97
-            # stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 170, 108, 72) # 38k --> 0.77
-            # stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 66, 141, 76) # 40k --> 1.18
-            # stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 66, 110, 121) # 40k --> 1.07
-            # stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 46, 58, 211) # 36k --> 1.18
+        for j in range(1, 150):
+            for k in range(1, 150):
+                for c in range(1, 150):
+                    print("J: " + str(k-1))
+                    countPips = 0
+                    avgPips = 0
+                    
+                    # stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 165, 48, 181) # 45k --> 0.77
+                    # stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 151, 122, 76) # 43k --> 0.77
+                    # stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 112, 122, 79) # 39k --> 0.87
+                    # stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 82, 136, 82) # 37k --> 0.97
+                    # stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 170, 108, 72) # 38k --> 0.77
+                    # stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 66, 141, 76) # 40k --> 1.18
+                    # stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 66, 110, 121) # 40k --> 1.07
+                    # stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, 46, 58, 211) # 36k --> 1.18
 
 
 
-            # -----NEW-----#
-            # (69, 148, 59) -->  1.07 --> 40,000
-            # (180, 33, 132) --> 0.87 --> 44,000
-            # (96, 64, 110) --> 0.97 --> 33,000
-            # (23, 375, 325) --> 1.37 --> -30,000
+                    # -----NEW-----#
+                    # (69, 148, 59) -->  1.07 --> 40,000
+                    # (180, 33, 132) --> 0.87 --> 44,000
+                    # (96, 64, 110) --> 0.97 --> 33,000
+                    # (23, 375, 325) --> 1.37 --> -30,000
 
-            # g = 339 #J:239, J: 339
-            # a = 00000
-            g = j
-            print2 = True
-            get_StochasticOscilator(data, 327, 327, 4)# 31, 290, 36
-            stochRSIK2 = data['%K']
-            stochRSID2 = data['%D']
-            # get_StochasticOscilator(da ta, 196, 731, 314) # 6, 303, 9
-            # stochRSIK2 = data['%K']
-            # stochRSID2 = data['%D']
-            # print(stochRSIK, stochRSID)          
-            # stochRSIK = data['%K']
-            # 561, 418 --> bad
-            # stochRSID = data['%D']           
-            # print("K: " + str(k))
-            v = 1
-            
-            for i in range(1, len(data)):
-                nowPrice += data['close'][i]
-                nowCount += 1
-                longI, shortI = findSelection(previousBuy, previousSell, longI, shortI, i) 
-                shortI, longI, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortI, longI, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
-                previousSell = previousBuy = False
-                # dif = stochRSIK2[i-v]/stochRSID2[i-v]
+                    # g = 339 #J:239, J: 339
+                    # a = 00000
+                    g = j
+                    print2 = False
+                    stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(data, j, k, c)# 31, 290, 36
+                    # stochRSIK2 = data['%K']
+                    # stochRSID2 = data['%D']
+                    # get_StochasticOscilator(da ta, 196, 731, 314) # 6, 303, 9
+                    # stochRSIK2 = data['%K']
+                    # stochRSID2 = data['%D']
+                    # print(stochRSIK, stochRSID)          
+                    # stochRSIK = data['%K']
+                    # 561, 418 --> bad
+                    # stochRSID = data['%D']           
+                    # print("K: " + str(k))
+                    v = 1
+                    
+                    for i in range(1, len(data)):
+                        nowPrice += data['close'][i]
+                        nowCount += 1
+                        longI, shortI = findSelection(previousBuy, previousSell, longI, shortI, i) 
+                        shortI, longI, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortI, longI, data, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+                        previousSell = previousBuy = False
+                        # dif = stochRSIK2[i-v]/stochRSID2[i-v]
 
-                if stochRSIK2[i-v] >= stochRSID2[i-v] and stochRSIK2[i] < stochRSID2[i]:
-                    previousSell = True
-                if stochRSIK2[i-v] <= stochRSID2[i-v] and stochRSIK2[i] > stochRSID2[i]:
-                    previousBuy = True
-
-
-                if previousBuy and previousSell:
-                    previousBuy = False
-                    previousSell = False
+                        if stochRSIK2[i-v] >= stochRSID2[i-v] and stochRSIK2[i] < stochRSID2[i]:
+                            previousSell = True
+                        if stochRSIK2[i-v] <= stochRSID2[i-v] and stochRSIK2[i] > stochRSID2[i]:
+                            previousBuy = True
 
 
+                        if previousBuy and previousSell:
+                            previousBuy = False
+                            previousSell = False
 
 
-            percentOfTrades = round(((pos + nuet + neg) / len(data)) * 100, 2)
-            
-            try:
-                AvgPrice = nowPrice/nowCount
-                if print2 == True:
-                    print(pos, nuet, neg)
+
+
+                    percentOfTrades = round(((pos + nuet + neg) / len(data)) * 100, 2)
+                    
                     try:
-                        print("POS/NEG RATIO: " + str(pos / neg))
-                        print(
-                            "Percentage Correct: " + str(round((pos / (neg + pos)) * 100, 2)) + "%"
-                        )
-                    except: 
-                        print("ERROR 404")
-                    print("CANDLES: " + str(len(data) - 2))
-                    print(
-                        "PERCENT OF TRADES: "
-                        + str(percentOfTrades)
-                    )
-                    print("protfilio: " + str(portfolio))
-                avgPips = totalPips/countPips
-                if print2:
-                    print("AVERAGE PIPS: " + str(totalPips/countPips))
-                    print("POSITIVE PIPS: " + str(posPips/(countPos)))
-                try:
-                    negPip = negPips/(neg)
-                except:
-                    negPip = 0
-                if print2:
-                    print("NEGITIVE PIPS: " + str(negPip))
-                    print("AVERAGE %: " + str(round((avgPips/AvgPrice), 5)))
-                    print("POS %: " + str(round(posPips/(pos)/AvgPrice, 5)))
-                    print("NEG %: " + str(round(negPip/AvgPrice, 5)))
-                    leverage = 50
-                    print(str(leverage) + "X LEVERAGE")
-                    print("AVERAGE %: " + str(round((avgPips/AvgPrice)*leverage, 5)))
-                    print("POS %: " + str(round((posPips/(pos)/AvgPrice)*leverage, 5)))
-                    print("NEG %: " + str(round((negPip/AvgPrice)*leverage, 5)))
-                if avgPips > bestAvgPips and percentOfTrades > 2.5:
-                    # if j == 411:
-                    #     print("a")
-                    bestAvgPips = avgPips
-                    bestAvgj = j
-                    bestAvgk = k
-                    hehehhahahaaPIPS2 = avgPips
-                    hehehahhaPer2 = percentOfTrades
-                if avgPips < worstAvgPips and percentOfTrades > 2.5:
-                    worstAvgPips = avgPips
-                    worstAvgj = j
-                    worstAvgk = k
-                    hehehhahahaaPIPS = avgPips
-                    hehehahhaPer = percentOfTrades
-                if portfolio > BestProfilio:
-                    BestProfilio = portfolio
-                    Bestj = j
-                    Bestk = k
-                elif portfolio < WorseProfilio:
-                    WorseProfilio = portfolio
-                    worstj = j
-                    worstk = k
-                
-            except ZeroDivisionError:
-                if print2 == True:
-                    print("ERROR GO BRRRR")
-            # # ------Profilio-----
+                        AvgPrice = nowPrice/nowCount
+                        if print2 == True:
+                            print(pos, nuet, neg)
+                            try:
+                                print("POS/NEG RATIO: " + str(pos / neg))
+                                print(
+                                    "Percentage Correct: " + str(round((pos / (neg + pos)) * 100, 2)) + "%"
+                                )
+                            except: 
+                                print("ERROR 404")
+                            print("CANDLES: " + str(len(data) - 2))
+                            print(
+                                "PERCENT OF TRADES: "
+                                + str(percentOfTrades)
+                            )
+                            print("protfilio: " + str(portfolio))
+                        avgPips = totalPips/countPips
+                        if print2:
+                            print("AVERAGE PIPS: " + str(totalPips/countPips))
+                            print("POSITIVE PIPS: " + str(posPips/(countPos)))
+                        try:
+                            negPip = negPips/(neg)
+                        except:
+                            negPip = 0
+                        if print2:
+                            print("NEGITIVE PIPS: " + str(negPip))
+                            print("AVERAGE %: " + str(round((avgPips/AvgPrice), 5)))
+                            print("POS %: " + str(round(posPips/(pos)/AvgPrice, 5)))
+                            print("NEG %: " + str(round(negPip/AvgPrice, 5)))
+                            leverage = 50
+                            print(str(leverage) + "X LEVERAGE")
+                            print("AVERAGE %: " + str(round((avgPips/AvgPrice)*leverage, 5)))
+                            print("POS %: " + str(round((posPips/(pos)/AvgPrice)*leverage, 5)))
+                            print("NEG %: " + str(round((negPip/AvgPrice)*leverage, 5)))
+                        if avgPips > bestAvgPips and percentOfTrades > 2.5:
+                            # if j == 411:
+                            #     print("a")
+                            bestAvgPips = avgPips
+                            bestAvgj = j
+                            bestAvgk = k
+                            hehehhahahaaPIPS2 = avgPips
+                            hehehahhaPer2 = percentOfTrades
+                        if avgPips < worstAvgPips and percentOfTrades > 2.5:
+                            worstAvgPips = avgPips
+                            worstAvgj = j
+                            worstAvgk = k
+                            hehehhahahaaPIPS = avgPips
+                            hehehahhaPer = percentOfTrades
+                        if portfolio > BestProfilio:
+                            BestProfilio = portfolio
+                            Bestj = j
+                            Bestk = k
+                        elif portfolio < WorseProfilio:
+                            WorseProfilio = portfolio
+                            worstj = j
+                            worstk = k
+                        
+                    except ZeroDivisionError:
+                        if print2 == True:
+                            print("ERROR GO BRRRR")
+                    # # ------Profilio-----
 
-            lst.append(portfolio)
-            # print(pos / (neg + pos))
-            # try:
-            #     ratio = (100-round((pos / (neg + pos)) * 100, 2))/(100-round(((pos + nuet + neg) / len(data)) * 100, 2))*100
-            # except ZeroDivisionError:
-            #     ratio = 0
-            # if avgPips > 1000:
-            #     avgPips -= 1000
-            #     avgPips = avgPips * percentOfTrades
-                # print("Ratio: " + str(ratio))
+                    lst.append(portfolio)
+                    # print(pos / (neg + pos))
+                    # try:
+                    #     ratio = (100-round((pos / (neg + pos)) * 100, 2))/(100-round(((pos + nuet + neg) / len(data)) * 100, 2))*100
+                    # except ZeroDivisionError:
+                    #     ratio = 0
+                    # if avgPips > 1000:
+                    #     avgPips -= 1000
+                    #     avgPips = avgPips * percentOfTrades
+                        # print("Ratio: " + str(ratio))
 
-            pos = nuet = neg = 0
+                    pos = nuet = neg = 0
 
-            portfolio = 10
-            negPips = 0
-            posPips = 0
-            totalPips = 0
-            countPips = 0
-            countPos = 0
-            countNeg = 0
+                    portfolio = 10
+                    negPips = 0
+                    posPips = 0
+                    totalPips = 0
+                    countPips = 0
+                    countPos = 0
+                    countNeg = 0
         #SEPERATE WHEN TABBING
         return BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, hehehhahahaaPIPS, hehehahhaPer, hehehhahahaaPIPS2, hehehahhaPer2
     except KeyboardInterrupt:
