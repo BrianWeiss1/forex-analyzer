@@ -1,25 +1,10 @@
-# Update data
-
-# from src.WMA import get_WMA
-from src.longTermPos import checkLuquidation, findSelection
-# from src.VWAP import get_VWAP
-# from src.specialFunctions import optimize2
-# from src.testADX import grabADX
-# from src.testRSI import get_rsi
-# from src.testSupertrend import superTrend
 import sys
-# from datetime import timedelta
-# from src.testIchi import get_ichimoku
+from src.longTermPos import checkLuquidation, findSelection
 from SpecialFunctions import formatDataset
-# from src.testEMA import calculate_200ema
-# from src.testMACD import get_macd
 from src.functions import get_StochasticOscilator, get_StochasticRelitiveStrengthIndex
 
 def simulateCrypto(data):
 
-    # data = grabADX(data, 14)
-    # rsiValue = 147 #8, 147
-    # dataRSI = get_rsi(data["close"], rsiValue)
     totalPips = 0
     countPips = 0
     bestAvgPips = -sys.maxsize
@@ -103,9 +88,9 @@ def simulateCrypto(data):
     # get_StochasticOscilator(data, 31, 290, 37) # 19%    24
     # get_StochasticOscilator(data, 328, 441, 3) # 23%    25
     try:
-        for j in range(1, 150):
-            for k in range(1, 150):
-                for c in range(1, 150):
+        for j in range(1, 300):
+            for k in range(1, 300):
+                for c in range(1, 300):
                     print("J: " + str(k-1))
                     countPips = 0
                     avgPips = 0

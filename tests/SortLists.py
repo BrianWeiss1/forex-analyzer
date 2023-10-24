@@ -1,17 +1,19 @@
-def openFileArray(file):
-    doc = open(f'documents/special/{file}', 'r')
-    aaa = doc.readline()
-    lstSpecialValueOct15=eval(aaa)
-    doc.close()
-    return lstSpecialValueOct15
+class SortLists:
+    def openFileArray(file):
+        doc = open(f'documents/special/{file}', 'r')
+        aaa = doc.readline()
+        lstSpecialValueOct15=eval(aaa)
+        doc.close()
+        return lstSpecialValueOct15
 
 if __name__ == '__main__':
-    BestPercentNumOct14 = openFileArray('bestPercentOct14.txt')
-    specialValueOct15 = openFileArray('lstSpecialValueOct15.txt')
-    specialValueSTOCHRSIOct18 = openFileArray('lstSpecialValueSTOCHRSIOct18.txt')
-    specialValueOct20 = openFileArray('lstSpecialValyueOct20.txt')
-    stochSpeicalValueOct23 = openFileArray('stochSpecialNumOct23.txt')
-    stochRSISpeicalValueOct23 = openFileArray('stochRSISpecialNumOct23.txt')
+    sortlist = SortLists()
+    BestPercentNumOct14 = sortlist.openFileArray('bestPercentOct14.txt')
+    specialValueOct15 = sortlist.openFileArray('lstSpecialValueOct15.txt')
+    specialValueSTOCHRSIOct18 = sortlist.openFileArray('lstSpecialValueSTOCHRSIOct18.txt')
+    specialValueOct20 = sortlist.openFileArray('lstSpecialValyueOct20.txt')
+    stochSpeicalValueOct23 = sortlist.openFileArray('stochSpecialNumOct23.txt')
+    stochRSISpeicalValueOct23 = sortlist.openFileArray('stochRSISpecialNumOct23.txt')
     ALllist = stochSpeicalValueOct23 
     dic = {}
     for i in range(len(ALllist)):

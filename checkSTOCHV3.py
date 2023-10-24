@@ -85,13 +85,15 @@ def simulateCrypto(df):
     # print(df)
     # countAAA = 0
     try:
-        for j in range(2, 150):
-            for k in range(1, 150):
-                for c in range(1, 150):
+        for j in range(2, 300):
+            for k in range(1, 300):
+                for c in range(1, 300):
                     if printingSpecific:
-                        if k != oldj:
-                            print("K: " + str(k))
-                            oldj = k
+                        if j != oldj:
+                            print("K: " + str(j))
+                            oldj = j
+                            print(lstSpecialNumsINCLINE)
+                            print(lstSpecialNumsDECLINE)
                     stochRSIK1, stochRSID1 = get_StochasticRelitiveStrengthIndex(df, j, k, c)# 31, 290, 36
                     
                     for i in range(len(df)):
@@ -272,10 +274,8 @@ def simulateCrypto(df):
 
 
 if "__main__" == __name__:
-    symbolVolume = "BTCUSDT"
     printing = True
     df = formatDataset2(formatDataset3(grabForex(5000)))
-    # df = formatDataset1(formatDataset(calltimes30FIXED(symbolVolume, (datetime.now()-timedelta(days=30)).strftime('%Y-%m-%d'))))
     print(len(df))
 
     bestSpecialValue, worstSpecialValue, BestSpecialValues, WorstSpecialValues, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue, lstSpecialNumsINCLINE, lstSpecialNumsDECLINE = simulateCrypto(df)
