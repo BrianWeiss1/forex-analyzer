@@ -84,7 +84,7 @@ if __name__ == '__main__':
     lst = []
 
     # Number of threads you want to create
-    num_threads = 10  # Adjust this as needed
+    num_threads = 5  # Adjust this as needed
     
     # Split the dataSymbol list into chunks for parallel processing
     chunk_size = len(dataSymbol) // num_threads

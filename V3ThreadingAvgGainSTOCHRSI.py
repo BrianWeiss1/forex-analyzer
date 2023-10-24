@@ -26,7 +26,7 @@ def process_symbol(dataSymbol, best_results, worst_results, lst):
             # data = f.readlines()
             # data = eval(data[0])
             # f.close()
-            # data = formatDataset(data)
+            # data = formatDatas33et(data)
             # columns_to_convert = ['open', 'high', 'low', 'close', 'volume']
 
             # for column in columns_to_convert:

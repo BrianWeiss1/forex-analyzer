@@ -1,11 +1,33 @@
 from src.longTermPos import checkLuquidation, findSelection
 import sys
+import requests
 from SpecialFunctions import formatDataset, formatDataset1, formatDataset3, formatDataset2
 from src.underliningProcesses import swap
-from V3.testGrabData import getYahoo, calltimes15m, calltimes30FIXED, grabForex
 from src.functions import get_StochasticOscilator, get_StochasticRelitiveStrengthIndex, get_supertrend
 from datetime import datetime, timedelta
 
+def grabForex(values):
+    # Define your API key
+    api_key = "d6e8542914aa439e92fceaccca1c2708"
+
+    # Define the API endpoint URL
+    base_url = "https://api.twelvedata.com/time_series"
+
+    # Define the parameters for the request
+    params = {
+        "symbol": "EUR/USD",  # The forex symbol you want to retrieve
+        "interval": "30min",   # Time interval (e.g., 1min, 1day)
+        "outputsize": values,     # Number of data points to retrieve
+        "apikey": api_key     # Your Twelve Data API key
+        
+    }
+
+    # Make the API request
+    response = requests.get(base_url, params=params)
+    data = response.json()
+    
+    return data['values']
+    
 def simulateCrypto(df):
     printing = False
     printingSpecific = True
@@ -63,13 +85,13 @@ def simulateCrypto(df):
     # print(df)
     # countAAA = 0
     try:
-        for j in range(1, 150):
+        for j in range(2, 150):
             for k in range(1, 150):
                 for c in range(1, 150):
                     if printingSpecific:
-                        if j != oldj:
-                            print("J: " + str(k))
-                            oldj = j
+                        if k != oldj:
+                            print("K: " + str(k))
+                            oldj = k
                     stochRSIK1, stochRSID1 = get_StochasticRelitiveStrengthIndex(df, j, k, c)# 31, 290, 36
                     
                     for i in range(len(df)):
@@ -234,16 +256,17 @@ def simulateCrypto(df):
         
         print(lstSpecialNumsDECLINE)
         
-        f = open("documents/lstSpecialNumsINCLINE", 'r')
+        f = open("documents/lstSpecialNumsINCLINE.txt", 'w')
         f.write(str(lstSpecialNumsINCLINE))
         f.close()
-        f = open("documents/lstSpecialNumsDECLINE", 'r')
+        f = open("documents/lstSpecialNumsDECLINE.txt", 'w')
         f.write(str(lstSpecialNumsDECLINE))
         f.close()
         print("\nBest Special Value: " + str(bestSpecialValue))
         print("Values for which: " + str(BestSpecialValues))
         print("\nWorst Special Value: " + str(worstSpecialValue))
         print("Values for which" + str(WorstSpecialValues))
+        return bestSpecialValue, worstSpecialValue, BestSpecialValues, WorstSpecialValues, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue, lstSpecialNumsINCLINE, lstSpecialNumsDECLINE
 
 
 
@@ -260,10 +283,10 @@ if "__main__" == __name__:
     print("\n\nSIMULATION RESULTS: ")
     print(lstSpecialNumsINCLINE)
     print(lstSpecialNumsDECLINE)
-    f = open("documents/lstSpecialNumsINCLINE.txt", 'r')
+    f = open("documents/lstSpecialNumsINCLINE.txt", 'w')
     f.write(str(lstSpecialNumsINCLINE))
     f.close()
-    f = open("documents/lstSpecialNumsDECLINE.txt", 'r')
+    f = open("documents/lstSpecialNumsDECLINE.txt", 'w')
     f.write(str(lstSpecialNumsDECLINE))
     f.close()
 

@@ -1,5 +1,5 @@
 def openFileArray(file):
-    doc = open(f'documents/{file}', 'r')
+    doc = open(f'documents/special/{file}', 'r')
     aaa = doc.readline()
     lstSpecialValueOct15=eval(aaa)
     doc.close()
@@ -10,7 +10,9 @@ if __name__ == '__main__':
     specialValueOct15 = openFileArray('lstSpecialValueOct15.txt')
     specialValueSTOCHRSIOct18 = openFileArray('lstSpecialValueSTOCHRSIOct18.txt')
     specialValueOct20 = openFileArray('lstSpecialValyueOct20.txt')
-    ALllist = specialValueSTOCHRSIOct18 
+    stochSpeicalValueOct23 = openFileArray('stochSpecialNumOct23.txt')
+    stochRSISpeicalValueOct23 = openFileArray('stochRSISpecialNumOct23.txt')
+    ALllist = stochSpeicalValueOct23 
     dic = {}
     for i in range(len(ALllist)):
         # print(farDatapoints[i][0])

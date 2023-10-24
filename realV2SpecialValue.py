@@ -200,7 +200,7 @@ while True:
                 columns_to_convert = ['open', 'high', 'low', 'close', 'volume']
                 for column in columns_to_convert:
                     df[column] = df[column].astype(float)
-                i = len(df)-1-2
+                i = len(df)-1
 
                 # get_StochasticOscilator(df, 34, 34, 34) # -21% 
                 # stochRSIK1 = df['%K']

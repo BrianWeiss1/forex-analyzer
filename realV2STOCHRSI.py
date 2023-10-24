@@ -199,7 +199,7 @@ while True:
                 columns_to_convert = ['open', 'high', 'low', 'close', 'volume']
                 for column in columns_to_convert:
                     df[column] = df[column].astype(float)
-                i = len(df)-8
+                i = len(df)-1 # rlly weird...
 
                 stochRSIK1, stochRSID1 = get_StochasticRelitiveStrengthIndex(df, 223, 418, 132)
                 stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(df, 250, 418, 132)
