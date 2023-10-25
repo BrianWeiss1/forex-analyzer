@@ -5,11 +5,9 @@ from SpecialFunctions import formatDataset, formatDataset1, formatDataset3, form
 from src.underliningProcesses import swap
 from src.functions import get_StochasticOscilator, get_StochasticRelitiveStrengthIndex, get_supertrend
 from datetime import datetime, timedelta
-
+api_key = "d6e8542914aa439e92fceaccca1c2708"
 def grabForex(values):
     # Define your API key
-    api_key = "d6e8542914aa439e92fceaccca1c2708"
-
     # Define the API endpoint URL
     base_url = "https://api.twelvedata.com/time_series"
 
@@ -94,6 +92,7 @@ def simulateCrypto(df):
                             oldj = j
                             print(lstSpecialNumsINCLINE)
                             print(lstSpecialNumsDECLINE)
+                            
                     stochRSIK1, stochRSID1 = get_StochasticRelitiveStrengthIndex(df, j, k, c)# 31, 290, 36
                     
                     for i in range(len(df)):
@@ -276,8 +275,14 @@ def simulateCrypto(df):
 if "__main__" == __name__:
     printing = True
     df = formatDataset2(formatDataset3(grabForex(5000)))
+    lst5 = []
     print(len(df))
+    for i in range(2, 100, 10):
+        for j in range(12, 110, 10):
+            lst5.append([df, [i, j]])
+    print(lst5)
 
+    
     bestSpecialValue, worstSpecialValue, BestSpecialValues, WorstSpecialValues, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue, lstSpecialNumsINCLINE, lstSpecialNumsDECLINE = simulateCrypto(df)
     
     print("\n\nSIMULATION RESULTS: ")

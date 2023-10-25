@@ -5,6 +5,12 @@ class SortLists:
         lstSpecialValueOct15=eval(aaa)
         doc.close()
         return lstSpecialValueOct15
+    def openFileArrayNormal(file):
+        doc = open(f'documents/{file}', 'r')
+        aaa = doc.readline()
+        lstSpecialValueOct15=eval(aaa)
+        doc.close()
+        return lstSpecialValueOct15
 
 if __name__ == '__main__':
     sortlist = SortLists()

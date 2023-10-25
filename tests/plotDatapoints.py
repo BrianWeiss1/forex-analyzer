@@ -1,15 +1,15 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from SpecialFunctions import formatDataset
+from SpecialFunctions import formatDataset, formatDataset1
 
 # Sample price data (replace with your own data)
-f = open("documents/dataCryptoTest.txt", "r")
+f = open("documents/binance30.txt", "r")
 data = f.readlines()
 data = eval(data[0])
 f.close()
 data = data[len(data)-100: len(data)]
-df = formatDataset(data)
+df = formatDataset1(formatDataset(data))
 
 periodK = 14
 smoothK = 10

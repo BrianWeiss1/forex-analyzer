@@ -8,7 +8,7 @@ from src.testRSI import get_rsi
 from src.testSTOCH import get_stoch
 from SpecialFunctions import formatDataset
 from src.testSupertrend import get_supertrend
-from tests.autoClick import limit, market
+from V1.autoClick import limit, market
 
 
 def __innit__(symbol):    
