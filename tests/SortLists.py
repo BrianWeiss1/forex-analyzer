@@ -1,26 +1,27 @@
-class SortLists:
-    def openFileArray(file):
-        doc = open(f'documents/special/{file}', 'r')
-        aaa = doc.readline()
-        lstSpecialValueOct15=eval(aaa)
-        doc.close()
-        return lstSpecialValueOct15
-    def openFileArrayNormal(file):
-        doc = open(f'documents/{file}', 'r')
-        aaa = doc.readline()
-        lstSpecialValueOct15=eval(aaa)
-        doc.close()
-        return lstSpecialValueOct15
+
+def openFileArray(file):
+    doc = open(f'documents/special/{file}.txt', 'r')
+    aaa = doc.readline()
+    lstSpecialValueOct15=eval(aaa)
+    doc.close()
+    return lstSpecialValueOct15
+def openFileArrayNormal(file):
+    doc = open(f'documents/{file}', 'r')
+    aaa = doc.readline()
+    lstSpecialValueOct15=eval(aaa)
+    doc.close()
+    return lstSpecialValueOct15
 
 if __name__ == '__main__':
-    sortlist = SortLists()
-    BestPercentNumOct14 = sortlist.openFileArray('bestPercentOct14.txt')
-    specialValueOct15 = sortlist.openFileArray('lstSpecialValueOct15.txt')
-    specialValueSTOCHRSIOct18 = sortlist.openFileArray('lstSpecialValueSTOCHRSIOct18.txt')
-    specialValueOct20 = sortlist.openFileArray('lstSpecialValyueOct20.txt')
-    stochSpeicalValueOct23 = sortlist.openFileArray('stochSpecialNumOct23.txt')
-    stochRSISpeicalValueOct23 = sortlist.openFileArray('stochRSISpecialNumOct23.txt')
-    ALllist = stochSpeicalValueOct23 
+
+    BestPercentNumOct14 = openFileArray("bestPercentOct14")
+    specialValueOct15 = openFileArray('lstSpecialValueOct15')
+    specialValueSTOCHRSIOct18 = openFileArray('lstSpecialValueSTOCHRSIOct18')
+    specialValueOct20 = openFileArray('lstSpecialValyueOct20')
+    stochSpeicalValueOct23 = openFileArray('stochSpecialNumOct23')
+    stochRSISpeicalValueOct23 = openFileArray('stochRSISpecialNumOct23')
+    bestStochRSIOct25 = openFileArray('bestStochRSIOct25')
+    ALllist = bestStochRSIOct25 
     dic = {}
     for i in range(len(ALllist)):
         # print(farDatapoints[i][0])
