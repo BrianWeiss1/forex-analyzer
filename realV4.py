@@ -186,7 +186,7 @@ opp = False
 while True:
     count = 0
     yes = False
-    if ((datetime.now().minute == 30 or datetime.now().minute == 0) and previousMinute != datetime.now().minute):
+    if ((datetime.now().minute == 21 or datetime.now().minute == 0) and previousMinute != datetime.now().minute):
         yes = True
         while (yes and count < 5):
             count += 1
@@ -199,7 +199,7 @@ while True:
                 columns_to_convert = ['open', 'high', 'low', 'close', 'volume']
                 for column in columns_to_convert:
                     df[column] = df[column].astype(float)
-                i = len(df)-1 # rlly weird...
+                i = len(df)-3 # rlly weird...
 
                 stochRSIK1, stochRSID1 = get_StochasticRelitiveStrengthIndex(df, 2, 33, 25)
                 stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(df, 42, 3, 105)
@@ -249,10 +249,8 @@ while True:
                     if count1 > 0:
                         closeLong(bingx_client, symbol, betAmount, maxLev)
                         buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
-
                     else:
                         buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
-
                     count1+=1
                 
                 if previousBuyStochasticRSI1 == True:
@@ -334,10 +332,8 @@ while True:
                     if count3 > 0:
                         closeLong(bingx_client, symbol, betAmount, maxLev)
                         buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
-
                     else:
                         buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
-
                     count3+=1
                 
                 if previousBuyStochasticRSI3 == True:
@@ -374,10 +370,8 @@ while True:
                     if count4 > 0:
                         closeLong(bingx_client, symbol, betAmount, maxLev)
                         buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
-
                     else:
                         buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
-
                     count4+=1
                 
                 if previousBuyStochasticRSI4 == True:
@@ -695,10 +689,8 @@ while True:
                     if count11 > 0:
                         closeLong(bingx_client, symbol, betAmount, maxLev)
                         buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
-
                     else:
                         buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
-
                     count11+=1
                 
                 if previousBuyStochasticRSI11 == True:
@@ -1110,10 +1102,8 @@ while True:
                     if count20 > 0:
                         closeLong(bingx_client, symbol, betAmount, maxLev)
                         buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
-
                     else:
                         buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
-
                     count20+=1
                 
                 if previousBuyStochasticRSI20 == True:
@@ -1243,10 +1233,8 @@ while True:
                     if count23 > 0:
                         closeLong(bingx_client, symbol, betAmount, maxLev)
                         buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
-
                     else:
                         buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
-
                     count23+=1
                 
                 if previousBuyStochasticRSI23 == True:
