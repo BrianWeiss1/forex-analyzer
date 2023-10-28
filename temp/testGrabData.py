@@ -478,9 +478,9 @@ def calltimes30FIXED(symbol, start_time = '2023-08-27'):
 
         formatted_data.append(formatted_candle)
     # print(formatted_data)
-    f = open('documents/binance30.txt', 'w')
-    f.write(str(formatted_data))
-    f.close()
+    # f = open('documents/binance30.txt', 'w')
+    # f.write(str(formatted_data))
+    # f.close()
     return formatted_data
 
 def grabForex(values):
