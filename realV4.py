@@ -186,7 +186,7 @@ opp = False
 while True:
     count = 0
     yes = False
-    if ((datetime.now().minute == 21 or datetime.now().minute == 0) and previousMinute != datetime.now().minute):
+    if ((datetime.now().minute == 30 or datetime.now().minute == 0) and previousMinute != datetime.now().minute):
         yes = True
         while (yes and count < 5):
             count += 1
@@ -199,7 +199,7 @@ while True:
                 columns_to_convert = ['open', 'high', 'low', 'close', 'volume']
                 for column in columns_to_convert:
                     df[column] = df[column].astype(float)
-                i = len(df)-3 # rlly weird...
+                i = len(df)-1 # rlly weird...
 
                 stochRSIK1, stochRSID1 = get_StochasticRelitiveStrengthIndex(df, 2, 33, 25)
                 stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(df, 42, 3, 105)
