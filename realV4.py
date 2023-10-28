@@ -1,16 +1,16 @@
 from datetime import datetime
 import telebot
 import time
-from temp.SpecialFunctions import formatDataset
-from temp.testGrabData import getYahoo, calltimes15m, calltimes30FIXED
-from temp.functions import get_StochasticRelitiveStrengthIndex, get_StochasticOscilator
-from temp.longTermPos import checkLuquidation, findSelection
-from temp.underliningProcesses import swap
-from temp.sendTelegramMessage import send_message
+from SpecialFunctions import formatDataset
+from V3.testGrabData import getYahoo, calltimes15m, calltimes30FIXED
+from src.functions import get_StochasticRelitiveStrengthIndex, get_StochasticOscilator
+from src.longTermPos import checkLuquidation, findSelection
+from src.underliningProcesses import swap
+from src.sendTelegramMessage import send_message
 import pandas_datareader
 import pandas
 import time
-from temp.createPosition import buyLong, buyShort, closeLong, closeShort
+from src.createPosition import buyLong, buyShort, closeLong, closeShort
 # pip install python-bingx
 from bingX.perpetual.v2 import PerpetualV2
 from bingX.perpetual.v2.types import (
@@ -186,7 +186,7 @@ opp = False
 while True:
     count = 0
     yes = False
-    if ((datetime.now().minute == 30 or datetime.now().minute == 0) and previousMinute != datetime.now().minute):
+    if ((datetime.now().minute == 30 or datetime.now().minute == 0) and previousMinute != datetime.now().minute) or True:
         yes = True
         while (yes and count < 5):
             count += 1
@@ -201,32 +201,32 @@ while True:
                     df[column] = df[column].astype(float)
                 i = len(df)-1 # rlly weird...
 
-                stochRSIK1, stochRSID1 = get_StochasticRelitiveStrengthIndex(df, 2, 33, 25)
-                stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(df, 42, 3, 105)
-                stochRSIK3, stochRSID3 = get_StochasticRelitiveStrengthIndex(df, 41, 3, 114)
-                stochRSIK4, stochRSID4 = get_StochasticRelitiveStrengthIndex(df, 42, 3, 113)
-                stochRSIK5, stochRSID5 = get_StochasticRelitiveStrengthIndex(df, 42, 3, 112)
-                stochRSIK6, stochRSID6 = get_StochasticRelitiveStrengthIndex(df, 42, 3, 111)
-                stochRSIK7, stochRSID7 = get_StochasticRelitiveStrengthIndex(df, 42, 3, 110)
-                stochRSIK8, stochRSID8 = get_StochasticRelitiveStrengthIndex(df, 42, 3, 104)
-                stochRSIK9, stochRSID9 = get_StochasticRelitiveStrengthIndex(df, 43, 3, 112)
-                stochRSIK10, stochRSID10 = get_StochasticRelitiveStrengthIndex(df, 41, 3, 115)
-                stochRSIK11, stochRSID11 = get_StochasticRelitiveStrengthIndex(df, 42, 3, 108)
-                stochRSIK12, stochRSID12 = get_StochasticRelitiveStrengthIndex(df, 42, 3, 106)
-                stochRSIK13, stochRSID13 = get_StochasticRelitiveStrengthIndex(df, 41, 3, 110)
-                stochRSIK14, stochRSID14 = get_StochasticRelitiveStrengthIndex(df, 41, 3, 113)
-                stochRSIK15, stochRSID15 = get_StochasticRelitiveStrengthIndex(df, 42, 3, 107)
-                stochRSIK16, stochRSID16 = get_StochasticRelitiveStrengthIndex(df, 42, 3, 114)
-                stochRSIK17, stochRSID17 = get_StochasticRelitiveStrengthIndex(df, 41, 3, 109)
-                stochRSIK18, stochRSID18 = get_StochasticRelitiveStrengthIndex(df, 41, 3, 112)
-                stochRSIK19, stochRSID19 = get_StochasticRelitiveStrengthIndex(df, 42, 3, 109)
-                stochRSIK20, stochRSID20 = get_StochasticRelitiveStrengthIndex(df, 40, 3, 115)
-                stochRSIK21, stochRSID21 = get_StochasticRelitiveStrengthIndex(df, 40, 3, 113)
-                stochRSIK22, stochRSID22 = get_StochasticRelitiveStrengthIndex(df, 39, 3, 106)
-                stochRSIK23, stochRSID23 = get_StochasticRelitiveStrengthIndex(df, 40, 3, 109)
-                stochRSIK24, stochRSID24 = get_StochasticRelitiveStrengthIndex(df, 42, 4, 92)
-                stochRSIK25, stochRSID25 = get_StochasticRelitiveStrengthIndex(df, 41, 3, 101)
-                stochRSIK26, stochRSID26 = get_StochasticRelitiveStrengthIndex(df, 40, 3, 112)
+                stochRSIK1, stochRSID1 = get_StochasticRelitiveStrengthIndex(df, 223, 418, 132)
+                stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(df, 250, 418, 132)
+                stochRSIK3, stochRSID3 = get_StochasticRelitiveStrengthIndex(df, 66, 70, 131)
+                stochRSIK4, stochRSID4 = get_StochasticRelitiveStrengthIndex(df, 535, 127, 137) # --> 30000
+                stochRSIK5, stochRSID5 = get_StochasticRelitiveStrengthIndex(df, 214, 47, 39)
+                stochRSIK6, stochRSID6 = get_StochasticRelitiveStrengthIndex(df, 180, 33, 132)
+                stochRSIK7, stochRSID7 = get_StochasticRelitiveStrengthIndex(df, 401, 127, 80)
+                stochRSIK8, stochRSID8 = get_StochasticRelitiveStrengthIndex(df, 69, 148, 59)
+                stochRSIK9, stochRSID9 = get_StochasticRelitiveStrengthIndex(df, 154, 120, 586)
+                stochRSIK10, stochRSID10 = get_StochasticRelitiveStrengthIndex(df, 96, 64, 110)
+                stochRSIK11, stochRSID11 = get_StochasticRelitiveStrengthIndex(df, 145, 145, 39)
+                stochRSIK12, stochRSID12 = get_StochasticRelitiveStrengthIndex(df, 153, 53, 56)
+                stochRSIK13, stochRSID13 = get_StochasticRelitiveStrengthIndex(df, 77, 60, 136)
+                stochRSIK14, stochRSID14 = get_StochasticRelitiveStrengthIndex(df, 51, 59, 156) 
+                stochRSIK15, stochRSID15 = get_StochasticRelitiveStrengthIndex(df, 184, 62, 62) # 0%
+                stochRSIK16, stochRSID16 = get_StochasticRelitiveStrengthIndex(df, 143, 143, 62)
+                stochRSIK17, stochRSID17 = get_StochasticRelitiveStrengthIndex(df, 143, 424, 424) # 1%
+                stochRSIK18, stochRSID18 = get_StochasticRelitiveStrengthIndex(df, 143, 49, 210) 
+                stochRSIK19, stochRSID19 = get_StochasticRelitiveStrengthIndex(df, 53, 52, 194)
+                stochRSIK20, stochRSID20 = get_StochasticRelitiveStrengthIndex(df, 53, 53, 199) # 0.8
+                stochRSIK21, stochRSID21 = get_StochasticRelitiveStrengthIndex(df, 171, 57, 150) # 0.7
+                stochRSIK22, stochRSID22 = get_StochasticRelitiveStrengthIndex(df, 65, 150, 65)
+                stochRSIK23, stochRSID23 = get_StochasticRelitiveStrengthIndex(df, 134, 47, 238) # 1.09
+                stochRSIK24, stochRSID24 = get_StochasticRelitiveStrengthIndex(df, 401, 127, 137)
+                stochRSIK25, stochRSID25 = get_StochasticRelitiveStrengthIndex(df, 401, 127, 153)
+                stochRSIK26, stochRSID26 = get_StochasticRelitiveStrengthIndex(df, 293, 83, 316)
                     
                 #--------STOCH1RSI----------#
                 longRunSTOCHRSI1, shortRunSTOCHRSI1 = findSelection(previousBuyStochasticRSI1, previousSellStochasticRSI1, longRunSTOCHRSI1, shortRunSTOCHRSI1, i) 
@@ -246,9 +246,14 @@ while True:
                 if previousSellStochasticRSI1 == True:
                     print("SELL: 1")
                     send_message("SELL: 1", bot)
+                                      
                     if count1 > 0:
-                        closeLong(bingx_client, symbol, betAmount, maxLev)
-                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        try:
+                            closeLong(bingx_client, symbol, betAmount, maxLev)
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        except:
+                            print("No position to close RQTRQT")       
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)     
                     else:
                         buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count1+=1
@@ -256,9 +261,14 @@ while True:
                 if previousBuyStochasticRSI1 == True:
                     print("BUY: 1")
                     send_message("BUY: 1", bot)
+                                         
                     if count1 > 0:
-                        closeShort(bingx_client, symbol, betAmount, maxLev)
-                        buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        try:
+                            closeShort(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        except:
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                            print("No position to close RQTRQT")
                     else:
                         buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count1+=1
@@ -329,9 +339,14 @@ while True:
                 if previousSellStochasticRSI3 == True:
                     print("SELL: 3")
                     send_message("SELL: 3", bot)
+                                      
                     if count3 > 0:
-                        closeLong(bingx_client, symbol, betAmount, maxLev)
-                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        try:
+                            closeLong(bingx_client, symbol, betAmount, maxLev)
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        except:
+                            print("No position to close RQTRQT")       
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)     
                     else:
                         buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count3+=1
@@ -339,9 +354,14 @@ while True:
                 if previousBuyStochasticRSI3 == True:
                     print("BUY: 3")
                     send_message("BUY: 3", bot)
+                                         
                     if count3 > 0:
-                        closeShort(bingx_client, symbol, betAmount, maxLev)
-                        buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        try:
+                            closeShort(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        except:
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                            print("No position to close RQTRQT")
                     else:
                         buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count3+=1
@@ -367,9 +387,14 @@ while True:
                 if previousSellStochasticRSI4 == True:
                     print("SELL: 4")
                     send_message("SELL: 4", bot)
+                                      
                     if count4 > 0:
-                        closeLong(bingx_client, symbol, betAmount, maxLev)
-                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        try:
+                            closeLong(bingx_client, symbol, betAmount, maxLev)
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        except:
+                            print("No position to close RQTRQT")       
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)     
                     else:
                         buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count4+=1
@@ -377,9 +402,14 @@ while True:
                 if previousBuyStochasticRSI4 == True:
                     print("BUY: 4")
                     send_message("BUY: 4", bot)
+                                         
                     if count4 > 0:
-                        closeShort(bingx_client, symbol, betAmount, maxLev)
-                        buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        try:
+                            closeShort(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        except:
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                            print("No position to close RQTRQT")
                     else:
                         buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count4+=1
@@ -686,9 +716,14 @@ while True:
                 if previousSellStochasticRSI11 == True:
                     print("SELL: 11")
                     send_message("SELL: 11", bot)
+                                      
                     if count11 > 0:
-                        closeLong(bingx_client, symbol, betAmount, maxLev)
-                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        try:
+                            closeLong(bingx_client, symbol, betAmount, maxLev)
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        except:
+                            print("No position to close RQTRQT")       
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)     
                     else:
                         buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count11+=1
@@ -696,9 +731,14 @@ while True:
                 if previousBuyStochasticRSI11 == True:
                     print("BUY: 11")
                     send_message("BUY: 11", bot)
+                                         
                     if count11 > 0:
-                        closeShort(bingx_client, symbol, betAmount, maxLev)
-                        buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        try:
+                            closeShort(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        except:
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                            print("No position to close RQTRQT")
                     else:
                         buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count11+=1
@@ -1099,9 +1139,14 @@ while True:
                 if previousSellStochasticRSI20 == True:
                     print("SELL: 20")
                     send_message("SELL: 20", bot)
+                                      
                     if count20 > 0:
-                        closeLong(bingx_client, symbol, betAmount, maxLev)
-                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        try:
+                            closeLong(bingx_client, symbol, betAmount, maxLev)
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        except:
+                            print("No position to close RQTRQT")       
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)     
                     else:
                         buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count20+=1
@@ -1109,9 +1154,14 @@ while True:
                 if previousBuyStochasticRSI20 == True:
                     print("BUY: 20")
                     send_message("BUY: 20", bot)
+                                         
                     if count20 > 0:
-                        closeShort(bingx_client, symbol, betAmount, maxLev)
-                        buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        try:
+                            closeShort(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        except:
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                            print("No position to close RQTRQT")
                     else:
                         buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count20+=1
@@ -1230,9 +1280,14 @@ while True:
                 if previousSellStochasticRSI23 == True:
                     print("SELL: 23")
                     send_message("SELL: 23", bot)
+                                      
                     if count23 > 0:
-                        closeLong(bingx_client, symbol, betAmount, maxLev)
-                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        try:
+                            closeLong(bingx_client, symbol, betAmount, maxLev)
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        except:
+                            print("No position to close RQTRQT")       
+                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)     
                     else:
                         buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count23+=1
@@ -1240,9 +1295,14 @@ while True:
                 if previousBuyStochasticRSI23 == True:
                     print("BUY: 23")
                     send_message("BUY: 23", bot)
+                                         
                     if count23 > 0:
-                        closeShort(bingx_client, symbol, betAmount, maxLev)
-                        buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        try:
+                            closeShort(bingx_client, symbol, betAmount, maxLev)
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        except:
+                            buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                            print("No position to close RQTRQT")
                     else:
                         buyLong(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count23+=1
@@ -1348,4 +1408,4 @@ while True:
                 send_message(str(e), bot)
     else:
         # print('L BOZO')
-        time.sleep(57)
+        time.sleep(59)
