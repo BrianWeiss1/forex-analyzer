@@ -1,9 +1,9 @@
-from longTermPos import checkLuquidation, findSelection
+from temp.longTermPos import checkLuquidation, findSelection
 import sys
 import requests
-from SpecialFunctions import formatDataset, formatDataset1, formatDataset3, formatDataset2
-from underliningProcesses import swap
-from functions import get_StochasticOscilator, get_StochasticRelitiveStrengthIndex, get_supertrend
+from temp.SpecialFunctions import formatDataset, formatDataset1, formatDataset3, formatDataset2
+from temp.underliningProcesses import swap
+from temp.functions import get_StochasticOscilator, get_StochasticRelitiveStrengthIndex, get_supertrend
 from datetime import datetime, timedelta
 api_key = "d6e8542914aa439e92fceaccca1c2708"
 def grabForex(values):
@@ -26,7 +26,7 @@ def grabForex(values):
     
     return data['values']
     
-def simulateCrypto(df):
+def simulateCryptoExpands(df, start, end):
     printing = False
     printingSpecific = True
     totalPips = 0
@@ -83,7 +83,7 @@ def simulateCrypto(df):
     # print(df)
     # countAAA = 0
     try:
-        for j in range(2, 300):
+        for j in range(start, end):
             for k in range(1, 300):
                 for c in range(1, 300):
                     if printingSpecific:
@@ -249,8 +249,8 @@ def simulateCrypto(df):
                     countNeg = 0
         #SEPERATE WHEN TABBING
         
-        
-        return bestSpecialValue, worstSpecialValue, BestSpecialValues, WorstSpecialValues, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue, lstSpecialNumsINCLINE, lstSpecialNumsDECLINE
+        combinedlist = lstSpecialNumsINCLINE + lstSpecialNumsDECLINE
+        return combinedlist
     except KeyboardInterrupt:
         print("\n\nSIMULATION RESULTS: ")
         print(lstSpecialNumsINCLINE)
@@ -267,7 +267,8 @@ def simulateCrypto(df):
         print("Values for which: " + str(BestSpecialValues))
         print("\nWorst Special Value: " + str(worstSpecialValue))
         print("Values for which" + str(WorstSpecialValues))
-        return bestSpecialValue, worstSpecialValue, BestSpecialValues, WorstSpecialValues, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue, lstSpecialNumsINCLINE, lstSpecialNumsDECLINE
+        combinedlist = lstSpecialNumsINCLINE + lstSpecialNumsDECLINE
+        return combinedlist
 
 
 
