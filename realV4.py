@@ -248,10 +248,10 @@ while True:
                     send_message("SELL: 1", bot)
                     if count1 > 0:
                         closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
 
                     else:
-                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
 
                     count1+=1
                 
@@ -288,7 +288,7 @@ while True:
                     if count2 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")       
                             buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)             
@@ -333,10 +333,10 @@ while True:
                     send_message("SELL: 3", bot)
                     if count3 > 0:
                         closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
 
                     else:
-                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
 
                     count3+=1
                 
@@ -373,10 +373,10 @@ while True:
                     send_message("SELL: 4", bot)
                     if count4 > 0:
                         closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
 
                     else:
-                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
 
                     count4+=1
                 
@@ -414,10 +414,10 @@ while True:
                     if count5 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")
-                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     else:
                         buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                     count5+=1
@@ -460,7 +460,7 @@ while True:
                     if count6 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")       
                             buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)             
@@ -507,7 +507,7 @@ while True:
                     if count7 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")       
                             buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)             
@@ -554,7 +554,7 @@ while True:
                     if count8 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")       
                             buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)             
@@ -601,7 +601,7 @@ while True:
                     if count9 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")       
                             buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)             
@@ -648,7 +648,7 @@ while True:
                     if count10 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")       
                             buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)             
@@ -694,10 +694,10 @@ while True:
                     send_message("SELL: 11", bot)
                     if count11 > 0:
                         closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
 
                     else:
-                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
 
                     count11+=1
                 
@@ -735,7 +735,7 @@ while True:
                     if count12 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")       
                             buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)             
@@ -783,7 +783,7 @@ while True:
                     if count13 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")       
                             buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)             
@@ -830,7 +830,7 @@ while True:
                     if count14 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")       
                             buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)             
@@ -876,7 +876,7 @@ while True:
                     if count15 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")       
                             buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)             
@@ -923,7 +923,7 @@ while True:
                     if count16 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")       
                             buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)             
@@ -969,7 +969,7 @@ while True:
                     if count17 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")
                             buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)                    
@@ -1016,7 +1016,7 @@ while True:
                     if count18 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")       
                             buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)             
@@ -1063,7 +1063,7 @@ while True:
                     if count19 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")       
                             buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)             
@@ -1109,10 +1109,10 @@ while True:
                     send_message("SELL: 20", bot)
                     if count20 > 0:
                         closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
 
                     else:
-                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
 
                     count20+=1
                 
@@ -1149,7 +1149,7 @@ while True:
                     if count21 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")       
                             buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)             
@@ -1196,7 +1196,7 @@ while True:
                     if count22 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")       
                             buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)             
@@ -1242,10 +1242,10 @@ while True:
                     send_message("SELL: 23", bot)
                     if count23 > 0:
                         closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
 
                     else:
-                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
 
                     count23+=1
                 
@@ -1283,7 +1283,7 @@ while True:
                     if count24 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")       
                             buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)             
@@ -1329,7 +1329,7 @@ while True:
                     if count25 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)
-                            buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
+                        buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)
                         except:
                             print("No position to close RQTRQT")       
                             buyShort(bingx_client, symbol, betAmount, maxLev, stopLoss)             
