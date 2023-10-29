@@ -1,3 +1,15 @@
+
+
+def check(bought, price, data):
+    if bought is not None:
+        currentPrice = data['close'][-1]
+        if bought:
+            if currentPrice > price:
+                dif = currentPrice-price
+                difPercent = dif/currentPrice
+                setStopLoss(difPercent/2)
+            
+    
 from datetime import datetime
 import telebot
 import time

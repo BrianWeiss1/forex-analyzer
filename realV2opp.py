@@ -455,6 +455,7 @@ while True:
                 if previousBuyStochasticRSI5 == True:
                     print("SELL: 5")
                     send_message("SELL: 5", bot)
+                    
                     if count5 > 0:
                         try:
                             closeLong(bingx_client, symbol, betAmount, maxLev)

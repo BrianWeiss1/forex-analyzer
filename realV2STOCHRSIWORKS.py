@@ -180,6 +180,62 @@ stopLoss = 0.5
 
 pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg, nowPrice, nowCount = 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0
 
+Bought1 = None
+Bought2 = None
+Bought3 = None
+Bought4 = None
+Bought5 = None
+Bought6 = None
+Bought7 = None
+Bought8 = None
+Bought9 = None
+Bought10 = None
+Bought11 = None
+Bought12 = None
+Bought13 = None
+Bought14 = None
+Bought15 = None
+Bought16 = None
+Bought17 = None
+Bought18 = None
+Bought19 = None
+Bought20 = None
+Bought21 = None
+Bought22 = None
+Bought23 = None
+Bought24 = None
+Bought25 = None
+Bought26 = None
+
+Price1 = None
+Price2 = None
+Price3 = None
+Price4 = None
+Price5 = None
+Price6 = None
+Price7 = None
+Price8 = None
+Price9 = None
+Price10 = None
+Price11 = None
+Price12 = None
+Price13 = None
+Price14 = None
+Price15 = None
+Price16 = None
+Price17 = None
+Price18 = None
+Price19 = None
+Price20 = None
+Price21 = None
+Price22 = None
+Price23 = None
+Price24 = None
+Price25 = None
+Price26 = None
+
+
+
 yes = False
 opp = False
 
@@ -245,6 +301,8 @@ while True:
                     previousSellStochasticRSI1 = False   
                 if previousSellStochasticRSI1 == True:
                     print("SELL: 1")
+                    Price1 = data[i]['close']
+                    Bought1 = False
                     send_message("SELL: 1", bot)
                     if count1 > 0:
                         closeLong(bingx_client, symbol, betAmount, maxLev)
@@ -255,6 +313,8 @@ while True:
                 
                 if previousBuyStochasticRSI1 == True:
                     print("BUY: 1")
+                    Price1 = data[i]['close']
+                    Bought1 = True
                     send_message("BUY: 1", bot)
                     if count1 > 0:
                         closeShort(bingx_client, symbol, betAmount, maxLev)
@@ -282,6 +342,8 @@ while True:
                     previousSellStochasticRSI2 = False   
                 if previousSellStochasticRSI2 == True:
                     print("SELL: 2")
+                    Price2 = data[i]['close']
+                    Bought2 = False
                     send_message("SELL: 2", bot)
                     if count2 > 0:
                         try:
@@ -296,6 +358,8 @@ while True:
                 
                 if previousBuyStochasticRSI2 == True:
                     print("BUY: 2")
+                    Price2 = data[i]['close']
+                    Bought2 = True
                     send_message("BUY: 2", bot)
                     if count2 > 0:
                         try:
@@ -328,6 +392,8 @@ while True:
                     previousSellStochasticRSI3 = False   
                 if previousSellStochasticRSI3 == True:
                     print("SELL: 3")
+                    Price3 = data[i]['close']
+                    Bought3 = False
                     send_message("SELL: 3", bot)
                     if count3 > 0:
                         closeLong(bingx_client, symbol, betAmount, maxLev)
@@ -338,6 +404,8 @@ while True:
                 
                 if previousBuyStochasticRSI3 == True:
                     print("BUY: 3")
+                    Price3 = data[i]['close']
+                    Bought3 = True
                     send_message("BUY: 3", bot)
                     if count3 > 0:
                         closeShort(bingx_client, symbol, betAmount, maxLev)
@@ -366,6 +434,8 @@ while True:
                     previousSellStochasticRSI4 = False   
                 if previousSellStochasticRSI4 == True:
                     print("SELL: 4")
+                    Price4 = data[i]['close']
+                    Bought4 = False
                     send_message("SELL: 4", bot)
                     if count4 > 0:
                         closeLong(bingx_client, symbol, betAmount, maxLev)
@@ -376,6 +446,8 @@ while True:
                 
                 if previousBuyStochasticRSI4 == True:
                     print("BUY: 4")
+                    Price4 = data[i]['close']
+                    Bought4 = True
                     send_message("BUY: 4", bot)
                     if count4 > 0:
                         closeShort(bingx_client, symbol, betAmount, maxLev)
@@ -404,6 +476,8 @@ while True:
                     previousSellStochasticRSI5 = False   
                 if previousSellStochasticRSI5 == True:
                     print("SELL: 5")
+                    Price5 = data[i]['close']
+                    Bought5 = False
                     send_message("SELL: 5", bot)
                     if count5 > 0:
                         try:
@@ -418,6 +492,8 @@ while True:
                 
                 if previousBuyStochasticRSI5 == True:
                     print("BUY: 5")
+                    Price5 = data[i]['close']
+                    Bought5 = True
                     send_message("BUY: 5", bot)
                     if count5 > 0:
                         try:
@@ -450,6 +526,8 @@ while True:
                     previousSellStochasticRSI6 = False   
                 if previousSellStochasticRSI6 == True:
                     print("SELL: 6")
+                    Price6 = data[i]['close']
+                    Bought6 = False
                     send_message("SELL: 6", bot)
                     if count6 > 0:
                         try:
@@ -464,6 +542,8 @@ while True:
                 
                 if previousBuyStochasticRSI6 == True:
                     print("BUY: 6")
+                    Price6 = data[i]['close']
+                    Bought6 = True
                     send_message("BUY: 6", bot)
                     if count6 > 0:
                         try:
@@ -497,6 +577,8 @@ while True:
                     previousSellStochasticRSI7 = False   
                 if previousSellStochasticRSI7 == True:
                     print("SELL: 7")
+                    Price7 = data[i]['close']
+                    Bought7 = False
                     send_message("SELL: 7", bot)
                     if count7 > 0:
                         try:
@@ -511,6 +593,8 @@ while True:
                 
                 if previousBuyStochasticRSI7 == True:
                     print("BUY: 7")
+                    Price7 = data[i]['close']
+                    Bought7 = True
                     send_message("BUY: 7", bot)
                     if count7 > 0:
                         try:
@@ -544,6 +628,8 @@ while True:
                     previousSellStochasticRSI8 = False   
                 if previousSellStochasticRSI8 == True:
                     print("SELL: 8")
+                    Price8 = data[i]['close']
+                    Bought8 = False
                     send_message("SELL: 8", bot)
                     if count8 > 0:
                         try:
@@ -558,6 +644,8 @@ while True:
                 
                 if previousBuyStochasticRSI8 == True:
                     print("BUY: 8")
+                    Price8 = data[i]['close']
+                    Bought8 = True
                     send_message("BUY: 8", bot)
                     if count8 > 0:
                         try:
@@ -591,6 +679,8 @@ while True:
                     previousSellStochasticRSI9 = False   
                 if previousSellStochasticRSI9 == True:
                     print("SELL: 9")
+                    Price9 = data[i]['close']
+                    Bought9 = False
                     send_message("SELL: 9", bot)
                     if count9 > 0:
                         try:
@@ -605,6 +695,8 @@ while True:
                 
                 if previousBuyStochasticRSI9 == True:
                     print("BUY: 9")
+                    Price9 = data[i]['close']
+                    Bought9 = True
                     send_message("BUY: 9", bot)
                     if count9 > 0:
                         try:
@@ -638,6 +730,8 @@ while True:
                     previousSellStochasticRSI10 = False   
                 if previousSellStochasticRSI10 == True:
                     print("SELL: 10")
+                    Price10 = data[i]['close']
+                    Bought10 = False
                     send_message("SELL: 10", bot)
                     if count10 > 0:
                         try:
@@ -652,6 +746,8 @@ while True:
                 
                 if previousBuyStochasticRSI10 == True:
                     print("BUY: 10")
+                    Price10 = data[i]['close']
+                    Bought10 = True
                     send_message("BUY: 10", bot)
                     if count10 > 0:
                         try:
@@ -685,6 +781,8 @@ while True:
                     previousSellStochasticRSI11 = False   
                 if previousSellStochasticRSI11 == True:
                     print("SELL: 11")
+                    Price11 = data[i]['close']
+                    Bought11 = False
                     send_message("SELL: 11", bot)
                     if count11 > 0:
                         closeLong(bingx_client, symbol, betAmount, maxLev)
@@ -695,6 +793,8 @@ while True:
                 
                 if previousBuyStochasticRSI11 == True:
                     print("BUY: 11")
+                    Price11 = data[i]['close']
+                    Bought11 = True
                     send_message("BUY: 11", bot)
                     if count11 > 0:
                         closeShort(bingx_client, symbol, betAmount, maxLev)
@@ -723,6 +823,8 @@ while True:
                     previousSellStochasticRSI12 = False   
                 if previousSellStochasticRSI12 == True:
                     print("SELL: 12")
+                    Price12 = data[i]['close']
+                    Bought12 = False
                     send_message("SELL: 12", bot)
                     if count12 > 0:
                         try:
@@ -737,6 +839,8 @@ while True:
                 
                 if previousBuyStochasticRSI12 == True:
                     print("BUY: 12")
+                    Price12 = data[i]['close']
+                    Bought12 = True
                     send_message("BUY: 12", bot)
                     
                     if count12 > 0:
@@ -771,6 +875,8 @@ while True:
                     previousSellStochasticRSI13 = False   
                 if previousSellStochasticRSI13 == True:
                     print("SELL: 13")
+                    Price13 = data[i]['close']
+                    Bought13 = False
                     send_message("SELL: 13", bot)
                     if count13 > 0:
                         try:
@@ -785,6 +891,8 @@ while True:
                 
                 if previousBuyStochasticRSI13 == True:
                     print("BUY: 13")
+                    Price13 = data[i]['close']
+                    Bought13 = True
                     send_message("BUY: 13", bot)
                     if count13 > 0:
                         try:
@@ -818,6 +926,8 @@ while True:
                     previousSellStochasticRSI14 = False   
                 if previousSellStochasticRSI14 == True:
                     print("SELL: 14")
+                    Price14 = data[i]['close']
+                    Bought14 = False
                     send_message("SELL: 14", bot)
                     if count14 > 0:
                         try:
@@ -832,6 +942,8 @@ while True:
                 
                 if previousBuyStochasticRSI14 == True:
                     print("BUY: 14")
+                    Price14 = data[i]['close']
+                    Bought14 = True
                     send_message("BUY: 14", bot)
                     if count14 > 0:
                         try:
@@ -864,6 +976,8 @@ while True:
                     previousSellStochasticRSI15 = False   
                 if previousSellStochasticRSI15 == True:
                     print("SELL: 15")
+                    Price15 = data[i]['close']
+                    Bought15 = False
                     send_message("SELL: 15", bot)
                     if count15 > 0:
                         try:
@@ -878,6 +992,8 @@ while True:
                 
                 if previousBuyStochasticRSI15 == True:
                     print("BUY: 15")
+                    Price15 = data[i]['close']
+                    Bought15 = True
                     send_message("BUY: 15", bot)
                     if count15 > 0:
                         try:
@@ -911,6 +1027,8 @@ while True:
                     previousSellStochasticRSI16 = False   
                 if previousSellStochasticRSI16 == True:
                     print("SELL: 16")
+                    Price16 = data[i]['close']
+                    Bought16 = False
                     send_message("SELL: 16", bot)
                     if count16 > 0:
                         try:
@@ -925,6 +1043,8 @@ while True:
                 
                 if previousBuyStochasticRSI16 == True:
                     print("BUY: 16")
+                    Price16 = data[i]['close']
+                    Bought16 = True
                     send_message("BUY: 16", bot)
                     if count16 > 0:
                         try:
@@ -957,6 +1077,8 @@ while True:
                     previousSellStochasticRSI17 = False   
                 if previousSellStochasticRSI17 == True:
                     print("SELL: 17")
+                    Price17 = data[i]['close']
+                    Bought17 = False
                     send_message("SELL: 17", bot)
                     if count17 > 0:
                         try:
@@ -971,6 +1093,8 @@ while True:
                 
                 if previousBuyStochasticRSI17 == True:
                     print("BUY: 17")
+                    Price17 = data[i]['close']
+                    Bought17 = True
                     send_message("BUY: 17", bot)
                     if count17 > 0:
                         try:
@@ -1004,6 +1128,8 @@ while True:
                     previousSellStochasticRSI18 = False   
                 if previousSellStochasticRSI18 == True:
                     print("SELL: 18")
+                    Price18 = data[i]['close']
+                    Bought18 = False
                     send_message("SELL: 18", bot)
                     if count18 > 0:
                         try:
@@ -1018,6 +1144,8 @@ while True:
                 
                 if previousBuyStochasticRSI18 == True:
                     print("BUY: 18")
+                    Price18 = data[i]['close']
+                    Bought18 = True
                     send_message("BUY: 18", bot)
                     if count18 > 0:
                         try:
@@ -1051,6 +1179,8 @@ while True:
                     previousSellStochasticRSI19 = False   
                 if previousSellStochasticRSI19 == True:
                     print("SELL: 19")
+                    Price19 = data[i]['close']
+                    Bought19 = False
                     send_message("SELL: 19", bot)
                     if count19 > 0:
                         try:
@@ -1065,6 +1195,8 @@ while True:
                 
                 if previousBuyStochasticRSI19 == True:
                     print("BUY: 19")
+                    Price19 = data[i]['close']
+                    Bought19 = True
                     send_message("BUY: 19", bot)
                     if count19 > 0:
                         try:
@@ -1098,6 +1230,8 @@ while True:
                     previousSellStochasticRSI20 = False   
                 if previousSellStochasticRSI20 == True:
                     print("SELL: 20")
+                    Price20 = data[i]['close']
+                    Bought20 = False
                     send_message("SELL: 20", bot)
                     if count20 > 0:
                         closeLong(bingx_client, symbol, betAmount, maxLev)
@@ -1108,6 +1242,8 @@ while True:
                 
                 if previousBuyStochasticRSI20 == True:
                     print("BUY: 20")
+                    Price20 = data[i]['close']
+                    Bought20 = True
                     send_message("BUY: 20", bot)
                     if count20 > 0:
                         closeShort(bingx_client, symbol, betAmount, maxLev)
@@ -1135,6 +1271,8 @@ while True:
                     previousSellStochasticRSI21 = False   
                 if previousSellStochasticRSI21 == True:
                     print("SELL: 21")
+                    Price21 = data[i]['close']
+                    Bought21 = False
                     send_message("SELL: 21", bot)
                     if count21 > 0:
                         try:
@@ -1149,6 +1287,8 @@ while True:
                 
                 if previousBuyStochasticRSI21 == True:
                     print("BUY: 21")
+                    Price21 = data[i]['close']
+                    Bought21 = True
                     send_message("BUY: 21", bot)
                     if count21 > 0:
                         try:
@@ -1182,6 +1322,8 @@ while True:
                     previousSellStochasticRSI22 = False   
                 if previousSellStochasticRSI22 == True:
                     print("SELL: 22")
+                    Price22 = data[i]['close']
+                    Bought22 = False
                     send_message("SELL: 22", bot)
                     if count22 > 0:
                         try:
@@ -1196,6 +1338,8 @@ while True:
                 
                 if previousBuyStochasticRSI22 == True:
                     print("BUY: 22")
+                    Price22 = data[i]['close']
+                    Bought22 = True
                     send_message("BUY: 22", bot)
                     if count22 > 0:
                         try:
@@ -1229,6 +1373,8 @@ while True:
                     previousSellStochasticRSI23 = False   
                 if previousSellStochasticRSI23 == True:
                     print("SELL: 23")
+                    Price23 = data[i]['close']
+                    Bought23 = False
                     send_message("SELL: 23", bot)
                     if count23 > 0:
                         closeLong(bingx_client, symbol, betAmount, maxLev)
@@ -1239,6 +1385,8 @@ while True:
                 
                 if previousBuyStochasticRSI23 == True:
                     print("BUY: 23")
+                    Price23 = data[i]['close']
+                    Bought23 = True
                     send_message("BUY: 23", bot)
                     if count23 > 0:
                         closeShort(bingx_client, symbol, betAmount, maxLev)
@@ -1267,6 +1415,8 @@ while True:
                     previousSellStochasticRSI24 = False   
                 if previousSellStochasticRSI24 == True:
                     print("SELL: 24")
+                    Price24 = data[i]['close']
+                    Bought24 = False
                     send_message("SELL: 24", bot)
                     if count24 > 0:
                         try:
@@ -1281,6 +1431,8 @@ while True:
                 
                 if previousBuyStochasticRSI24 == True:
                     print("BUY: 24")
+                    Price24 = data[i]['close']
+                    Bought24 = True
                     send_message("BUY: 24", bot)
                     if count24 > 0:
                         try:
@@ -1313,6 +1465,8 @@ while True:
                     previousSellStochasticRSI25 = False   
                 if previousSellStochasticRSI25 == True:
                     print("SELL: 25")
+                    Price25 = data[i]['close']
+                    Bought25 = False
                     send_message("SELL: 25", bot)
                     if count25 > 0:
                         try:
@@ -1327,6 +1481,8 @@ while True:
                 
                 if previousBuyStochasticRSI25 == True:
                     print("BUY: 25")
+                    Price25 = data[i]['close']
+                    Bought25 = True
                     send_message("BUY: 25", bot)
                     if count25 > 0:
                         try:
