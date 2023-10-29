@@ -1,13 +1,13 @@
 
 
-def check(bought, price, data):
-    if bought is not None:
-        currentPrice = data['close'][-1]
-        if bought:
-            if currentPrice > price:
-                dif = currentPrice-price
-                difPercent = dif/currentPrice
-                setStopLoss(difPercent/2)
+# def check(bought, price, data):
+#     if bought is not None:
+#         currentPrice = data['close'][-1]
+#         if bought:
+#             if currentPrice > price:
+#                 dif = currentPrice-price
+#                 difPercent = dif/currentPrice
+#                 setStopLoss(difPercent/2)
             
     
 from datetime import datetime
@@ -37,8 +37,8 @@ from bingX.perpetual.v2.types import (
 
 
 APIURL = "https://open-api.bingx.com"
-f = open('documents/api_key.txt', 'r')
-APIKEY = 'zGnYUEbpDvOI36v9DnPIvMLQEVz44Vgme7AUAyFeonkUAusiLDi9PFM65nyjAuijESmpmC2eGAuqmFfHVQ'
+f = open('documents/api_key3.txt', 'r')
+APIKEY = '0yM5fkA5pvkqE9v5RlukfZdqmAZY8xgQAkhFjnECepgGgX6OT8mNPolBDY7yefFqbHUzIexIdhWb4QD8ZEcw'
 SECRETKEY = f.readline()
 f.close()
 sim = "GFT"
