@@ -37,13 +37,13 @@ from bingX.perpetual.v2.types import (
 
 
 APIURL = "https://open-api.bingx.com"
-f = open('documents/api_key3.txt', 'r')
-APIKEY = '0yM5fkA5pvkqE9v5RlukfZdqmAZY8xgQAkhFjnECepgGgX6OT8mNPolBDY7yefFqbHUzIexIdhWb4QD8ZEcw'
+f = open('documents/api_key.txt', 'r')
+APIKEY = 'zGnYUEbpDvOI36v9DnPIvMLQEVz44Vgme7AUAyFeonkUAusiLDi9PFM65nyjAuijESmpmC2eGAuqmFfHVQ'
 SECRETKEY = f.readline()
 f.close()
-sim = "GFT"
+sim = "BOND"
 maxLev = 10
-betAmount = 0.23
+betAmount = 0.2
 symbol = f'{sim}-USDT'
 symbolVolume = f'{sim}USDT'
 
