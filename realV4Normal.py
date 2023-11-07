@@ -29,9 +29,9 @@ f = open('documents/api_key.txt', 'r')
 APIKEY = 'zGnYUEbpDvOI36v9DnPIvMLQEVz44Vgme7AUAyFeonkUAusiLDi9PFM65nyjAuijESmpmC2eGAuqmFfHVQ'
 SECRETKEY = f.readline()
 f.close()
-sim = "GAS"
-maxLev = 25
-betAmount = 0.2
+sim = "FRONT"
+maxLev = 10
+betAmount = 0.19
 symbol = f'{sim}-USDT'
 symbolVolume = f'{sim}USDT'
 
