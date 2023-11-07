@@ -5,13 +5,11 @@ from SpecialFunctions import formatDataset, formatDataset1, formatDataset3, form
 from src.underliningProcesses import swap
 from src.functions import get_StochasticOscilator, get_StochasticRelitiveStrengthIndex, get_supertrend
 from datetime import datetime, timedelta
-api_key = "d6e8542914aa439e92fceaccca1c2708"
+import numpy
+api_key = "My_API_KEY"
 def grabForex(values):
-    # Define your API key
-    # Define the API endpoint URL
     base_url = "https://api.twelvedata.com/time_series"
 
-    # Define the parameters for the request
     params = {
         "symbol": "EUR/USD",  # The forex symbol you want to retrieve
         "interval": "30min",   # Time interval (e.g., 1min, 1day)
@@ -77,176 +75,189 @@ def simulateCrypto(df):
     previousSellStochasticRSI1 = previousBuyStochasticRSI1 = False
     lstSpecialNumsDECLINE = []
     lstSpecialNumsINCLINE = []
-
-
+#get_StochasticRelitiveStrengthIndex(df, 258, 19, 161) -0.0022
+#get_StochasticRelitiveStrengthIndex(df, 18, 217, 289) -0.00147
+#get_StochasticRelitiveStrengthIndex(df, 276, 296, 18) -0.0027
+#get_StochasticRelitiveStrengthIndex(df, 53, 327, 132) -0.00212
+#get_StochasticRelitiveStrengthIndex(df, 267, 291, 11) -0.00289
+#get_StochasticRelitiveStrengthIndex(df, 125, 285, 151)-0.0022
+#get_StochasticRelitiveStrengthIndex(df, 149, j, 235)  -0.0014
+#get_StochasticRelitiveStrengthIndex(df, 306, 297, 13) -0.00294
+#get_StochasticRelitiveStrengthIndex(df, 304, 18, 145) -0.00224
+#get_StochasticRelitiveStrengthIndex(df, 451, 17, 212) -0.00353
+#get_StochasticRelitiveStrengthIndex(df, 91, 304, 699) -0.0027
+#get_StochasticRelitiveStrengthIndex(df, 106, 261, 417)-0.0021
+#get_StochasticRelitiveStrengthIndex(df, 255, 298, 15) -0.00302
+#get_StochasticRelitiveStrengthIndex(df, 236, 4, 219)  -0.0018
+#get_StochasticRelitiveStrengthIndex(df, 321, 5, 584)  -0.00426
     SpecialValue = 0
     # print(df)
     # countAAA = 0
     try:
-        for j in range(2, 300):
-            for k in range(1, 300):
-                for c in range(1, 300):
-                    if printingSpecific:
-                        if j != oldj:
-                            print("K: " + str(j))
-                            oldj = j
-                            print(lstSpecialNumsINCLINE)
-                            print(lstSpecialNumsDECLINE)
-                            
-                    stochRSIK1, stochRSID1 = get_StochasticRelitiveStrengthIndex(df, j, k, c)# 31, 290, 36
-                    
-                    for i in range(len(df)):
-                        # countAAA += 1
-                        # print(countAAA)
-
-                        nowPrice += df['close'][i]
-                        nowCount += 1
-
-
-                        #--------STOCH1RSI----------#
-                        longRunSTOCHRSI1, shortRunSTOCHRSI1 = findSelection(previousBuyStochasticRSI1, previousSellStochasticRSI1, longRunSTOCHRSI1, shortRunSTOCHRSI1, i) 
-                        shortRunSTOCHRSI1, longRunSTOCHRSI1, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI1, longRunSTOCHRSI1, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+        for j in range(1, 1200):
+    # for k in range(1, 300):
+    #     for c in range(1, 300):
+            if printingSpecific: 
+                if j != oldj:
+                    # print("K: " + str(j))
+                    oldj = j
+                    # print(lstSpecialNumsINCLINE)
+                    # print(lstSpecialNumsDECLINE)
+                    # 300, 3,12
+            stochRSIK1, stochRSID1 = get_StochasticRelitiveStrengthIndex(df, 77, 619, 892)
             
-                        previousSellStochasticRSI1 = previousBuyStochasticRSI1 = False
+            for i in range(len(df)):
+                # countAAA += 1
+                # print(countAAA)
 
-                        if stochRSIK1[i-1] >= stochRSID1[i-1] and stochRSIK1[i] < stochRSID1[i]:
-                            previousSellStochasticRSI1 = True
-                        if stochRSIK1[i-1] <= stochRSID1[i-1] and stochRSIK1[i] > stochRSID1[i]:
-                            previousBuyStochasticRSI1 = True
-                            
-                        previousBuyStochasticRSI1, previousSellStochasticRSI1 = swap(previousBuyStochasticRSI1, previousSellStochasticRSI1)
-                        
-                        if previousSellStochasticRSI1 and previousBuyStochasticRSI1:
-                            previousBuyStochasticRSI1 = False
-                            previousSellStochasticRSI1 = False   
-                        #--------STOCH1RSI----------#  
-                        
+                nowPrice += df['close'][i]
+                nowCount += 1
 
 
+                #--------STOCH1RSI----------#
+                longRunSTOCHRSI1, shortRunSTOCHRSI1 = findSelection(previousBuyStochasticRSI1, previousSellStochasticRSI1, longRunSTOCHRSI1, shortRunSTOCHRSI1, i) 
+                shortRunSTOCHRSI1, longRunSTOCHRSI1, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI1, longRunSTOCHRSI1, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
+    
+                previousSellStochasticRSI1 = previousBuyStochasticRSI1 = False
+
+                if stochRSIK1[i-1] >= stochRSID1[i-1] and stochRSIK1[i] < stochRSID1[i]:
+                    previousSellStochasticRSI1 = True
+                if stochRSIK1[i-1] <= stochRSID1[i-1] and stochRSIK1[i] > stochRSID1[i]:
+                    previousBuyStochasticRSI1 = True
+                    
+                previousBuyStochasticRSI1, previousSellStochasticRSI1 = swap(previousBuyStochasticRSI1, previousSellStochasticRSI1)
+                
+                if previousSellStochasticRSI1 and previousBuyStochasticRSI1:
+                    previousBuyStochasticRSI1 = False
+                    previousSellStochasticRSI1 = False   
+                #--------STOCH1RSI----------#  
+                
+
+
+            try:
+                percentOfTrades = round(((pos + nuet + neg) / len(df)) * 100, 2)
+                AvgPrice = nowPrice/nowCount
+                if printing:
                     try:
-                        percentOfTrades = round(((pos + nuet + neg) / len(df)) * 100, 2)
-                        AvgPrice = nowPrice/nowCount
-                        if printing:
-                            try:
-                                print("POS/NEG RATIO: " + str(pos / neg))
-                                print(
-                                    "Percentage Correct: " + str(round((pos / (neg + pos)) * 100, 2)) + "%"
-                                )
-                            except: 
-                                print("ERROR 404")
-                            print("CANDLES: " + str(len(df) - 2))
-                            print(
-                                "PERCENT OF TRADES: "
-                                + str(percentOfTrades)
-                            )
-                            print("protfilio: " + str(portfolio))
-                        avgPips = totalPips/countPips
-                        if printing:
-                            print("AVERAGE PIPS: " + str(totalPips/countPips))
-                            print("POSITIVE PIPS: " + str(posPips/(countPos)))
-                        try:
-                            negPip = negPips/(neg)
-                        except:
-                            negPip = 0
-                        posPercent = round((posPips/(pos)/AvgPrice), 5)
-                        negPercent = round((negPip/AvgPrice), 5)
-                        AvgPercent = round((avgPips/AvgPrice), 5)
-                        if printing:
-                            print("NEGITIVE PIPS: " + str(negPip))
-                            print("AVERAGE %: " + str(AvgPercent))
-                            print("POS %: " + str(posPercent))
-                            print("NEG %: " + str(negPercent))
-                        leverage = 50
-                        if printing:
-                            print(f"{leverage}X LEVERAGE")
-                            print("AVERAGE %: " + str(AvgPercent*leverage))
-                            print("POS %: " + str(posPercent*leverage))
-                            print("NEG %: " + str(negPercent*leverage))
-                        difference = (posPercent + negPercent)
-                        correctness = round((pos / (neg + pos)), 2)
-                        accuracy = correctness-0.5
-                        tradeDecimal = percentOfTrades/100
-                        if printing:
-                            print(SpecialValue)
-                        p = (pos / (neg + pos))
-                        q = 1-p
-                        t = (((posPips/(pos)/AvgPrice)*leverage)/100)+1
-                        s = ((negPip/AvgPrice)*leverage/100)+1
-                        # print(s)
-                        KellyCriterum = p/s - q/t
-                        if printing:
-                            print("Best Bet %: " + str(KellyCriterum))
-                        # amountOfBets = pos + nuet + neg
+                        print("POS/NEG RATIO: " + str(pos / neg))
+                        print(
+                            "Percentage Correct: " + str(round((pos / (neg + pos)) * 100, 2)) + "%"
+                        )
+                    except: 
+                        print("ERROR 404")
+                    print("CANDLES: " + str(len(df) - 2))
+                    print(
+                        "PERCENT OF TRADES: "
+                        + str(percentOfTrades)
+                    )
+                    print("protfilio: " + str(portfolio))
+                avgPips = totalPips/countPips
+                if printing:
+                    print("AVERAGE PIPS: " + str(totalPips/countPips))
+                    print("POSITIVE PIPS: " + str(posPips/(countPos)))
+                try:
+                    negPip = negPips/(neg)
+                except:
+                    negPip = 0
+                posPercent = round((posPips/(pos)/AvgPrice), 5)
+                negPercent = round((negPip/AvgPrice), 5)
+                AvgPercent = round((avgPips/AvgPrice), 5)
+                if printing:
+                    print("NEGITIVE PIPS: " + str(negPip))
+                    print("AVERAGE %: " + str(AvgPercent))
+                    print("POS %: " + str(posPercent))
+                    print("NEG %: " + str(negPercent))
+                leverage = 50
+                if printing:
+                    print(f"{leverage}X LEVERAGE")
+                    print("AVERAGE %: " + str(AvgPercent*leverage))
+                    print("POS %: " + str(posPercent*leverage))
+                    print("NEG %: " + str(negPercent*leverage))
+                difference = (posPercent + negPercent)
+                correctness = round((pos / (neg + pos)), 2)
+                accuracy = correctness-0.5
+                tradeDecimal = percentOfTrades/100
+                if printing:
+                    print(SpecialValue)
+                p = (pos / (neg + pos))
+                q = 1-p
+                t = (((posPips/(pos)/AvgPrice)*leverage)/100)+1
+                s = ((negPip/AvgPrice)*leverage/100)+1
+                # print(s)
+                KellyCriterum = p/s - q/t
+                if printing:
+                    print("Best Bet %: " + str(KellyCriterum))
+                # amountOfBets = pos + nuet + neg
 
-                        # amount = 10 * pow((1 + 0.76*1.768), amountOfBets)
-                        # print(amount)
-                    except ZeroDivisionError:
-                        if printing:
-                            print("ERROR GO BRRRR")
-                    # # ------Profilio-----
+                # amount = 10 * pow((1 + 0.76*1.768), amountOfBets)
+                # print(amount)
+            except ZeroDivisionError:
+                if printing:
+                    print("ERROR GO BRRRR")
+            # # ------Profilio-----
 
-                    lst.append(portfolio)
-                    # print(pos / (neg + pos))
-                    # try:
-                    #     ratio = (100-round((pos / (neg + pos)) * 100, 2))/(100-round(((pos + nuet + neg) / len(df)) * 100, 2))*100
-                    # except ZeroDivisionError:
-                    #     ratio = 0
-                    pos = nuet = neg = 0
-                    # if avgPips > 1000:
-                    #     avgPips -= 1000
-                    #     avgPips = avgPips * percentOfTrades
-                        # print("Ratio: " + str(ratio))
-                    try: 
-                        SpecialValue = difference * accuracy * tradeDecimal
-                        if SpecialValue < 0:
-                            lstSpecialNumsDECLINE.append([(j, k, c),SpecialValue])
-                            lstSpecialNumsDECLINE = sorted(lstSpecialNumsDECLINE, key=lambda x: x[1])
-                            # print(lstSpecialNumsDECLINE)
-                            countr += 1
-                            if countr > 100:
-                                lstSpecialNumsDECLINE.pop()
-                                # print(len(lstSpecialNumsDECLINE))
-                        if SpecialValue > 0:
-                            lstSpecialNumsINCLINE.append([(j, k, c),SpecialValue])
-                            lstSpecialNumsINCLINE = sorted(lstSpecialNumsINCLINE, key=lambda x: x[1], reverse=True)
-                            # print(lstSpecialNumsINCLINE)
-                            countrUp += 1
-                            if countrUp > 100:
-                                lstSpecialNumsINCLINE.pop()
-                                # print(len(lstSpecialNumsINCLINE))
-                                
-                        if SpecialValue > bestSpecialValue:
-                            bestSpecialValue = SpecialValue
-                            BestSpecialValues = (j, k)
-                        if SpecialValue < worstSpecialValue:
-                            worstSpecialValue = SpecialValue
-                            WorstSpecialValues = (j, k)
-                    except:
-                        a = j
+            lst.append(portfolio)
+            # print(pos / (neg + pos))
+            # try:
+            #     ratio = (100-round((pos / (neg + pos)) * 100, 2))/(100-round(((pos + nuet + neg) / len(df)) * 100, 2))*100
+            # except ZeroDivisionError:
+            #     ratio = 0
+            pos = nuet = neg = 0
+            # if avgPips > 1000:
+            #     avgPips -= 1000
+            #     avgPips = avgPips * percentOfTrades
+                # print("Ratio: " + str(ratio))
+            try: 
+                SpecialValue = difference * accuracy * tradeDecimal
+                if SpecialValue < 0:
+                    lstSpecialNumsDECLINE.append([(31, 290, 36),SpecialValue])
+                    lstSpecialNumsDECLINE = sorted(lstSpecialNumsDECLINE, key=lambda x: x[1])
+                    # print(lstSpecialNumsDECLINE)
+                    countr += 1
+                    if countr > 100:
+                        lstSpecialNumsDECLINE.pop()
+                        # print(len(lstSpecialNumsDECLINE))
+                if SpecialValue > 0:
+                    lstSpecialNumsINCLINE.append([(31, 290, 36),SpecialValue])
+                    lstSpecialNumsINCLINE = sorted(lstSpecialNumsINCLINE, key=lambda x: x[1], reverse=True)
+                    # print(lstSpecialNumsINCLINE)
+                    countrUp += 1
+                    if countrUp > 100:
+                        lstSpecialNumsINCLINE.pop()
+                        # print(len(lstSpecialNumsINCLINE))
                         
-                    if avgPips*percentOfTrades > bestAvgPips and avgPips > 52000:
-                        bestAvgPips = avgPips*percentOfTrades
-                        bestAvgj = j
-                        bestAvgk = k
-                    if avgPips*percentOfTrades < worstAvgPips:
-                        worstAvgPips = avgPips*percentOfTrades
-                        worstAvgj = j
-                        worstAvgk = k
-                    if portfolio > BestProfilio:
-                        BestProfilio = portfolio
-                        Bestj = j
-                        Bestk = k
-                    elif portfolio < WorseProfilio:
-                        WorseProfilio = portfolio
-                        worstj = j
-                        worstk = k
-                    portfolio = 10
-                    negPips = 0
-                    posPips = 0
-                    totalPips = 0
-                    countPips = 0
-                    countPos = 0
-                    countNeg = 0
+                if SpecialValue > bestSpecialValue:
+                    bestSpecialValue = SpecialValue
+                    BestSpecialValues = (j, k)
+                if SpecialValue < worstSpecialValue:
+                    worstSpecialValue = SpecialValue
+                    WorstSpecialValues = (j, k)
+            except:
+                a = j
+                
+            if avgPips*percentOfTrades > bestAvgPips and avgPips > 52000:
+                bestAvgPips = avgPips*percentOfTrades
+                bestAvgj = j
+                bestAvgk = k
+            if avgPips*percentOfTrades < worstAvgPips:
+                worstAvgPips = avgPips*percentOfTrades
+                worstAvgj = j
+                worstAvgk = k
+            if portfolio > BestProfilio:
+                BestProfilio = portfolio
+                Bestj = j
+                Bestk = k
+            elif portfolio < WorseProfilio:
+                WorseProfilio = portfolio
+                worstj = j
+                worstk = k
+            portfolio = 10
+            negPips = 0
+            posPips = 0
+            totalPips = 0
+            countPips = 0
+            countPos = 0
+            countNeg = 0
         #SEPERATE WHEN TABBING
         
         
@@ -276,11 +287,11 @@ if "__main__" == __name__:
     printing = True
     df = formatDataset2(formatDataset3(grabForex(5000)))
     lst5 = []
-    print(len(df))
-    for i in range(2, 100, 10):
-        for j in range(12, 110, 10):
-            lst5.append([df, [i, j]])
-    print(lst5)
+    # print(len(df))
+    # for i in range(2, 100, 10):
+    #     for j in range(12, 110, 10):
+    #         lst5.append([df, [i, j]])
+    # print(lst5)
 
     
     bestSpecialValue, worstSpecialValue, BestSpecialValues, WorstSpecialValues, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue, lstSpecialNumsINCLINE, lstSpecialNumsDECLINE = simulateCrypto(df)
@@ -296,7 +307,11 @@ if "__main__" == __name__:
     f.close()
 
     
-    print("\nBest Special Value: " + str(bestSpecialValue))
-    print("Values for which: " + str(BestSpecialValues))
-    print("\nWorst Special Value: " + str(worstSpecialValue))
-    print("Values for which" + str(WorstSpecialValues))
+    print("\nBest Special Value: " + str(bestSpecialValue) + "  " + str(BestSpecialValues))
+    # print("Values for which: " + str(BestSpecialValues))
+    print("\nWorst Specl Value: " + str(worstSpecialValue) + "  " + str(WorstSpecialValues))
+    if abs(bestSpecialValue) > abs(worstSpecialValue):
+        print("Best: " + str(BestSpecialValues))
+    else:
+        print("Worst: " + str(WorstSpecialValues))
+    # print("Values for which" + str(WorstSpecialValues))

@@ -1,15 +1,3 @@
-
-
-# def check(bought, price, data):
-#     if bought is not None:
-#         currentPrice = data['close'][-1]
-#         if bought:
-#             if currentPrice > price:
-#                 dif = currentPrice-price
-#                 difPercent = dif/currentPrice
-#                 setStopLoss(difPercent/2)
-            
-    
 from datetime import datetime
 import telebot
 import time
@@ -188,7 +176,7 @@ shortRunSTOCHRSI26 = {'shortSignal': False, 'luquidate': False, 'entry': []}
 previousBuyStochasticRSI26, previousSellStochasticRSI26 = False, False
 
 previousMinute = -1
-stopLoss = 0.25
+stopLoss = 0.50
 
 pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg, nowPrice, nowCount = 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0
 
