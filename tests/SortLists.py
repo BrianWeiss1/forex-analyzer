@@ -22,8 +22,9 @@ if __name__ == '__main__':
     stochRSISpeicalValueOct23 = openFileArray('stochRSISpecialNumOct23')
     bestStochRSIOct25 = openFileArray('bestStochRSIOct25')
     bestSTOCHRSIOct28 = openFileArray('bestStochRSIOct28')
-    bestSTOCHRSINov5 = openFileArray('stochRSISpecialNumNov5')
-    ALllist = bestSTOCHRSINov5 
+    bestSTOCHRSIOptimizdNov5 = openFileArray('stochRSISpecialNumNov5')
+    bestSTOCHRSInormalNov6 = openFileArray('SRSINNov6')
+    ALllist = bestSTOCHRSIOptimizdNov5 
     dic = {}
     for i in range(len(ALllist)):
         # print(farDatapoints[i][0])

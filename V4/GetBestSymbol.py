@@ -1,8 +1,11 @@
 import threading
-from SimulationV4 import simulateCryptoSTOCHRSI
+from SimulationV4 import simulateSRSI, simulateSRSIOptimized
 from temp.SpecialFunctions import formatDataset, formatDataset1
 from temp.testGrabData import calltimes30FIXED
 from datetime import datetime, timedelta
+
+
+WHICHONE = simulateSRSI
 
 
 def process_symbol(dataSymbol, best_results, worst_results, lst):
@@ -42,7 +45,7 @@ def process_symbol(dataSymbol, best_results, worst_results, lst):
             # print(dic)
             for key, value in dic.items():
                 # print(key)
-                BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCryptoSTOCHRSI(df, key, False, 1)
+                BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateSRSI(df, key, False, 1)
                 totalAmount += AvgPercent * value
                 count += value
             # print("AVG PERCENT: " + str(totalAmount/count))
@@ -75,7 +78,16 @@ def process_symbol(dataSymbol, best_results, worst_results, lst):
     # bestNumSymbol.append()
 
 if __name__ == '__main__':
-    
+    print(" THIS SCRIPT IS NOT OPTIMIZED  ")
+    print(" THIS SCRIPT IS NOT OPTIMIZED  ")
+    print(" THIS SCRIPT IS NOT OPTIMIZED  ")
+    print(" THIS SCRIPT IS NOT OPTIMIZED  ")
+    print(" THIS SCRIPT IS NOT OPTIMIZED  ")
+    print(" THIS SCRIPT IS NOT OPTIMIZED  ")
+    print(" THIS SCRIPT IS NOT OPTIMIZED  ")
+    print(" THIS SCRIPT IS NOT OPTIMIZED  ")
+    print(" THIS SCRIPT IS NOT OPTIMIZED  ")
+
     f = open('documents/binanceSymbols.txt', 'r')
     dataSymbol = f.readlines()
     dataSymbol = eval(dataSymbol[0])
@@ -84,7 +96,7 @@ if __name__ == '__main__':
     lst = []
 
     # Number of threads you want to create
-    num_threads = 8  # Adjust this as needed
+    num_threads = 7  # Adjust this as needed
     
     # Split the dataSymbol list into chunks for parallel processing
     chunk_size = len(dataSymbol) // num_threads

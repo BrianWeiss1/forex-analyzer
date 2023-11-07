@@ -6,7 +6,7 @@ from src.underliningProcesses import swap
 from src.functions import get_StochasticOscilator, get_StochasticRelitiveStrengthIndex, get_supertrend
 from datetime import datetime, timedelta
 import numpy
-api_key = "My_API_KEY"
+api_key = "d6e8542914aa439e92fceaccca1c2708"
 def grabForex(values):
     base_url = "https://api.twelvedata.com/time_series"
 
@@ -90,11 +90,13 @@ def simulateCrypto(df):
 #get_StochasticRelitiveStrengthIndex(df, 255, 298, 15) -0.00302
 #get_StochasticRelitiveStrengthIndex(df, 236, 4, 219)  -0.0018
 #get_StochasticRelitiveStrengthIndex(df, 321, 5, 584)  -0.00426
+#get_StochasticRelitiveStrengthInde(df, 69, 1273, 1120)-0.00306
+#get_StochasticRelitiveStrengthIndex(df, 1223, 4, 487) -0.00527
     SpecialValue = 0
     # print(df)
     # countAAA = 0
     try:
-        for j in range(1, 1200):
+        for j in range(1, 1700):
     # for k in range(1, 300):
     #     for c in range(1, 300):
             if printingSpecific: 
@@ -103,8 +105,8 @@ def simulateCrypto(df):
                     oldj = j
                     # print(lstSpecialNumsINCLINE)
                     # print(lstSpecialNumsDECLINE)
-                    # 300, 3,12
-            stochRSIK1, stochRSID1 = get_StochasticRelitiveStrengthIndex(df, 77, 619, 892)
+                    # 1223, 4, 487
+            stochRSIK1, stochRSID1 = get_StochasticRelitiveStrengthIndex(df, j, j, 487)
             
             for i in range(len(df)):
                 # countAAA += 1

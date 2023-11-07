@@ -25,8 +25,6 @@ def closeLong(bingx_client, symbol, betAmount, maxLev):
     
     Quanity = round((betAmount * maxLev) / assetPrice, 6)
 
-    # print(Quanity)
-    # time.sleep(5)
     bingx_client.trade.create_order(Order(symbol=symbol, side=Side.SELL, positionSide=PositionSide.LONG, quantity=Quanity))
 def buyShort(bingx_client, symbol, betAmount, maxLev, stopLossAmount):
     bingx_client.trade.change_leverage(symbol=symbol, positionSide=PositionSide.LONG, leverage=maxLev)
@@ -45,8 +43,4 @@ def closeShort(bingx_client, symbol, betAmount, maxLev):
     
     Quanity = round((betAmount * maxLev) / assetPrice, 6)
 
-    # print(Quanity)
-    # time.sleep(5)
     bingx_client.trade.create_order(Order(symbol=symbol, side=Side.BUY, positionSide=PositionSide.SHORT, quantity=Quanity))
-    
-                # Trade.change_leverage() got an unexpected keyword argument 'positionSide'
