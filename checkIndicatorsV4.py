@@ -7,10 +7,11 @@ from src.functions import get_StochasticOscilator, get_StochasticRelitiveStrengt
 from datetime import datetime, timedelta
 import numpy as np
 import random
+import time
 
 api_key = "d6e8542914aa439e92fceaccca1c2708"
 api_key2= "0d27bad2c7854a18bc4cafcb5d7f3583"
-def grabForex(values):
+def grabForex(values, symbol="USD/NZD", api_key2="0d27bad2c7854a18bc4cafcb5d7f3583"):
     base_url = "https://api.twelvedata.com/time_series"
     '''
     GBPUSD=X/GBP/USD
@@ -37,7 +38,7 @@ def grabForex(values):
     RUB=X/USD/RUB
     '''
     params = {
-        "symbol": "USD/NZD", #USD/NZD 0.003, NZD/USD 0.002
+        "symbol": symbol, #USD/NZD 0.003, NZD/USD 0.002
         "interval": "30min",
         "outputsize": values,
         "apikey": api_key2
@@ -47,12 +48,12 @@ def grabForex(values):
     # Make the API request
     response = requests.get(base_url, params=params)
     data = response.json()
-    ForexData = open('documents/forexData.txt', 'w')
-    ForexData.write(str(data['values']))
-    ForexData.close()
+    # ForexData = open('documents/forexData.txt', 'w')
+    # ForexData.write(str(data['values']))
+    # ForexData.close()
     return data['values']
 
-def simulateCrypto(df, amountTo, a, b, c, aVal, bVal, cVal):
+def simulateCrypto(df, aVal, bVal, cVal):
     printing = False
     printingSpecific = True
     totalPips = 0
@@ -155,29 +156,17 @@ def simulateCrypto(df, amountTo, a, b, c, aVal, bVal, cVal):
 #get_StochasticRelitiveStrengthIndex(df, 303, 295, 54)
 
 
-
-
-#lstOfSTOCH = [[-0.0028316428799999996, (11, 318, 126)], [-0.00579613696, (161, 3, 316)], [-0.0026401339999999997, (1056, 41, 6)], [-0.0035683620000000007, (521, 321, 73)], [-0.0027887670199999996, (10, 130, 148)], [-0.0032564743199999997, (12, 298, 78)], [-0.005307652959999999, (640, 14, 374)], [-0.002934756, (255, 317, 85)], [-0.0034242753999999998, (315, 325, 90)], [-0.005224770479999999, (345, 311, 45)], [-0.00553080816, (686, 4, 984)], [-0.0034872774999999997, (16, 298, 252)], [-0.0046564574, (366, 3, 1017)], [-0.004528188, (326, 12, 717)], [-0.0023384592, (422, 120, 120)], [-0.00223377, (433, 120, 123)], [-0.0028171470600000005, (18, 1325, 157)], [-0.00454345632, (874, 7, 805)], [-0.0020107008000000005, (7, 122, 140)], [-0.0023027963999999995, (9, 145, 361)], [-0.006052687740000001, (321, 7, 150)], [-0.005577784740000002, (323, 8, 163)]]
-
-
+#STOCH RSI CHECK ALL INDICATORS: how? run this through each one, loop through them all
 
     SpecialValue = 0
     # print(df)
     # countAAA = 0
     try:
-        for j in range(2, amountTo):
+        for j in range(1, 2):
             if printingSpecific: 
                 if j != oldj:
                     oldj = j
-            # print(a, b, c)
-            if a:
-                stochRSIK1, stochRSID1 = get_StochasticRelitiveStrengthIndex(df, j, bVal, cVal) 
-            elif b:
-                stochRSIK1, stochRSID1 = get_StochasticRelitiveStrengthIndex(df, aVal, j, cVal) 
-            elif c:
-                stochRSIK1, stochRSID1 = get_StochasticRelitiveStrengthIndex(df, aVal, bVal, j) 
-            else:
-                stochRSIK1, stochRSID1 = get_StochasticRelitiveStrengthIndex(df, j, 100, 680)
+            stochRSIK1, stochRSID1 = get_StochasticRelitiveStrengthIndex(df, aVal, bVal, cVal)
                 
                 
         
@@ -329,108 +318,71 @@ def simulateCrypto(df, amountTo, a, b, c, aVal, bVal, cVal):
 
 
 if "__main__" == __name__:
-    # ForexData = open('documents/forexData.txt', 'w')
-    # forexData = grabForex(5000)
-    # ForexData.write(str())
-    # ForexData = open('documents/ForexData.txt', 'r')
-    # forexData = ForexData.readlines()
-    # ForexData.close()
-    
-    df = formatDataset2(formatDataset3(grabForex(5000)))
-    # a = 0
-    # b = 1
-    # c = 1
-    a = b = c = False
-    aVal = bVal = cVal = 50
-    # a = True
-    i = 50
-    stochValues = []
-    lastBestVal = -1
-    amountTo = 1400
-    countRep = 0
-    while(True):
-        a = b = c = False
-        abOrC = random.randint(0, 2)
-        if abOrC == 0:
-            a = True  
-        if abOrC == 1:
-            b = True
-        if abOrC == 2:
-            c = True 
-        aVal = random.randint(0, 1000) 
-        bVal = random.randint(0, 1000) 
-        cVal = random.randint(0, 1000) 
-        
-        amountTo = 1400
-        repeatA = False
-        repeatB = False
-        repeatC = False
-        # 1.5x max
-        onceA = onceB = onceC = False
-        while True:
-            bestSpecialValue, BestSpecialValues, worstSpecialValue, WorstSpecialValues = simulateCrypto(df, amountTo, a, b, c, aVal, bVal, cVal)
-            randomNum = random.randint(0, 1)
-            # print("\n\nSIMULATION RESULTS: ")
-            # print("\nBest Special Value: " + str(bestSpecialValue) + "  " + str(BestSpecialValues))
-            # print("\nWorst Specl Value: " + str(worstSpecialValue) + "  " + str(WorstSpecialValues))
-            if abs(bestSpecialValue) > abs(worstSpecialValue):
-                # print("Best: " + str(BestSpecialValues))
-                bestVal = BestSpecialValues[0]
-                bestPer = bestSpecialValue
+    # import re
+
+    # original_list = [
+    #     "GBPUSD=X/GBP/USD",
+    #     "AUDUSD=X/AUD/USD",
+    #     "NZDUSD=X/NZD/USD",
+    #     "EURJPY=X/EUR/JPY",
+    #     "GBPJPY=X/GBP/JPY",
+    #     "EURGBP=X/EUR/GBP",
+    #     "EURCAD=X/EUR/CAD",
+    #     "EURSEK=X/EUR/SEK",
+    #     "EURCHF=X/EUR/CHF",
+    #     "EURHUF=X/EUR/HUF",
+    #     "EURJPY=X/EUR/JPY",
+    #     "CNY=X/USD/CNY",
+    #     "HKD=X/USD/HKD",
+    #     "SGD=X/USD/SGD",
+    #     "INR=X/USD/INR",
+    #     "MXN=X/USD/MXN",
+    #     "PHP=X/USD/PHP",
+    #     "IDR=X/USD/IDR",
+    #     "THB=X/USD/THB",
+    #     "MYR=X/USD/MYR",
+    #     "ZAR=X/USD/ZAR",
+    #     "RUB=X/USD/RUB"
+    # ]
+
+    # pattern = r'(\w{3}/\w{3})'  # Define a regular expression pattern for XXX/YYY format
+    dic = {}
+    forex_symbols = ['GBP/USD', 'AUD/USD', 'NZD/USD', 'EUR/JPY', 'GBP/JPY', 'EUR/GBP', 'EUR/CAD', 'EUR/SEK', 'EUR/CHF', 'EUR/HUF', 'EUR/JPY', 'USD/CNY', 'USD/HKD', 'USD/SGD', 'USD/INR', 'USD/MXN', 'USD/PHP', 'USD/IDR', 'USD/THB', 'USD/MYR', 'USD/ZAR', 'USD/RUB']
+#  [[-0.0036410471999999998, (552, 28, 872)], [-0.0037366807399999997, (781, 971, 10)], [-0.0022908795, (22, 316, 162)], [-0.007873680360000001, (664, 4, 265)], [-0.0068785982999999985, (189, 522, 947)], [-0.0019358036000000003, (824, 1124, 3)], [-0.0029315714400000004, (110, 322, 22)], [-0.00439623976, (160, 631, 613)], [-0.005215583999999999, (249, 4, 346)], [-0.00603495936, (549, 7, 327)], [-0.0024781679999999998, (10, 82, 107)], [-0.003242826399999999, (138, 587, 6)], [-0.00472372992, (114, 3, 413)], [-0.009469126400000001, (628, 960, 10)], [-0.0047135648, (217, 5, 774)], [-0.0050740614, (680, 959, 13)], [-0.0034603264, (365, 17, 652)], [-0.004908023759999999, (219, 19, 361)], [-0.004967219399999999, (459, 2, 251)], [-0.003455264340000001, (318, 1243, 449)], [-0.004013453839999999, (100, 1555, 790)], [-0.005844654, (264, 3, 159)], [-0.0023328914399999997, (6, 48, 288)], [-0.00520546932, (539, 10, 341)], [-0.005572400459999999, (370, 3, 218)], [-0.0059221833999999985, (301, 7, 325)], [-0.0052228288, (12, 942, 1080)], [-0.003340869839999999, (200, 823, 486)], [-0.0021226077600000003, (92, 1500, 1117)], [-0.0041306606200000005, (632, 28, 704)], [-0.006237546479999997, (318, 7, 153)], [-0.005519434680000002, (287, 6, 158)], [-0.003508073160000001, (275, 1169, 109)], [-0.005885165239999999, (552, 7, 332)], [-0.004507456000000001, (780, 7, 850)], [-0.005233001199999999, (397, 4, 1031)], [-0.00387193914, (615, 29, 710)], [-0.006027344399999999, (313, 6, 160)], [-0.005166881600000001, (348, 7, 186)], [-0.005667141999999999, (527, 7, 482)], [-0.004050597599999999, (197, 267, 279)], [-0.0024576116399999998, (11, 137, 773)], [-0.004434063659999999, (887, 3, 741)], [-0.00583247952, (649, 10, 425)], [-0.005388838359999999, (625, 11, 400)], [-0.0047763198399999995, (162, 255, 387)], [-0.005267606400000001, (527, 10, 466)], [-0.00541825768, (214, 520, 803)], [-0.0028828072000000003, (11, 1383, 543)], [-0.005273950499999998, (611, 177, 477)]]
+    for symbol in forex_symbols:
+        # symbol = "USD/MYR"
+        try:
+            df = formatDataset2(formatDataset3(grabForex(5000, symbol)))
+        except:
+            time.sleep(20)
+            try:
+                df = formatDataset2(formatDataset3(grabForex(5000, symbol)))
+            except:
+                time.sleep(60)
+                try:
+                    df = formatDataset2(formatDataset3(grabForex(5000, symbol)))
+                except:
+                    df = formatDataset2(formatDataset3(grabForex(5000, symbol, api_key)))
+
+
+        lstOfSTOCH = [[-0.0036410471999999998, (552, 28, 872)], [-0.0037366807399999997, (781, 971, 10)], [-0.0022908795, (22, 316, 162)], [-0.007873680360000001, (664, 4, 265)], [-0.0068785982999999985, (189, 522, 947)], [-0.0019358036000000003, (824, 1124, 3)], [-0.0029315714400000004, (110, 322, 22)], [-0.00439623976, (160, 631, 613)], [-0.005215583999999999, (249, 4, 346)], [-0.00603495936, (549, 7, 327)], [-0.0024781679999999998, (10, 82, 107)], [-0.003242826399999999, (138, 587, 6)], [-0.00472372992, (114, 3, 413)], [-0.009469126400000001, (628, 960, 10)], [-0.0047135648, (217, 5, 774)], [-0.0050740614, (680, 959, 13)], [-0.0034603264, (365, 17, 652)], [-0.004908023759999999, (219, 19, 361)], [-0.004967219399999999, (459, 2, 251)], [-0.003455264340000001, (318, 1243, 449)], [-0.004013453839999999, (100, 1555, 790)], [-0.005844654, (264, 3, 159)], [-0.0023328914399999997, (6, 48, 288)], [-0.00520546932, (539, 10, 341)], [-0.005572400459999999, (370, 3, 218)], [-0.0059221833999999985, (301, 7, 325)], [-0.0052228288, (12, 942, 1080)], [-0.003340869839999999, (200, 823, 486)], [-0.0021226077600000003, (92, 1500, 1117)], [-0.0041306606200000005, (632, 28, 704)], [-0.006237546479999997, (318, 7, 153)], [-0.005519434680000002, (287, 6, 158)], [-0.003508073160000001, (275, 1169, 109)], [-0.005885165239999999, (552, 7, 332)], [-0.004507456000000001, (780, 7, 850)], [-0.005233001199999999, (397, 4, 1031)], [-0.00387193914, (615, 29, 710)], [-0.006027344399999999, (313, 6, 160)], [-0.005166881600000001, (348, 7, 186)], [-0.005667141999999999, (527, 7, 482)], [-0.004050597599999999, (197, 267, 279)], [-0.0024576116399999998, (11, 137, 773)], [-0.004434063659999999, (887, 3, 741)], [-0.00583247952, (649, 10, 425)], [-0.005388838359999999, (625, 11, 400)], [-0.0047763198399999995, (162, 255, 387)], [-0.005267606400000001, (527, 10, 466)], [-0.00541825768, (214, 520, 803)], [-0.0028828072000000003, (11, 1383, 543)], [-0.005273950499999998, (611, 177, 477)], [-0.005839939560000001, (347, 310, 34)], [-0.0027130545000000005, (520, 893, 47)], [-0.00245960312, (705, 1055, 3)], [-0.0024036818199999997, (6, 849, 431)], [-0.00409000416, (216, 604, 550)], [-0.0035916615000000005, (488, 903, 47)], [-0.0043386504, (838, 517, 35)], [-0.00407557332, (203, 7, 65)], [-0.0051773596000000005, (523, 10, 213)], [-0.004090086, (336, 718, 233)], [-0.00523344672, (526, 8, 340)], [-0.004902192, (892, 9, 693)], [-0.0021891240000000006, (4, 397, 73)], [-0.00389093144, (225, 507, 646)], [-0.0070985677999999995, (937, 2, 540)], [0.00233979648, (170, 2021, 2009)], [-0.00269508, (608, 83, 934)], [-0.0058723084799999995, (304, 7, 253)], [-0.005413692, (385, 320, 14)], [-0.006294899520000001, (972, 2, 503)], [-0.00445292144, (823, 517, 31)], [-0.004423639500000001, (517, 1194, 12)], [-0.0046034352, (206, 4, 186)], [-0.0060715712399999995, (584, 5, 968)], [-0.00579590632, (161, 3, 316)], [-0.00492170976, (338, 11, 868)], [-0.0031597197599999996, (182, 228, 6)], [-0.0025388193599999993, (15, 318, 125)], [-0.005369395499999999, (199, 618, 552)], [-0.004421862000000001, (217, 3, 343)], [-0.004156233760000001, (12, 1268, 527)], [-0.005001420300000002, (205, 521, 877)], [-0.005161632, (348, 4, 445)], [-0.0032678624000000004, (428, 338, 24)], [-0.0045723524, (112, 296, 556)], [-0.0005576348000000004, (2, 2, 3)]]
+
+        sumN = 0
+        for i in range(len(lstOfSTOCH)):
+            aVal = bVal = cVal = lstOfSTOCH[i][1][0], lstOfSTOCH[i][1][1], lstOfSTOCH[i][1][2] 
+            aVal = aVal[0]
+            bVal = bVal[1]
+            cVal = cVal[2]
+            bestSpecialValue, BestSpecialValues, worstSpecialValue, WorstSpecialValues = simulateCrypto(df, aVal, bVal, cVal)
+            print(worstSpecialValue)
+            if worstSpecialValue == 9223372036854775807:
+                continue
+            if dic.get(i) is not None:
+                dic[i].append(worstSpecialValue)
             else:
-                # print("Worst: " + str(WorstSpecialValues))
-                bestVal = WorstSpecialValues[0]
-                bestPer = worstSpecialValue
-            if a:
-                onceA = True
-                a = False
-                if round(aVal, 5) == round(bestVal, 5):
-                    repeatA = True
-                else:
-                    repeatA = False
-                    repeatB = False
-                    repeatC = False
-                aVal = bestVal
-                if (randomNum == 1 or repeatC) and (not repeatB):
-                    b = True
-                elif (randomNum == 0 or repeatB) and (not repeatC):
-                    c = True
-            elif b:
-                onceB = True
-                if round(bVal, 5) == round(bestVal, 5):
-                    repeatB = True
-                else:
-                    repeatA = False
-                    repeatB = False
-                    repeatC = False
-                b = False
-                bVal = bestVal
-                if (randomNum == 1 or repeatC) and (not repeatA):
-                    a = True
-                elif (randomNum == 0 or repeatA) and (not repeatC):
-                    c = True
-            elif c:
-                onceC = True
-                if round(cVal, 5) == round(bestVal, 5):
-                    repeatC = True
-                else:
-                    repeatA = False
-                    repeatB = False
-                    repeatC = False
-                c = False
-                cVal = bestVal
-                if (randomNum == 1 or repeatB) and (not repeatA):
-                    a = True
-                elif (randomNum == 0 or repeatA) and (not repeatB):
-                    b = True
-            else:
-                print("ERROR: No value for a b c")
-            
-            if repeatA and repeatB and repeatC:
-                print(f"get_StochasticRelitiveStrengthIndex(df, {aVal}, {bVal}, {cVal})")
-                stochValues.append([bestPer, (aVal, bVal, cVal)])
-                break
-            if onceC and onceB and onceA:
-                amountTo = int(max(aVal, bVal, cVal)*2)
-            lastBestVal = bestVal
-        print(stochValues)
+                dic[i] = [worstSpecialValue]
+            sumN+=worstSpecialValue
+        print("\n\n\nBEST: " + str(round((sumN/len(lstOfSTOCH)), 5)))
+        print(symbol)
+        print("\n\n\n")
+        print(dic)
