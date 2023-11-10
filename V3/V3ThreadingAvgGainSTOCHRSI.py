@@ -42,7 +42,7 @@ def process_symbol(dataSymbol, best_results, worst_results, lst):
             # print(dic)
             for key, value in dic.items():
                 # print(key)
-                BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCryptoSTOCHRSI(df, key, False, 1)
+                BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateCryptoSTOCHRSIoptimi(df, key, False, 1)
                 totalAmount += AvgPercent * value
                 count += value
             # print("AVG PERCENT: " + str(totalAmount/count))

@@ -4,94 +4,59 @@ import requests
 from SpecialFunctions import formatDataset, formatDataset1, formatDataset3, formatDataset2
 from src.underliningProcesses import swap
 from src.functions import get_StochasticOscilator, get_StochasticRelitiveStrengthIndex, get_supertrend
+from temp.testGrabData import calltimes30FIXED
 from datetime import datetime, timedelta
 import numpy as np
 import random
-
-api_key = "d6e8542914aa439e92fceaccca1c2708"
-api_key2= "0d27bad2c7854a18bc4cafcb5d7f3583"
-def grabForex(values):
-    base_url = "https://api.twelvedata.com/time_series"
-    '''
-    GBPUSD=X/GBP/USD
-    AUDUSD=X/AUD/USD
-    NZDUSD=X/NZD/USD
-    EURJPY=X/EUR/JPY
-    GBPJPY=X/GBP/JPY
-    EURGBP=X/EUR/GBP
-    EURCAD=X/EUR/CAD
-    EURSEK=X/EUR/SEK
-    EURCHF=X/EUR/CHF
-    EURHUF=X/EUR/HUF
-    EURJPY=X/EUR/JPY
-    CNY=X/USD/CNY
-    HKD=X/USD/HKD
-    SGD=X/USD/SGD
-    INR=X/USD/INR
-    MXN=X/USD/MXN
-    PHP=X/USD/PHP
-    IDR=X/USD/IDR
-    THB=X/USD/THB
-    MYR=X/USD/MYR
-    ZAR=X/USD/ZAR
-    RUB=X/USD/RUB
-    '''
-    params = {
-        "symbol": "USD/NZD", #USD/NZD 0.003, NZD/USD 0.002
-        "interval": "30min",
-        "outputsize": values,
-        "apikey": api_key2
-        
-    }
-
-    # Make the API request
-    response = requests.get(base_url, params=params)
-    data = response.json()
-    ForexData = open('documents/forexData.txt', 'w')
-    ForexData.write(str(data['values']))
-    ForexData.close()
-    return data['values']
-
-def simulateCrypto(df, amountTo, a, b, c, aVal, bVal, cVal):
+import time
+def simulateCrypto(df, aVal, bVal, cVal):
     printing = False
     printingSpecific = True
-    # bestAvgPips = -sys.maxsize
-    # worstAvgPips = sys.maxsize
+    totalPips = 0
+    countPips = 0
+    bestAvgPips = -sys.maxsize
+    worstAvgPips = sys.maxsize
     df = df.dropna()
     bestSpecialValue = -sys.maxsize
     worstSpecialValue = sys.maxsize
     j = -1
     k = -1
     pos = 0
-    # AvgPercent = 0
+    AvgPercent = 0
     nuet = 0
-    # countrUp = 0
+    countrUp = 0
     neg = 0
-    # BestProfilio = -sys.maxsize
-    # WorseProfilio = sys.maxsize
-    # Bestj = -1
-    # Bestk = -1
-    # worstk = -1
-    # worstj = -1
-    # bestAvgj = -1
-    # bestAvgk = -1
-    # worstAvgj = -1
-    # worstAvgk = -1
+    BestProfilio = -sys.maxsize
+    WorseProfilio = sys.maxsize
+    Bestj = -1
+    Bestk = -1
+    worstk = -1
+    worstj = -1
+    bestAvgj = -1
+    bestAvgk = -1
+    worstAvgj = -1
+    worstAvgk = -1
     BestSpecialValues = (0, 0)
     WorstSpecialValues = (0, 0)
 
     oldj = -1
+    portfolio = 10
+    countPos = 0
+    countNeg = 0
     posPips = 0
+    countr = 0
     negPips = 0
-    # avgPips = 0
+    avgPips = 0
     nowPrice = 0
     nowCount = 0
-    # repeatA = repeatB = repeatC = False
+    repeatA = repeatB = repeatC = False
 
 
     longRunSTOCHRSI1 = {"buySignal": False, 'luquidate': False, 'entry': []}    
     shortRunSTOCHRSI1 = {'shortSignal': False, 'luquidate': False, 'entry': []}
     previousSellStochasticRSI1 = previousBuyStochasticRSI1 = False
+    lstSpecialNumsDECLINE = []
+    lstSpecialNumsINCLINE = []
     
 #get_StochasticRelitiveStrengthIndex(df, 258, 19, 161) -0.0022 #1
 #get_StochasticRelitiveStrengthIndex(df, 18, 217, 289) -0.00147#2
@@ -147,40 +112,31 @@ def simulateCrypto(df, amountTo, a, b, c, aVal, bVal, cVal):
 #get_StochasticRelitiveStrengthIndex(df, 303, 295, 54)
 
 
-
-
-#lstOfSTOCH = [[-0.0028316428799999996, (11, 318, 126)], [-0.00579613696, (161, 3, 316)], [-0.0026401339999999997, (1056, 41, 6)], [-0.0035683620000000007, (521, 321, 73)], [-0.0027887670199999996, (10, 130, 148)], [-0.0032564743199999997, (12, 298, 78)], [-0.005307652959999999, (640, 14, 374)], [-0.002934756, (255, 317, 85)], [-0.0034242753999999998, (315, 325, 90)], [-0.005224770479999999, (345, 311, 45)], [-0.00553080816, (686, 4, 984)], [-0.0034872774999999997, (16, 298, 252)], [-0.0046564574, (366, 3, 1017)], [-0.004528188, (326, 12, 717)], [-0.0023384592, (422, 120, 120)], [-0.00223377, (433, 120, 123)], [-0.0028171470600000005, (18, 1325, 157)], [-0.00454345632, (874, 7, 805)], [-0.0020107008000000005, (7, 122, 140)], [-0.0023027963999999995, (9, 145, 361)], [-0.006052687740000001, (321, 7, 150)], [-0.005577784740000002, (323, 8, 163)]]
-
-
+#STOCH RSI CHECK ALL INDICATORS: how? run this through each one, loop through them all
 
     SpecialValue = 0
     # print(df)
     # countAAA = 0
     try:
-        for j in range(2, amountTo):
+        for j in range(1, 2):
             if printingSpecific: 
                 if j != oldj:
                     oldj = j
-            # print(a, b, c)
-            if a:
-                stochRSIK1, stochRSID1 = get_StochasticRelitiveStrengthIndex(df, j, bVal, cVal) 
-            elif b:
-                stochRSIK1, stochRSID1 = get_StochasticRelitiveStrengthIndex(df, aVal, j, cVal) 
-            elif c:
-                stochRSIK1, stochRSID1 = get_StochasticRelitiveStrengthIndex(df, aVal, bVal, j) 
-            else:
-                stochRSIK1, stochRSID1 = get_StochasticRelitiveStrengthIndex(df, j, 100, 680)
-            stochRSIK1 = np.array(stochRSIK1)                
-            stochRSID1 = np.array(stochRSID1)
-            closeData = np.array(df['close'])
+            stochRSIK1, stochRSID1 = get_StochasticRelitiveStrengthIndex(df, aVal, bVal, cVal)
+                
+                
+        
+            stochRSIK1 = stochRSIK1.values
+            stochRSID1 = stochRSID1.values
+
             for i in range(len(df)):
                 
-                nowPrice += closeData[i]
+                nowPrice += df['close'][i]
                 nowCount += 1
                 
                 #--------STOCH1RSI----------#
                 longRunSTOCHRSI1, shortRunSTOCHRSI1 = findSelection(previousBuyStochasticRSI1, previousSellStochasticRSI1, longRunSTOCHRSI1, shortRunSTOCHRSI1, i) 
-                shortRunSTOCHRSI1, longRunSTOCHRSI1, pos, nuet, neg, posPips, negPips = checkLuquidation(shortRunSTOCHRSI1, longRunSTOCHRSI1, closeData, i, pos, nuet, neg, posPips, negPips)
+                shortRunSTOCHRSI1, longRunSTOCHRSI1, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI1, longRunSTOCHRSI1, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
     
                 previousSellStochasticRSI1 = previousBuyStochasticRSI1 = False
 
@@ -200,10 +156,12 @@ def simulateCrypto(df, amountTo, a, b, c, aVal, bVal, cVal):
                 percentOfTrades = round(((pos + nuet + neg) / len(df)) * 100, 2)
                 AvgPrice = nowPrice / nowCount
 
+                avgPips = totalPips / countPips
                 negPip = np.where(neg != 0, negPips / neg, 0)
 
                 posPercent = round((posPips / pos / AvgPrice), 5)
                 negPercent = round((negPip / AvgPrice), 5)
+                AvgPercent = round((avgPips / AvgPrice), 5)
 
                 difference = (posPercent + negPercent)
                 correctness = round((pos / (neg + pos)), 2)
@@ -282,24 +240,29 @@ def simulateCrypto(df, amountTo, a, b, c, aVal, bVal, cVal):
                 if printing:
                     print("ERROR")
                 
-            # if avgPips*percentOfTrades > bestAvgPips and avgPips > 52000:
-            #     bestAvgPips = avgPips*percentOfTrades
-            #     bestAvgj = j
-            #     bestAvgk = k
-            # if avgPips*percentOfTrades < worstAvgPips:
-            #     worstAvgPips = avgPips*percentOfTrades
-            #     worstAvgj = j
-            #     worstAvgk = k
-            # if portfolio > BestProfilio:
-            #     BestProfilio = portfolio
-            #     Bestj = j
-            #     Bestk = k
-            # elif portfolio < WorseProfilio:
-            #     WorseProfilio = portfolio
-            #     worstj = j
-            #     worstk = k
+            if avgPips*percentOfTrades > bestAvgPips and avgPips > 52000:
+                bestAvgPips = avgPips*percentOfTrades
+                bestAvgj = j
+                bestAvgk = k
+            if avgPips*percentOfTrades < worstAvgPips:
+                worstAvgPips = avgPips*percentOfTrades
+                worstAvgj = j
+                worstAvgk = k
+            if portfolio > BestProfilio:
+                BestProfilio = portfolio
+                Bestj = j
+                Bestk = k
+            elif portfolio < WorseProfilio:
+                WorseProfilio = portfolio
+                worstj = j
+                worstk = k
+            portfolio = 10
             negPips = 0
             posPips = 0
+            totalPips = 0
+            countPips = 0
+            countPos = 0
+            countNeg = 0
         #SEPERATE WHEN TABBING
         
 #        return bestSpecialValue, worstSpecialValue, BestSpecialValues, WorstSpecialValues, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue, lstSpecialNumsINCLINE, lstSpecialNumsDECLINE
@@ -311,108 +274,71 @@ def simulateCrypto(df, amountTo, a, b, c, aVal, bVal, cVal):
 
 
 if "__main__" == __name__:
-    # ForexData = open('documents/forexData.txt', 'w')
-    # forexData = grabForex(5000)
-    # ForexData.write(str())
-    # ForexData = open('documents/ForexData.txt', 'r')
-    # forexData = ForexData.readlines()
-    # ForexData.close()
-    
-    df = formatDataset2(formatDataset3(grabForex(5000)))
-    # a = 0
-    # b = 1
-    # c = 1
-    a = b = c = False
-    aVal = bVal = cVal = 50
-    # a = True
-    i = 50
-    stochValues = []
-    lastBestVal = -1
-    amountTo = 1400
-    countRep = 0
-    while(True):
-        a = b = c = False
-        abOrC = random.randint(0, 2)
-        if abOrC == 0:
-            a = True  
-        if abOrC == 1:
-            b = True
-        if abOrC == 2:
-            c = True 
-        aVal = random.randint(1, 1000) 
-        bVal = random.randint(1, 1000) 
-        cVal = random.randint(1, 1000) 
-        
-        amountTo = 1400
-        repeatA = False
-        repeatB = False
-        repeatC = False
-        # 1.5x max
-        onceA = onceB = onceC = False
-        while True:
-            bestSpecialValue, BestSpecialValues, worstSpecialValue, WorstSpecialValues = simulateCrypto(df, amountTo, a, b, c, aVal, bVal, cVal)
-            randomNum = random.randint(0, 1)
-            # print("\n\nSIMULATION RESULTS: ")
-            # print("\nBest Special Value: " + str(bestSpecialValue) + "  " + str(BestSpecialValues))
-            # print("\nWorst Specl Value: " + str(worstSpecialValue) + "  " + str(WorstSpecialValues))
-            if abs(bestSpecialValue) > abs(worstSpecialValue):
-                # print("Best: " + str(BestSpecialValues))
-                bestVal = BestSpecialValues[0]
-                bestPer = bestSpecialValue
-            else:
-                # print("Worst: " + str(WorstSpecialValues))
-                bestVal = WorstSpecialValues[0]
-                bestPer = worstSpecialValue
-            if a:
-                onceA = True
-                a = False
-                if round(aVal, 5) == round(bestVal, 5):
-                    repeatA = True
-                else:
-                    repeatA = False
-                    repeatB = False
-                    repeatC = False
-                aVal = bestVal
-                if (randomNum == 1 or repeatC) and (not repeatB):
-                    b = True
-                elif (randomNum == 0 or repeatB) and (not repeatC):
-                    c = True
-            elif b:
-                onceB = True
-                if round(bVal, 5) == round(bestVal, 5):
-                    repeatB = True
-                else:
-                    repeatA = False
-                    repeatB = False
-                    repeatC = False
-                b = False
-                bVal = bestVal
-                if (randomNum == 1 or repeatC) and (not repeatA):
-                    a = True
-                elif (randomNum == 0 or repeatA) and (not repeatC):
-                    c = True
-            elif c:
-                onceC = True
-                if round(cVal, 5) == round(bestVal, 5):
-                    repeatC = True
-                else:
-                    repeatA = False
-                    repeatB = False
-                    repeatC = False
-                c = False
-                cVal = bestVal
-                if (randomNum == 1 or repeatB) and (not repeatA):
-                    a = True
-                elif (randomNum == 0 or repeatA) and (not repeatB):
-                    b = True
-            else:
-                print("ERROR: No value for a b c")
+    # import re
+
+    # original_list = [
+    #     "GBPUSD=X/GBP/USD",
+    #     "AUDUSD=X/AUD/USD",
+    #     "NZDUSD=X/NZD/USD",
+    #     "EURJPY=X/EUR/JPY",
+    #     "GBPJPY=X/GBP/JPY",
+    #     "EURGBP=X/EUR/GBP",
+    #     "EURCAD=X/EUR/CAD",
+    #     "EURSEK=X/EUR/SEK",
+    #     "EURCHF=X/EUR/CHF",
+    #     "EURHUF=X/EUR/HUF",
+    #     "EURJPY=X/EUR/JPY",
+    #     "CNY=X/USD/CNY",
+    #     "HKD=X/USD/HKD",
+    #     "SGD=X/USD/SGD",
+    #     "INR=X/USD/INR",
+    #     "MXN=X/USD/MXN",
+    #     "PHP=X/USD/PHP",
+    #     "IDR=X/USD/IDR",
+    #     "THB=X/USD/THB",
+    #     "MYR=X/USD/MYR",
+    #     "ZAR=X/USD/ZAR",
+    #     "RUB=X/USD/RUB"
+    # ]
+
+    # pattern = r'(\w{3}/\w{3})'  # Define a regular expression pattern for XXX/YYY format
+    dic = {}
+    f = open('documents/binanceSymbols.txt', 'r')
+    dataSymbol = f.readlines()
+    dataSymbol = eval(dataSymbol[0])
+    f.close()
+#  [[-0.0036410471999999998, (552, 28, 872)], [-0.0037366807399999997, (781, 971, 10)], [-0.0022908795, (22, 316, 162)], [-0.007873680360000001, (664, 4, 265)], [-0.0068785982999999985, (189, 522, 947)], [-0.0019358036000000003, (824, 1124, 3)], [-0.0029315714400000004, (110, 322, 22)], [-0.00439623976, (160, 631, 613)], [-0.005215583999999999, (249, 4, 346)], [-0.00603495936, (549, 7, 327)], [-0.0024781679999999998, (10, 82, 107)], [-0.003242826399999999, (138, 587, 6)], [-0.00472372992, (114, 3, 413)], [-0.009469126400000001, (628, 960, 10)], [-0.0047135648, (217, 5, 774)], [-0.0050740614, (680, 959, 13)], [-0.0034603264, (365, 17, 652)], [-0.004908023759999999, (219, 19, 361)], [-0.004967219399999999, (459, 2, 251)], [-0.003455264340000001, (318, 1243, 449)], [-0.004013453839999999, (100, 1555, 790)], [-0.005844654, (264, 3, 159)], [-0.0023328914399999997, (6, 48, 288)], [-0.00520546932, (539, 10, 341)], [-0.005572400459999999, (370, 3, 218)], [-0.0059221833999999985, (301, 7, 325)], [-0.0052228288, (12, 942, 1080)], [-0.003340869839999999, (200, 823, 486)], [-0.0021226077600000003, (92, 1500, 1117)], [-0.0041306606200000005, (632, 28, 704)], [-0.006237546479999997, (318, 7, 153)], [-0.005519434680000002, (287, 6, 158)], [-0.003508073160000001, (275, 1169, 109)], [-0.005885165239999999, (552, 7, 332)], [-0.004507456000000001, (780, 7, 850)], [-0.005233001199999999, (397, 4, 1031)], [-0.00387193914, (615, 29, 710)], [-0.006027344399999999, (313, 6, 160)], [-0.005166881600000001, (348, 7, 186)], [-0.005667141999999999, (527, 7, 482)], [-0.004050597599999999, (197, 267, 279)], [-0.0024576116399999998, (11, 137, 773)], [-0.004434063659999999, (887, 3, 741)], [-0.00583247952, (649, 10, 425)], [-0.005388838359999999, (625, 11, 400)], [-0.0047763198399999995, (162, 255, 387)], [-0.005267606400000001, (527, 10, 466)], [-0.00541825768, (214, 520, 803)], [-0.0028828072000000003, (11, 1383, 543)], [-0.005273950499999998, (611, 177, 477)]]
+    for i in range(len(dataSymbol)):
+        # symbol = "USD/MYR"
+        try:
+            df = formatDataset1(formatDataset(calltimes30FIXED(dataSymbol[i], (datetime.now()-timedelta(days=100)).strftime('%Y-%m-%d'))))
+        except:
+            time.sleep(3)
+            continue
             
-            if repeatA and repeatB and repeatC:
-                print(f"get_StochasticRelitiveStrengthIndex(df, {aVal}, {bVal}, {cVal})")
-                stochValues.append([bestPer, (aVal, bVal, cVal)])
-                break
-            if onceC and onceB and onceA:
-                amountTo = int(max(aVal, bVal, cVal)*2)
-            lastBestVal = bestVal
-        print(stochValues)
+
+        lstOfSTOCH = [(366, 3, 1017), (161, 3, 316), (370, 3, 218), (459, 2, 251), (217, 5, 774), (527, 7, 482), (625, 11, 400), (664, 4, 265), (301, 7, 325), (264, 3, 159), (114, 3, 413), (217, 3, 343), (313, 6, 160), (304, 7, 253), (348, 7, 186), (348, 4, 445), (249, 4, 346), (649, 10, 425), (206, 4, 186), (161, 3, 316), (203, 7, 65), (307, 5, 186), (700, 4, 136), (306, 3, 152), (948, 2, 531), (547, 8, 517), (310, 6, 179), (433, 4, 155), (323, 5, 139), (278, 6, 157), (964, 3, 495), (282, 6, 275), (227, 6, 412), (295, 8, 179), (386, 15, 261), (236, 4, 219), (32, 1302, 876), (255, 298, 15), (1217, 138, 52), (686, 4, 984), (321, 7, 150), (10, 130, 148), (230, 20, 860), (401, 4, 272), (595, 4, 830), (886, 2, 551), (320, 10, 599), (401, 11, 223), (521, 9, 238)]        
+        sumN = 0
+        for j in range(len(lstOfSTOCH)):
+            print(lstOfSTOCH[j])
+            aVal = bVal = cVal = lstOfSTOCH[j][0], lstOfSTOCH[j][1], lstOfSTOCH[j][2] 
+            aVal = aVal[0]
+            bVal = bVal[1]
+            cVal = cVal[2]
+            bestSpecialValue, BestSpecialValues, worstSpecialValue, WorstSpecialValues = simulateCrypto(df, aVal, bVal, cVal)
+            print(worstSpecialValue)
+            if worstSpecialValue == 9223372036854775807:
+                continue
+            if dic.get(j) is not None:
+                dic[j].append([dataSymbol[i], worstSpecialValue])
+            else:
+                dic[j] = [[dataSymbol[i], worstSpecialValue]]
+            sumN+=worstSpecialValue
+        print("\n\n\nBEST: " + str(round((sumN/len(lstOfSTOCH)), 5)))
+        # print(symbol)
+        print("\n\n\n")
+        print(dic)
+    print(i)
+f = open("test2.txt", 'w')
+f.write(str(dic))
+f.close

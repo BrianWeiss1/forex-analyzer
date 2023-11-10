@@ -1,5 +1,5 @@
 import threading
-from SimulationV4 import simulateSRSI, simulateSRSIOptimized
+from SimulationV4 import simulateSRSI, simulateSRSIOptimized, simulateSRSIOptimizedV2
 from temp.SpecialFunctions import formatDataset, formatDataset1
 from temp.testGrabData import calltimes30FIXED
 from datetime import datetime, timedelta
@@ -45,7 +45,7 @@ def process_symbol(dataSymbol, best_results, worst_results, lst):
             # print(dic)
             for key, value in dic.items():
                 # print(key)
-                BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateSRSI(df, key, False, 1)
+                BestProfilio, WorseProfilio, Bestk, Bestj, worstk, worstj, bestAvgPips, bestAvgj, bestAvgk, worstAvgPips, worstAvgk, worstAvgj, AvgPercent, SpecialValue = simulateSRSIOptimizedV2(df, key, False, 1)
                 totalAmount += AvgPercent * value
                 count += value
             # print("AVG PERCENT: " + str(totalAmount/count))
@@ -78,15 +78,15 @@ def process_symbol(dataSymbol, best_results, worst_results, lst):
     # bestNumSymbol.append()
 
 if __name__ == '__main__':
-    print(" THIS SCRIPT IS NOT OPTIMIZED  ")
-    print(" THIS SCRIPT IS NOT OPTIMIZED  ")
-    print(" THIS SCRIPT IS NOT OPTIMIZED  ")
-    print(" THIS SCRIPT IS NOT OPTIMIZED  ")
-    print(" THIS SCRIPT IS NOT OPTIMIZED  ")
-    print(" THIS SCRIPT IS NOT OPTIMIZED  ")
-    print(" THIS SCRIPT IS NOT OPTIMIZED  ")
-    print(" THIS SCRIPT IS NOT OPTIMIZED  ")
-    print(" THIS SCRIPT IS NOT OPTIMIZED  ")
+    print(" THIS SCRIPT IS OPTIMIZED  ")
+    print(" THIS SCRIPT IS OPTIMIZED  ")
+    print(" THIS SCRIPT IS OPTIMIZED  ")
+    print(" THIS SCRIPT IS OPTIMIZED  ")
+    print(" THIS SCRIPT IS OPTIMIZED  ")
+    print(" THIS SCRIPT IS OPTIMIZED  ")
+    print(" THIS SCRIPT IS OPTIMIZED  ")
+    print(" THIS SCRIPT IS OPTIMIZED  ")
+    print(" THIS SCRIPT IS OPTIMIZED  ")
 
     f = open('documents/binanceSymbols.txt', 'r')
     dataSymbol = f.readlines()

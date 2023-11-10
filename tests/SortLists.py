@@ -24,7 +24,8 @@ if __name__ == '__main__':
     bestSTOCHRSIOct28 = openFileArray('bestStochRSIOct28')
     bestSTOCHRSIOptimizdNov5 = openFileArray('stochRSISpecialNumNov5')
     bestSTOCHRSInormalNov6 = openFileArray('SRSINNov6')
-    ALllist = bestSTOCHRSIOptimizdNov5 
+    lstSpecialNov9OptV2 = openFileArray("lstSpecialNov9OptV2")
+    ALllist = lstSpecialNov9OptV2 
     dic = {}
     for i in range(len(ALllist)):
         # print(farDatapoints[i][0])
