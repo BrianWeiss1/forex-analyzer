@@ -25,8 +25,8 @@ from bingX.perpetual.v2.types import (
 
 
 APIURL = "https://open-api.bingx.com"
-f = open('documents/api_key3.txt', 'r')
-APIKEY = '0yM5fkA5pvkqE9v5RlukfZdqmAZY8xgQAkhFjnECepgGgX6OT8mNPolBDY7yefFqbHUzIexIdhWb4QD8ZEcw'
+f = open('documents/api_key.txt', 'r')
+APIKEY = 'zGnYUEbpDvOI36v9DnPIvMLQEVz44Vgme7AUAyFeonkUAusiLDi9PFM65nyjAuijESmpmC2eGAuqmFfHVQ'
 SECRETKEY = f.readline()
 f.close()
 sim = "BTC"
@@ -201,42 +201,41 @@ while True:
                     df[column] = df[column].astype(float)
                 i = len(df)-1 # rlly weird...
 
-                stochRSIK1, stochRSID1 = get_StochasticRelitiveStrengthIndex(df, 2, 33, 25)
-                stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(df, 42, 3, 105)
-                stochRSIK3, stochRSID3 = get_StochasticRelitiveStrengthIndex(df, 41, 3, 114)
-                stochRSIK4, stochRSID4 = get_StochasticRelitiveStrengthIndex(df, 42, 3, 113)
-                stochRSIK5, stochRSID5 = get_StochasticRelitiveStrengthIndex(df, 42, 3, 112)
-                stochRSIK6, stochRSID6 = get_StochasticRelitiveStrengthIndex(df, 42, 3, 111)
-                stochRSIK7, stochRSID7 = get_StochasticRelitiveStrengthIndex(df, 42, 3, 110)
-                stochRSIK8, stochRSID8 = get_StochasticRelitiveStrengthIndex(df, 42, 3, 104)
-                stochRSIK9, stochRSID9 = get_StochasticRelitiveStrengthIndex(df, 43, 3, 112)
-                stochRSIK10, stochRSID10 = get_StochasticRelitiveStrengthIndex(df, 41, 3, 115)
-                stochRSIK11, stochRSID11 = get_StochasticRelitiveStrengthIndex(df, 42, 3, 108)
-                stochRSIK12, stochRSID12 = get_StochasticRelitiveStrengthIndex(df, 42, 3, 106)
-                stochRSIK13, stochRSID13 = get_StochasticRelitiveStrengthIndex(df, 41, 3, 110)
-                stochRSIK14, stochRSID14 = get_StochasticRelitiveStrengthIndex(df, 41, 3, 113)
-                stochRSIK15, stochRSID15 = get_StochasticRelitiveStrengthIndex(df, 42, 3, 107)
-                stochRSIK16, stochRSID16 = get_StochasticRelitiveStrengthIndex(df, 42, 3, 114)
-                stochRSIK17, stochRSID17 = get_StochasticRelitiveStrengthIndex(df, 41, 3, 109)
-                stochRSIK18, stochRSID18 = get_StochasticRelitiveStrengthIndex(df, 41, 3, 112)
-                stochRSIK19, stochRSID19 = get_StochasticRelitiveStrengthIndex(df, 42, 3, 109)
-                stochRSIK20, stochRSID20 = get_StochasticRelitiveStrengthIndex(df, 40, 3, 115)
-                stochRSIK21, stochRSID21 = get_StochasticRelitiveStrengthIndex(df, 40, 3, 113)
-                stochRSIK22, stochRSID22 = get_StochasticRelitiveStrengthIndex(df, 39, 3, 106)
-                stochRSIK23, stochRSID23 = get_StochasticRelitiveStrengthIndex(df, 40, 3, 109)
-                stochRSIK24, stochRSID24 = get_StochasticRelitiveStrengthIndex(df, 42, 4, 92)
-                stochRSIK25, stochRSID25 = get_StochasticRelitiveStrengthIndex(df, 41, 3, 101)
-                stochRSIK26, stochRSID26 = get_StochasticRelitiveStrengthIndex(df, 40, 3, 112)
-                    
+                stochRSIK1, stochRSID1 = get_StochasticRelitiveStrengthIndex(df, 348, 4, 445)
+                stochRSIK2, stochRSID2 = get_StochasticRelitiveStrengthIndex(df, 545, 8, 465)
+                stochRSIK3, stochRSID3 = get_StochasticRelitiveStrengthIndex(df, 545, 8, 465)
+                stochRSIK4, stochRSID4 = get_StochasticRelitiveStrengthIndex(df, 545, 8, 465)
+                stochRSIK5, stochRSID5 = get_StochasticRelitiveStrengthIndex(df, 370, 3, 218)
+                stochRSIK6, stochRSID6 = get_StochasticRelitiveStrengthIndex(df, 595, 4, 830)
+                stochRSIK7, stochRSID7 = get_StochasticRelitiveStrengthIndex(df, 600, 5, 894)
+                stochRSIK8, stochRSID8 = get_StochasticRelitiveStrengthIndex(df, 600, 5, 894)
+                stochRSIK9, stochRSID9 = get_StochasticRelitiveStrengthIndex(df, 527, 8, 232)
+                stochRSIK10, stochRSID10 = get_StochasticRelitiveStrengthIndex(df, 379, 3, 216)
+                stochRSIK11, stochRSID11 = get_StochasticRelitiveStrengthIndex(df, 544, 8, 466)
+                stochRSIK12, stochRSID12 = get_StochasticRelitiveStrengthIndex(df, 307, 5, 440)
+                stochRSIK13, stochRSID13 = get_StochasticRelitiveStrengthIndex(df, 869, 3, 761)
+                stochRSIK14, stochRSID14 = get_StochasticRelitiveStrengthIndex(df, 303, 3, 119)
+                stochRSIK15, stochRSID15 = get_StochasticRelitiveStrengthIndex(df, 323, 5, 139)
+                stochRSIK16, stochRSID16 = get_StochasticRelitiveStrengthIndex(df, 295, 8, 179)
+                stochRSIK17, stochRSID17 = get_StochasticRelitiveStrengthIndex(df, 329, 5, 140)
+                stochRSIK18, stochRSID18 = get_StochasticRelitiveStrengthIndex(df, 316, 2, 160)
+                stochRSIK19, stochRSID19 = get_StochasticRelitiveStrengthIndex(df, 459, 2, 251)
+                stochRSIK20, stochRSID20 = get_StochasticRelitiveStrengthIndex(df, 523, 8, 564)
+                stochRSIK21, stochRSID21 = get_StochasticRelitiveStrengthIndex(df, 329, 2, 166)
+                stochRSIK22, stochRSID22 = get_StochasticRelitiveStrengthIndex(df, 306, 3, 152)
+                stochRSIK23, stochRSID23 = get_StochasticRelitiveStrengthIndex(df, 686, 4, 984)
+                stochRSIK24, stochRSID24 = get_StochasticRelitiveStrengthIndex(df, 690, 8, 890)
+                stochRSIK25, stochRSID25 = get_StochasticRelitiveStrengthIndex(df, 307, 3, 120)
+                stochRSIK26, stochRSID26 = get_StochasticRelitiveStrengthIndex(df, 1081, 3, 724)                    
                 #--------STOCH1RSI----------#
                 longRunSTOCHRSI1, shortRunSTOCHRSI1 = findSelection(previousBuyStochasticRSI1, previousSellStochasticRSI1, longRunSTOCHRSI1, shortRunSTOCHRSI1, i) 
                 shortRunSTOCHRSI1, longRunSTOCHRSI1, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg = checkLuquidation(shortRunSTOCHRSI1, longRunSTOCHRSI1, df, i, pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg)
 
                 previousSellStochasticRSI1 = previousBuyStochasticRSI1 = False
 
-                if stochRSIK1[i-1] > stochRSID1[i-1] and stochRSIK1[i] < stochRSID1[i]:
+                if stochRSIK1[i-1] >= stochRSID1[i-1] and stochRSIK1[i] < stochRSID1[i]:
                     previousSellStochasticRSI1 = True
-                if stochRSIK1[i-1] < stochRSID1[i-1] and stochRSIK1[i] > stochRSID1[i]:
+                if stochRSIK1[i-1] <= stochRSID1[i-1] and stochRSIK1[i] > stochRSID1[i]:
                     previousBuyStochasticRSI1 = True
                 # previousSellStochasticRSI1, previousBuyStochasticRSI1 = previousBuyStochasticRSI1, previousSellStochasticRSI1)
 
@@ -281,9 +280,9 @@ while True:
 
                 previousSellStochasticRSI2 = previousBuyStochasticRSI2 = False
 
-                if stochRSIK2[i-1] > stochRSID2[i-1] and stochRSIK2[i] < stochRSID2[i]:
+                if stochRSIK2[i-1] >= stochRSID2[i-1] and stochRSIK2[i] < stochRSID2[i]:
                     previousSellStochasticRSI2 = True
-                if stochRSIK2[i-1] < stochRSID2[i-1] and stochRSIK2[i] > stochRSID2[i]:
+                if stochRSIK2[i-1] <= stochRSID2[i-1] and stochRSIK2[i] > stochRSID2[i]:
                     previousBuyStochasticRSI2 = True
                 # previousSellStochasticRSI2, previousBuyStochasticRSI2 = previousBuyStochasticRSI2, previousSellStochasticRSI2)
 
@@ -327,9 +326,9 @@ while True:
 
                 previousSellStochasticRSI3 = previousBuyStochasticRSI3 = False
 
-                if stochRSIK3[i-1] > stochRSID3[i-1] and stochRSIK3[i] < stochRSID3[i]:
+                if stochRSIK3[i-1] >= stochRSID3[i-1] and stochRSIK3[i] < stochRSID3[i]:
                     previousSellStochasticRSI3 = True
-                if stochRSIK3[i-1] < stochRSID3[i-1] and stochRSIK3[i] > stochRSID3[i]:
+                if stochRSIK3[i-1] <= stochRSID3[i-1] and stochRSIK3[i] > stochRSID3[i]:
                     previousBuyStochasticRSI3 = True
                 # previousSellStochasticRSI3, previousBuyStochasticRSI3 = previousBuyStochasticRSI3, previousSellStochasticRSI3)
 
@@ -375,9 +374,9 @@ while True:
 
                 previousSellStochasticRSI4 = previousBuyStochasticRSI4 = False
 
-                if stochRSIK4[i-1] > stochRSID4[i-1] and stochRSIK4[i] < stochRSID4[i]:
+                if stochRSIK4[i-1] >= stochRSID4[i-1] and stochRSIK4[i] < stochRSID4[i]:
                     previousSellStochasticRSI4 = True
-                if stochRSIK4[i-1] < stochRSID4[i-1] and stochRSIK4[i] > stochRSID4[i]:
+                if stochRSIK4[i-1] <= stochRSID4[i-1] and stochRSIK4[i] > stochRSID4[i]:
                     previousBuyStochasticRSI4 = True
                 # previousSellStochasticRSI4, previousBuyStochasticRSI4 = previousBuyStochasticRSI4, previousSellStochasticRSI4)
 
@@ -423,9 +422,9 @@ while True:
 
                 previousSellStochasticRSI5 = previousBuyStochasticRSI5 = False
 
-                if stochRSIK5[i-1] > stochRSID5[i-1] and stochRSIK5[i] < stochRSID5[i]:
+                if stochRSIK5[i-1] >= stochRSID5[i-1] and stochRSIK5[i] < stochRSID5[i]:
                     previousSellStochasticRSI5 = True
-                if stochRSIK5[i-1] < stochRSID5[i-1] and stochRSIK5[i] > stochRSID5[i]:
+                if stochRSIK5[i-1] <= stochRSID5[i-1] and stochRSIK5[i] > stochRSID5[i]:
                     previousBuyStochasticRSI5 = True
                 # previousSellStochasticRSI5, previousBuyStochasticRSI5 = previousBuyStochasticRSI5, previousSellStochasticRSI5)
 
@@ -469,9 +468,9 @@ while True:
 
                 previousSellStochasticRSI6 = previousBuyStochasticRSI6 = False
 
-                if stochRSIK6[i-1] > stochRSID6[i-1] and stochRSIK6[i] < stochRSID6[i]:
+                if stochRSIK6[i-1] >= stochRSID6[i-1] and stochRSIK6[i] < stochRSID6[i]:
                     previousSellStochasticRSI6 = True
-                if stochRSIK6[i-1] < stochRSID6[i-1] and stochRSIK6[i] > stochRSID6[i]:
+                if stochRSIK6[i-1] <= stochRSID6[i-1] and stochRSIK6[i] > stochRSID6[i]:
                     previousBuyStochasticRSI6 = True
                 # previousSellStochasticRSI6, previousBuyStochasticRSI6 = previousBuyStochasticRSI6, previousSellStochasticRSI6)
 
@@ -516,9 +515,9 @@ while True:
 
                 previousSellStochasticRSI7 = previousBuyStochasticRSI7 = False
 
-                if stochRSIK7[i-1] > stochRSID7[i-1] and stochRSIK7[i] < stochRSID7[i]:
+                if stochRSIK7[i-1] >= stochRSID7[i-1] and stochRSIK7[i] < stochRSID7[i]:
                     previousSellStochasticRSI7 = True
-                if stochRSIK7[i-1] < stochRSID7[i-1] and stochRSIK7[i] > stochRSID7[i]:
+                if stochRSIK7[i-1] <= stochRSID7[i-1] and stochRSIK7[i] > stochRSID7[i]:
                     previousBuyStochasticRSI7 = True
                 # previousSellStochasticRSI7, previousBuyStochasticRSI7 = previousBuyStochasticRSI7, previousSellStochasticRSI7)
 
@@ -563,9 +562,9 @@ while True:
 
                 previousSellStochasticRSI8 = previousBuyStochasticRSI8 = False
 
-                if stochRSIK8[i-1] > stochRSID8[i-1] and stochRSIK8[i] < stochRSID8[i]:
+                if stochRSIK8[i-1] >= stochRSID8[i-1] and stochRSIK8[i] < stochRSID8[i]:
                     previousSellStochasticRSI8 = True
-                if stochRSIK8[i-1] < stochRSID8[i-1] and stochRSIK8[i] > stochRSID8[i]:
+                if stochRSIK8[i-1] <= stochRSID8[i-1] and stochRSIK8[i] > stochRSID8[i]:
                     previousBuyStochasticRSI8 = True
                 # previousSellStochasticRSI8, previousBuyStochasticRSI8 = previousBuyStochasticRSI8, previousSellStochasticRSI8)
 
@@ -610,9 +609,9 @@ while True:
 
                 previousSellStochasticRSI9 = previousBuyStochasticRSI9 = False
 
-                if stochRSIK9[i-1] > stochRSID9[i-1] and stochRSIK9[i] < stochRSID9[i]:
+                if stochRSIK9[i-1] >= stochRSID9[i-1] and stochRSIK9[i] < stochRSID9[i]:
                     previousSellStochasticRSI9 = True
-                if stochRSIK9[i-1] < stochRSID9[i-1] and stochRSIK9[i] > stochRSID9[i]:
+                if stochRSIK9[i-1] <= stochRSID9[i-1] and stochRSIK9[i] > stochRSID9[i]:
                     previousBuyStochasticRSI9 = True
                 # previousSellStochasticRSI9, previousBuyStochasticRSI9 = previousBuyStochasticRSI9, previousSellStochasticRSI9)
 
@@ -657,9 +656,9 @@ while True:
 
                 previousSellStochasticRSI10 = previousBuyStochasticRSI10 = False
 
-                if stochRSIK10[i-1] > stochRSID10[i-1] and stochRSIK10[i] < stochRSID10[i]:
+                if stochRSIK10[i-1] >= stochRSID10[i-1] and stochRSIK10[i] < stochRSID10[i]:
                     previousSellStochasticRSI10 = True
-                if stochRSIK10[i-1] < stochRSID10[i-1] and stochRSIK10[i] > stochRSID10[i]:
+                if stochRSIK10[i-1] <= stochRSID10[i-1] and stochRSIK10[i] > stochRSID10[i]:
                     previousBuyStochasticRSI10 = True
                 # previousSellStochasticRSI10, previousBuyStochasticRSI10 = previousBuyStochasticRSI10, previousSellStochasticRSI10)
 
@@ -704,9 +703,9 @@ while True:
 
                 previousSellStochasticRSI11 = previousBuyStochasticRSI11 = False
 
-                if stochRSIK11[i-1] > stochRSID11[i-1] and stochRSIK11[i] < stochRSID11[i]:
+                if stochRSIK11[i-1] >= stochRSID11[i-1] and stochRSIK11[i] < stochRSID11[i]:
                     previousSellStochasticRSI11 = True
-                if stochRSIK11[i-1] < stochRSID11[i-1] and stochRSIK11[i] > stochRSID11[i]:
+                if stochRSIK11[i-1] <= stochRSID11[i-1] and stochRSIK11[i] > stochRSID11[i]:
                     previousBuyStochasticRSI11 = True
                 # previousSellStochasticRSI11, previousBuyStochasticRSI11 = previousBuyStochasticRSI11, previousSellStochasticRSI11)
 
@@ -752,9 +751,9 @@ while True:
 
                 previousSellStochasticRSI12 = previousBuyStochasticRSI12 = False
 
-                if stochRSIK12[i-1] > stochRSID12[i-1] and stochRSIK12[i] < stochRSID12[i]:
+                if stochRSIK12[i-1] >= stochRSID12[i-1] and stochRSIK12[i] < stochRSID12[i]:
                     previousSellStochasticRSI12 = True
-                if stochRSIK12[i-1] < stochRSID12[i-1] and stochRSIK12[i] > stochRSID12[i]:
+                if stochRSIK12[i-1] <= stochRSID12[i-1] and stochRSIK12[i] > stochRSID12[i]:
                     previousBuyStochasticRSI12 = True
                 # previousSellStochasticRSI12, previousBuyStochasticRSI12 = previousBuyStochasticRSI12, previousSellStochasticRSI12)
 
@@ -800,9 +799,9 @@ while True:
 
                 previousSellStochasticRSI13 = previousBuyStochasticRSI13 = False
 
-                if stochRSIK13[i-1] > stochRSID13[i-1] and stochRSIK13[i] < stochRSID13[i]:
+                if stochRSIK13[i-1] >= stochRSID13[i-1] and stochRSIK13[i] < stochRSID13[i]:
                     previousSellStochasticRSI13 = True
-                if stochRSIK13[i-1] < stochRSID13[i-1] and stochRSIK13[i] > stochRSID13[i]:
+                if stochRSIK13[i-1] <= stochRSID13[i-1] and stochRSIK13[i] > stochRSID13[i]:
                     previousBuyStochasticRSI13 = True
                 # previousSellStochasticRSI13, previousBuyStochasticRSI13 = previousBuyStochasticRSI13, previousSellStochasticRSI13)
 
@@ -847,9 +846,9 @@ while True:
 
                 previousSellStochasticRSI14 = previousBuyStochasticRSI14 = False
 
-                if stochRSIK14[i-1] > stochRSID14[i-1] and stochRSIK14[i] < stochRSID14[i]:
+                if stochRSIK14[i-1] >= stochRSID14[i-1] and stochRSIK14[i] < stochRSID14[i]:
                     previousSellStochasticRSI14 = True
-                if stochRSIK14[i-1] < stochRSID14[i-1] and stochRSIK14[i] > stochRSID14[i]:
+                if stochRSIK14[i-1] <= stochRSID14[i-1] and stochRSIK14[i] > stochRSID14[i]:
                     previousBuyStochasticRSI14 = True
                 # previousSellStochasticRSI14, previousBuyStochasticRSI14 = previousBuyStochasticRSI14, previousSellStochasticRSI14)
 
@@ -893,9 +892,9 @@ while True:
 
                 previousSellStochasticRSI15 = previousBuyStochasticRSI15 = False
 
-                if stochRSIK15[i-1] > stochRSID15[i-1] and stochRSIK15[i] < stochRSID15[i]:
+                if stochRSIK15[i-1] >= stochRSID15[i-1] and stochRSIK15[i] < stochRSID15[i]:
                     previousSellStochasticRSI15 = True
-                if stochRSIK15[i-1] < stochRSID15[i-1] and stochRSIK15[i] > stochRSID15[i]:
+                if stochRSIK15[i-1] <= stochRSID15[i-1] and stochRSIK15[i] > stochRSID15[i]:
                     previousBuyStochasticRSI15 = True
                 # previousSellStochasticRSI15, previousBuyStochasticRSI15 = previousBuyStochasticRSI15, previousSellStochasticRSI15)
 
@@ -940,9 +939,9 @@ while True:
 
                 previousSellStochasticRSI16 = previousBuyStochasticRSI16 = False
 
-                if stochRSIK16[i-1] > stochRSID16[i-1] and stochRSIK16[i] < stochRSID16[i]:
+                if stochRSIK16[i-1] >= stochRSID16[i-1] and stochRSIK16[i] < stochRSID16[i]:
                     previousSellStochasticRSI16 = True
-                if stochRSIK16[i-1] < stochRSID16[i-1] and stochRSIK16[i] > stochRSID16[i]:
+                if stochRSIK16[i-1] <= stochRSID16[i-1] and stochRSIK16[i] > stochRSID16[i]:
                     previousBuyStochasticRSI16 = True
                 # previousSellStochasticRSI16, previousBuyStochasticRSI16 = previousBuyStochasticRSI16, previousSellStochasticRSI16)
 
@@ -986,9 +985,9 @@ while True:
 
                 previousSellStochasticRSI17 = previousBuyStochasticRSI17 = False
 
-                if stochRSIK17[i-1] > stochRSID17[i-1] and stochRSIK17[i] < stochRSID17[i]:
+                if stochRSIK17[i-1] >= stochRSID17[i-1] and stochRSIK17[i] < stochRSID17[i]:
                     previousSellStochasticRSI17 = True
-                if stochRSIK17[i-1] < stochRSID17[i-1] and stochRSIK17[i] > stochRSID17[i]:
+                if stochRSIK17[i-1] <= stochRSID17[i-1] and stochRSIK17[i] > stochRSID17[i]:
                     previousBuyStochasticRSI17 = True
                 # previousSellStochasticRSI17, previousBuyStochasticRSI17 = previousBuyStochasticRSI17, previousSellStochasticRSI17)
 
@@ -1033,9 +1032,9 @@ while True:
 
                 previousSellStochasticRSI18 = previousBuyStochasticRSI18 = False
 
-                if stochRSIK18[i-1] > stochRSID18[i-1] and stochRSIK18[i] < stochRSID18[i]:
+                if stochRSIK18[i-1] >= stochRSID18[i-1] and stochRSIK18[i] < stochRSID18[i]:
                     previousSellStochasticRSI18 = True
-                if stochRSIK18[i-1] < stochRSID18[i-1] and stochRSIK18[i] > stochRSID18[i]:
+                if stochRSIK18[i-1] <= stochRSID18[i-1] and stochRSIK18[i] > stochRSID18[i]:
                     previousBuyStochasticRSI18 = True
                 # previousSellStochasticRSI18, previousBuyStochasticRSI18 = previousBuyStochasticRSI18, previousSellStochasticRSI18)
 
@@ -1080,9 +1079,9 @@ while True:
 
                 previousSellStochasticRSI19 = previousBuyStochasticRSI19 = False
 
-                if stochRSIK19[i-1] > stochRSID19[i-1] and stochRSIK19[i] < stochRSID19[i]:
+                if stochRSIK19[i-1] >= stochRSID19[i-1] and stochRSIK19[i] < stochRSID19[i]:
                     previousSellStochasticRSI19 = True
-                if stochRSIK19[i-1] < stochRSID19[i-1] and stochRSIK19[i] > stochRSID19[i]:
+                if stochRSIK19[i-1] <= stochRSID19[i-1] and stochRSIK19[i] > stochRSID19[i]:
                     previousBuyStochasticRSI19 = True
                 # previousSellStochasticRSI19, previousBuyStochasticRSI19 = previousBuyStochasticRSI19, previousSellStochasticRSI19)
 
@@ -1127,9 +1126,9 @@ while True:
 
                 previousSellStochasticRSI20 = previousBuyStochasticRSI20 = False
 
-                if stochRSIK20[i-1] > stochRSID20[i-1] and stochRSIK20[i] < stochRSID20[i]:
+                if stochRSIK20[i-1] >= stochRSID20[i-1] and stochRSIK20[i] < stochRSID20[i]:
                     previousSellStochasticRSI20 = True
-                if stochRSIK20[i-1] < stochRSID20[i-1] and stochRSIK20[i] > stochRSID20[i]:
+                if stochRSIK20[i-1] <= stochRSID20[i-1] and stochRSIK20[i] > stochRSID20[i]:
                     previousBuyStochasticRSI20 = True
                 # previousSellStochasticRSI20, previousBuyStochasticRSI20 = previousBuyStochasticRSI20, previousSellStochasticRSI20)
 
@@ -1174,9 +1173,9 @@ while True:
 
                 previousSellStochasticRSI21 = previousBuyStochasticRSI21 = False
 
-                if stochRSIK21[i-1] > stochRSID21[i-1] and stochRSIK21[i] < stochRSID21[i]:
+                if stochRSIK21[i-1] >= stochRSID21[i-1] and stochRSIK21[i] < stochRSID21[i]:
                     previousSellStochasticRSI21 = True
-                if stochRSIK21[i-1] < stochRSID21[i-1] and stochRSIK21[i] > stochRSID21[i]:
+                if stochRSIK21[i-1] <= stochRSID21[i-1] and stochRSIK21[i] > stochRSID21[i]:
                     previousBuyStochasticRSI21 = True
                 # previousSellStochasticRSI21, previousBuyStochasticRSI21 = previousBuyStochasticRSI21, previousSellStochasticRSI21)
 
@@ -1221,9 +1220,9 @@ while True:
 
                 previousSellStochasticRSI22 = previousBuyStochasticRSI22 = False
 
-                if stochRSIK22[i-1] > stochRSID22[i-1] and stochRSIK22[i] < stochRSID22[i]:
+                if stochRSIK22[i-1] >= stochRSID22[i-1] and stochRSIK22[i] < stochRSID22[i]:
                     previousSellStochasticRSI22 = True
-                if stochRSIK22[i-1] < stochRSID22[i-1] and stochRSIK22[i] > stochRSID22[i]:
+                if stochRSIK22[i-1] <= stochRSID22[i-1] and stochRSIK22[i] > stochRSID22[i]:
                     previousBuyStochasticRSI22 = True
                 # previousSellStochasticRSI22, previousBuyStochasticRSI22 = previousBuyStochasticRSI22, previousSellStochasticRSI22)
 
@@ -1268,9 +1267,9 @@ while True:
 
                 previousSellStochasticRSI23 = previousBuyStochasticRSI23 = False
 
-                if stochRSIK23[i-1] > stochRSID23[i-1] and stochRSIK23[i] < stochRSID23[i]:
+                if stochRSIK23[i-1] >= stochRSID23[i-1] and stochRSIK23[i] < stochRSID23[i]:
                     previousSellStochasticRSI23 = True
-                if stochRSIK23[i-1] < stochRSID23[i-1] and stochRSIK23[i] > stochRSID23[i]:
+                if stochRSIK23[i-1] <= stochRSID23[i-1] and stochRSIK23[i] > stochRSID23[i]:
                     previousBuyStochasticRSI23 = True
                 # previousSellStochasticRSI23, previousBuyStochasticRSI23 = previousBuyStochasticRSI23, previousSellStochasticRSI23)
 
@@ -1316,9 +1315,9 @@ while True:
 
                 previousSellStochasticRSI24 = previousBuyStochasticRSI24 = False
 
-                if stochRSIK24[i-1] > stochRSID24[i-1] and stochRSIK24[i] < stochRSID24[i]:
+                if stochRSIK24[i-1] >= stochRSID24[i-1] and stochRSIK24[i] < stochRSID24[i]:
                     previousSellStochasticRSI24 = True
-                if stochRSIK24[i-1] < stochRSID24[i-1] and stochRSIK24[i] > stochRSID24[i]:
+                if stochRSIK24[i-1] <= stochRSID24[i-1] and stochRSIK24[i] > stochRSID24[i]:
                     previousBuyStochasticRSI24 = True
                 # previousSellStochasticRSI24, previousBuyStochasticRSI24 = previousBuyStochasticRSI24, previousSellStochasticRSI24)
 
@@ -1362,9 +1361,9 @@ while True:
 
                 previousSellStochasticRSI25 = previousBuyStochasticRSI25 = False
 
-                if stochRSIK25[i-1] > stochRSID25[i-1] and stochRSIK25[i] < stochRSID25[i]:
+                if stochRSIK25[i-1] >= stochRSID25[i-1] and stochRSIK25[i] < stochRSID25[i]:
                     previousSellStochasticRSI25 = True
-                if stochRSIK25[i-1] < stochRSID25[i-1] and stochRSIK25[i] > stochRSID25[i]:
+                if stochRSIK25[i-1] <= stochRSID25[i-1] and stochRSIK25[i] > stochRSID25[i]:
                     previousBuyStochasticRSI25 = True
                 # previousSellStochasticRSI25, previousBuyStochasticRSI25 = previousBuyStochasticRSI25, previousSellStochasticRSI25)
 
