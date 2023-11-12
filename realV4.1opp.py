@@ -25,8 +25,8 @@ from bingX.perpetual.v2.types import (
 
 
 APIURL = "https://open-api.bingx.com"
-f = open('documents/api_key.txt', 'r')
-APIKEY = 'zGnYUEbpDvOI36v9DnPIvMLQEVz44Vgme7AUAyFeonkUAusiLDi9PFM65nyjAuijESmpmC2eGAuqmFfHVQ'
+f = open('documents/api_key3.txt', 'r')
+APIKEY = '0yM5fkA5pvkqE9v5RlukfZdqmAZY8xgQAkhFjnECepgGgX6OT8mNPolBDY7yefFqbHUzIexIdhWb4QD8ZEcw'
 SECRETKEY = f.readline()
 f.close()
 sim = "BTC"
