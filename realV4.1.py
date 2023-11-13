@@ -31,7 +31,7 @@ SECRETKEY = f.readline()
 f.close()
 sim = "BTC"
 maxLev = 150
-betAmount = 0.02
+betAmount = 0.03
 symbol = f'{sim}-USDT'
 symbolVolume = f'{sim}USDT'
 
