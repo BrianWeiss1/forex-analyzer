@@ -566,7 +566,9 @@ def main(df):
             return stochValues
 if __name__ == '__main__':
     def run_main(i, df):
-        main(df)
+        result_array = main(df)
+        print(f"Thread {i}: Result Array: {result_array}")
+
     df = formatDataset2(formatDataset3(grabForex(5000))) # obtains a pandas dataframe
     # Create and start 20 threads with unique IDs
     threads = []
