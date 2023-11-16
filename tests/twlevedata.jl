@@ -1,7 +1,7 @@
 using HTTP
 using JSON
 
-function fetch_twelvedata_time_series(symbol::String, interval::String, apikey::String, outputsize::Int = 30)
+function grabForex(apikey::String, outputsize::Int = 30)
     symbol = "EUR/USD"
     interval = "30min"
 
@@ -26,9 +26,7 @@ function fetch_twelvedata_time_series(symbol::String, interval::String, apikey::
 end
 
 # Usage example
-symbol = "AAPL"
-interval = "1min"
 apikey = "d6e8542914aa439e92fceaccca1c2708"
 
-data = fetch_twelvedata_time_series(symbol, interval, apikey, 5000)
+data = grabForex(apikey, 5000)
 

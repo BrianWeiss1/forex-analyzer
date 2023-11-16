@@ -1,8 +1,5 @@
 import numpy as np
 def findPos(data, pastI, currentI, BuyOrSell, pos, nuet, neg, posPips, negPips):
-    betPercent = 0.1
-
-
     if len(pastI) == 1:
         if BuyOrSell:
             if data[currentI] > data[pastI[0]]:
