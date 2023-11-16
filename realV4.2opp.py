@@ -176,7 +176,7 @@ shortRunSTOCHRSI26 = {'shortSignal': False, 'luquidate': False, 'entry': []}
 previousBuyStochasticRSI26, previousSellStochasticRSI26 = False, False
 
 previousMinute = -1
-stopLoss = 0.50
+stopLoss = 0.20
 
 pos, nuet, neg, portfolio, totalPips, countPips, posPips, countPos, negPips, countNeg, nowPrice, nowCount = 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0
 
