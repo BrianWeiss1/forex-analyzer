@@ -7,7 +7,7 @@ from src.functions import get_StochasticRelitiveStrengthIndex, get_StochasticOsc
 from src.longTermPos import findSelection, checkLuquidationV1
 from src.underliningProcesses import swap
 from src.sendTelegramMessage import send_message
-import pandas_datareader
+# import pandas_datareader
 import pandas
 import time
 from src.createPosition import buyLong, buyShort, closeLong, closeShort

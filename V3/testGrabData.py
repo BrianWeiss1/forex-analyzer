@@ -336,7 +336,7 @@ def calltimes30(symbol, start_time = '2030-02-23'):
     f.write(str(formatted_data))
     f.close()
     return formatted_data
-def calltimes30(symbol, start_time = '2023-02-23'):
+def calltimes30(symbol, start_time = '2018-11-17'):
     endpoint = "https://api.binance.com/api/v1/klines"
 
     api_key = "0imfnc8mVLWwsAawjYr4RxAf50DDqtle" # 0imfnc8mVLWwsAawjYr4RxAf50DDqtlx
