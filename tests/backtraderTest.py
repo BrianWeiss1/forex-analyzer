@@ -8,13 +8,11 @@ from testCounter import run
 import decimal
 import numpy as np
 from ta.momentum import StochRSIIndicator
-
 def get_StochasticRelitiveStrengthIndex(data, window, smooth1, smooth2):
     stochRSIind = StochRSIIndicator(data['close'], window, smooth1, smooth2)
     return stochRSIind.stochrsi_k(), stochRSIind.stochrsi_d()
 def getData():
-    # df = calltimes30('MATICUSDT')
-    df = eval(open('documents/MATICData.txt', 'r').read())
+    df = eval(open('documents/BTCData.txt', 'r').read())
     df = formatDataset(df)
     columns_to_convert = ['open', 'high', 'low', 'close', 'volume']
     for column in columns_to_convert:
@@ -38,6 +36,8 @@ class OpeningRangeBreakout(bt.Strategy):
         self.short = False
         self.startTime = dfIndex
         self.i = 0
+        self.shortPrice = None
+        self.longPrice = None
         
     def log(self, txt, dt=None):
         ''' Logging function fot this strategy'''
@@ -47,10 +47,10 @@ class OpeningRangeBreakout(bt.Strategy):
         
         
     def notify_order(self, order):
+        return
         if order.status in [order.Submitted, order.Accepted]:
             # Buy/Sell order submitted/accepted to/by broker - Nothing to do
             return
-
         # Check if an order has been completed
         # Attention: broker could reject order if not enough cash
         if order.status in [order.Completed]:
@@ -58,15 +58,12 @@ class OpeningRangeBreakout(bt.Strategy):
                 self.log('BUY EXECUTED, %.2f' % order.executed.price)
             elif order.issell():
                 self.log('SELL EXECUTED, %.2f' % order.executed.price)
-
             self.bar_executed = len(self)
-
         elif order.status in [order.Canceled, order.Margin, order.Rejected]:
             self.log('Order Canceled/Margin/Rejected')
-
         # Write down: no pending order
         self.order = None
-
+        
     def next(self):
         i = self.i
         rsiK = self.params.rsiK
@@ -94,24 +91,43 @@ class OpeningRangeBreakout(bt.Strategy):
         #     self.opening_range_high = max(self.data.high[0], self.opening_range_high)
         #     self.opening_range = self.opening_range_high - self.opening_range_low
         # else:
-        
-        if rsiK[i - 1] > rsiD[i - 1] and rsiK[i] < rsiD[i]:
+        # if self.long and self.position:
+        #     stop_loss_price = self.longPrice * (1 - stop_loss_percent)
+        #     # take_profit_price = self.longPrice * (1 + take_profit_percent)
+
+        #     if self.data.close[0] <= stop_loss_price:
+        #         self.close()  # Close the long
+        #     # elif self.data.close[0] >= take_profit_price:
+        #     #     self.close()  # Close the long position if take-profit is triggered
+        # if self.short and self.position:
+        #     stop_loss_price = self.shortPrice * (1 + stop_loss_percent)
+        #     # take_profit_price = self.shortPrice * (1 - take_profit_percent)
+
+        #     if self.data.close[0] <= stop_loss_price:
+        #         self.close()  # Close the long
+        #     # elif self.data.close[0] >= take_profit_price:
+        #     #     self.close()  # Close the long position if take-profit is triggered
+
+        if rsiK[i - 1] < rsiD[i - 1] and rsiK[i] > rsiD[i]:
             if self.position:
                 self.close() #size=self.position.size
-            self.order = self.sell() #price=self.data.close[0], size=size
+            self.order = self.buy() #price=self.data.close[0], size=size
             self.long = True
             self.short = False
-        elif rsiK[i-1] < rsiD[i-1] and rsiK[i] > rsiD[i]:
+            self.longPrice = self.data.close[0]
+        elif rsiK[i-1] > rsiD[i-1] and rsiK[i] < rsiD[i]:
             if self.position:
                 self.close() #size=self.position.size
-            self.order = self.buy() # price=self.df_data.close[0], size=size
-        # print(self.positionm)
-            
+            self.order = self.sell() # price=self.df_data.close[0], size=size
+            self.long = False
+            self.short = True  
+            self.shortPrice = self.data.close[0]
+      
         self.i += 1
-
+        
             
 cerebro = bt.Cerebro()
-cerebro.broker.set_cash(100000.00)
+cerebro.broker.set_cash(10.00)
 print('Starting Portfolio Value: %.2f' % cerebro.broker.getvalue())
 df = getData()
 stochRSIK, stochRSID = get_StochasticRelitiveStrengthIndex(df, 348, 4, 445)
@@ -120,9 +136,7 @@ stochRSId = np.array(stochRSID)
 data = bt.feeds.PandasData(dataname=df)
 cerebro.adddata(data)
 cerebro.addstrategy(OpeningRangeBreakout, rsiK=stochRSIk, rsiD=stochRSId)
-cerebro.broker.setcommission(commission=0.0018, margin=1.00, mult=150.0)
+cerebro.broker.setcommission(commission=0.0018, mult=75.0)
 cerebro.run()
-
-
 print('Final Portfolio Value: %.2f' % cerebro.broker.getvalue())
 cerebro.plot()
