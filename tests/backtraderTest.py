@@ -8,6 +8,7 @@ from testCounter import run
 import decimal
 import numpy as np
 from ta.momentum import StochRSIIndicator
+hiddenNums = (348, 4, 445)
 def get_StochasticRelitiveStrengthIndex(data, window, smooth1, smooth2):
     stochRSIind = StochRSIIndicator(data['close'], window, smooth1, smooth2)
     return stochRSIind.stochrsi_k(), stochRSIind.stochrsi_d()
@@ -38,6 +39,8 @@ class OpeningRangeBreakout(bt.Strategy):
         self.i = 0
         self.shortPrice = None
         self.longPrice = None
+        self.betPercent = 0.001
+        self.size = 0
         
     def log(self, txt, dt=None):
         ''' Logging function fot this strategy'''
@@ -47,7 +50,7 @@ class OpeningRangeBreakout(bt.Strategy):
         
         
     def notify_order(self, order):
-        return
+        # return
         if order.status in [order.Submitted, order.Accepted]:
             # Buy/Sell order submitted/accepted to/by broker - Nothing to do
             return
@@ -111,32 +114,35 @@ class OpeningRangeBreakout(bt.Strategy):
         if rsiK[i - 1] < rsiD[i - 1] and rsiK[i] > rsiD[i]:
             if self.position:
                 self.close() #size=self.position.size
-            self.order = self.buy() #price=self.data.close[0], size=size
+            self.size = (self.betPercent * self.broker.cash)
+            self.order = self.buy(size=self.size) #price=self.data.close[0], size=size
             self.long = True
             self.short = False
             self.longPrice = self.data.close[0]
         elif rsiK[i-1] > rsiD[i-1] and rsiK[i] < rsiD[i]:
             if self.position:
                 self.close() #size=self.position.size
-            self.order = self.sell() # price=self.df_data.close[0], size=size
+            self.size = (self.betPercent * self.broker.cash)
+            self.order = self.sell(size=self.size) # price=self.df_data.close[0], size=size
             self.long = False
             self.short = True  
             self.shortPrice = self.data.close[0]
+        print(self.broker.cash)
       
         self.i += 1
         
             
 cerebro = bt.Cerebro()
-cerebro.broker.set_cash(10.00)
+cerebro.broker.set_cash(1.00)
 print('Starting Portfolio Value: %.2f' % cerebro.broker.getvalue())
 df = getData()
-stochRSIK, stochRSID = get_StochasticRelitiveStrengthIndex(df, 348, 4, 445)
+stochRSIK, stochRSID = get_StochasticRelitiveStrengthIndex(df, hiddenNums[0], hiddenNums[1], hiddenNums[2])
 stochRSIk = np.array(stochRSIK)                
 stochRSId = np.array(stochRSID)
 data = bt.feeds.PandasData(dataname=df)
 cerebro.adddata(data)
 cerebro.addstrategy(OpeningRangeBreakout, rsiK=stochRSIk, rsiD=stochRSId)
-cerebro.broker.setcommission(commission=0.0018, mult=75.0)
+cerebro.broker.setcommission(commission=0.0018, mult=75)
 cerebro.run()
 print('Final Portfolio Value: %.2f' % cerebro.broker.getvalue())
 cerebro.plot()
