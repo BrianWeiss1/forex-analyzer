@@ -148,6 +148,7 @@ def run_strategy(hiddenNums):
         if np.isinf(lastVal):
             print("ACTUAL VALUE: " + str(lastVal))
             return finalBlanace, lastVal 
+        cerebro.plot()
         # if np.isnp.nan(finalBlanace):
         #     return i
         # elif np.isinf(finalBlanace):
