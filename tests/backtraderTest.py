@@ -49,11 +49,10 @@ class OpeningRangeBreakout(bt.Strategy):
         self.i = 0
         self.shortPrice = None
         self.longPrice = None
-        self.betPercent = 0.14
+        self.betPercent = 0.14 # I'm not sure if I should stack indicators since this is so high
         self.size = 0
         self.stopMachine = False
-        stop_loss_percentage = f"0.000{self.params.j}"
-        print(stop_loss_percentage)
+        stop_loss_percentage = f"0.012" #need this value, this or lower is required.
         self.stop_loss_percentage = float(stop_loss_percentage)
         #1.0782222930632772e+303 from 75
     def log(self, txt, dt=None):
@@ -64,16 +63,9 @@ class OpeningRangeBreakout(bt.Strategy):
         
         
     def notify_order(self, order):
-        # if order.status in [order.Completed, order.Canceled, order.Margin]:
-        #     if order.isbuy():
-        #         self.stop_loss_price = self.data.close[0] * (1.0 - self.stop_loss_percentage)
-        #         # print("AAAA")
-        #         self.sell(exectype=bt.Order.Stop, price=self.stop_loss_price)
-                
         if order.status in [order.Submitted, order.Accepted]:
             # Buy/Sell order submitted/accepted to/by broker - Nothing to do
             return
-        return
         # Check if an order has been completed
         # Attention: broker could reject order if not enough cash
         if order.status in [order.Completed]:
@@ -92,12 +84,12 @@ class OpeningRangeBreakout(bt.Strategy):
             i = self.i
             rsiK = self.params.rsiK
             rsiD = self.params.rsiD
-            # print(f"{self.data.close[0]} < {(1 - self.stop_loss_percentage) * self.position.price}")
-            # if self.position and self.long and self.data.close[0] < (1 - self.stop_loss_percentage) * self.position.price:
-            #     self.close() 
-                
-            # if self.position and self.short and self.data.close[0] > (1 + self.stop_loss_percentage) * self.position.price:
-            #     self.close() 
+            
+            
+            if self.position and self.long and self.data.close[0] < (1 - self.stop_loss_percentage) * self.longPrice: #prior: [[(84, 3, 28), 1.4861467698959665e+192], [(84, 3, 43), 8.390303035431468e+140], [(130, 2, 24), 2.246013891772523e+216], [(66, 3, 28), 8.544174406628138e+201], [(41, 3, 105), 7.757502842264305e+171], [(42, 3, 96), 6.26539968915441e+158], [(43, 3, 90), 5.638268983752525e+146], [(78, 3, 46), 1.0952429407331773e+148], [(114, 3, 35), 1.0217120405335898e+130], [(99, 2, 48), 3.135681021030289e+185]]
+                self.close()
+            if self.position and self.short and self.data.close[0] > (1 + self.stop_loss_percentage) * self.short: #prior: [[(84, 3, 28), 1.4861467698959665e+192], [(84, 3, 43), 8.390303035431468e+140], [(130, 2, 24), 2.246013891772523e+216], [(66, 3, 28), 8.544174406628138e+201], [(41, 3, 105), 7.757502842264305e+171], [(42, 3, 96), 6.26539968915441e+158], [(43, 3, 90), 5.638268983752525e+146], [(78, 3, 46), 1.0952429407331773e+148], [(114, 3, 35), 1.0217120405335898e+130], [(99, 2, 48), 3.135681021030289e+185]]
+                self.close() 
             if rsiK[i - 1] < rsiD[i - 1] and rsiK[i] > rsiD[i]:
                 if self.position:
                     self.close() 
@@ -114,7 +106,6 @@ class OpeningRangeBreakout(bt.Strategy):
                 self.long = False
                 self.short = True  
                 self.shortPrice = self.data.close[0]
-            print(self.broker.cash)
             if self.broker.cash < 0:
                 self.stopMachine = True
                 lastVal = self.broker.cash
@@ -122,6 +113,7 @@ class OpeningRangeBreakout(bt.Strategy):
                 self.stopMachine = True
                 self.broker.cash = np.inf
                 lastVal = np.inf
+
             self.i += 1
             lastVal = self.broker.cash
 
@@ -148,10 +140,10 @@ def run_strategy(hiddenNums):
         if np.isinf(lastVal):
             print("ACTUAL VALUE: " + str(lastVal))
             return finalBlanace, lastVal 
-        cerebro.plot()
         # if np.isnp.nan(finalBlanace):
         #     return i
         # elif np.isinf(finalBlanace):
+        
         #     return 5
         return finalBlanace, value
     except Exception as e:
