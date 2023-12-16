@@ -1,7 +1,7 @@
 import datetime
 import requests
 from SpecialFunctions import formatDataset, formatDataset3
-def calltimes30(symbol, start_time = '2018-11-17'):
+def calltimes30(symbol, start_time = '2015-11-17'):
     endpoint = "https://api.binance.com/api/v1/klines"
 
     api_key = "0imfnc8mVLWwsAawjYr4RxAf50DDqtle" # 0imfnc8mVLWwsAawjYr4RxAf50DDqtlx
@@ -11,7 +11,7 @@ def calltimes30(symbol, start_time = '2018-11-17'):
     start_time = start_time # prev 2023-02-23, '2023-05-23
     date_obj = datetime.datetime.strptime(start_time, "%Y-%m-%d")
     timestamp_ms = int(date_obj.timestamp()) * 1000
-    end_time = '2023-09-30'
+    end_time = '2023-12-15'
     date_obj = datetime.datetime.strptime(end_time, "%Y-%m-%d")
     timestamp_ms2 = int(date_obj.timestamp()) * 1000
 
