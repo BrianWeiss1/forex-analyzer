@@ -1,8 +1,8 @@
 from ta.momentum import StochRSIIndicator
-
+import numpy as np
 def get_StochasticRelitiveStrengthIndex(data, window, smooth1, smooth2):
     stochRSIind = StochRSIIndicator(data['close'], window, smooth1, smooth2)
-    return stochRSIind.stochrsi_k(), stochRSIind.stochrsi_d()
+    return np.array(stochRSIind.stochrsi_k()), np.array(stochRSIind.stochrsi_d())
 
 from SpecialFunctions import formatDataset
 import pandas_ta as ta
