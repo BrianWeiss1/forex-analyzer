@@ -140,25 +140,37 @@ class OpeningRangeBreakout(bt.Strategy):
         self.i += 1
 maxFinalVal = -1
 maxFinalSym = -1    
-# for k in range(97, 150, 1):
-cerebro = bt.Cerebro()
-cerebro.broker.set_cash(100.00)
-# print(f'\n{k}')
-print('Starting Portfolio Value: %.2f' % cerebro.broker.getvalue())
-df = getData()
-stochRSIK, stochRSID = get_StochasticRelitiveStrengthIndex(df, 7, 1, 98) # 348, 4, 445
-stochRSIk = np.array(stochRSIK)                
-stochRSId = np.array(stochRSID)
-data = bt.feeds.PandasData(dataname=df)
-cerebro.adddata(data)
-cerebro.addstrategy(OpeningRangeBreakout, rsiK=stochRSIk, rsiD=stochRSId)
-# cerebro.broker.setcommission(mult=100)
-cerebro.run()
-finalVal = cerebro.broker.getvalue()
-print('Final Portfolio Value: %.2f' % finalVal)
-if finalVal > maxFinalVal:
-    maxFinalVal = finalVal
-    # maxFinalSym = k 
-# print('\n')
-cerebro.plot()
-# print(maxFinalVal, maxFinalSym)
+lst = []
+try:
+    for j in range(1, 150, 1):
+        cerebro = bt.Cerebro()
+        cerebro.broker.set_cash(1.00)
+        print(f'\n{j}')
+        print('Starting Portfolio Value: %.2f' % cerebro.broker.getvalue())
+        df = getData()
+        stochRSIK, stochRSID = get_StochasticRelitiveStrengthIndex(df, 73, 1, 21) # 348, 4, 445
+        stochRSIk = np.array(stochRSIK)                
+        stochRSId = np.array(stochRSID)
+        data = bt.feeds.PandasData(dataname=df)
+        cerebro.adddata(data)
+        cerebro.addstrategy(OpeningRangeBreakout, rsiK=stochRSIk, rsiD=stochRSId)
+        cerebro.broker.setcommission(mult=53)
+        cerebro.run()
+    # cerebro.plot()
+      
+        finalVal = cerebro.broker.getvalue()
+        print('Final Portfolio Value: %.2f' % finalVal)
+        lst.append([j, finalVal])
+        if finalVal > maxFinalVal:
+            maxFinalVal = finalVal
+            maxFinalSym = j
+    print(lst)    
+    print(maxFinalVal, maxFinalSym)
+    sortedLst = sorted(lst, key = lambda x: x[1])
+    print(sortedLst)
+except:
+    print(lst)    
+    # cerebro.plot()
+    print(maxFinalVal, maxFinalSym)
+    sortedLst = sorted(lst, key = lambda x: x[1])
+    print(sortedLst)
