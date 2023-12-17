@@ -27,7 +27,7 @@ import numpy as np
 
 APIURL = "https://open-api.bingx.com"
 f = open('documents/api_key.txt', 'r')
-APIKEY = 'zGnYUEbpDvOI36v9DnPIvMLQEVz44Vgme7AUAyFeonkUAusiLDi9PFM65nyjAuijESmpmC2eGAuqmFfHVQ'
+APIKEY = 'zGnYUEbpDvOI36v9DnPIvMLQEVz44Vgme7AUAyFeonkUAusiLDi9PFM65nyjAuijESmpmC2eGAuqmFfHVQ' # b dubs account
 SECRETKEY = f.readline()
 f.close()
 sim = "BTC"
