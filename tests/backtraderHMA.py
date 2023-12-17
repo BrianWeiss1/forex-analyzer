@@ -51,6 +51,8 @@ class OpeningRangeBreakout(bt.Strategy):
         self.betPercent = 0.1 # I'm not sure if I should stack indicators since this is so high
         self.shortCount = 0
         self.longCount = 0
+        self.cross = ""
+        self.hullSignal = ""
         
     def log(self, txt, dt=None):
         ''' Logging function fot this strategy'''
@@ -81,7 +83,8 @@ class OpeningRangeBreakout(bt.Strategy):
         i = self.i
         hull_20 = self.params.hull_20
         hull_50 = self.params.hull_50
-        
+        hull_50 = hull_50
+        hull_20 = hull_20
         # print(self.data.open[-1])
         # print(self.data.open[0])
         # current_bar_datetime = self.data.num2date(self.data.datetime[0])        
@@ -120,56 +123,117 @@ class OpeningRangeBreakout(bt.Strategy):
         #         self.close()  # Close the long
         #     # elif self.data.close[0] >= take_profit_price:
         #     #     self.close()  # Close the long position if take-profit is triggered
-        if hull_20[i-1] < hull_50[i-1] and hull_20[i] > hull_50[i] :
-            self.shortCount += 1
-        else:
-            self.shortCount = 0
-        if hull_20[i - 1] > hull_50[i - 1] and (hull_20[i]) < hull_50[i]:
-            self.longCount += 1
-        else:
-            self.longCount = 0
+        if not np.isnan(hull_20[i]) and not np.isnan(hull_50[i]):  
+            if hull_20[i] > hull_50[i]:
+                if self.data.close[0] > hull_20[i]:
+                    self.hullSignal = "BUY SIGNAL"
+                elif self.data.close[0] < hull_20[i] and self.data.close[0] > hull_50[i]: 
+                    self.hullSignal = "LUQUIDATE CURRENT POSITION"
+                elif self.data.close[0] < hull_50[i]: 
+                    self.hullSignal = "SELL SIGNAL"
+                else:
+                    print("ERROR 1")
+            elif hull_50[i] > hull_20[i]:
+                if self.data.close[0] > hull_50[i]:
+                    self.hullSignal = "SELL SIGNAL"
+                elif self.data.close[0] < hull_50[i] and self.data.close[0] > hull_20[i]:
+                    self.hullSignal = "LUQUIDATE CURRENT POSITION"
+                elif self.data.close[0] < hull_20[i]:
+                    self.hullSignal = "BUY SIGNAL"
+                else:
+                    print("ERROR 2")
+            elif hull_50[i] == hull_20[i]:
+                print("EQUALITY ERROR 4")
+            else:
+                print(hull_50[i], hull_20[i])
+                print("ERROR 3")
+                
+                        
+            if hull_20[i-1] > hull_50[i-1] and hull_20[i] < hull_50[i] :
+                self.shortCount += 1
+            else:
+                self.shortCount = 0
+            if hull_20[i - 1] < hull_50[i - 1] and (hull_20[i]) > hull_50[i]:
+                self.longCount += 1
+            else:
+                self.longCount = 0
+                
+            # '''
+            if self.hullSignal == 'BUY SIGNAL':
+                self.long = True
+                self.short = False
+                self.size = ((self.betPercent * self.broker.cash)/ self.data.close[0])
+                # if self.position:
+                #     self.close() #size=self.position.size
+                self.order = self.buy(size=self.size) #price=self.data.close[0], size=size
+
+                self.longPrice = self.data.close[0]
+            # '''
             
-        if self.longCount == 1 and self.short:
-            self.size = ((self.betPercent * self.broker.cash)/ self.data.close[0])
-            # if self.position:
-            #     self.close() #size=self.position.size
-            self.order = self.buy(size=self.size) #price=self.data.close[0], size=size
-            self.long = True
-            self.short = False
-            self.longPrice = self.data.close[0]
-        elif self.shortCount == 1 and self.long:
-            self.size = ((self.betPercent * self.broker.cash)/ self.data.close[0])
-            # if self.position:
-            self.order = self.sell(size=self.size) # price=self.df_data.close[0], size=size
-            # if self.broker.cash < 0.1*self.broker.getvalue():
-            #     self.close()
-            self.long = False
-            self.short = True  
-            self.shortPrice = self.data.close[0]
+            # '''
+            if self.hullSignal == 'SELL SIGNAL':
+                self.short = True  
+                self.long = False
+
+                self.size = ((self.betPercent * self.broker.cash)/ self.data.close[0])
+                # if self.position:
+                self.order = self.sell(size=self.size) # price=self.df_data.close[0], size=size
+                # if self.broker.cash < 0.1*self.broker.getvalue():
+                #     self.close()
+                self.shortPrice = self.data.close[0]
+
+            # '''
+            # if self.broker.cash < 0.5*self.broker.getvalue():
+            #         self.close()    
+            if (self.longCount == 1 and self.short): #or self.hullSignal == 'BUY SIGNAL'
+                self.long = True
+                self.short = False
+                self.size = ((self.betPercent * self.broker.cash)/ self.data.close[0])
+                # if self.position:
+                #     self.close() #size=self.position.size
+                self.order = self.buy(size=self.size) #price=self.data.close[0], size=size
+
+                self.longPrice = self.data.close[0]
+            elif (self.shortCount == 1 and self.long): #or self.hullSignal == 'SELL SIGNAL'
+                self.long = False
+                self.short = True  
+                self.size = ((self.betPercent * self.broker.cash)/ self.data.close[0])
+                # if self.position:
+                self.order = self.sell(size=self.size) # price=self.df_data.close[0], size=size
+                self.shortPrice = self.data.close[0]
       
         self.i += 1
 maxFinalVal = -1
-maxFinalSym = -1    
-# for k in range(97, 150, 1):
-cerebro = bt.Cerebro()
-cerebro.broker.set_cash(100.00)
-print('Starting Portfolio Value: %.2f' % cerebro.broker.getvalue())
-df = getData()
-hma_20, hma_50 = get_HMA(df, 20, 50)
-# stochRSIK, stochRSID = get_StochasticRelitiveStrengthIndex(df, 7, 1, k) # 117
-# print(stochRSIK)
-npHMA_20 = np.array(hma_20)                
-npHMA_50 = np.array(hma_50)
-data = bt.feeds.PandasData(dataname=df)
-cerebro.adddata(data)
-cerebro.addstrategy(OpeningRangeBreakout, hull_20=npHMA_20, hull_50=npHMA_50)
-# cerebro.broker.setcommission(mult=50)
-cerebro.run()
-finalVal = cerebro.broker.getvalue()
-print('Final Portfolio Value: %.2f' % finalVal)
-cerebro.plot()
-# if finalVal > maxFinalVal:
-#     maxFinalVal = finalVal
-    # maxFinalSym = k 
-# print('\n')
-# print(maxFinalVal, maxFinalSym)
+maxFinalSym = -1  
+lst = []  
+k = -1
+for k in range(0, 100, 1):
+    cerebro = bt.Cerebro()
+    cerebro.broker.set_cash(1.00)
+    print(k)
+    print('Starting Portfolio Value: %.2f' % cerebro.broker.getvalue())
+    df = getData()
+    hma_20, hma_50 = get_HMA(df, 27, 50)
+    # stochRSIK, stochRSID = get_StochasticRelitiveStrengthIndex(df, 7, 1, k) # 117
+    # print(stochRSIK)
+    npHMA_20 = np.array(hma_20)                
+    npHMA_50 = np.array(hma_50)
+    data = bt.feeds.PandasData(dataname=df)
+    cerebro.adddata(data)
+    cerebro.addstrategy(OpeningRangeBreakout, hull_20=npHMA_20, hull_50=npHMA_50)
+    cerebro.broker.setcommission(mult=53)
+    cerebro.run()
+    finalVal = cerebro.broker.getvalue()
+    print('Final Portfolio Value: %.2f' % finalVal + "\n")
+    # cerebro.plot()
+    lst.append([finalVal, k])
+    if finalVal > maxFinalVal:
+        maxFinalVal = finalVal
+        maxFinalSym = k 
+
+
+print(maxFinalVal, maxFinalSym)
+sortedLst = sorted(lst, key=lambda x: x[0], reverse=True) # How to sort a lst by the first elemenet in python
+print(lst)
+
+print(sortedLst)
