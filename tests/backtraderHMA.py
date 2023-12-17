@@ -8,13 +8,22 @@ from testCounter import run
 import decimal
 import numpy as np
 from ta.momentum import StochRSIIndicator
+import pandas_ta as ta
+import pandas as pd
+
 def get_StochasticRelitiveStrengthIndex(data, window, smooth1, smooth2):
     stochRSIind = StochRSIIndicator(data['close'], window, smooth1, smooth2)
     return stochRSIind.stochrsi_k(), stochRSIind.stochrsi_d()
+
+def get_HMA(df: pd.DataFrame, period_1: int, period_2: int) -> pd.Series:
+    hma_1 = ta.hma(df["close"], period_1)
+    hma_2 = ta.hma(df["close"], period_2)    
+    return hma_1, hma_2
+
 def getData():
     # calltimes30('BTCUSDT')
     df = eval(open('documents/BTCData.txt', 'r').read())
-    df = formatDataset(df[len(df)-17500:len(df)])
+    df = formatDataset(df[len(df)-17500:len(df)-600])
     columns_to_convert = ['open', 'high', 'low', 'close', 'volume']
     for column in columns_to_convert:
         df[column] = df[column].apply(float)
@@ -24,8 +33,8 @@ def getData():
 run()
 class OpeningRangeBreakout(bt.Strategy):
     params = (
-        ('rsiK', None),  # External NumPy array for stochRSIK3
-        ('rsiD', None),  # External NumPy array for stochRSID3
+        ('hull_20', None),  # External NumPy array for stochRSIK3
+        ('hull_50', None),  # External NumPy array for stochRSID3
     )
     def __init__(self):
         self.opening_range_low = 0
@@ -33,13 +42,13 @@ class OpeningRangeBreakout(bt.Strategy):
         self.opening_range = 0
         self.bought_today = False
         self.order = None
-        self.long = False
-        self.short = False
+        self.long = True
+        self.short = True
         self.startTime = dfIndex
         self.i = 0
         self.shortPrice = None
         self.longPrice = None
-        self.betPercent = 0.001 # I'm not sure if I should stack indicators since this is so high
+        self.betPercent = 0.1 # I'm not sure if I should stack indicators since this is so high
         self.shortCount = 0
         self.longCount = 0
         
@@ -70,8 +79,8 @@ class OpeningRangeBreakout(bt.Strategy):
         
     def next(self):
         i = self.i
-        rsiK = self.params.rsiK
-        rsiD = self.params.rsiD
+        hull_20 = self.params.hull_20
+        hull_50 = self.params.hull_50
         
         # print(self.data.open[-1])
         # print(self.data.open[0])
@@ -111,16 +120,16 @@ class OpeningRangeBreakout(bt.Strategy):
         #         self.close()  # Close the long
         #     # elif self.data.close[0] >= take_profit_price:
         #     #     self.close()  # Close the long position if take-profit is triggered
-        if rsiK[i-1] < rsiD[i-1] and rsiK[i] > rsiD[i]*1.4 :
+        if hull_20[i-1] < hull_50[i-1] and hull_20[i] > hull_50[i] :
             self.shortCount += 1
         else:
             self.shortCount = 0
-        if rsiK[i - 1] > rsiD[i - 1] and (rsiK[i])*1.4 < rsiD[i]:
+        if hull_20[i - 1] > hull_50[i - 1] and (hull_20[i]) < hull_50[i]:
             self.longCount += 1
         else:
             self.longCount = 0
             
-        if self.longCount == 1:
+        if self.longCount == 1 and self.short:
             self.size = ((self.betPercent * self.broker.cash)/ self.data.close[0])
             # if self.position:
             #     self.close() #size=self.position.size
@@ -128,11 +137,12 @@ class OpeningRangeBreakout(bt.Strategy):
             self.long = True
             self.short = False
             self.longPrice = self.data.close[0]
-        elif self.shortCount == 1:
+        elif self.shortCount == 1 and self.long:
             self.size = ((self.betPercent * self.broker.cash)/ self.data.close[0])
             # if self.position:
-            #     self.close() #size=self.position.size
-            self.order = self.close(size=self.size) # price=self.df_data.close[0], size=size
+            self.order = self.sell(size=self.size) # price=self.df_data.close[0], size=size
+            # if self.broker.cash < 0.1*self.broker.getvalue():
+            #     self.close()
             self.long = False
             self.short = True  
             self.shortPrice = self.data.close[0]
@@ -140,25 +150,26 @@ class OpeningRangeBreakout(bt.Strategy):
         self.i += 1
 maxFinalVal = -1
 maxFinalSym = -1    
-for k in range(97, 150, 1):
-    cerebro = bt.Cerebro()
-    cerebro.broker.set_cash(100.00)
-    print(f'\n{k}')
-    print('Starting Portfolio Value: %.2f' % cerebro.broker.getvalue())
-    df = getData()
-    stochRSIK, stochRSID = get_StochasticRelitiveStrengthIndex(df, 7, 1, k) # 348, 4, 445
-    stochRSIk = np.array(stochRSIK)                
-    stochRSId = np.array(stochRSID)
-    data = bt.feeds.PandasData(dataname=df)
-    cerebro.adddata(data)
-    cerebro.addstrategy(OpeningRangeBreakout, rsiK=stochRSIk, rsiD=stochRSId)
-    # cerebro.broker.setcommission(mult=100)
-    cerebro.run()
-    finalVal = cerebro.broker.getvalue()
-    print('Final Portfolio Value: %.2f' % finalVal)
-    if finalVal > maxFinalVal:
-        maxFinalVal = finalVal
-        maxFinalSym = k 
-    print('\n')
-    # cerebro.plot()
-print(maxFinalVal, maxFinalSym)
+# for k in range(97, 150, 1):
+cerebro = bt.Cerebro()
+cerebro.broker.set_cash(100.00)
+print('Starting Portfolio Value: %.2f' % cerebro.broker.getvalue())
+df = getData()
+hma_20, hma_50 = get_HMA(df, 20, 50)
+# stochRSIK, stochRSID = get_StochasticRelitiveStrengthIndex(df, 7, 1, k) # 117
+# print(stochRSIK)
+npHMA_20 = np.array(hma_20)                
+npHMA_50 = np.array(hma_50)
+data = bt.feeds.PandasData(dataname=df)
+cerebro.adddata(data)
+cerebro.addstrategy(OpeningRangeBreakout, hull_20=npHMA_20, hull_50=npHMA_50)
+# cerebro.broker.setcommission(mult=50)
+cerebro.run()
+finalVal = cerebro.broker.getvalue()
+print('Final Portfolio Value: %.2f' % finalVal)
+cerebro.plot()
+# if finalVal > maxFinalVal:
+#     maxFinalVal = finalVal
+    # maxFinalSym = k 
+# print('\n')
+# print(maxFinalVal, maxFinalSym)
