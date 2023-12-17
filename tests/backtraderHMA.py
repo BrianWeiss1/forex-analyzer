@@ -10,20 +10,30 @@ import numpy as np
 from ta.momentum import StochRSIIndicator
 import pandas_ta as ta
 import pandas as pd
+from ta.volume import MFIIndicator
 
 def get_StochasticRelitiveStrengthIndex(data, window, smooth1, smooth2):
     stochRSIind = StochRSIIndicator(data['close'], window, smooth1, smooth2)
     return stochRSIind.stochrsi_k(), stochRSIind.stochrsi_d()
+def get_MFI(data, window):
+    MFIind = MFIIndicator(data['high'], data['low'], data['close'], data['volume'], window)
+    return MFIind.money_flow_index()
 
 def get_HMA(df: pd.DataFrame, period_1: int, period_2: int) -> pd.Series:
     hma_1 = ta.hma(df["close"], period_1)
     hma_2 = ta.hma(df["close"], period_2)    
     return hma_1, hma_2
-
+def findMFI(value):
+    if value > 55:
+        return "BULLISH"
+    elif value < 45:
+        return 'BEARISH'
+    else:
+        return 'SIDEWAYS'
 def getData():
     # calltimes30('BTCUSDT')
     df = eval(open('documents/BTCData.txt', 'r').read())
-    df = formatDataset(df[len(df)-62144:len(df)-54576])
+    df = formatDataset(df[len(df)-17500:len(df)])
     columns_to_convert = ['open', 'high', 'low', 'close', 'volume']
     for column in columns_to_convert:
         df[column] = df[column].apply(float)
@@ -35,6 +45,7 @@ class OpeningRangeBreakout(bt.Strategy):
     params = (
         ('hull_20', None),  # External NumPy array for stochRSIK3
         ('hull_50', None),  # External NumPy array for stochRSID3
+        ('mfi_50', None),
     )
     def __init__(self):
         self.opening_range_low = 0
@@ -83,44 +94,9 @@ class OpeningRangeBreakout(bt.Strategy):
         i = self.i
         hull_20 = self.params.hull_20
         hull_50 = self.params.hull_50
-        # print(self.data.open[-1])
-        # print(self.data.open[0])
-        # current_bar_datetime = self.data.num2date(self.data.datetime[0])        
-        # previous_bar_datetime = self.data.num2date(self.data.datetime[-1])
-        # print(previous_bar_datetime)
-        # print(current_bar_datetime)
-        # if current_bar_datetime.date() != previous_bar_datetime.date(): # every day
-        #     self.opening_range_low = self.data.low[0]
-        #     self.opening_range_high = self.data.high[0]
-        #     self.bought_today = False
-        # opening_range_start_time = time(0, 0, 0)
-        # dt = datetime.combine(date.today(), opening_range_start_time) + timedelta(minutes=1)
-        # amount_to_spend = 1000  # Replace with your desired amount
-        # current_price = self.data.close[0]
-        # size = int(amount_to_spend / current_price)
-        # opening_range_end_time = dt.time()
-        # if current_bar_datetime.time() >= opening_range_start_time \
-        #     and current_bar_datetime.time() < opening_range_end_time: 
-        #     self.opening_range_low = min(self.data.low[0], self.opening_range_low)
-        #     self.opening_range_high = max(self.data.high[0], self.opening_range_high)
-        #     self.opening_range = self.opening_range_high - self.opening_range_low
-        # else:
-        # if self.long and self.position:
-        #     stop_loss_price = self.longPrice * (1 - stop_loss_percent)
-        #     # take_profit_price = self.longPrice * (1 + take_profit_percent)
-
-        #     if self.data.close[0] <= stop_loss_price:
-        #         self.close()  # Close the long
-        #     # elif self.data.close[0] >= take_profit_price:
-        #     #     self.close()  # Close the long position if take-profit is triggered
-        # if self.short and self.position:
-        #     stop_loss_price = self.shortPrice * (1 + stop_loss_percent)
-        #     # take_profit_price = self.shortPrice * (1 - take_profit_percent)
-
-        #     if self.data.close[0] <= stop_loss_price:
-        #         self.close()  # Close the long
-        #     # elif self.data.close[0] >= take_profit_price:
-        #     #     self.close()  # Close the long position if take-profit is triggered
+        mfi_50 = self.params.mfi_50
+        
+        
         if not np.isnan(hull_20[i]) and not np.isnan(hull_50[i]):  
             if hull_20[i] > hull_50[i]:
                 if self.data.close[0] > hull_20[i]:
@@ -211,7 +187,7 @@ cerebro.broker.set_cash(1.00)
 print(k)
 print('Starting Portfolio Value: %.2f' % cerebro.broker.getvalue())
 df = getData()
-print(df)
+mfi48 = get_MFI(df, 50)
 hma_20, hma_50 = get_HMA(df, 27, 50) # bull, bear
 # hma_20 --> bull
 # hma_50 --> bear
@@ -219,12 +195,13 @@ hma_20, hma_50 = get_HMA(df, 27, 50) # bull, bear
 # print(stochRSIK)
 npHMA_20 = np.array(hma_20)                
 npHMA_50 = np.array(hma_50)
+NPmfi48 = np.array(mfi48)
 data = bt.feeds.PandasData(dataname=df)
 cerebro.adddata(data)
-cerebro.addstrategy(OpeningRangeBreakout, hull_20=npHMA_20, hull_50=npHMA_50)
+cerebro.addstrategy(OpeningRangeBreakout, hull_20=npHMA_20, hull_50=npHMA_50, mfi_50=NPmfi48)
 cerebro.broker.setcommission(mult=53)
 cerebro.run()
-cerebro.plot()
+# cerebro.plot()
 finalVal = cerebro.broker.getvalue()
 print('Final Portfolio Value: %.2f' % finalVal + "\n")
 # cerebro.plot()
