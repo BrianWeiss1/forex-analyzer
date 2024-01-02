@@ -26,8 +26,8 @@ import numpy as np
 
 
 APIURL = "https://open-api.bingx.com"
-f = open('documents/api_key.txt', 'r')
-APIKEY = 'zGnYUEbpDvOI36v9DnPIvMLQEVz44Vgme7AUAyFeonkUAusiLDi9PFM65nyjAuijESmpmC2eGAuqmFfHVQ' # b dubs account
+f = open('documents/api_key2.txt', 'r')
+APIKEY = '4kBokBizUrJ8SPGUR0Vr4Aul6vVgKJwB4Fas0qzhYbvf5WRKQGyaBW9DMJqI7pTOn4BzDh96ycgAE2WH1Vg' # b dubs account
 SECRETKEY = f.readline()
 f.close()
 sim = "BTC"
@@ -37,7 +37,7 @@ betAmount = totalValueOfAccount/10
 symbol = f'{sim}-USDT'
 symbolVolume = f'{sim}USDT'
 
-BOT_TOKEN = '6913673966:AAGVUweik0EpNrPxUgFVA35Ve0Dyayo5waw'
+BOT_TOKEN = ''
 
 bingx_client = PerpetualV2(api_key=APIKEY, secret_key=SECRETKEY)
 

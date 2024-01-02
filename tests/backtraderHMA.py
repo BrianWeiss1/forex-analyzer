@@ -11,6 +11,7 @@ from ta.momentum import StochRSIIndicator
 import pandas_ta as ta
 import pandas as pd
 from ta.volume import MFIIndicator
+import matplotlib as plt
 
 def get_StochasticRelitiveStrengthIndex(data, window, smooth1, smooth2):
     stochRSIind = StochRSIIndicator(data['close'], window, smooth1, smooth2)
@@ -45,7 +46,6 @@ class OpeningRangeBreakout(bt.Strategy):
     params = (
         ('hull_20', None),  # External NumPy array for stochRSIK3
         ('hull_50', None),  # External NumPy array for stochRSID3
-        ('mfi_50', None),
     )
     def __init__(self):
         self.opening_range_low = 0
@@ -94,7 +94,6 @@ class OpeningRangeBreakout(bt.Strategy):
         i = self.i
         hull_20 = self.params.hull_20
         hull_50 = self.params.hull_50
-        mfi_50 = self.params.mfi_50
         
         
         if not np.isnan(hull_20[i]) and not np.isnan(hull_50[i]):  
@@ -167,6 +166,7 @@ class OpeningRangeBreakout(bt.Strategy):
                 #     self.close() #size=self.position.size
                 self.order = self.buy(size=self.size) #price=self.data.close[0], size=size
 
+
                 self.longPrice = self.data.close[0]
             elif (self.shortCount == 1 and self.long): #or self.hullSignal == 'SELL SIGNAL'
                 self.long = False
@@ -187,7 +187,6 @@ cerebro.broker.set_cash(1.00)
 print(k)
 print('Starting Portfolio Value: %.2f' % cerebro.broker.getvalue())
 df = getData()
-mfi48 = get_MFI(df, 50)
 hma_20, hma_50 = get_HMA(df, 27, 50) # bull, bear
 # hma_20 --> bull
 # hma_50 --> bear
@@ -195,15 +194,16 @@ hma_20, hma_50 = get_HMA(df, 27, 50) # bull, bear
 # print(stochRSIK)
 npHMA_20 = np.array(hma_20)                
 npHMA_50 = np.array(hma_50)
-NPmfi48 = np.array(mfi48)
 data = bt.feeds.PandasData(dataname=df)
 cerebro.adddata(data)
-cerebro.addstrategy(OpeningRangeBreakout, hull_20=npHMA_20, hull_50=npHMA_50, mfi_50=NPmfi48)
-cerebro.broker.setcommission(mult=53)
+cerebro.addstrategy(OpeningRangeBreakout, hull_20=npHMA_20, hull_50=npHMA_50)
+cerebro.broker.setcommission(mult=52)
 cerebro.run()
 finalVal = cerebro.broker.getvalue()
 print('Final Portfolio Value: %.2f' % finalVal + "\n")
-# cerebro.plot()
+
+cerebro.plot()
+
 lst.append([finalVal, k])
 if finalVal > maxFinalVal:
     maxFinalVal = finalVal

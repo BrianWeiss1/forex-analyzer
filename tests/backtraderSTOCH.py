@@ -8,6 +8,8 @@ from testCounter import run
 import decimal
 import numpy as np
 from ta.momentum import StochRSIIndicator
+import concurrent.futures
+
 def get_StochasticRelitiveStrengthIndex(data, window, smooth1, smooth2):
     stochRSIind = StochRSIIndicator(data['close'], window, smooth1, smooth2)
     return stochRSIind.stochrsi_k(), stochRSIind.stochrsi_d()
@@ -84,42 +86,44 @@ class OpeningRangeBreakout(bt.Strategy):
       
         self.i += 1
         
-maxFinalVal = -1
-maxFinalSym = -1    
-lst = []
-j = -1
-try:
-    for k in range(0, 10, 1):
-        for j in range(0, 10, 1):
-            cerebro = bt.Cerebro()
-            cerebro.broker.set_cash(1.00)
-            print(f'{j}')
-            print(f'{k}')
-            print('Starting Portfolio Value: %.2f' % cerebro.broker.getvalue())
-            df = getData()
-            stochRSIK, stochRSID = get_StochasticRelitiveStrengthIndex(df, 73, 1, 21)
-            stochRSIk = np.array(stochRSIK)                
-            stochRSId = np.array(stochRSID)
-            data = bt.feeds.PandasData(dataname=df) # 4, 4
-            cerebro.adddata(data)
-            cerebro.addstrategy(OpeningRangeBreakout, rsiK=stochRSIk, rsiD=stochRSId)
-            cerebro.broker.setcommission(mult=53)
-            cerebro.run()
-            # cerebro.plot()
-            
-            finalVal = cerebro.broker.getvalue()
-            print('Final Portfolio Value: %.2f' % finalVal)
-            lst.append([(j, k), finalVal])
-            if finalVal > maxFinalVal:
-                maxFinalVal = finalVal
-                maxFinalSym = (j, k)
-            print(lst)    
-            print(maxFinalVal, maxFinalSym)
-            sortedLst = sorted(lst, key = lambda x: x[1])
-            print(sortedLst)
-except:
-    # print(lst)    
-    # cerebro.plot()
+def run_strategy(j, k, df, stochRSIk, stochRSId):
+    cerebro = bt.Cerebro()
+    cerebro.broker.set_cash(1.00)
+    print(f'{j}')
+    print(f'{k}')
+    print('Starting Portfolio Value: %.2f' % cerebro.broker.getvalue())
+
+    data = bt.feeds.PandasData(dataname=df)
+    cerebro.adddata(data)
+    cerebro.addstrategy(OpeningRangeBreakout, rsiK=stochRSIk, rsiD=stochRSId)
+    cerebro.broker.setcommission(mult=53)
+    cerebro.run()
+
+    finalVal = cerebro.broker.getvalue()
+    print('Final Portfolio Value: %.2f' % finalVal)
+    return [(j, k), finalVal]
+
+if __name__ == "__main__":
+    maxFinalVal = -1
+    maxFinalSym = -1    
+    lst = []
+
+    df = getData()
+    stochRSIK, stochRSID = get_StochasticRelitiveStrengthIndex(df, 73, 1, 21)
+    stochRSIk = np.array(stochRSIK)                
+    stochRSId = np.array(stochRSID)
+
+    with concurrent.futures.ProcessPoolExecutor() as executor:
+        futures = [executor.submit(run_strategy, j, k, df, stochRSIk, stochRSId) 
+                   for j in range(10) for k in range(10)]
+        
+        for future in concurrent.futures.as_completed(futures):
+            result = future.result()
+            lst.append(result)
+            if result[1] > maxFinalVal:
+                maxFinalVal = result[1]
+                maxFinalSym = result[0]
+
+    sortedLst = sorted(lst, key=lambda x: x[1])
     print(maxFinalVal, maxFinalSym)
-    sortedLst = sorted(lst, key = lambda x: x[1])
-    # print(sortedLst)
+    print(sortedLst)
