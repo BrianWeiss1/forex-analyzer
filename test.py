@@ -34,7 +34,6 @@ import re
 
 # The text containing the values
 text = """
-
 get_StochasticRelitiveStrengthIndex(df, 78, 3, 46)
 get_StochasticRelitiveStrengthIndex(df, 195, 89, 18)
 get_StochasticRelitiveStrengthIndex(df, 290, 8, 209)

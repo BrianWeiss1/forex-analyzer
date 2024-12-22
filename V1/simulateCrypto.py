@@ -16,6 +16,7 @@ from src.testIchi import get_ichimoku
 from SpecialFunctions import formatDataset
 from src.testEMA import calculate_200ema
 from src.testMACD import get_macd
+
 def optimize(i, data, WMA, previousBuy, previousSell):
     prevBuy2, prevSell2 = optimize2(i, data, WMA, previousBuy, previousSell)
     if prevSell2 and previousBuy:
